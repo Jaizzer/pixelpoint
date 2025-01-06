@@ -7,7 +7,12 @@ export default function Sidebar() {
 					<Link to="/">Logo</Link>
 				</li>
 				<li>
-					<Link to="/user">User</Link>
+					<Link to="/user">
+						<div className="user">
+							<img className="userProfilePicture" />
+							<div className="userName">Username</div>
+						</div>
+					</Link>
 				</li>
 				<li>
 					<Link to="/">Home</Link>
