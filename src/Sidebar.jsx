@@ -5,7 +5,7 @@ export default function Sidebar() {
             <ul>
                 <li>Logo</li>
                 <li>User</li>
-                <li><Link to='/home'>Home</Link></li>
+                <li><Link to='/'>Home</Link></li>
                 <li>Shop</li>
                 <li>Account</li>
                 <li>About</li>
