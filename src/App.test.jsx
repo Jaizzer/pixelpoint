@@ -135,4 +135,18 @@ describe('App component', () => {
 
 		expect(logoPageContent).not.toBeNull();
 	});
+
+	it('renders Error page if the path does not exist', async () => {
+		render(
+			<MemoryRouter initialEntries={['/nonExistentPath']}>
+				<Routes>
+					<Route path="/" element={<App />} />
+					<Route path="/:content" element={<App />} />
+				</Routes>
+			</MemoryRouter>
+		);
+
+		const errorPageContent = screen.queryByTitle('error');
+		expect(errorPageContent).not.toBeNull();
+	});
 });

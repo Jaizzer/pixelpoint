@@ -3,6 +3,7 @@ import Home from './Home';
 import Account from './Account';
 import About from './About';
 import Shop from './Shop';
+import Error from './Error';
 import { useParams } from 'react-router-dom';
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
 				) : content === 'about' ? (
 					<About />
 				) : (
-					'Other Page'
+					<Error />
 				)}
 			</main>
 		</>
