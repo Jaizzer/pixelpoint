@@ -13,7 +13,7 @@ export default function App() {
 		<>
 			<Sidebar></Sidebar>
 			<main>
-				{content === undefined ? (
+				{!content ? (
 					<Home />
 				) : content === 'account' ? (
 					<Account />
