@@ -1,8 +1,32 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { userEvent } from '@testing-library/user-event';
 import App from './App';
+
+vi.mock('./Home', () => ({
+	default: () => <div title="home">Home</div>,
+}));
+
+vi.mock('./Shop', () => ({
+	default: () => <div title="shop">Shop</div>,
+}));
+
+vi.mock('./Account', () => ({
+	default: () => <div title="account">Account</div>,
+}));
+
+vi.mock('./About', () => ({
+	default: () => <div title="about">About</div>,
+}));
+
+vi.mock('./Cart', () => ({
+	default: () => <div title="cart">Cart</div>,
+}));
+
+vi.mock('./Error', () => ({
+	default: () => <div title="error">Error</div>,
+}));
 
 describe('App component', () => {
 	it('contains the sidebar', () => {
