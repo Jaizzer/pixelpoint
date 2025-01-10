@@ -171,4 +171,35 @@ describe('App component', () => {
 
 		expect(cartPageContent).not.toBeNull();
 	});
+
+	it('increments the cart icon count indicator by 1 when an "Add to Cart" button is pressed in a product card', async () => {
+		const user = userEvent.setup();
+
+		render(
+			<MemoryRouter initialEntries={['/']}>
+				<Routes>
+					<Route path="/" element={<App />} />
+					<Route path="/:content" element={<App />} />
+				</Routes>
+			</MemoryRouter>
+		);
+
+		// Go to the Shop page content
+		const shopNavItem = screen.queryByText('Shop');
+		await user.click(shopNavItem);
+
+		// Get all available 'Add to Cart' buttons
+		const addToCartButtons = screen.queryAllByText(/Add to Cart/i);
+		const numberOfAddToCartButtons = addToCartButtons.length;
+
+		// Click all obtained 'Add to Cart' buttons
+		for (let index = 0; index < addToCartButtons.length; index++) {
+			await user.click(addToCartButtons[index]);
+		}
+
+		// Access the cart icon order count
+		const orderCount = screen.queryByTitle('cart-content-count');
+
+		expect(orderCount.textContent).toEqual(`${numberOfAddToCartButtons}`);
+	});
 });

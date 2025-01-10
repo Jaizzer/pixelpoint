@@ -1,6 +1,6 @@
 import ProductCard from './ProductCard';
 import PropTypes from 'prop-types';
-function Shop({ products }) {
+function Shop({ products, onAddItemToCart }) {
 	const productCards = products.map((product) => {
 		return (
 			<ProductCard
@@ -8,6 +8,8 @@ function Shop({ products }) {
 				imageLink={product.imageLink}
 				productName={product.productName}
 				productPrice={product.productPrice}
+				onAddItemToCart={onAddItemToCart}
+				productId={product.productId}
 			/>
 		);
 	});
@@ -17,6 +19,7 @@ function Shop({ products }) {
 
 Shop.propTypes = {
 	products: PropTypes.array,
+	onAddItemToCart: PropTypes.func,
 };
 
 export default Shop;
