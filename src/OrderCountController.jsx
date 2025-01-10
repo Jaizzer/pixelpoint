@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
-	const [inputValue, setInputValue] = useState(productCartQuantity);
+	const [inputValue, setInputValue] = useState(productCartQuantity || 0);
 
 	if (inputValue === 0) {
 		return (
