@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export default function AddToCartButton() {
+function AddToCartButton({ onAddItemToCart }) {
 	const [inputValue, setInputValue] = useState(0);
 
 	if (inputValue === 0) {
@@ -8,6 +9,7 @@ export default function AddToCartButton() {
 			<button
 				role="button"
 				onClick={() => {
+					onAddItemToCart();
 					setInputValue((current) => current + 1);
 				}}
 			>
@@ -27,7 +29,15 @@ export default function AddToCartButton() {
 				>
 					-
 				</button>
-				<input type="number" min={0} value={inputValue} role="input" />
+				<input
+					type="number"
+					min={0}
+					value={inputValue}
+					role="input"
+					onChange={(e) => {
+						setInputValue(e.target.value);
+					}}
+				/>
 				<button
 					className="add"
 					onClick={() => {
@@ -40,3 +50,9 @@ export default function AddToCartButton() {
 		);
 	}
 }
+
+AddToCartButton.propTypes = {
+	onAddItemToCart: PropTypes.func,
+};
+
+export default AddToCartButton;
