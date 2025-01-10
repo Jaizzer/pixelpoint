@@ -149,4 +149,25 @@ describe('App component', () => {
 		const errorPageContent = screen.queryByTitle('error');
 		expect(errorPageContent).not.toBeNull();
 	});
+
+	it('renders Cart content in main content when "Cart" icon is clicked', async () => {
+		const user = userEvent.setup();
+
+		render(
+			<MemoryRouter initialEntries={['/']}>
+				<Routes>
+					<Route path="/" element={<App />} />
+					<Route path="/:content" element={<App />} />
+				</Routes>
+			</MemoryRouter>
+		);
+
+		const cartNavItem = screen.queryByTitle('cart-icon');
+
+		await user.click(cartNavItem);
+
+		const cartPageContent = screen.queryByTitle('cart');
+
+		expect(cartPageContent).not.toBeNull();
+	});
 });

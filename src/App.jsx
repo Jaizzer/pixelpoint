@@ -4,6 +4,8 @@ import Account from './Account';
 import About from './About';
 import Shop from './Shop';
 import Error from './Error';
+import Cart from './Cart';
+import TopBar from './TopBar';
 import { useParams } from 'react-router-dom';
 
 export default function App() {
@@ -12,6 +14,7 @@ export default function App() {
 	return (
 		<>
 			<Sidebar></Sidebar>
+			<TopBar></TopBar>
 			<main>
 				{!content ? (
 					<Home />
@@ -21,6 +24,8 @@ export default function App() {
 					<Shop />
 				) : content === 'about' ? (
 					<About />
+				) : content === 'cart' ? (
+					<Cart />
 				) : (
 					<Error />
 				)}
