@@ -1,12 +1,13 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import OrderCountController from './OrderCountController';
 
+
 describe('Order Count Controller', () => {
 	it('has an "Add to Cart" button that dissapears when clicked', async () => {
 		const user = userEvent.setup();
-		render(<OrderCountController />);
+		render(<OrderCountController onAddItemToCart={vi.fn()}/>);
 		let addToCart = screen.queryByText('Add to Cart');
 		await user.click(addToCart);
 		addToCart = screen.queryByText('Add to Cart');
@@ -15,7 +16,7 @@ describe('Order Count Controller', () => {
 
 	it('has an "Add to Cart" button that is replaced by a number input initialized to 1 when clicked', async () => {
 		const user = userEvent.setup();
-		render(<OrderCountController />);
+		render(<OrderCountController onAddItemToCart={vi.fn()}/>);
 		let addToCart = screen.queryByRole('button');
 		await user.click(addToCart);
 		let input = screen.queryByRole('input');
@@ -24,7 +25,7 @@ describe('Order Count Controller', () => {
 
 	it('has a subtract button that appears when the "Add to Cart" button is clicked', async () => {
 		const user = userEvent.setup();
-		render(<OrderCountController />);
+		render(<OrderCountController onAddItemToCart={vi.fn()}/>);
 		let addToCart = screen.queryByRole('button');
 		await user.click(addToCart);
 		let subtractButton = screen.queryByText('-');
@@ -33,7 +34,7 @@ describe('Order Count Controller', () => {
 
 	it('has an add button that appears when the "Add to Cart" button is clicked', async () => {
 		const user = userEvent.setup();
-		render(<OrderCountController />);
+		render(<OrderCountController onAddItemToCart={vi.fn()}/>);
 		let addToCart = screen.queryByRole('button');
 		await user.click(addToCart);
 		let addButton = screen.queryByText('+');
@@ -42,7 +43,7 @@ describe('Order Count Controller', () => {
 
 	it('has an add button that increments the order input when clicked', async () => {
 		const user = userEvent.setup();
-		render(<OrderCountController />);
+		render(<OrderCountController onAddItemToCart={vi.fn()}/>);
 		let addToCart = screen.queryByRole('button');
 		await user.click(addToCart);
         let addButton = screen.queryByText('+');
@@ -57,7 +58,7 @@ describe('Order Count Controller', () => {
 
     it('has an "Add to Cart" button that reappears when order count reaches zero', async () => {
 		const user = userEvent.setup();
-		render(<OrderCountController />);
+		render(<OrderCountController onAddItemToCart={vi.fn()}/>);
 		let addToCart = screen.queryByRole('button');
 		await user.click(addToCart);
         let subtractButton = screen.queryByText('-');
