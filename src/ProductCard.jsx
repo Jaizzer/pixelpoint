@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import OrderCountController from './OrderCountController';
 
-function ProductCard({ imageLink, productName, productPrice, productId, onAddItemToCart }) {
+function ProductCard({ imageLink, productName, productPrice, productId, onAddItemToCart, productCartQuantity = 0 }) {
 	return (
 		<div className="ProductCard">
 			<img src={imageLink} role="image" alt={productName} />
@@ -13,6 +13,7 @@ function ProductCard({ imageLink, productName, productPrice, productId, onAddIte
 				onAddItemToCart={() => {
 					onAddItemToCart(productId);
 				}}
+				productCartQuantity={productCartQuantity}
 			/>
 		</div>
 	);
@@ -24,6 +25,7 @@ ProductCard.propTypes = {
 	productPrice: PropTypes.string,
 	productId: PropTypes.string,
 	onAddItemToCart: PropTypes.func,
+	productCartQuantity: PropTypes.number,
 };
 
 export default ProductCard;

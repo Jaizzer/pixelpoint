@@ -14,11 +14,11 @@ export default function App() {
 	const [cart, setCart] = useState([]);
 
 	const [products, setProducts] = useState([
-		{ imageLink: '', productName: 'product1', productPrice: '$451', productId: '1' },
-		{ imageLink: '', productName: 'product2', productPrice: '$552', productId: '2' },
-		{ imageLink: '', productName: 'product3', productPrice: '$653', productId: '3' },
-		{ imageLink: '', productName: 'product4', productPrice: '$654', productId: '4' },
-		{ imageLink: '', productName: 'product5', productPrice: '$655', productId: '5' },
+		{ imageLink: '', productName: 'product1', productPrice: '$451', productId: '1', productCartQuantity: null },
+		{ imageLink: '', productName: 'product2', productPrice: '$552', productId: '2', productCartQuantity: null },
+		{ imageLink: '', productName: 'product3', productPrice: '$653', productId: '3', productCartQuantity: null },
+		{ imageLink: '', productName: 'product4', productPrice: '$654', productId: '4', productCartQuantity: null },
+		{ imageLink: '', productName: 'product5', productPrice: '$655', productId: '5', productCartQuantity: null },
 	]);
 
 	function onAddItemToCart(productId) {

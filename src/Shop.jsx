@@ -9,6 +9,7 @@ function Shop({ products, onAddItemToCart }) {
 				productName={product.productName}
 				productPrice={product.productPrice}
 				onAddItemToCart={onAddItemToCart}
+				productCartQuantity={product.productCartQuantity}
 				productId={product.productId}
 			/>
 		);

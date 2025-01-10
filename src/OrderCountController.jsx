@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function AddToCartButton({ onAddItemToCart }) {
-	const [inputValue, setInputValue] = useState(0);
+function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
+	const [inputValue, setInputValue] = useState(productCartQuantity);
 
 	if (inputValue === 0) {
 		return (
@@ -53,6 +53,7 @@ function AddToCartButton({ onAddItemToCart }) {
 
 AddToCartButton.propTypes = {
 	onAddItemToCart: PropTypes.func,
+	productCartQuantity: PropTypes.number,
 };
 
 export default AddToCartButton;
