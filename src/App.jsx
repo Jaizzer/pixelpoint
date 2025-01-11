@@ -11,15 +11,17 @@ import { useState } from 'react';
 
 export default function App() {
 	const { content } = useParams();
-	const [cart, setCart] = useState([]);
 
 	const [products, setProducts] = useState([
-		{ imageLink: '', productName: 'product1', productPrice: '$451', productId: '1', productCartQuantity: null },
-		{ imageLink: '', productName: 'product2', productPrice: '$552', productId: '2', productCartQuantity: null },
-		{ imageLink: '', productName: 'product3', productPrice: '$653', productId: '3', productCartQuantity: null },
-		{ imageLink: '', productName: 'product4', productPrice: '$654', productId: '4', productCartQuantity: null },
-		{ imageLink: '', productName: 'product5', productPrice: '$655', productId: '5', productCartQuantity: null },
+		{ imageLink: '', productName: 'product1', productPrice: '$451', productId: '1', productCartQuantity: 0 },
+		{ imageLink: '', productName: 'product2', productPrice: '$552', productId: '2', productCartQuantity: 0 },
+		{ imageLink: '', productName: 'product3', productPrice: '$653', productId: '3', productCartQuantity: 0 },
+		{ imageLink: '', productName: 'product4', productPrice: '$654', productId: '4', productCartQuantity: 0 },
+		{ imageLink: '', productName: 'product5', productPrice: '$655', productId: '5', productCartQuantity: 0 },
 	]);
+
+	// Cart is composed of products that have product cart quantity greater than zero
+	const cart = products.filter((product) => product.productCartQuantity > 0);
 
 	function onAddItemToCart(productId, productCartQuantity) {
 		// Update the products
@@ -27,19 +29,6 @@ export default function App() {
 			existingCartItem.productId === productId ? { ...existingCartItem, productCartQuantity: productCartQuantity } : existingCartItem
 		);
 		setProducts(updatedProducts);
-
-		const productIsNotYetInTheCart = cart.filter((cartProduct) => cartProduct.productId === productId).length === 0;
-		if (productIsNotYetInTheCart) {
-			// Add the product to the cart if it's not yet in the cart
-			const [productToBeAddedToCart] = updatedProducts.filter((updatedProduct) => updatedProduct.productId === productId);
-			setCart([...cart, productToBeAddedToCart]);
-		} else {
-			// Modify the product quantity if it's already in the cart
-			const updatedCart = cart.map((existingCartItem) =>
-				existingCartItem.productId === productId ? { ...existingCartItem, productCartQuantity: productCartQuantity } : existingCartItem
-			);
-			setCart(updatedCart);
-		}
 	}
 
 	function getCartLength() {
