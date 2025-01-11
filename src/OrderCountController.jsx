@@ -23,7 +23,7 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 					className="subtract"
 					onClick={() => {
 						if (inputValue > 0) {
-							// Decrement the product quantity that was added in the cart
+							// Decrement the product quantity of the corresponding item that was added in the cart
 							setInputValue((current) => current - 1);
 							onAddItemToCart(parseInt(inputValue) - 1);
 						}
@@ -44,6 +44,7 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 				<button
 					className="add"
 					onClick={() => {
+						// Increment the product quantity of the corresponding item that was added in the cart
 						onAddItemToCart(parseInt(inputValue) + 1);
 						setInputValue((current) => current + 1);
 					}}
