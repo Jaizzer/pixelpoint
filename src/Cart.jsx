@@ -2,7 +2,6 @@ import ProductCard from './ProductCard';
 import PropTypes from 'prop-types';
 
 function Cart({ products, onAddItemToCart }) {
-	console.log(products);
 	const productCards = products.map((product) => {
 		return (
 			<ProductCard
