@@ -9,6 +9,7 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 			<button
 				role="button"
 				onClick={() => {
+                    // Initialize the product quantity to 1 when the item is added to the cart for the first time
 					onAddItemToCart(1);
 					setInputValue(1);
 				}}
