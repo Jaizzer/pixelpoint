@@ -21,15 +21,36 @@ export default function App() {
 		{ imageLink: '', productName: 'product5', productPrice: '$655', productId: '5', productCartQuantity: null },
 	]);
 
-	function onAddItemToCart(productId) {
-		const productToBeAddedToCart = products.filter((product) => product.productId === productId);
-		setCart(cart.concat(productToBeAddedToCart));
+	function onAddItemToCart(productId, productCartQuantity) {
+		// Update the products
+		const updatedProducts = products.map((existingCartItem) =>
+			existingCartItem.productId === productId ? { ...existingCartItem, productCartQuantity: productCartQuantity } : existingCartItem
+		);
+		setProducts(updatedProducts);
+
+		const productIsNotYetInTheCart = cart.filter((cartProduct) => cartProduct.productId === productId).length === 0;
+		if (productIsNotYetInTheCart) {
+			// Add the product to the cart if it's not yet in the cart
+			const [productToBeAddedToCart] = updatedProducts.filter((updatedProduct) => updatedProduct.productId === productId);
+			setCart([...cart, productToBeAddedToCart]);
+		} else {
+			// Modify the product quantity if it's already in the cart
+			const updatedCart = cart.map((existingCartItem) =>
+				existingCartItem.productId === productId ? { ...existingCartItem, productCartQuantity: productCartQuantity } : existingCartItem
+			);
+			setCart(updatedCart);
+		}
+	}
+
+	function getCartLength() {
+		const cartItemsQuantity = cart.map((item) => item.productCartQuantity).reduce((acc, curr) => acc + curr, 0);
+		return cartItemsQuantity;
 	}
 
 	return (
 		<>
 			<Sidebar></Sidebar>
-			<TopBar cartContentCount={cart.length}></TopBar>
+			<TopBar cartContentCount={getCartLength()}></TopBar>
 			<main>
 				{!content ? (
 					<Home />
@@ -40,7 +61,7 @@ export default function App() {
 				) : content === 'about' ? (
 					<About />
 				) : content === 'cart' ? (
-					<Cart />
+					<Cart onAddItemToCart={onAddItemToCart} products={cart} />
 				) : (
 					<Error />
 				)}

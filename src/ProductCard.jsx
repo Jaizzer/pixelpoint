@@ -10,8 +10,8 @@ function ProductCard({ imageLink, productName, productPrice, productId, onAddIte
 			</div>
 			<div className="price">{productPrice}</div>
 			<OrderCountController
-				onAddItemToCart={() => {
-					onAddItemToCart(productId);
+				onAddItemToCart={(productCartQuantity) => {
+					onAddItemToCart(productId, productCartQuantity);
 				}}
 				productCartQuantity={productCartQuantity}
 			/>

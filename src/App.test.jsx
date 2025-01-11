@@ -4,7 +4,6 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { userEvent } from '@testing-library/user-event';
 import App from './App';
 
-
 describe('App component', () => {
 	it('contains the sidebar', () => {
 		render(
@@ -201,5 +200,40 @@ describe('App component', () => {
 		const orderCount = screen.queryByTitle('cart-content-count');
 
 		expect(orderCount.textContent).toEqual(`${numberOfAddToCartButtons}`);
+	});
+
+	it('enables the incrementation of a product added to the cart when the corresponding "+" is clicked', async () => {
+		const user = userEvent.setup();
+
+		render(
+			<MemoryRouter initialEntries={['/']}>
+				<Routes>
+					<Route path="/" element={<App />} />
+					<Route path="/:content" element={<App />} />
+				</Routes>
+			</MemoryRouter>
+		);
+
+		// Go to the Shop page content
+		const shopNavItem = screen.queryByText('Shop');
+		await user.click(shopNavItem);
+
+		// Get the first Add to Cart button
+		const addToCartButton = screen.queryAllByText(/Add to Cart/i)[0];
+
+		// Click the obtained add to cart button
+		await user.click(addToCartButton);
+
+		// Access the '+' icon
+		const addButton = screen.queryByText('+');
+
+		// Click the add button twice
+		await user.click(addButton);
+		await user.click(addButton);
+
+		// Access the cart icon order count
+		const orderCount = screen.queryByTitle('cart-content-count');
+
+		expect(orderCount.textContent).toEqual('3');
 	});
 });

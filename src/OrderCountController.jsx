@@ -9,7 +9,7 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 			<button
 				role="button"
 				onClick={() => {
-					onAddItemToCart();
+					onAddItemToCart(inputValue + 1);
 					setInputValue((current) => current + 1);
 				}}
 			>
@@ -41,6 +41,7 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 				<button
 					className="add"
 					onClick={() => {
+						onAddItemToCart(inputValue + 1);
 						setInputValue((current) => current + 1);
 					}}
 				>
