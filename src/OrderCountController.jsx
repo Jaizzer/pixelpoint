@@ -9,8 +9,8 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 			<button
 				role="button"
 				onClick={() => {
-					onAddItemToCart(inputValue + 1);
-					setInputValue((current) => current + 1);
+					onAddItemToCart(1);
+					setInputValue(1);
 				}}
 			>
 				Add to Cart
