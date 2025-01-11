@@ -237,6 +237,49 @@ describe('App component', () => {
 		expect(orderCount.textContent).toEqual('3');
 	});
 
+	it('enables the decrementation of a product added to the cart when the corresponding "-" is clicked', async () => {
+		const user = userEvent.setup();
+
+		render(
+			<MemoryRouter initialEntries={['/']}>
+				<Routes>
+					<Route path="/" element={<App />} />
+					<Route path="/:content" element={<App />} />
+				</Routes>
+			</MemoryRouter>
+		);
+
+		// Go to the Shop page content
+		const shopNavItem = screen.queryByText('Shop');
+		await user.click(shopNavItem);
+
+		// Get the first Add to Cart button
+		const addToCartButton = screen.queryAllByText(/Add to Cart/i)[0];
+
+		// Click the obtained add to cart button
+		await user.click(addToCartButton);
+
+		// Access the '+' icon
+		const addButton = screen.queryByText('+');
+
+		// Click the add button twice
+		await user.click(addButton);
+		await user.click(addButton);
+
+		// Access the '-' icon
+		const subtractButton = screen.queryByText('-');
+
+		// Clikc the subtract button once
+		await user.click(subtractButton);
+
+        screen.debug()
+
+		// Access the cart icon order count
+		const orderCount = screen.queryByTitle('cart-content-count');
+
+		expect(orderCount.textContent).toEqual('2');
+	});
+
 	it('enables the changes in the order quantity input box to reflect on the cart contents', async () => {
 		const user = userEvent.setup();
 

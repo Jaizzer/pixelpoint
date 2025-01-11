@@ -23,7 +23,9 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 					className="subtract"
 					onClick={() => {
 						if (inputValue > 0) {
+							// Decrement the product quantity that was added in the cart
 							setInputValue((current) => current - 1);
+							onAddItemToCart(parseInt(inputValue) - 1);
 						}
 					}}
 				>
