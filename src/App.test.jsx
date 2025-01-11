@@ -236,4 +236,41 @@ describe('App component', () => {
 
 		expect(orderCount.textContent).toEqual('3');
 	});
+
+	it('enables the changes in the order quantity input box to reflect on the cart contents', async () => {
+		const user = userEvent.setup();
+
+		render(
+			<MemoryRouter initialEntries={['/']}>
+				<Routes>
+					<Route path="/" element={<App />} />
+					<Route path="/:content" element={<App />} />
+				</Routes>
+			</MemoryRouter>
+		);
+
+		// Go to the Shop page content
+		const shopNavItem = screen.queryByText('Shop');
+		await user.click(shopNavItem);
+
+		// Get the first Add to Cart button
+		const addToCartButton = screen.queryAllByText(/Add to Cart/i)[0];
+
+		// Click the obtained add to cart button
+		await user.click(addToCartButton);
+
+		// Access the input box
+		const inputInShopPage = screen.queryByRole('textbox');
+
+		// Modify the input value
+		await user.type(inputInShopPage, '8');
+
+		// Go to the Cart page content
+		const cartNavItem = screen.queryByText('Cart');
+		await user.click(cartNavItem);
+
+		// Check if the input textbox of the added item in the cart matches
+		const inputInCartPage = screen.queryByRole('textbox');
+		expect(inputInCartPage.value).toEqual(inputInShopPage.value);
+	});
 });

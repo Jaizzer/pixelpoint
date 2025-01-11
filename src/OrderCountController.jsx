@@ -34,14 +34,15 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 					min={0}
 					value={inputValue}
 					role="input"
-					onChange={(e) => {
+					onInput={(e) => {
+						onAddItemToCart(parseInt(e.target.value) || 0);
 						setInputValue(e.target.value);
 					}}
 				/>
 				<button
 					className="add"
 					onClick={() => {
-						onAddItemToCart(inputValue + 1);
+						onAddItemToCart(parseInt(inputValue) + 1);
 						setInputValue((current) => current + 1);
 					}}
 				>
