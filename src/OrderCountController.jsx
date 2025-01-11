@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 	const [inputValue, setInputValue] = useState(productCartQuantity || 0);
 
-	if (inputValue === 0) {
+	if (parseInt(inputValue) === 0) {
 		return (
 			<button
 				role="button"
@@ -46,7 +46,7 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 					className="add"
 					onClick={() => {
 						// Increment the product quantity of the corresponding item that was added in the cart
-						setInputValue((current) => current + 1);
+						setInputValue((current) => parseInt(current) + 1);
 						onAddItemToCart(parseInt(inputValue) + 1);
 					}}
 				>
