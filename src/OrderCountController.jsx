@@ -9,9 +9,9 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 			<button
 				role="button"
 				onClick={() => {
-                    // Initialize the product quantity to 1 when the item is added to the cart for the first time
-					onAddItemToCart(1);
+					// Initialize the product quantity to 1 when the item is added to the cart for the first time
 					setInputValue(1);
+					onAddItemToCart(1);
 				}}
 			>
 				Add to Cart
@@ -38,16 +38,16 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 					value={inputValue}
 					role="input"
 					onInput={(e) => {
-						onAddItemToCart(parseInt(e.target.value) || 0);
 						setInputValue(e.target.value);
+						onAddItemToCart(parseInt(e.target.value) || 0);
 					}}
 				/>
 				<button
 					className="add"
 					onClick={() => {
 						// Increment the product quantity of the corresponding item that was added in the cart
-						onAddItemToCart(parseInt(inputValue) + 1);
 						setInputValue((current) => current + 1);
+						onAddItemToCart(parseInt(inputValue) + 1);
 					}}
 				>
 					+
