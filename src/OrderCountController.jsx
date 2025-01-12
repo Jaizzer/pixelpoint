@@ -39,7 +39,10 @@ function AddToCartButton({ onAddItemToCart, productCartQuantity }) {
 					role="input"
 					onInput={(e) => {
 						setInputValue(e.target.value);
-						onAddItemToCart(parseInt(e.target.value) || 0);
+						// Only update the cart if the input is not blank
+						if (e.target.value !== '') {
+							onAddItemToCart(parseInt(e.target.value));
+						}
 					}}
 				/>
 				<button
