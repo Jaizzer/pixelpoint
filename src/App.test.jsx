@@ -20,6 +20,7 @@ describe('App component', () => {
 			})
 		);
 	});
+    
 	it('contains the sidebar', () => {
 		render(
 			<MemoryRouter initialEntries={['/about']}>
