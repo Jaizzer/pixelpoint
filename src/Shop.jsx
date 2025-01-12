@@ -1,19 +1,22 @@
 import ProductCard from './ProductCard';
 import PropTypes from 'prop-types';
 function Shop({ products, onAddItemToCart }) {
-	const productCards = products.map((product) => {
-		return (
-			<ProductCard
-				key={product.productId}
-				imageLink={product.imageLink}
-				productName={product.productName}
-				productPrice={product.productPrice}
-				onAddItemToCart={onAddItemToCart}
-				productCartQuantity={product.productCartQuantity}
-				productId={product.productId}
-			/>
-		);
-	});
+	let productCards;
+	if (products) {
+		productCards = products.map((product) => {
+			return (
+				<ProductCard
+					key={product.productId}
+					imageLink={product.imageLink}
+					productName={product.productName}
+					productPrice={product.productPrice}
+					onAddItemToCart={onAddItemToCart}
+					productCartQuantity={product.productCartQuantity}
+					productId={product.productId}
+				/>
+			);
+		});
+	}
 
 	return <div title="shop">{productCards}</div>;
 }
