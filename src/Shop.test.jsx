@@ -28,4 +28,16 @@ describe('Shop component', () => {
 
 		expect(images.length).toBe(products.length);
 	});
+
+	it('renders loading message if the products are currently loading', () => {
+		render(<Shop loading={true} products={null} error={null} />);
+		const loadingMessage = screen.queryByTitle('loading');
+		expect(loadingMessage).not.toBeNull();
+	});
+
+    it('renders error message if there is an error', () => {
+		render(<Shop loading={false} products={null} error={true} />);
+		const errorMessage = screen.queryByTitle('error');
+		expect(errorMessage).not.toBeNull();
+	});
 });
