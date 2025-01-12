@@ -1,10 +1,25 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { userEvent } from '@testing-library/user-event';
 import App from './App';
 
 describe('App component', () => {
+	beforeEach(() => {
+		// Mock the fetch function
+		window.fetch = vi.fn(() =>
+			Promise.resolve({
+				json: () =>
+					Promise.resolve([
+						{ image: 'imageLink', title: 'product1', price: 451, id: 1 },
+						{ image: 'imageLink', title: 'product2', price: 552, id: 2 },
+						{ image: 'imageLink', title: 'product3', price: 653, id: 3 },
+						{ image: 'imageLink', title: 'product4', price: 654, id: 4 },
+						{ image: 'imageLink', title: 'product5', price: 655, id: 5 },
+					]),
+			})
+		);
+	});
 	it('contains the sidebar', () => {
 		render(
 			<MemoryRouter initialEntries={['/about']}>
@@ -272,7 +287,7 @@ describe('App component', () => {
 		// Clikc the subtract button once
 		await user.click(subtractButton);
 
-        screen.debug()
+		screen.debug();
 
 		// Access the cart icon order count
 		const orderCount = screen.queryByTitle('cart-content-count');

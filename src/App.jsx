@@ -7,21 +7,40 @@ import Error from './Error';
 import Cart from './Cart';
 import TopBar from './TopBar';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function App() {
 	const { content } = useParams();
-
-	const [products, setProducts] = useState([
-		{ imageLink: '', productName: 'product1', productPrice: '$451', productId: '1', productCartQuantity: 0 },
-		{ imageLink: '', productName: 'product2', productPrice: '$552', productId: '2', productCartQuantity: 0 },
-		{ imageLink: '', productName: 'product3', productPrice: '$653', productId: '3', productCartQuantity: 0 },
-		{ imageLink: '', productName: 'product4', productPrice: '$654', productId: '4', productCartQuantity: 0 },
-		{ imageLink: '', productName: 'product5', productPrice: '$655', productId: '5', productCartQuantity: 0 },
-	]);
+	const [products, setProducts] = useState([]);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(true);
 
 	// Cart is composed of products that have product cart quantity greater than zero
 	const cart = products.filter((product) => product.productCartQuantity > 0);
+
+	// Fetch the products from the Fake Store API
+	useEffect(() => {
+		(async function () {
+			try {
+				const response = await fetch('https://fakestoreapi.com/products');
+				const jsondata = await response.json();
+				const modifiedProducts = jsondata.map((product) => {
+					return {
+						imageLink: product.image,
+						productName: product.title,
+						productPrice: '$' + product.price,
+						productId: `${product.id}`,
+						productCartQuantity: 0,
+					};
+				});
+				setProducts(modifiedProducts);
+			} catch (error) {
+				setError(error ? true : false);
+			} finally {
+				setLoading(false);
+			}
+		})();
+	}, []);
 
 	function onAddItemToCart(productId, productCartQuantity) {
 		// Update the products
@@ -46,7 +65,7 @@ export default function App() {
 				) : content === 'account' ? (
 					<Account />
 				) : content === 'shop' ? (
-					<Shop onAddItemToCart={onAddItemToCart} products={products} />
+					<Shop onAddItemToCart={onAddItemToCart} products={products} error={error} loading={loading} />
 				) : content === 'about' ? (
 					<About />
 				) : content === 'cart' ? (
