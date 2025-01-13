@@ -20,7 +20,7 @@ describe('App component', () => {
 			})
 		);
 	});
-    
+
 	it('contains the sidebar', () => {
 		render(
 			<MemoryRouter initialEntries={['/about']}>
@@ -287,8 +287,6 @@ describe('App component', () => {
 
 		// Clikc the subtract button once
 		await user.click(subtractButton);
-
-		screen.debug();
 
 		// Access the cart icon order count
 		const orderCount = screen.queryByTitle('cart-content-count');
