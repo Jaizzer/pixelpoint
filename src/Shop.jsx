@@ -61,10 +61,10 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					<DropdownFilter
 						items={genreFilters}
 						title="Genre"
-						onDropdownItemClick={(clickedGenreFilterItemName) => {
+						onDropdownItemClick={(clickedItem) => {
 							// Save the Unchecked/Checked status of the genre filter item in the 'genreFilters state array
 							const updatedGenreFilters = genreFilters.map((genreFilter) =>
-								genreFilter.name === clickedGenreFilterItemName ? { ...genreFilter, isChecked: !genreFilter.isChecked } : genreFilter
+								genreFilter.name === clickedItem ? { ...genreFilter, isChecked: !genreFilter.isChecked } : genreFilter
 							);
 							setGenreFilters(updatedGenreFilters);
 						}}
