@@ -14,9 +14,6 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 		// State variable that determines whether the dropdown is in 'Show less' or 'Show more' mode
 		const [isEveryDropdownItemsVisible, setIsEveryDropdownItemsVisible] = useState(false);
 
-		// Only show 'Show less' or 'Show more' button if there is a provided number of items to be shown in 'Show less' mode
-		const isShowLessOrShowMoreButtonVisible = numberOfShowLessItems !== null;
-
 		// Create the dropdown items
 		let dropdownItems = [];
 		if (isEveryDropdownItemsVisible || !numberOfShowLessItems) {
@@ -62,16 +59,19 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 					<div className="dropdown">
 						{dropdownItems}
 						<div className="filterActions">
-							{isShowLessOrShowMoreButtonVisible ? (
-								<div
-									className="expand-collapse-toggler"
-									onClick={() => {
-										setIsEveryDropdownItemsVisible(!isEveryDropdownItemsVisible);
-									}}
-								>
-									{isEveryDropdownItemsVisible ? 'Show less' : 'Show more'}
-								</div>
-							) : null}
+							{
+								// Only show 'Show less' or 'Show more' button if there is a provided number of items to be shown in 'Show less' mode
+								numberOfShowLessItems ? (
+									<div
+										className="expand-collapse-toggler"
+										onClick={() => {
+											setIsEveryDropdownItemsVisible(!isEveryDropdownItemsVisible);
+										}}
+									>
+										{isEveryDropdownItemsVisible ? 'Show less' : 'Show more'}
+									</div>
+								) : null
+							}
 							<div className="clear" onClick={onClearClick}>
 								Clear
 							</div>
