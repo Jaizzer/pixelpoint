@@ -95,7 +95,7 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 }
 
 Shop.propTypes = {
-	products: PropTypes.array,
+	products: PropTypes.array.isRequired,
 	onAddItemToCart: PropTypes.func,
 	loading: PropTypes.bool,
 	error: PropTypes.bool,
