@@ -1,26 +1,31 @@
 import ProductCard from './ProductCard';
 import PropTypes from 'prop-types';
 import DropdownFilter from './DropdownFilter';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function Shop({ products, error, loading, onAddItemToCart }) {
 	const [genreFilters, setGenreFilters] = useState([]);
 
-	useEffect(() => {
-		// Collect every possible distinct genres from the products
-		if (products) {
-			let updatedGenreFilters = [
-				...new Set(
-					products.map((product) => {
-						return product.genre;
-					})
-				),
-			].map((genreFilter) => {
-				return { name: genreFilter, isChecked: false };
-			});
-			setGenreFilters(updatedGenreFilters);
-		}
-	}, [products]);
+	// Check if the updated products have been fetched
+	const hasFetchedAllUpdatedProducts = products.length !== 0;
+
+	// Check if the filters have not yet been set
+	const areGenreFiltersUnset = genreFilters.length === 0;
+
+	// Collect every possible distinct genres from the products
+	// only if the updated products have been fetched and the genre filters have not yet been set
+	if (hasFetchedAllUpdatedProducts && areGenreFiltersUnset) {
+		let updatedGenreFilters = [
+			...new Set(
+				products.map((product) => {
+					return product.genre;
+				})
+			),
+		].map((genreFilter) => {
+			return { name: genreFilter, isChecked: false };
+		});
+		setGenreFilters(updatedGenreFilters);
+	}
 
 	let productCards;
 	if (products) {
