@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import DropdownFilter from './DropdownFilter';
 
-describe('Dropdown flter', () => {
+describe('Dropdown filter', () => {
 	it('shows the list of the drop down items provided when clicked', async () => {
 		const items = [
 			{ name: 'Price', isChecked: true },
