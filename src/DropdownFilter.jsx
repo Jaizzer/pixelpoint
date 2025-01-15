@@ -17,7 +17,7 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 		// Create the dropdown items
 		let dropdownItems = [];
 		if (isEveryDropdownItemsVisible || !numberOfShowLessItems) {
-			// Render all dropdown items since there is no 'Show less' or 'Show more' button
+			// Render all dropdown items if the dropdown is in 'Show more' mode or if there is no numberOfShowLessItems provided
 			dropdownItems = items.map((item) => {
 				return (
 					<DropdownItem
