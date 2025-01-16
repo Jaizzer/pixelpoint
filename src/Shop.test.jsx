@@ -78,7 +78,7 @@ describe('Shop component', () => {
 		];
 		render(<Shop loading={false} products={products} error={false} />);
 
-		// Filter by price
+		// Filter all 'Action'
 		const actionDropdownFilter = screen.queryByText('Action');
 		await user.click(actionDropdownFilter);
 
