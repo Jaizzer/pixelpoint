@@ -45,9 +45,9 @@ vi.mock('./DropdownFilter', () => ({
 describe('Shop component', () => {
 	it('converts all array of products into shopping cards', () => {
 		const products = [
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: 'Action', platforms: ['PC', 'Mobile'] },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: 'Action', platforms: ['PC', 'Mobile'] },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: 'Mystery', platforms: ['PC', 'Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
 		render(<Shop products={products} />);
 
@@ -72,9 +72,9 @@ describe('Shop component', () => {
 	it('filters the product when a dropdown filter is clicked', async () => {
 		const user = userEvent.setup();
 		const products = [
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: 'Action', platforms: ['PC', 'Mobile'] },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: 'Action', platforms: ['PC', 'Mobile'] },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: 'Mystery', platforms: ['PC', 'Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
 		render(<Shop loading={false} products={products} error={false} />);
 
@@ -92,9 +92,9 @@ describe('Shop component', () => {
 	it('filters the products by platform', async () => {
 		const user = userEvent.setup();
 		const products = [
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: 'Action', platforms: ['Mobile'] },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: 'Action', platforms: ['PC'] },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: 'Mystery', platforms: ['PC'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
 		render(<Shop loading={false} products={products} error={false} />);
 		// Filter all products available for 'PC' platform

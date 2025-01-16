@@ -18,9 +18,11 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 	if (hasFetchedAllUpdatedProducts && areGenreFiltersUnset) {
 		let updatedGenreFilters = [
 			...new Set(
-				products.map((product) => {
-					return product.genre;
-				})
+				products
+					.map((product) => {
+						return product.genre;
+					})
+					.flat()
 			),
 		].map((genreFilter) => {
 			return { name: genreFilter, isChecked: false };
@@ -62,7 +64,9 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 		}
 
 		// Filter the products by genre
-		const filteredProductsByGenre = products.filter((product) => checkedGenreFilters.includes(product.genre));
+		const filteredProductsByGenre = products.filter((product) => {
+			return product.genre.reduce((acc, curr) => checkedGenreFilters.includes(curr) || acc, false);
+		});
 
 		// Get all currently checked platform filter items to be used for filtering the genre-filtered-products
 		let checkedPlatformFilters;
