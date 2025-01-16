@@ -8,7 +8,7 @@ function ProductCard({ imageLink, productName, productPrice, productId, onAddIte
 			<div className="productName" data-testid="productName">
 				{productName}
 			</div>
-			<div className="price">{productPrice}</div>
+			<div className="price">{'$' + productPrice}</div>
 			<OrderCountController
 				onAddItemToCart={(productCartQuantity) => {
 					onAddItemToCart(productId, productCartQuantity);
@@ -22,7 +22,7 @@ function ProductCard({ imageLink, productName, productPrice, productId, onAddIte
 ProductCard.propTypes = {
 	imageLink: PropTypes.string,
 	productName: PropTypes.string,
-	productPrice: PropTypes.string,
+	productPrice: PropTypes.number,
 	productId: PropTypes.string,
 	onAddItemToCart: PropTypes.func,
 	productCartQuantity: PropTypes.number,
