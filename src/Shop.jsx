@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 function Shop({ products, error, loading, onAddItemToCart }) {
 	const [genreFilters, setGenreFilters] = useState([]);
+	const [platformFilters, setPlatformFilters] = useState([]);
 
 	// Check if the updated products have been fetched
 	const hasFetchedAllUpdatedProducts = products.length !== 0;
@@ -27,6 +28,26 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 		setGenreFilters(updatedGenreFilters);
 	}
 
+	// Check if the platform filters have not yet been set
+	const arePlatformFiltersUnset = platformFilters.length === 0;
+
+	// Collect every possible distinct platforms from the products
+	// only if the updated products have been fetched and the platform filters have not yet been set
+	if (hasFetchedAllUpdatedProducts && arePlatformFiltersUnset) {
+		let updatedPlatformFilters = [
+			...new Set(
+				products
+					.map((product) => {
+						return product.platforms;
+					})
+					.flat()
+			),
+		].map((platformFilter) => {
+			return { name: platformFilter, isChecked: false };
+		});
+		setPlatformFilters(updatedPlatformFilters);
+	}
+
 	let productCards;
 	if (products) {
 		// Get all currently checked genre filter items to be used for filtering the products to be rendered
@@ -41,8 +62,27 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 		}
 
 		// Filter the products to be rendered by genre
-		const filteredProducts = products.filter((product) => checkedGenreFilters.includes(product.genre));
-		productCards = filteredProducts.map((product) => {
+		const filteredProductsByGenre = products.filter((product) => checkedGenreFilters.includes(product.genre));
+
+		// Get all currently checked platform filter items to be used for filtering the products to be rendered
+		let checkedPlatformFilters;
+		const isThereAtleastOnePlatformFilterChecked = platformFilters.filter((platformFilter) => platformFilter.isChecked).length === 0;
+		if (isThereAtleastOnePlatformFilterChecked) {
+			// Get all the checked platform filter items
+			checkedPlatformFilters = platformFilters.map((platformFilter) => platformFilter.name);
+		} else {
+			// Apply all platform filters (to render all items) if there is currently no checked platform filter
+			checkedPlatformFilters = platformFilters
+				.filter((platformFilter) => platformFilter.isChecked)
+				.map((platformFilter) => platformFilter.name);
+		}
+
+		// Filter the products to be rendered by genre
+		const filteredProductsByPlatform = filteredProductsByGenre.filter((filteredProductByGenre) => {
+			return filteredProductByGenre.platforms.reduce((acc, curr) => checkedPlatformFilters.includes(curr) || acc, false);
+		});
+
+		productCards = filteredProductsByPlatform.map((product) => {
 			if (product)
 				return (
 					<ProductCard
@@ -79,6 +119,31 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 								return { ...genreFilter, isChecked: false };
 							});
 							setGenreFilters(updatedGenreFilters);
+						}}
+					/>
+				) : null
+			}
+
+			{
+				// Only render the genre dropdown filter if there are available platform filter
+				platformFilters.length > 0 ? (
+					<DropdownFilter
+						items={platformFilters}
+						title="Platform"
+						onDropdownItemClick={(clickedItem) => {
+							// Save the Unchecked/Checked status of the genre filter item in the 'genreFilters state array
+							const updatedPlatformFilters = platformFilters.map((platformFilter) =>
+								platformFilter.name === clickedItem ? { ...platformFilter, isChecked: !platformFilter.isChecked } : platformFilter
+							);
+							setPlatformFilters(updatedPlatformFilters);
+						}}
+						onClearClick={() => {
+							// Save the unchecking of all genre filter items in the 'genreFilters state array
+							const updatedPlatformFilters = platformFilters.map((platformFilter) => {
+								return { ...platformFilter, isChecked: false };
+							});
+
+							setPlatformFilters(updatedPlatformFilters);
 						}}
 					/>
 				) : null

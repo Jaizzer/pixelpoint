@@ -88,4 +88,20 @@ describe('Shop component', () => {
 
 		expect(isActionGenresRemained.length).toEqual(2);
 	});
+
+	it('filters the products by platform', async () => {
+		const user = userEvent.setup();
+		const products = [
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: 'Action', platforms: ['Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: 'Action', platforms: ['PC'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: 'Mystery', platforms: ['PC'] },
+		];
+		render(<Shop loading={false} products={products} error={false} />);
+		// Filter all products available for 'PC' platform
+		const pcDropdownFilter = screen.queryByText('PC');
+		await user.click(pcDropdownFilter);
+
+		const isProductsForPCRemained = screen.queryAllByRole('image').length === 2;
+		expect(isProductsForPCRemained).toBeTruthy();
+	});
 });
