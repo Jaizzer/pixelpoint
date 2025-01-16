@@ -57,27 +57,27 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 			// Get all the checked genre filter items
 			checkedGenreFilters = genreFilters.map((genreFilter) => genreFilter.name);
 		} else {
-			// Apply all filters (to render all items) if there is currently no checked genre filter
+			// Use all the genre filters if there is currently no checked genre filter
 			checkedGenreFilters = genreFilters.filter((genreFilter) => genreFilter.isChecked).map((genreFilter) => genreFilter.name);
 		}
 
-		// Filter the products to be rendered by genre
+		// Filter the products by genre
 		const filteredProductsByGenre = products.filter((product) => checkedGenreFilters.includes(product.genre));
 
-		// Get all currently checked platform filter items to be used for filtering the products to be rendered
+		// Get all currently checked platform filter items to be used for filtering the genre-filtered-products
 		let checkedPlatformFilters;
 		const isThereAtleastOnePlatformFilterChecked = platformFilters.filter((platformFilter) => platformFilter.isChecked).length === 0;
 		if (isThereAtleastOnePlatformFilterChecked) {
 			// Get all the checked platform filter items
 			checkedPlatformFilters = platformFilters.map((platformFilter) => platformFilter.name);
 		} else {
-			// Apply all platform filters (to render all items) if there is currently no checked platform filter
+			// Use all the platform filters if there is currently no checked platform filter
 			checkedPlatformFilters = platformFilters
 				.filter((platformFilter) => platformFilter.isChecked)
 				.map((platformFilter) => platformFilter.name);
 		}
 
-		// Filter the products to be rendered by genre
+		// Filter the genre-filtered-products by platform
 		const filteredProductsByPlatform = filteredProductsByGenre.filter((filteredProductByGenre) => {
 			return filteredProductByGenre.platforms.reduce((acc, curr) => checkedPlatformFilters.includes(curr) || acc, false);
 		});
