@@ -45,9 +45,9 @@ vi.mock('./DropdownFilter', () => ({
 describe('Shop component', () => {
 	it('converts all array of products into shopping cards', () => {
 		const products = [
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: 'Action' },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: 'Action' },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: 'Mystery' },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: 'Action', platforms: ['PC', 'Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: 'Action', platforms: ['PC', 'Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: 'Mystery', platforms: ['PC', 'Mobile'] },
 		];
 		render(<Shop products={products} />);
 
@@ -72,11 +72,9 @@ describe('Shop component', () => {
 	it('filters the product when a dropdown filter is clicked', async () => {
 		const user = userEvent.setup();
 		const products = [
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: 'Action' },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: 'Action' },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: 'Mystery' },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '4', genre: 'Adventure' },
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '5', genre: 'Horror' },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$45', productId: '1', genre: 'Action', platforms: ['PC', 'Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$55', productId: '2', genre: 'Action', platforms: ['PC', 'Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: 'Mystery', platforms: ['PC', 'Mobile'] },
 		];
 		render(<Shop loading={false} products={products} error={false} />);
 
