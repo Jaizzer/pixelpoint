@@ -51,7 +51,7 @@ describe('Shop component', () => {
 		];
 		render(<Shop products={products} />);
 
-		// Existence of an image guarantess the existence of a product card
+		// Existence of an image guarantees the existence of a product card
 		const images = screen.queryAllByAltText('product');
 
 		expect(images.length).toBe(products.length);
