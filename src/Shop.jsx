@@ -1,6 +1,7 @@
 import ProductCard from './ProductCard';
 import PropTypes from 'prop-types';
 import DropdownFilter from './DropdownFilter';
+import PriceRangeController from './PriceRangeController';
 import { useState } from 'react';
 import Sorter from './Sorter';
 
@@ -9,6 +10,7 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 	const [platformFilters, setPlatformFilters] = useState([]);
 	const [ageRatingFilters, setAgeRatingFilters] = useState([]);
 	const [sortCriteria, setSortCriteria] = useState(null);
+	const [priceRangeFilters, setPriceRangeFilters] = useState({ min: null, max: null });
 
 	// Check if the updated products have been fetched
 	const hasFetchedAllUpdatedProducts = products.length !== 0;
@@ -123,6 +125,24 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 			return filteredProductByGenre.platforms.reduce((acc, curr) => checkedPlatformFilters.includes(curr) || acc, false);
 		});
 
+		// Filter the products by price range if there is a provided price range
+		if (priceRangeFilters.min !== null && priceRangeFilters.max !== null) {
+			// Both minimum and maximum price was provided
+			filteredProductsByPlatform = filteredProductsByPlatform.filter((product) => {
+				return product.productPrice >= priceRangeFilters.min && product.productPrice <= priceRangeFilters.max;
+			});
+		} else if (priceRangeFilters.min !== null && priceRangeFilters.max === null) {
+			// Only minimum price was provided
+			filteredProductsByPlatform = filteredProductsByPlatform.filter((product) => {
+				return product.productPrice >= priceRangeFilters.min;
+			});
+		} else if (priceRangeFilters.min === null && priceRangeFilters.max !== null) {
+			// Only maximum price was provided
+			filteredProductsByPlatform = filteredProductsByPlatform.filter((product) => {
+				return product.productPrice <= priceRangeFilters.max;
+			});
+		}
+
 		// Sort the products after filtering
 		switch (sortCriteria) {
 			case 'Popularity: High to Low':
@@ -196,6 +216,11 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 	return (
 		<div title="shop">
 			<div className="dropdownFiltersContainer">
+				<PriceRangeController
+					onPriceRangeSet={(range) => {
+						setPriceRangeFilters(range);
+					}}
+				></PriceRangeController>
 				{
 					// Only render the genre dropdown filter if there are available genre filter
 					genreFilters.length > 0 ? (

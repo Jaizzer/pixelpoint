@@ -42,6 +42,21 @@ vi.mock('./DropdownFilter', () => ({
 	},
 }));
 
+vi.mock('./PriceRangeController', () => ({
+	default: ({ onPriceRangeSet }) => {
+		return (
+			<div
+				className="priceRangeController"
+				onClick={() => {
+					onPriceRangeSet({ min: 50, max: 100 });
+				}}
+			>
+				Price Range Controller
+			</div>
+		);
+	},
+}));
+
 vi.mock('./Sorter', () => ({
 	default: ({ onSortItemClick }) => {
 		return (
@@ -259,6 +274,45 @@ describe('Shop component', () => {
 
 		const isMatureRatedProductsRemained = screen.queryAllByRole('image').length === 2;
 		expect(isMatureRatedProductsRemained).toBeTruthy();
+	});
+
+	it('filters the products base on the price range', async () => {
+		const user = userEvent.setup();
+		const products = [
+			{
+				imageLink: 'fakeLink',
+				productName: 'product1',
+				productPrice: 650,
+				productId: '1',
+				genre: ['Action', 'Adventure'],
+				platforms: ['Mobile'],
+				unitsSold: 10,
+			},
+			{
+				imageLink: 'fakeLink',
+				productName: 'product2',
+				productPrice: 23,
+				productId: '2',
+				genre: ['Action', 'Open World'],
+				platforms: ['PC'],
+				unitsSold: 20,
+			},
+			{
+				imageLink: 'fakeLink',
+				productName: 'product3',
+				productPrice: 55,
+				productId: '3',
+				genre: ['Mystery', 'Puzzle'],
+				platforms: ['PC'],
+				unitsSold: 30,
+			},
+		];
+		render(<Shop loading={false} products={products} error={false} />);
+		const priceRangeControllerMock = screen.queryByText('Price Range Controller');
+		await user.click(priceRangeControllerMock);
+
+		const productThatFitsThePriceRange = screen.queryAllByTitle('product-name')[0];
+		expect(productThatFitsThePriceRange.textContent).toEqual('product3');
 	});
 
 	it('sorts the item by popularity from high to low', async () => {
