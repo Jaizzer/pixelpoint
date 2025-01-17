@@ -100,6 +100,13 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					return productA.unitsSold - productB.unitsSold;
 				});
 				break;
+			case 'Release Date: Newest First':
+				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
+                    const productAReleaseDate = productA.releaseDate;
+                    const productBReleaseDate = productB.releaseDate;
+					return productBReleaseDate.localeCompare(productAReleaseDate)
+				});
+				break;
 			case 'Price: Low to High':
 				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
 					return productA.productPrice - productB.productPrice;
