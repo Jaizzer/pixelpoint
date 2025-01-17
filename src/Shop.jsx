@@ -90,28 +90,28 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 
 		// Sort the products after filtering
 		switch (sortCriteria) {
-            case 'Popularity: High to Low':
+			case 'Popularity: High to Low':
 				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
 					return productB.unitsSold - productA.unitsSold;
 				});
 				break;
-            case 'Popularity: Low to High':
+			case 'Popularity: Low to High':
 				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
 					return productA.unitsSold - productB.unitsSold;
 				});
 				break;
 			case 'Release Date: Newest First':
 				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-                    const productAReleaseDate = productA.releaseDate;
-                    const productBReleaseDate = productB.releaseDate;
-					return productBReleaseDate.localeCompare(productAReleaseDate)
+					const productAReleaseDate = productA.releaseDate;
+					const productBReleaseDate = productB.releaseDate;
+					return productBReleaseDate.localeCompare(productAReleaseDate);
 				});
 				break;
 			case 'Release Date: Oldest First':
 				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-                    const productAReleaseDate = productA.releaseDate;
-                    const productBReleaseDate = productB.releaseDate;
-					return productAReleaseDate.localeCompare(productBReleaseDate)
+					const productAReleaseDate = productA.releaseDate;
+					const productBReleaseDate = productB.releaseDate;
+					return productAReleaseDate.localeCompare(productBReleaseDate);
 				});
 				break;
 			case 'Price: Low to High':
