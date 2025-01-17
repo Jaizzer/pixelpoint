@@ -95,6 +95,11 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					return productB.unitsSold - productA.unitsSold;
 				});
 				break;
+            case 'Popularity: Low to High':
+				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
+					return productA.unitsSold - productB.unitsSold;
+				});
+				break;
 			case 'Price: Low to High':
 				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
 					return productA.productPrice - productB.productPrice;

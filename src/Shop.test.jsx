@@ -192,6 +192,26 @@ describe('Shop component', () => {
         expect(productNames).toEqual(expectedNamesOfProductsSortedByPopularity)
     });
 
+    it('sorts the item by popularity from low to high', async() => {
+        const user = userEvent.setup();
+		const products = [
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeSecond', productPrice: 65, productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'], unitsSold: 20 },
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeThird', productPrice: 45, productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'], unitsSold: 30 },
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeFirst', productPrice: 55, productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'], unitsSold: 10 },
+		];
+        const expectedNamesOfProductsSortedByPopularity = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+
+		render(<Shop loading={false} products={products} error={false} />);
+
+        // Click the 'Popularity: Low to High' sort option
+        const popularitySorterOption = screen.queryByText('Popularity: Low to High');
+        await user.click(popularitySorterOption);
+
+        // Get the product names
+        const productNames = screen.queryAllByTitle('product-name').map(productName => productName.textContent)
+        expect(productNames).toEqual(expectedNamesOfProductsSortedByPopularity)
+    });
+
     it('sorts the item by price from low to high', async() => {
         const user = userEvent.setup();
 		const products = [
