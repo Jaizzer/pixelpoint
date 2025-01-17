@@ -326,4 +326,27 @@ describe('Shop component', () => {
 
 
     })
+
+    it('sorts the item by release date, oldest first', async()=> {
+        const user = userEvent.setup();
+		const products = [
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeThird', productPrice: 65, productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'], releaseDate: '2024-01-03' },
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeFirst', productPrice: 45, productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'], releaseDate: '2024-01-01' },
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeSecond', productPrice: 55, productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'], releaseDate: '2024-01-02' },
+		];
+        const expectedNamesOfProductsSortedByDate = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+
+        render(<Shop loading={false} products={products} error={false} />);
+
+        // Click the 'Release Date: Oldest First' sort option
+        const dateSorterOption = screen.queryByText('Release Date: Oldest First');
+        await user.click(dateSorterOption);
+
+        // Get the product names
+        const productNames = screen.queryAllByTitle('product-name').map(productName => productName.textContent)
+
+        expect(productNames).toEqual(expectedNamesOfProductsSortedByDate)
+
+
+    })
 });
