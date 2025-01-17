@@ -90,6 +90,11 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 
 		// Sort the products after filtering
 		switch (sortCriteria) {
+            case 'Popularity: High to Low':
+				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
+					return productB.unitsSold - productA.unitsSold;
+				});
+				break;
 			case 'Price: Low to High':
 				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
 					return productA.productPrice - productB.productPrice;
