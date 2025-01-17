@@ -225,4 +225,25 @@ describe('Shop component', () => {
 
         expect(productNames).toEqual(expectedNamesOfProductsSortedByName)
     })
+
+    it('sorts the item by name from Z to A', async() => {
+        const user = userEvent.setup();
+		const products = [
+			{ imageLink: 'fakeLink', productName: 'A', productPrice: 65, productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'B', productPrice: 45, productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'] },
+			{ imageLink: 'fakeLink', productName: 'C', productPrice: 55, productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+		];
+        const expectedNamesOfProductsSortedByName = ['C', 'B', 'A'];
+
+		render(<Shop loading={false} products={products} error={false} />);
+
+        // Click the 'Name: Z to A' sort option
+        const nameSorterOption = screen.queryByText('Name: Z to A');
+        await user.click(nameSorterOption);
+
+        // Get the product names
+        const productNames = screen.queryAllByTitle('product-name').map(productName => productName.textContent)
+
+        expect(productNames).toEqual(expectedNamesOfProductsSortedByName)
+    })
 });

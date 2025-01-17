@@ -107,6 +107,13 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					return productAName.localeCompare(productBName);
 				});
 				break;
+			case 'Name: Z to A':
+				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
+					const productAName = productA.productName;
+					const productBName = productB.productName;
+					return productBName.localeCompare(productAName);
+				});
+				break;
 			default:
 				break;
 		}
