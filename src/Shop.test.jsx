@@ -50,10 +50,18 @@ vi.mock('./Sorter', () => ({
 				<div
 					title="sort-option"
 					onClick={() => {
-						onSortItemClick('Popularity');
+						onSortItemClick('Popularity: High to Low');
 					}}
 				>
-					Popularity
+					Popularity: High to Low
+				</div>
+				<div
+					title="sort-option"
+					onClick={() => {
+						onSortItemClick('Popularity: Low to High');
+					}}
+				>
+					Popularity: Low to High
 				</div>
 				<div
 					title="sort-option"

@@ -10,7 +10,7 @@ describe('Sorter Component', () => {
 		const sorterDropdown = screen.queryByText('Sort');
 		await user.click(sorterDropdown);
 
-		const expectedSortOptions = ['Popularity', 'Release Date', 'Name: A to Z', 'Name: Z to A', 'Price: Low to High', 'Price: High to Low'];
+		const expectedSortOptions = ['Popularity: High to Low', 'Popularity: Low to High', 'Release Date', 'Name: A to Z', 'Name: Z to A', 'Price: Low to High', 'Price: High to Low'];
 		const sortOptions = screen.queryAllByTitle('sort-option').map((sortItem) => sortItem.textContent);
 		expect(sortOptions).toEqual(expectedSortOptions);
 	});
