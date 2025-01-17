@@ -8,7 +8,7 @@ vi.mock('./ProductCard', () => ({
 		return (
 			<div>
 				<img src={imageLink} alt={productName} role="image" />
-				<div>{productName}</div>
+				<div title='product-name'>{productName}</div>
 				<div>{productPrice}</div>
 			</div>
 		);
@@ -37,6 +37,64 @@ vi.mock('./DropdownFilter', () => ({
 			<div>
 				<div className="filterButton">{title}</div>
 				<div className="dropdown">{dropdownItems}</div>
+			</div>
+		);
+	},
+}));
+
+vi.mock('./Sorter', () => ({
+	default: ({ onSortItemClick }) => {
+		return (
+			<div className="sorter">
+				<button>Sort</button>
+				<div
+					title="sort-option"
+					onClick={() => {
+						onSortItemClick('Popularity');
+					}}
+				>
+					Popularity
+				</div>
+				<div
+					title="sort-option"
+					onClick={() => {
+						onSortItemClick('Release Date');
+					}}
+				>
+					Release Date
+				</div>
+				<div
+					title="sort-option"
+					onClick={() => {
+						onSortItemClick('Name: A to Z');
+					}}
+				>
+					Name: A to Z
+				</div>
+				<div
+					title="sort-option"
+					onClick={() => {
+						onSortItemClick('Name: Z to A');
+					}}
+				>
+					Name: Z to A
+				</div>
+				<div
+					title="sort-option"
+					onClick={() => {
+						onSortItemClick('Price: Low to High');
+					}}
+				>
+					Price: Low to High
+				</div>
+				<div
+					title="sort-option"
+					onClick={() => {
+						onSortItemClick('Price: High to Low');
+					}}
+				>
+					Price: High to Low
+				</div>
 			</div>
 		);
 	},
@@ -104,4 +162,25 @@ describe('Shop component', () => {
 		const isProductsForPCRemained = screen.queryAllByRole('image').length === 2;
 		expect(isProductsForPCRemained).toBeTruthy();
 	});
+
+    it('sorts the item by price from low to high', async() => {
+        const user = userEvent.setup();
+		const products = [
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeThird', productPrice: 65, productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeFirst', productPrice: 45, productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'] },
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeSecond', productPrice: 55, productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+		];
+        const expectedNamesOfProductsSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+
+		render(<Shop loading={false} products={products} error={false} />);
+
+        // Click the 'Price: Low to High' sort option
+        const priceSorterOption = screen.queryByText('Price: Low to High');
+        await user.click(priceSorterOption);
+
+        // Get the product names
+        const productNames = screen.queryAllByTitle('product-name').map(productName => productName.textContent)
+
+        expect(productNames).toEqual(expectedNamesOfProductsSortedByPrice)
+    })
 });

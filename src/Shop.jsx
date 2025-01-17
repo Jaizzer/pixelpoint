@@ -2,10 +2,12 @@ import ProductCard from './ProductCard';
 import PropTypes from 'prop-types';
 import DropdownFilter from './DropdownFilter';
 import { useState } from 'react';
+import Sorter from './Sorter';
 
 function Shop({ products, error, loading, onAddItemToCart }) {
 	const [genreFilters, setGenreFilters] = useState([]);
 	const [platformFilters, setPlatformFilters] = useState([]);
+	const [sortCriteria, setSortCriteria] = useState(null);
 
 	// Check if the updated products have been fetched
 	const hasFetchedAllUpdatedProducts = products.length !== 0;
@@ -82,9 +84,20 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 		}
 
 		// Filter the genre-filtered-products by platform
-		const filteredProductsByPlatform = filteredProductsByGenre.filter((filteredProductByGenre) => {
+		let filteredProductsByPlatform = filteredProductsByGenre.filter((filteredProductByGenre) => {
 			return filteredProductByGenre.platforms.reduce((acc, curr) => checkedPlatformFilters.includes(curr) || acc, false);
 		});
+
+		// Sort the products after filtering
+		switch (sortCriteria) {
+			case 'Price: Low to High':
+				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
+					return productA.productPrice - productB.productPrice;
+				});
+				break;
+			default:
+				break;
+		}
 
 		productCards = filteredProductsByPlatform.map((product) => {
 			if (product)
@@ -152,6 +165,11 @@ function Shop({ products, error, loading, onAddItemToCart }) {
                     ) : null
                 }
             </div>
+            {
+				<div className="otherTools">
+					<Sorter onSortItemClick={setSortCriteria} />
+				</div>
+			}
 			<div className="productCardsContainer">
 				{loading ? (
 					<div className="loading" title="loading">
