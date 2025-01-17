@@ -100,6 +100,13 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					return productB.productPrice - productA.productPrice;
 				});
 				break;
+			case 'Name: A to Z':
+				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
+					const productAName = productA.productName;
+					const productBName = productB.productName;
+					return productAName.localeCompare(productBName);
+				});
+				break;
 			default:
 				break;
 		}
@@ -123,54 +130,54 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 	return (
 		<div title="shop">
 			<div className="dropdownFiltersContainer">
-                {
-                    // Only render the genre dropdown filter if there are available genre filter
-                    genreFilters.length > 0 ? (
-                        <DropdownFilter
-                            items={genreFilters}
-                            title="Genre"
-                            onDropdownItemClick={(clickedItem) => {
-                                // Save the Unchecked/Checked status of the genre filter item in the 'genreFilters state array
-                                const updatedGenreFilters = genreFilters.map((genreFilter) =>
-                                    genreFilter.name === clickedItem ? { ...genreFilter, isChecked: !genreFilter.isChecked } : genreFilter
-                                );
-                                setGenreFilters(updatedGenreFilters);
-                            }}
-                            onClearClick={() => {
-                                // Save the unchecking of all genre filter items in the 'genreFilters state array
-                                const updatedGenreFilters = genreFilters.map((genreFilter) => {
-                                    return { ...genreFilter, isChecked: false };
-                                });
-                                setGenreFilters(updatedGenreFilters);
-                            }}
-                        />
-                    ) : null
-                }
-                {
-                    // Only render the genre dropdown filter if there are available platform filter
-                    platformFilters.length > 0 ? (
-                        <DropdownFilter
-                            items={platformFilters}
-                            title="Platform"
-                            onDropdownItemClick={(clickedItem) => {
-                                // Save the Unchecked/Checked status of the genre filter item in the 'genreFilters state array
-                                const updatedPlatformFilters = platformFilters.map((platformFilter) =>
-                                    platformFilter.name === clickedItem ? { ...platformFilter, isChecked: !platformFilter.isChecked } : platformFilter
-                                );
-                                setPlatformFilters(updatedPlatformFilters);
-                            }}
-                            onClearClick={() => {
-                                // Save the unchecking of all genre filter items in the 'genreFilters state array
-                                const updatedPlatformFilters = platformFilters.map((platformFilter) => {
-                                    return { ...platformFilter, isChecked: false };
-                                });
-                                setPlatformFilters(updatedPlatformFilters);
-                            }}
-                        />
-                    ) : null
-                }
-            </div>
-            {
+				{
+					// Only render the genre dropdown filter if there are available genre filter
+					genreFilters.length > 0 ? (
+						<DropdownFilter
+							items={genreFilters}
+							title="Genre"
+							onDropdownItemClick={(clickedItem) => {
+								// Save the Unchecked/Checked status of the genre filter item in the 'genreFilters state array
+								const updatedGenreFilters = genreFilters.map((genreFilter) =>
+									genreFilter.name === clickedItem ? { ...genreFilter, isChecked: !genreFilter.isChecked } : genreFilter
+								);
+								setGenreFilters(updatedGenreFilters);
+							}}
+							onClearClick={() => {
+								// Save the unchecking of all genre filter items in the 'genreFilters state array
+								const updatedGenreFilters = genreFilters.map((genreFilter) => {
+									return { ...genreFilter, isChecked: false };
+								});
+								setGenreFilters(updatedGenreFilters);
+							}}
+						/>
+					) : null
+				}
+				{
+					// Only render the genre dropdown filter if there are available platform filter
+					platformFilters.length > 0 ? (
+						<DropdownFilter
+							items={platformFilters}
+							title="Platform"
+							onDropdownItemClick={(clickedItem) => {
+								// Save the Unchecked/Checked status of the genre filter item in the 'genreFilters state array
+								const updatedPlatformFilters = platformFilters.map((platformFilter) =>
+									platformFilter.name === clickedItem ? { ...platformFilter, isChecked: !platformFilter.isChecked } : platformFilter
+								);
+								setPlatformFilters(updatedPlatformFilters);
+							}}
+							onClearClick={() => {
+								// Save the unchecking of all genre filter items in the 'genreFilters state array
+								const updatedPlatformFilters = platformFilters.map((platformFilter) => {
+									return { ...platformFilter, isChecked: false };
+								});
+								setPlatformFilters(updatedPlatformFilters);
+							}}
+						/>
+					) : null
+				}
+			</div>
+			{
 				<div className="otherTools">
 					<Sorter onSortItemClick={setSortCriteria} />
 				</div>
