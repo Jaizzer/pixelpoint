@@ -6,7 +6,7 @@ function Sorter({ onSortItemClick }) {
 	const [selectedSortOption, setSelectedSortOption] = useState(null);
 
 	// Create the sort option items to be put in DOM
-	const sortOptions = ['Popularity: High to Low', 'Popularity: Low to High', 'Release Date', 'Name: A to Z', 'Name: Z to A', 'Price: Low to High', 'Price: High to Low'];
+	const sortOptions = ['Popularity: High to Low', 'Popularity: Low to High', 'Release Date: Newest First', 'Release Date: Oldest First', 'Name: A to Z', 'Name: Z to A', 'Price: Low to High', 'Price: High to Low'];
 	const sortOptionsDOM = sortOptions.map((sortOption) => {
 		// Add distinction between selected and non-selected sort option
 		const className = sortOption === selectedSortOption ? 'sortOption selected' : 'sortOption';

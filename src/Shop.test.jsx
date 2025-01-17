@@ -66,10 +66,18 @@ vi.mock('./Sorter', () => ({
 				<div
 					title="sort-option"
 					onClick={() => {
-						onSortItemClick('Release Date');
+						onSortItemClick('Release Date: Newest First');
 					}}
 				>
-					Release Date
+					Release Date: Newest First
+				</div>
+				<div
+					title="sort-option"
+					onClick={() => {
+						onSortItemClick('Release Date: Oldest First');
+					}}
+				>
+					Release Date: Oldest First
 				</div>
 				<div
 					title="sort-option"
