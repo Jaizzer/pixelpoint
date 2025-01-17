@@ -132,7 +132,7 @@ vi.mock('./Sorter', () => ({
 }));
 
 describe('Shop component', () => {
-	it('converts all array of products into shopping cards', () => {
+	it('renders the entire products if no filter is applied', () => {
 		const products = [
 			{
 				imageLink: 'fakeLink',
@@ -160,13 +160,13 @@ describe('Shop component', () => {
 		expect(images.length).toBe(products.length);
 	});
 
-	it('renders loading message if the products are currently loading', () => {
+	it('renders the loading message if the products are currently loading', () => {
 		render(<Shop loading={true} products={[]} error={false} />);
 		const loadingMessage = screen.queryByTitle('loading');
 		expect(loadingMessage).not.toBeNull();
 	});
 
-	it('renders error message if there is an error', () => {
+	it('renders the error message if there is an error', () => {
 		render(<Shop loading={false} products={[]} error={true} />);
 		const errorMessage = screen.queryByTitle('error');
 		expect(errorMessage).not.toBeNull();
@@ -315,7 +315,7 @@ describe('Shop component', () => {
 		expect(productThatFitsThePriceRange.textContent).toEqual('product3');
 	});
 
-	it('sorts the item by popularity from high to low', async () => {
+	it('sorts the products by popularity from high to low', async () => {
 		const user = userEvent.setup();
 		const products = [
 			{
@@ -360,7 +360,7 @@ describe('Shop component', () => {
 		expect(productNames).toEqual(expectedNamesOfProductsSortedByPopularity);
 	});
 
-	it('sorts the item by popularity from low to high', async () => {
+	it('sorts the products by popularity from low to high', async () => {
 		const user = userEvent.setup();
 		const products = [
 			{
@@ -404,7 +404,7 @@ describe('Shop component', () => {
 		expect(productNames).toEqual(expectedNamesOfProductsSortedByPopularity);
 	});
 
-	it('sorts the item by price from low to high', async () => {
+	it('sorts the products by price from low to high', async () => {
 		const user = userEvent.setup();
 		const products = [
 			{
@@ -446,7 +446,7 @@ describe('Shop component', () => {
 		expect(productNames).toEqual(expectedNamesOfProductsSortedByPrice);
 	});
 
-	it('sorts the item by price from high to low', async () => {
+	it('sorts the products by price from high to low', async () => {
 		const user = userEvent.setup();
 		const products = [
 			{
@@ -488,7 +488,7 @@ describe('Shop component', () => {
 		expect(productNames).toEqual(expectedNamesOfProductsSortedByPrice);
 	});
 
-	it('sorts the item by name from A to Z', async () => {
+	it('sorts the products by name from A to Z', async () => {
 		const user = userEvent.setup();
 		const products = [
 			{ imageLink: 'fakeLink', productName: 'C', productPrice: 65, productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
@@ -509,7 +509,7 @@ describe('Shop component', () => {
 		expect(productNames).toEqual(expectedNamesOfProductsSortedByName);
 	});
 
-	it('sorts the item by name from Z to A', async () => {
+	it('sorts the products by name from Z to A', async () => {
 		const user = userEvent.setup();
 		const products = [
 			{ imageLink: 'fakeLink', productName: 'A', productPrice: 65, productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
@@ -530,7 +530,7 @@ describe('Shop component', () => {
 		expect(productNames).toEqual(expectedNamesOfProductsSortedByName);
 	});
 
-	it('sorts the item by release date, newest first', async () => {
+	it('sorts the products by release date, newest first', async () => {
 		const user = userEvent.setup();
 		const products = [
 			{
@@ -575,7 +575,7 @@ describe('Shop component', () => {
 		expect(productNames).toEqual(expectedNamesOfProductsSortedByDate);
 	});
 
-	it('sorts the item by release date, oldest first', async () => {
+	it('sorts the products by release date, oldest first', async () => {
 		const user = userEvent.setup();
 		const products = [
 			{
