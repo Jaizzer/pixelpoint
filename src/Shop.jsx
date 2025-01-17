@@ -185,20 +185,20 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					) : null
 				}
 				{
-					// Only render the genre dropdown filter if there are available platform filter
+					// Only render the platform dropdown filter if there are available platform filter
 					platformFilters.length > 0 ? (
 						<DropdownFilter
 							items={platformFilters}
 							title="Platform"
 							onDropdownItemClick={(clickedItem) => {
-								// Save the Unchecked/Checked status of the genre filter item in the 'genreFilters state array
+								// Save the Unchecked/Checked status of the platform filter item in the 'platformFilters state array
 								const updatedPlatformFilters = platformFilters.map((platformFilter) =>
 									platformFilter.name === clickedItem ? { ...platformFilter, isChecked: !platformFilter.isChecked } : platformFilter
 								);
 								setPlatformFilters(updatedPlatformFilters);
 							}}
 							onClearClick={() => {
-								// Save the unchecking of all genre filter items in the 'genreFilters state array
+								// Save the unchecking of all platform filter items in the 'platformFilters state array
 								const updatedPlatformFilters = platformFilters.map((platformFilter) => {
 									return { ...platformFilter, isChecked: false };
 								});
