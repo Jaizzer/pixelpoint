@@ -16,7 +16,7 @@ vi.mock('./ProductCard', () => ({
 }));
 
 vi.mock('./DropdownFilter', () => ({
-	default: ({ items, title, onDropdownItemClick, numberOfShowLessItems, onClearClick }) => {
+	default: ({ items, title, onDropdownItemClick }) => {
 		const dropdownItems = items.map((item) => {
 			return (
 				<div key={item.name} className="dropdownItem">
