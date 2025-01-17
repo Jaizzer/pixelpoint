@@ -24,12 +24,13 @@ function PriceRangeController({ onPriceRangeSet }) {
 							id="minimumPrice"
 							value={priceRange.min}
 							onChange={(e) => {
-								const newMinValue = e.target.value;
-								setPriceRange({ ...priceRange, min: newMinValue === '' ? '' : parseInt(newMinValue) });
-								// Only return the range to the parent component if both min and max have values
-								if (newMinValue !== '' && priceRange.max !== '') {
-									onPriceRangeSet({ ...priceRange, min: parseInt(newMinValue) });
-								}
+								const newMinValue = e.target.value === '' ? '' : parseInt(e.target.value);
+								setPriceRange({ ...priceRange, min: newMinValue });
+
+								// Convert empty string to null
+								const maxValueToBeReturnedToParent = priceRange.max === '' ? null : priceRange.max;
+								const minValueToBeReturnedToParent = newMinValue === '' ? null : newMinValue;
+								onPriceRangeSet({ min: minValueToBeReturnedToParent, max: maxValueToBeReturnedToParent });
 							}}
 						/>
 					</div>
@@ -41,12 +42,13 @@ function PriceRangeController({ onPriceRangeSet }) {
 							id="maximumPrice"
 							value={priceRange.max}
 							onChange={(e) => {
-								const newMaxValue = e.target.value;
-								setPriceRange({ ...priceRange, max: newMaxValue === '' ? '' : parseInt(newMaxValue) });
-								// Only return the range to the parent component if both min and max have values
-								if (newMaxValue !== '' && priceRange.min !== '') {
-									onPriceRangeSet({ ...priceRange, max: parseInt(newMaxValue) });
-								}
+								const newMaxValue = e.target.value === '' ? '' : parseInt(e.target.value);
+								setPriceRange({ ...priceRange, max: newMaxValue });
+
+								// Convert empty string to null
+								const maxValueToBeReturnedToParent = newMaxValue === '' ? null : newMaxValue;
+								const minValueToBeReturnedToParent = priceRange.min === '' ? null : priceRange.min;
+								onPriceRangeSet({ min: minValueToBeReturnedToParent, max: maxValueToBeReturnedToParent });
 							}}
 						/>
 					</div>
