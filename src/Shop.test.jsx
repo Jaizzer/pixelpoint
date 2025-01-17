@@ -221,6 +221,46 @@ describe('Shop component', () => {
 		expect(isProductsForPCRemained).toBeTruthy();
 	});
 
+	it('filters the products by age rating', async () => {
+		const user = userEvent.setup();
+		const products = [
+			{
+				imageLink: 'fakeLink',
+				productName: 'product',
+				productPrice: '$45',
+				productId: '1',
+				genre: ['Action', 'Adventure'],
+				platforms: ['Mobile'],
+				esrbRating: 'Everyone 10+',
+			},
+			{
+				imageLink: 'fakeLink',
+				productName: 'product',
+				productPrice: '$55',
+				productId: '2',
+				genre: ['Action', 'Open World'],
+				platforms: ['PC'],
+				esrbRating: 'Mature',
+			},
+			{
+				imageLink: 'fakeLink',
+				productName: 'product',
+				productPrice: '$65',
+				productId: '3',
+				genre: ['Mystery', 'Puzzle'],
+				platforms: ['PC'],
+				esrbRating: 'Mature',
+			},
+		];
+		render(<Shop loading={false} products={products} error={false} />);
+		// Filter all products that are age rated as 'Mature'
+		const ageRatingDropdownFilter = screen.queryByText('Mature');
+		await user.click(ageRatingDropdownFilter);
+
+		const isMatureRatedProductsRemained = screen.queryAllByRole('image').length === 2;
+		expect(isMatureRatedProductsRemained).toBeTruthy();
+	});
+
 	it('sorts the item by popularity from high to low', async () => {
 		const user = userEvent.setup();
 		const products = [

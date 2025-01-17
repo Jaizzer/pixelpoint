@@ -7,6 +7,7 @@ import Sorter from './Sorter';
 function Shop({ products, error, loading, onAddItemToCart }) {
 	const [genreFilters, setGenreFilters] = useState([]);
 	const [platformFilters, setPlatformFilters] = useState([]);
+	const [ageRatingFilters, setAgeRatingFilters] = useState([]);
 	const [sortCriteria, setSortCriteria] = useState(null);
 
 	// Check if the updated products have been fetched
@@ -52,6 +53,24 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 		setPlatformFilters(updatedPlatformFilters);
 	}
 
+	// Check if the age filters have not yet been set
+	const areAgeRatingFiltersUnset = ageRatingFilters.length === 0;
+
+	// Collect every possible distinct age ratings from the products
+	// only if the updated products have been fetched and the age rating filters have not yet been set
+	if (hasFetchedAllUpdatedProducts && areAgeRatingFiltersUnset) {
+		let updatedAgeRatingFilters = [
+			...new Set(
+				products.map((product) => {
+					return product.esrbRating;
+				})
+			),
+		].map((ageRatingFilter) => {
+			return { name: ageRatingFilter, isChecked: false };
+		});
+		setAgeRatingFilters(updatedAgeRatingFilters);
+	}
+
 	let productCards;
 	if (products) {
 		// Get all currently checked genre filter items to be used for filtering the products to be rendered
@@ -70,6 +89,22 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 			return product.genre.reduce((acc, curr) => checkedGenreFilters.includes(curr) || acc, false);
 		});
 
+		// Get all currently checked age rating filter items to be used for filtering the genre-filtered-products
+		let checkedAgeRatingFilters;
+		const isThereAtleastOneAgeRatingFilterChecked = ageRatingFilters.filter((ageRatingFilter) => ageRatingFilter.isChecked).length === 0;
+		if (isThereAtleastOneAgeRatingFilterChecked) {
+			// Get all the checked age rating filter items
+			checkedAgeRatingFilters = ageRatingFilters.map((ageRatingFilter) => ageRatingFilter.name);
+		} else {
+			// Use all the age rating filters if there is currently no checked age rating filter
+			checkedAgeRatingFilters = ageRatingFilters
+				.filter((ageRatingFilter) => ageRatingFilter.isChecked)
+				.map((ageRatingFilter) => ageRatingFilter.name);
+		}
+
+		// Filter the genre-filtered-products by age rating
+		const filteredProductsByAgeRating = filteredProductsByGenre.filter((product) => checkedAgeRatingFilters.includes(product.esrbRating));
+
 		// Get all currently checked platform filter items to be used for filtering the genre-filtered-products
 		let checkedPlatformFilters;
 		const isThereAtleastOnePlatformFilterChecked = platformFilters.filter((platformFilter) => platformFilter.isChecked).length === 0;
@@ -83,8 +118,8 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 				.map((platformFilter) => platformFilter.name);
 		}
 
-		// Filter the genre-filtered-products by platform
-		let filteredProductsByPlatform = filteredProductsByGenre.filter((filteredProductByGenre) => {
+		// Filter the age-rating-filtered-products by platform
+		let filteredProductsByPlatform = filteredProductsByAgeRating.filter((filteredProductByGenre) => {
 			return filteredProductByGenre.platforms.reduce((acc, curr) => checkedPlatformFilters.includes(curr) || acc, false);
 		});
 
@@ -203,6 +238,31 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 									return { ...platformFilter, isChecked: false };
 								});
 								setPlatformFilters(updatedPlatformFilters);
+							}}
+						/>
+					) : null
+				}
+				{
+					// Only render the age rating dropdown filter if there are available age rating filter
+					ageRatingFilters.length > 0 ? (
+						<DropdownFilter
+							items={ageRatingFilters}
+							title="Age Rating"
+							onDropdownItemClick={(clickedItem) => {
+								// Save the Unchecked/Checked status of the age rating filter item in the 'ageRatingFilters' state array
+								const updatedAgeRatingFilters = ageRatingFilters.map((ageRatingFilter) =>
+									ageRatingFilter.name === clickedItem
+										? { ...ageRatingFilter, isChecked: !ageRatingFilter.isChecked }
+										: ageRatingFilter
+								);
+								setAgeRatingFilters(updatedAgeRatingFilters);
+							}}
+							onClearClick={() => {
+								// Save the unchecking of all age rating filter items in the 'ageRatingFilters' state array
+								const updatedAgeRatingFilters = ageRatingFilters.map((ageRatingFilter) => {
+									return { ...ageRatingFilter, isChecked: false };
+								});
+								setAgeRatingFilters(updatedAgeRatingFilters);
 							}}
 						/>
 					) : null
