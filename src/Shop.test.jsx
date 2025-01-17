@@ -182,5 +182,26 @@ describe('Shop component', () => {
         const productNames = screen.queryAllByTitle('product-name').map(productName => productName.textContent)
 
         expect(productNames).toEqual(expectedNamesOfProductsSortedByPrice)
+    });
+
+    it('sorts the item by price from high to low', async() => {
+        const user = userEvent.setup();
+		const products = [
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeFirst', productPrice: 65, productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeThird', productPrice: 45, productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'] },
+			{ imageLink: 'fakeLink', productName: 'thisShouldBeSecond', productPrice: 55, productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+		];
+        const expectedNamesOfProductsSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+
+		render(<Shop loading={false} products={products} error={false} />);
+
+        // Click the 'Price: High to Low' sort option
+        const priceSorterOption = screen.queryByText('Price: High to Low');
+        await user.click(priceSorterOption);
+
+        // Get the product names
+        const productNames = screen.queryAllByTitle('product-name').map(productName => productName.textContent)
+
+        expect(productNames).toEqual(expectedNamesOfProductsSortedByPrice)
     })
 });
