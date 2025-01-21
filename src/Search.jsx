@@ -57,6 +57,7 @@ function Search() {
 							setIsDropdownVisible(true);
 						}
 					}}
+					onBlur={() => setIsDropdownVisible(false)}
 				/>
 			</div>
 			{isDropdownVisible ? <SearchDropdown data={data} error={error} loading={isLoading} /> : null}
