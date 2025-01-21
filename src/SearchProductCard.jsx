@@ -6,8 +6,10 @@ function SearchProductCard({ image, name, price, onClickCallback, id }) {
 			className="searchProductCard"
 			role="search-product-card"
 			onClick={() => {
-				// Return the product ID to the parent component when clicked
-				onClickCallback(id);
+				if (onClickCallback !== null) {
+					// Return the product ID to the parent component when clicked
+					onClickCallback(id);
+				}
 			}}
 		>
 			<img src={image} alt={name} />
