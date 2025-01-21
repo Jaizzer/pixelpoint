@@ -45,10 +45,7 @@ describe('Search Component', () => {
 		const user = userEvent.setup();
 		render(<Search />);
 		const searchBar = screen.queryByRole('textbox');
-
 		await user.type(searchBar, 'product');
-		screen.debug();
-
 		const searchResultDropdown = screen.queryByTitle('search-result-dropdown');
 		expect(searchResultDropdown).not.toBeNull();
 	});
