@@ -21,7 +21,7 @@ describe('Product description', () => {
 			description: 'This is the product description',
 			rating: 4.1,
 			price: 45,
-			developer: 'Developer A',
+			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 		};
@@ -36,7 +36,7 @@ describe('Product description', () => {
 			description: 'This is the product description',
 			rating: 4.1,
 			price: 45,
-			developer: 'Developer A',
+			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 		};
@@ -51,7 +51,7 @@ describe('Product description', () => {
 			description: 'This is the product description',
 			rating: 4.1,
 			price: 45,
-			developer: 'Developer A',
+			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 		};
@@ -66,27 +66,28 @@ describe('Product description', () => {
 			description: 'This is the product description',
 			rating: 4.1,
 			price: 41,
-			developer: 'Developer A',
+			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
+        screen.debug()
 		const productPrice = screen.queryByText(/\$41/);
 		expect(productPrice).not.toBeNull();
 	});
 
-	it('renders the developer of the product', () => {
+	it('renders the developer/s of the product', () => {
 		const product = {
 			title: 'Witcher 3',
 			description: 'This is the product description',
 			rating: 4.1,
 			price: 45,
-			developer: 'Developer A',
+			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productDeveloper = screen.queryByText('Developer A');
+		const productDeveloper = screen.queryByText('Developer A, Developer B');
 		expect(productDeveloper).not.toBeNull();
 	});
 
@@ -96,7 +97,7 @@ describe('Product description', () => {
 			description: 'This is the product description',
 			rating: 4.1,
 			price: 45,
-			developer: 'Developer A',
+			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 		};
@@ -111,7 +112,7 @@ describe('Product description', () => {
 			description: 'This is the product description',
 			rating: 4.1,
 			price: 45,
-			developer: 'Developer A',
+			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 		};

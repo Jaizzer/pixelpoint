@@ -23,7 +23,7 @@ function ProductDetails({ product, loading, error }) {
 					<div className="otherDetails">
 						<div className="productDeveloper">
 							<h2 className="productDeveloperHeading">Developer</h2>
-							<div className="productDeveloperContent">{product.developer ? product.developer : 'Unknown'}</div>
+							<div className="productDeveloperContent">{product.developers ? product.developers.join(', ') : 'Unknown'}</div>
 						</div>
 						<div className="productReleaseDate">
 							<h2 className="productReleaseDateHeading">Release Date</h2>
