@@ -3,7 +3,7 @@ import OrderCountController from './OrderCountController';
 
 function ProductCard({ imageLink, productName, productPrice, productId, onAddItemToCart, productCartQuantity = 0 }) {
 	return (
-		<div className="ProductCard">
+		<div className="ProductCard" title="product-card">
 			<img src={imageLink} role="image" alt={productName} />
 			<div className="productName" data-testid="productName">
 				{productName}
