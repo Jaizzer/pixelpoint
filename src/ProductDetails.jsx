@@ -21,6 +21,10 @@ function ProductDetails({ product, loading, error }) {
 					</div>
 					<div className="productPrice">{product.price ? `$${product.price}` : 'Price Unavailable'}</div>
 					<div className="otherDetails">
+						<div className="productGenre">
+							<h2 className="productGenreHeading">Genre</h2>
+							<div className="productGenreContent">{product.genres ? product.genres.join(', ') : 'Unknown'}</div>
+						</div>
 						<div className="productDeveloper">
 							<h2 className="productDeveloperHeading">Developer</h2>
 							<div className="productDeveloperContent">{product.developers ? product.developers.join(', ') : 'Unknown'}</div>

@@ -24,6 +24,7 @@ describe('Product description', () => {
 			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
+			genres: ['Action', 'Puzzle', 'Adventure'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productTitle = screen.queryByText('Witcher 3');
@@ -39,6 +40,7 @@ describe('Product description', () => {
 			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
+			genres: ['Action', 'Puzzle', 'Adventure'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productDescription = screen.queryByText('This is the product description');
@@ -54,6 +56,7 @@ describe('Product description', () => {
 			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
+			genres: ['Action', 'Puzzle', 'Adventure'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productRating = screen.queryByText('4.1');
@@ -69,9 +72,9 @@ describe('Product description', () => {
 			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
+			genres: ['Action', 'Puzzle', 'Adventure'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
-        screen.debug()
 		const productPrice = screen.queryByText(/\$41/);
 		expect(productPrice).not.toBeNull();
 	});
@@ -85,6 +88,7 @@ describe('Product description', () => {
 			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
+			genres: ['Action', 'Puzzle', 'Adventure'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productDeveloper = screen.queryByText('Developer A, Developer B');
@@ -100,6 +104,7 @@ describe('Product description', () => {
 			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
+			genres: ['Action', 'Puzzle', 'Adventure'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productReleaseDate = screen.queryByText('January 12, 2024');
@@ -115,9 +120,26 @@ describe('Product description', () => {
 			developers: ['Developer A', 'Developer B'],
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
+			genres: ['Action', 'Puzzle', 'Adventure'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productPlatforms = screen.queryByText('Windows, Xbox, PS4');
 		expect(productPlatforms).not.toBeNull();
+	});
+
+	it('renders the genres of the product', () => {
+		const product = {
+			title: 'Witcher 3',
+			description: 'This is the product description',
+			rating: 4.1,
+			price: 45,
+			developers: ['Developer A', 'Developer B'],
+			releaseDate: '2024-01-12',
+			platforms: ['Windows, Xbox, PS4'],
+			genres: ['Action', 'Puzzle', 'Adventure'],
+		};
+		render(<ProductDetails product={product} loading={false} error={false} />);
+		const productGenres = screen.queryByText('Action, Puzzle, Adventure');
+		expect(productGenres).not.toBeNull();
 	});
 });
