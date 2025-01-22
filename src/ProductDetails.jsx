@@ -49,7 +49,7 @@ function ProductDetails({ product, loading, error }) {
 ProductDetails.propTypes = {
 	product: PropTypes.object,
 	loading: PropTypes.bool,
-	error: PropTypes.error,
+	error: PropTypes.bool,
 };
 
 export default ProductDetails;
