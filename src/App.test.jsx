@@ -10,13 +10,55 @@ describe('App component', () => {
 		window.fetch = vi.fn(() =>
 			Promise.resolve({
 				json: () =>
-					Promise.resolve([
-						{ image: 'imageLink', title: 'product1', price: 451, id: 1 },
-						{ image: 'imageLink', title: 'product2', price: 552, id: 2 },
-						{ image: 'imageLink', title: 'product3', price: 653, id: 3 },
-						{ image: 'imageLink', title: 'product4', price: 654, id: 4 },
-						{ image: 'imageLink', title: 'product5', price: 655, id: 5 },
-					]),
+					Promise.resolve({
+						results: [
+							{
+								background_image: 'imageLink',
+								name: 'product1',
+								id: 1,
+								genres: [{ name: 'Action' }],
+								platforms: [{ name: 'Windows' }],
+								released: '2024-01-24',
+								esrb_rating: { name: 'Everyone' },
+							},
+							{
+								background_image: 'imageLink',
+								name: 'product2',
+								id: 2,
+								genres: [{ name: 'Action' }],
+								platforms: [{ name: 'Windows' }],
+								released: '2024-01-24',
+								esrb_rating: { name: 'Everyone' },
+							},
+							{
+								background_image: 'imageLink',
+								name: 'product3',
+								id: 3,
+								genres: [{ name: 'Action' }],
+								platforms: [{ name: 'Windows' }],
+								released: '2024-01-24',
+								esrb_rating: { name: 'Everyone' },
+							},
+							{
+								background_image: 'imageLink',
+								name: 'product4',
+								id: 4,
+								genres: [{ name: 'Action' }],
+								platforms: [{ name: 'Windows' }],
+								released: '2024-01-24',
+								esrb_rating: { name: 'Everyone' },
+							},
+							{
+								background_image: 'imageLink',
+								name: 'product5',
+								id: 5,
+								genres: [{ name: 'Action' }],
+								platforms: [{ name: 'Windows' }],
+								released: '2024-01-24',
+								esrb_rating: { name: 'Everyone' },
+							},
+						],
+					}),
 			})
 		);
 	});

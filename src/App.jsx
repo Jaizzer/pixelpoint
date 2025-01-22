@@ -18,19 +18,24 @@ export default function App() {
 	// Cart is composed of products that have product cart quantity greater than zero
 	const cart = products.filter((product) => product.productCartQuantity > 0);
 
-	// Fetch the products from the Fake Store API
+	// Fetch the products using the RAWG GAMES API
 	useEffect(() => {
 		(async function () {
 			try {
-				const response = await fetch('https://fakestoreapi.com/products');
-				const jsondata = await response.json();
-				const modifiedProducts = jsondata.map((product) => {
+				const response = await fetch('https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&page=3&page_size=100');
+				const jsonData = await response.json();
+				const modifiedProducts = jsonData.results.map((product) => {
 					return {
-						imageLink: product.image,
-						productName: product.title,
-						productPrice: '$' + product.price,
+						imageLink: product.background_image,
+						productName: product.name,
+						productPrice: Math.floor(Math.random() * (100 - 50) + 50),
 						productId: `${product.id}`,
 						productCartQuantity: 0,
+						genre: product.genres.map((genre) => genre.name),
+						platforms: product.platforms.map((platform) => platform.name),
+						unitsSold: Math.floor(Math.random() * 1000000),
+						releaseDate: product.released,
+						esrbRating: product.esrb_rating ? product.esrb_rating.name : 'Unrated',
 					};
 				});
 				setProducts(modifiedProducts);
