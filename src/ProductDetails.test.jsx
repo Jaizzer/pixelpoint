@@ -3,44 +3,119 @@ import { render, screen } from '@testing-library/react';
 import ProductDetails from './ProductDetails';
 
 describe('Product description', () => {
+	it('renders the loading indicator if the products are still being fetched', () => {
+		render(<ProductDetails product={null} loading={true} error={false} />);
+		const loadingIndicator = screen.queryByTitle('loading-indicator');
+		expect(loadingIndicator).not.toBeNull();
+	});
+
+	it('renders the error message if there is an error fetching the product', () => {
+		render(<ProductDetails product={null} loading={false} error={true} />);
+		const errorMessage = screen.queryByTitle('error-message');
+		expect(errorMessage).not.toBeNull();
+	});
+
 	it('renders the game title', () => {
-		render(<ProductDetails title={'Witcher 3'} />);
+		const product = {
+			title: 'Witcher 3',
+			description: 'This is the product description',
+			rating: 4.1,
+			price: 45,
+			developer: 'Developer A',
+			releaseDate: '2024-01-12',
+			platforms: ['Windows, Xbox, PS4'],
+		};
+		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productTitle = screen.queryByText('Witcher 3');
 		expect(productTitle).not.toBeNull();
 	});
 
-	it('renders the product gameplay description', () => {
-		render(<ProductDetails title={'Witcher 3'} description={'This is the game description'} />);
-		const productDescription = screen.queryByText('This is the game description');
+	it('renders the product description', () => {
+		const product = {
+			title: 'Witcher 3',
+			description: 'This is the product description',
+			rating: 4.1,
+			price: 45,
+			developer: 'Developer A',
+			releaseDate: '2024-01-12',
+			platforms: ['Windows, Xbox, PS4'],
+		};
+		render(<ProductDetails product={product} loading={false} error={false} />);
+		const productDescription = screen.queryByText('This is the product description');
 		expect(productDescription).not.toBeNull();
 	});
 
 	it('renders the rating', () => {
-		render(<ProductDetails title={'Witcher 3'} rating={4.1} />);
+		const product = {
+			title: 'Witcher 3',
+			description: 'This is the product description',
+			rating: 4.1,
+			price: 45,
+			developer: 'Developer A',
+			releaseDate: '2024-01-12',
+			platforms: ['Windows, Xbox, PS4'],
+		};
+		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productRating = screen.queryByText('4.1');
 		expect(productRating).not.toBeNull();
 	});
 
 	it('renders the price', () => {
-		render(<ProductDetails title={'Witcher 3'} price={41} />);
+		const product = {
+			title: 'Witcher 3',
+			description: 'This is the product description',
+			rating: 4.1,
+			price: 41,
+			developer: 'Developer A',
+			releaseDate: '2024-01-12',
+			platforms: ['Windows, Xbox, PS4'],
+		};
+		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productPrice = screen.queryByText(/\$41/);
 		expect(productPrice).not.toBeNull();
 	});
 
 	it('renders the developer of the product', () => {
-		render(<ProductDetails title={'Product A'} developer={'Developer A'} />);
+		const product = {
+			title: 'Witcher 3',
+			description: 'This is the product description',
+			rating: 4.1,
+			price: 45,
+			developer: 'Developer A',
+			releaseDate: '2024-01-12',
+			platforms: ['Windows, Xbox, PS4'],
+		};
+		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productDeveloper = screen.queryByText('Developer A');
 		expect(productDeveloper).not.toBeNull();
 	});
 
 	it('renders the release date of the product', () => {
-		render(<ProductDetails title={'Product A'} releaseDate={'2024-01-12'} />);
+		const product = {
+			title: 'Witcher 3',
+			description: 'This is the product description',
+			rating: 4.1,
+			price: 45,
+			developer: 'Developer A',
+			releaseDate: '2024-01-12',
+			platforms: ['Windows, Xbox, PS4'],
+		};
+		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productReleaseDate = screen.queryByText('January 12, 2024');
 		expect(productReleaseDate).not.toBeNull();
 	});
 
 	it('renders the platforms of the product', () => {
-		render(<ProductDetails title={'Product A'} platforms={['Windows', 'Xbox', 'PS4']} />);
+		const product = {
+			title: 'Witcher 3',
+			description: 'This is the product description',
+			rating: 4.1,
+			price: 45,
+			developer: 'Developer A',
+			releaseDate: '2024-01-12',
+			platforms: ['Windows, Xbox, PS4'],
+		};
+		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productPlatforms = screen.queryByText('Windows, Xbox, PS4');
 		expect(productPlatforms).not.toBeNull();
 	});
