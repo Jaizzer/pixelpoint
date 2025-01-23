@@ -11,7 +11,10 @@ function Search() {
 	// Wait for the user to stop typing before fetching the search result
 	useEffect(() => {
 		const delaySearch = setTimeout(() => {
-			getSearchResults(inputValue);
+			const { error, loading, searchResults } = getSearchResults(inputValue);
+			setError(error);
+			setIsLoading(loading);
+			setData(searchResults);
 		}, 400);
 
 		return () => {
@@ -24,11 +27,15 @@ function Search() {
 	}, [inputValue]);
 
 	async function getSearchResults(searchQuery) {
+		let searchResults = null;
+		let error = false;
+		let loading = true;
 		try {
 			// Get the search results
 			const response = await fetch(`https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&search=${searchQuery}`);
 			const jsonData = await response.json();
-			const searchResults = jsonData.results.map((product) => ({
+
+			searchResults = jsonData.results.map((product) => ({
 				name: product.name,
 				id: product.id,
 				price: 89,
@@ -36,10 +43,12 @@ function Search() {
 			}));
 			setData(searchResults);
 		} catch {
-			setError(true);
+			error = true;
 		} finally {
-			setIsLoading(false);
+			loading = false;
 		}
+
+		return { error, loading, searchResults };
 	}
 
 	return (
