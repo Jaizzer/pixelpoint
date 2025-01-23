@@ -8,12 +8,17 @@ import Cart from './Cart';
 import TopBar from './TopBar';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import ProductDetails from './ProductDetails';
 
 export default function App() {
 	const { content } = useParams();
 	const [products, setProducts] = useState([]);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const { id } = useParams();
+	const [clickedProduct, setClickedProduct] = useState(null);
+	const [isClickedProductLoading, setIsClickedProductLoading] = useState(true);
+	const [clickedProductError, setClickedProductError] = useState(false);
 
 	// Cart is composed of products that have product cart quantity greater than zero
 	const cart = products.filter((product) => product.productCartQuantity > 0);
@@ -22,7 +27,7 @@ export default function App() {
 	useEffect(() => {
 		(async function () {
 			try {
-				const response = await fetch('https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&page=3&page_size=100');
+				const response = await fetch('https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&page=1&page_size=100');
 				const jsonData = await response.json();
 				const modifiedProducts = jsonData.results.map((product) => {
 					return {
@@ -46,6 +51,40 @@ export default function App() {
 			}
 		})();
 	}, []);
+
+	// Clear the previously loaded products details when moving to a different page that is not 'gameDetails'
+	if (content != 'gameDetails' && clickedProduct !== null) {
+		setClickedProduct(null);
+		setIsClickedProductLoading(true);
+	}
+
+	// Get the necessary details about the clicked product
+	useEffect(() => {
+		if (id !== undefined) {
+			(async function () {
+				try {
+					const response = await fetch(`https://api.rawg.io/api/games/${id}?key=99ef179fc1ee4d77a91ccee7e1bb59e6`);
+					const jsonData = await response.json();
+					const modifiedProduct = {
+						id: jsonData.id,
+						title: jsonData.name,
+						description: jsonData.description_raw,
+						rating: jsonData.rating,
+						price: 45,
+						developers: jsonData.developers.map((developer) => developer.name),
+						genres: jsonData.genres.map((genre) => genre.name),
+						releaseDate: jsonData.released,
+						platforms: jsonData.platforms.map((platform) => platform.platform.name),
+					};
+					setClickedProduct(modifiedProduct);
+				} catch (error) {
+					setClickedProductError(error ? true : false);
+				} finally {
+					setIsClickedProductLoading(false);
+				}
+			})();
+		}
+	}, [id]);
 
 	function onAddItemToCart(productId, productCartQuantity) {
 		// Update the products
@@ -75,6 +114,8 @@ export default function App() {
 					<About />
 				) : content === 'cart' ? (
 					<Cart onAddItemToCart={onAddItemToCart} products={cart} />
+				) : content === 'gameDetails' && id !== undefined ? (
+					<ProductDetails key={id} product={clickedProduct} loading={isClickedProductLoading} error={clickedProductError} />
 				) : (
 					<Error />
 				)}
