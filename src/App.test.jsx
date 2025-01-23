@@ -6,61 +6,78 @@ import App from './App';
 
 describe('App component', () => {
 	beforeEach(() => {
-		// Mock the fetch function
-		window.fetch = vi.fn(() =>
-			Promise.resolve({
-				json: () =>
-					Promise.resolve({
-						results: [
-							{
-								background_image: 'imageLink',
-								name: 'product1',
-								id: 1,
-								genres: [{ name: 'Action' }],
-								platforms: [{ name: 'Windows' }],
-								released: '2024-01-24',
-								esrb_rating: { name: 'Everyone' },
-							},
-							{
-								background_image: 'imageLink',
-								name: 'product2',
-								id: 2,
-								genres: [{ name: 'Action' }],
-								platforms: [{ name: 'Windows' }],
-								released: '2024-01-24',
-								esrb_rating: { name: 'Everyone' },
-							},
-							{
-								background_image: 'imageLink',
-								name: 'product3',
-								id: 3,
-								genres: [{ name: 'Action' }],
-								platforms: [{ name: 'Windows' }],
-								released: '2024-01-24',
-								esrb_rating: { name: 'Everyone' },
-							},
-							{
-								background_image: 'imageLink',
-								name: 'product4',
-								id: 4,
-								genres: [{ name: 'Action' }],
-								platforms: [{ name: 'Windows' }],
-								released: '2024-01-24',
-								esrb_rating: { name: 'Everyone' },
-							},
-							{
-								background_image: 'imageLink',
-								name: 'product5',
-								id: 5,
-								genres: [{ name: 'Action' }],
-								platforms: [{ name: 'Windows' }],
-								released: '2024-01-24',
-								esrb_rating: { name: 'Everyone' },
-							},
-						],
-					}),
-			})
-		);
+		window.fetch = vi
+			.fn()
+			// Mock the fetch for getting the products
+			.mockResolvedValueOnce(
+				Promise.resolve({
+					json: () =>
+						Promise.resolve({
+							results: [
+								{
+									background_image: 'imageLink',
+									name: 'product1',
+									id: 1,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product2',
+									id: 2,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product3',
+									id: 3,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product4',
+									id: 4,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product5',
+									id: 5,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+							],
+						}),
+				})
+			)
+			// Mock the fetch for getting the details of the clicked product
+			.mockResolvedValueOnce(
+				Promise.resolve({
+					json: () =>
+						Promise.resolve({
+							name: 'Witcher 3',
+							description_raw: 'This is the product description',
+							esrb_rating: 4.1,
+							developers: [{ name: 'Developer A' }, { name: 'Developer B' }],
+							released: '2024-01-12',
+							platforms: [{ platform: { name: 'Windows' } }, { platform: { name: 'Xbox' } }, { platform: { name: 'PS5' } }],
+							genres: [{ name: 'Action' }, { name: 'Puzzle' }, { name: 'Adventure' }],
+						}),
+				})
+			);
 	});
 
 	it('contains the sidebar', () => {
@@ -371,5 +388,34 @@ describe('App component', () => {
 		// Check if the input textbox of the added item in the cart matches
 		const inputInCartPage = screen.queryByRole('textbox');
 		expect(inputInCartPage.value).toEqual(inputInShopPage.value);
+	});
+
+	it("renders the details page of the game when a game's image is clicked", async () => {
+		const user = userEvent.setup();
+
+		render(
+			<MemoryRouter initialEntries={['/']}>
+				<Routes>
+					<Route path="/" element={<App />} />
+					<Route path="/:content" element={<App />} />
+					<Route path="/:content/:id" element={<App />} />
+				</Routes>
+			</MemoryRouter>
+		);
+
+		// Go to the Shop page content
+		const shopNavItem = screen.queryByText('Shop');
+		await user.click(shopNavItem);
+
+		// Get the first product card's image
+		const cardImage = screen.queryAllByRole('image')[0];
+
+		// Click the obtained product card
+		await user.click(cardImage);
+
+		// Get the 'Description' which will be available if the details page is rendered
+		const description = screen.queryByText('Description');
+
+		expect(description).not.toBeNull();
 	});
 });
