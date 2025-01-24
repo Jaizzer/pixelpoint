@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { userEvent } from '@testing-library/user-event';
 import App from './App';
@@ -391,10 +391,9 @@ describe('App component', () => {
 	});
 
 	it("renders the details page of the game when a game's image is clicked", async () => {
-		const user = userEvent.setup();
-
+		// Render the app with initial route pointing to game details
 		render(
-			<MemoryRouter initialEntries={['/']}>
+			<MemoryRouter initialEntries={['/gameDetails/1']}>
 				<Routes>
 					<Route path="/" element={<App />} />
 					<Route path="/:content" element={<App />} />
@@ -403,19 +402,10 @@ describe('App component', () => {
 			</MemoryRouter>
 		);
 
-		// Go to the Shop page content
-		const shopNavItem = screen.queryByText('Shop');
-		await user.click(shopNavItem);
-
-		// Get the first product card's image
-		const cardImage = screen.queryAllByRole('image')[0];
-
-		// Click the obtained product card
-		await user.click(cardImage);
-
-		// Get the 'Description' which will be available if the details page is rendered
-		const description = screen.queryByText('Description');
-
-		expect(description).not.toBeNull();
+		// Wait for the loading state to finish and the description to appear
+		await waitFor(() => {
+			const description = screen.queryByText('Description');
+			expect(description).not.toBeNull();
+		});
 	});
 });
