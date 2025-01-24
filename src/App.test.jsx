@@ -196,7 +196,7 @@ describe('App component', () => {
 				</Routes>
 			</MemoryRouter>
 		);
-        
+
 		await waitFor(() => {
 			const cartPageContent = screen.queryByTitle('cart');
 			expect(cartPageContent).not.toBeNull();
@@ -301,7 +301,7 @@ describe('App component', () => {
 		// Access the '-' icon
 		const subtractButton = screen.queryByText('-');
 
-		// Clikc the subtract button once
+		// Click the subtract button once
 		await user.click(subtractButton);
 
 		// Access the cart icon order count
