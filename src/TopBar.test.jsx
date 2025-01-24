@@ -35,7 +35,6 @@ describe('TopBar component', () => {
 			</MemoryRouter>
 		);
 		const cart = screen.queryByText('6');
-		screen.debug();
 		expect(cart).not.toBeNull();
 	});
 });
