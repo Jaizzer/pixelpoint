@@ -66,6 +66,11 @@ function Search() {
 							setIsDropdownVisible(true);
 						}
 					}}
+					onFocus={(e) => {
+						if (e.target.value !== '') {
+							setIsDropdownVisible(true);
+						}
+					}}
 					onBlur={() => setIsDropdownVisible(false)}
 				/>
 			</div>
