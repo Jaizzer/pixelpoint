@@ -205,9 +205,8 @@ describe('App component', () => {
 
 	it('increments the cart icon count indicator by 1 when an "Add to Cart" button is pressed in a product card', async () => {
 		const user = userEvent.setup();
-
 		render(
-			<MemoryRouter initialEntries={['/']}>
+			<MemoryRouter initialEntries={['/shop']}>
 				<Routes>
 					<Route path="/" element={<App />} />
 					<Route path="/:content" element={<App />} />
@@ -215,30 +214,28 @@ describe('App component', () => {
 			</MemoryRouter>
 		);
 
-		// Go to the Shop page content
-		const shopNavItem = screen.queryByText('Shop');
-		await user.click(shopNavItem);
+		// Wait for the shop to fetch all products
+		await waitFor(async () => {
+			// Get all available 'Add to Cart' buttons
+			const addToCartButtons = screen.queryAllByText(/Add to Cart/i);
+			const numberOfAddToCartButtons = addToCartButtons.length;
 
-		// Get all available 'Add to Cart' buttons
-		const addToCartButtons = screen.queryAllByText(/Add to Cart/i);
-		const numberOfAddToCartButtons = addToCartButtons.length;
+			// Click all obtained 'Add to Cart' buttons
+			for (let index = 0; index < addToCartButtons.length; index++) {
+				await user.click(addToCartButtons[index]);
+			}
 
-		// Click all obtained 'Add to Cart' buttons
-		for (let index = 0; index < addToCartButtons.length; index++) {
-			await user.click(addToCartButtons[index]);
-		}
+			// Access the cart icon order count
+			const orderCount = screen.queryByTitle('cart-content-count');
 
-		// Access the cart icon order count
-		const orderCount = screen.queryByTitle('cart-content-count');
-
-		expect(orderCount.textContent).toEqual(`${numberOfAddToCartButtons}`);
+			expect(orderCount.textContent).toEqual(`${numberOfAddToCartButtons}`);
+		});
 	});
 
 	it('enables the incrementation of a product added to the cart when the corresponding "+" is clicked', async () => {
 		const user = userEvent.setup();
-
 		render(
-			<MemoryRouter initialEntries={['/']}>
+			<MemoryRouter initialEntries={['/shop']}>
 				<Routes>
 					<Route path="/" element={<App />} />
 					<Route path="/:content" element={<App />} />
@@ -246,34 +243,31 @@ describe('App component', () => {
 			</MemoryRouter>
 		);
 
-		// Go to the Shop page content
-		const shopNavItem = screen.queryByText('Shop');
-		await user.click(shopNavItem);
+		await waitFor(async () => {
+			// Get the first Add to Cart button
+			const addToCartButton = screen.queryAllByText(/Add to Cart/i)[0];
 
-		// Get the first Add to Cart button
-		const addToCartButton = screen.queryAllByText(/Add to Cart/i)[0];
+			// Click the obtained add to cart button
+			await user.click(addToCartButton);
 
-		// Click the obtained add to cart button
-		await user.click(addToCartButton);
+			// Access the '+' icon
+			const addButton = screen.queryByText('+');
 
-		// Access the '+' icon
-		const addButton = screen.queryByText('+');
+			// Click the add button twice
+			await user.click(addButton);
+			await user.click(addButton);
 
-		// Click the add button twice
-		await user.click(addButton);
-		await user.click(addButton);
+			// Access the cart icon order count
+			const orderCount = screen.queryByTitle('cart-content-count');
 
-		// Access the cart icon order count
-		const orderCount = screen.queryByTitle('cart-content-count');
-
-		expect(orderCount.textContent).toEqual('3');
+			expect(orderCount.textContent).toEqual('3');
+		});
 	});
 
 	it('enables the decrementation of a product added to the cart when the corresponding "-" is clicked', async () => {
 		const user = userEvent.setup();
-
 		render(
-			<MemoryRouter initialEntries={['/']}>
+			<MemoryRouter initialEntries={['/shop']}>
 				<Routes>
 					<Route path="/" element={<App />} />
 					<Route path="/:content" element={<App />} />
@@ -281,38 +275,39 @@ describe('App component', () => {
 			</MemoryRouter>
 		);
 
-		// Go to the Shop page content
-		const shopNavItem = screen.queryByText('Shop');
-		await user.click(shopNavItem);
+		await waitFor(async () => {
+			// Go to the Shop page content
+			const shopNavItem = screen.queryByText('Shop');
+			await user.click(shopNavItem);
 
-		// Get the first Add to Cart button
-		const addToCartButton = screen.queryAllByText(/Add to Cart/i)[0];
+			// Get the first Add to Cart button
+			const addToCartButton = screen.queryAllByText(/Add to Cart/i)[0];
 
-		// Click the obtained add to cart button
-		await user.click(addToCartButton);
+			// Click the obtained add to cart button
+			await user.click(addToCartButton);
 
-		// Access the '+' icon
-		const addButton = screen.queryByText('+');
+			// Access the '+' icon
+			const addButton = screen.queryByText('+');
 
-		// Click the add button twice
-		await user.click(addButton);
-		await user.click(addButton);
+			// Click the add button twice
+			await user.click(addButton);
+			await user.click(addButton);
 
-		// Access the '-' icon
-		const subtractButton = screen.queryByText('-');
+			// Access the '-' icon
+			const subtractButton = screen.queryByText('-');
 
-		// Click the subtract button once
-		await user.click(subtractButton);
+			// Click the subtract button once
+			await user.click(subtractButton);
 
-		// Access the cart icon order count
-		const orderCount = screen.queryByTitle('cart-content-count');
+			// Access the cart icon order count
+			const orderCount = screen.queryByTitle('cart-content-count');
 
-		expect(orderCount.textContent).toEqual('2');
+			expect(orderCount.textContent).toEqual('2');
+		});
 	});
 
 	it('enables the changes in the order quantity input box to reflect on the cart contents', async () => {
 		const user = userEvent.setup();
-
 		render(
 			<MemoryRouter initialEntries={['/']}>
 				<Routes>
@@ -322,29 +317,27 @@ describe('App component', () => {
 			</MemoryRouter>
 		);
 
-		// Go to the Shop page content
-		const shopNavItem = screen.queryByText('Shop');
-		await user.click(shopNavItem);
+		await waitFor(async () => {
+			// Get the first Add to Cart button
+			const addToCartButton = screen.queryAllByText(/Add to Cart/i)[0];
 
-		// Get the first Add to Cart button
-		const addToCartButton = screen.queryAllByText(/Add to Cart/i)[0];
+			// Click the obtained add to cart button
+			await user.click(addToCartButton);
 
-		// Click the obtained add to cart button
-		await user.click(addToCartButton);
+			// Access the input box
+			const inputInShopPage = screen.queryByRole('textbox');
 
-		// Access the input box
-		const inputInShopPage = screen.queryByRole('textbox');
+			// Modify the input value
+			await user.type(inputInShopPage, '8');
 
-		// Modify the input value
-		await user.type(inputInShopPage, '8');
+			// Go to the Cart page content
+			const cartNavItem = screen.queryByText('Cart');
+			await user.click(cartNavItem);
 
-		// Go to the Cart page content
-		const cartNavItem = screen.queryByText('Cart');
-		await user.click(cartNavItem);
-
-		// Check if the input textbox of the added item in the cart matches
-		const inputInCartPage = screen.queryByRole('textbox');
-		expect(inputInCartPage.value).toEqual(inputInShopPage.value);
+			// Check if the input textbox of the added item in the cart matches
+			const inputInCartPage = screen.queryByRole('textbox');
+			expect(inputInCartPage.value).toEqual(inputInShopPage.value);
+		});
 	});
 
 	it("renders the details page of the game when a game's image is clicked", async () => {
