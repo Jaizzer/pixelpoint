@@ -24,7 +24,7 @@ SearchProductCard.propTypes = {
 	name: PropTypes.string,
 	price: PropTypes.number,
 	onClickCallback: PropTypes.func,
-	id: PropTypes.string,
+	id: PropTypes.number,
 };
 
 export default SearchProductCard;
