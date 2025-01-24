@@ -80,7 +80,7 @@ describe('App component', () => {
 			);
 	});
 
-	it('contains the sidebar', () => {
+	it('contains the sidebar', async () => {
 		render(
 			<MemoryRouter initialEntries={['/about']}>
 				<Routes>
@@ -89,11 +89,14 @@ describe('App component', () => {
 				</Routes>
 			</MemoryRouter>
 		);
-		const sidebar = screen.queryByRole('navigation');
-		expect(sidebar).not.toBeNull();
+
+		await waitFor(() => {
+			const sidebar = screen.queryByRole('navigation');
+			expect(sidebar).not.toBeNull();
+		});
 	});
 
-	it('contains main content', () => {
+	it('contains main content', async () => {
 		render(
 			<MemoryRouter initialEntries={['/about']}>
 				<Routes>
@@ -102,8 +105,11 @@ describe('App component', () => {
 				</Routes>
 			</MemoryRouter>
 		);
-		const mainContent = screen.queryByRole('main');
-		expect(mainContent).not.toBeNull();
+
+		await waitFor(() => {
+			const mainContent = screen.queryByRole('main');
+			expect(mainContent).not.toBeNull();
+		});
 	});
 
 	it("renders Home content in '/' route", async () => {
@@ -115,8 +121,10 @@ describe('App component', () => {
 				</Routes>
 			</MemoryRouter>
 		);
-		const homePageContent = screen.queryByTitle('home');
-		expect(homePageContent).not.toBeNull();
+		await waitFor(() => {
+			const homePageContent = screen.queryByTitle('home');
+			expect(homePageContent).not.toBeNull();
+		});
 	});
 
 	it("renders Account content in '/account' route", async () => {
@@ -128,8 +136,10 @@ describe('App component', () => {
 				</Routes>
 			</MemoryRouter>
 		);
-		const accountPageContent = screen.queryByTitle('account');
-		expect(accountPageContent).not.toBeNull();
+		await waitFor(() => {
+			const accountPageContent = screen.queryByTitle('account');
+			expect(accountPageContent).not.toBeNull();
+		});
 	});
 
 	it("renders Shop content in '/shop' route", async () => {
@@ -141,8 +151,10 @@ describe('App component', () => {
 				</Routes>
 			</MemoryRouter>
 		);
-		const shopPageContent = screen.queryByTitle('shop');
-		expect(shopPageContent).not.toBeNull();
+		await waitFor(() => {
+			const shopPageContent = screen.queryByTitle('shop');
+			expect(shopPageContent).not.toBeNull();
+		});
 	});
 
 	it("renders About content in '/about' route", async () => {
@@ -154,8 +166,10 @@ describe('App component', () => {
 				</Routes>
 			</MemoryRouter>
 		);
-		const aboutPageContent = screen.queryByTitle('about');
-		expect(aboutPageContent).not.toBeNull();
+		await waitFor(() => {
+			const aboutPageContent = screen.queryByTitle('about');
+			expect(aboutPageContent).not.toBeNull();
+		});
 	});
 
 	it('renders Error page if the path does not exist', async () => {
@@ -167,8 +181,10 @@ describe('App component', () => {
 				</Routes>
 			</MemoryRouter>
 		);
-		const errorPageContent = screen.queryByTitle('error');
-		expect(errorPageContent).not.toBeNull();
+		await waitFor(() => {
+			const errorPageContent = screen.queryByTitle('error');
+			expect(errorPageContent).not.toBeNull();
+		});
 	});
 
 	it("renders Cart content in '/cart' route", async () => {
@@ -180,8 +196,11 @@ describe('App component', () => {
 				</Routes>
 			</MemoryRouter>
 		);
-		const cartPageContent = screen.queryByTitle('cart');
-		expect(cartPageContent).not.toBeNull();
+        
+		await waitFor(() => {
+			const cartPageContent = screen.queryByTitle('cart');
+			expect(cartPageContent).not.toBeNull();
+		});
 	});
 
 	it('increments the cart icon count indicator by 1 when an "Add to Cart" button is pressed in a product card', async () => {
