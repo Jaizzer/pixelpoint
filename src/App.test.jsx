@@ -68,6 +68,7 @@ describe('App component', () => {
 				Promise.resolve({
 					json: () =>
 						Promise.resolve({
+							id: 1,
 							name: 'Witcher 3',
 							description_raw: 'This is the product description',
 							esrb_rating: 4.1,
