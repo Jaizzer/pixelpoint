@@ -58,6 +58,12 @@ export default function App() {
 		setIsClickedProductLoading(true);
 	}
 
+	// Clear the previously loaded product details when new product was clicked in the search dropdown while in '/gameDetails' route
+	if (content === 'gameDetails' && id && clickedProduct && parseInt(id) !== clickedProduct.id) {
+		setClickedProduct(null);
+		setIsClickedProductLoading(true);
+	}
+
 	// Get the necessary details about the clicked product
 	useEffect(() => {
 		if (id !== undefined) {
