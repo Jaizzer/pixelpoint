@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import SearchProductCard from './SearchProductCard';
 
-function SearchDropdown({ loading, data, error }) {
-    // Create the product cards to be rendered inside the search drop down
+function SearchDropdown({ loading, data, error, onSearchResultItemClick }) {
+	// Create the product cards to be rendered inside the search drop down
 	let searchProductCards;
 	if (data != null) {
 		searchProductCards = data.map((product) => (
@@ -12,7 +12,7 @@ function SearchDropdown({ loading, data, error }) {
 				image={product.image}
 				name={product.name}
 				price={product.price}
-				onClickCallback={(clickedResultID) => console.log(clickedResultID)}
+				onClickCallback={onSearchResultItemClick}
 			/>
 		));
 	}

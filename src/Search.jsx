@@ -71,10 +71,19 @@ function Search() {
 							setIsDropdownVisible(true);
 						}
 					}}
-					onBlur={() => setIsDropdownVisible(false)}
 				/>
 			</div>
-			{isDropdownVisible ? <SearchDropdown data={data} error={error} loading={isLoading} /> : null}
+			{isDropdownVisible ? (
+				<SearchDropdown
+					data={data}
+					error={error}
+					loading={isLoading}
+					// Hide the dropdown when a search result item is clicked
+					onSearchResultItemClick={() => {
+						setIsDropdownVisible(false);
+					}}
+				/>
+			) : null}
 		</div>
 	);
 }

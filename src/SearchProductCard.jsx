@@ -2,16 +2,7 @@ import PropTypes from 'prop-types';
 
 function SearchProductCard({ image, name, price, onClickCallback, id }) {
 	return (
-		<div
-			className="searchProductCard"
-			role="search-product-card"
-			onClick={() => {
-				if (onClickCallback !== null) {
-					// Return the product ID to the parent component when clicked
-					onClickCallback(id);
-				}
-			}}
-		>
+		<div className="searchProductCard" role="search-product-card" onClick={onClickCallback}>
 			<img src={image} alt={name} />
 			<div className="productName">{name}</div>
 			<div className="productPrice">${price}</div>
