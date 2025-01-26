@@ -298,7 +298,7 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					<Sorter onSortItemClick={setSortCriteria} />
 				</div>
 			}
-			<div className="productCardsContainer" onScroll={() => {}}>
+			<div className="productCardsContainer" title="product-cards-container">
 				{productCards ? productCards : null}
 				{loading ? (
 					<div className="loading" title="loading">
