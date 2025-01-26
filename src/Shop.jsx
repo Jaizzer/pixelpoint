@@ -2,7 +2,7 @@ import ProductCard from './ProductCard';
 import PropTypes from 'prop-types';
 import DropdownFilter from './DropdownFilter';
 import PriceRangeController from './PriceRangeController';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Sorter from './Sorter';
 
 function Shop({ products, error, loading, onAddItemToCart }) {
@@ -11,6 +11,12 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 	const [ageRatingFilters, setAgeRatingFilters] = useState([]);
 	const [sortCriteria, setSortCriteria] = useState(null);
 	const [priceRangeFilters, setPriceRangeFilters] = useState({ min: null, max: null });
+	const [isProductsLoading, setIsProductsLoading] = useState(loading);
+
+	// Update isProductsLoading if the parent component passed a new loading prop
+	useEffect(() => {
+		setIsProductsLoading(loading);
+	}, [loading]);
 
 	// Check if the updated products have been fetched
 	const hasFetchedAllUpdatedProducts = products.length !== 0;
@@ -300,7 +306,7 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 			}
 			<div className="productCardsContainer" title="product-cards-container">
 				{productCards ? productCards : null}
-				{loading ? (
+				{isProductsLoading ? (
 					<div className="loading" title="loading">
 						Loading...
 					</div>
