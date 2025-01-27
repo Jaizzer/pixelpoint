@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Shop from './Shop';
 import { userEvent } from '@testing-library/user-event';
 
@@ -618,5 +618,38 @@ describe('Shop component', () => {
 		const productNames = screen.queryAllByTitle('product-name').map((productName) => productName.textContent);
 
 		expect(productNames).toEqual(expectedNamesOfProductsSortedByDate);
+	});
+
+	it('renders a loading indicator if the user has scrolled all the way to the bottom of the product card container', async () => {
+		const products = [
+			{
+				imageLink: 'fakeLink',
+				productName: 'thisShouldBeThird',
+				productPrice: 65,
+				productId: '1',
+				genre: ['Action', 'Adventure'],
+				platforms: ['Mobile'],
+				releaseDate: '2024-01-03',
+			},
+			// Add more products here...
+		];
+
+		render(<Shop loading={false} products={products} error={false} />);
+
+		const productCardsContainer = screen.getByTitle('product-cards-container');
+
+		// Mock scrollHeight, clientHeight, and scroll top to simulate user going on the bottom of the container
+		Object.defineProperty(productCardsContainer, 'scrollHeight', { value: 1000 });
+		Object.defineProperty(productCardsContainer, 'clientHeight', { value: 300 });
+		Object.defineProperty(productCardsContainer, 'scrollTop', { value: 700 });
+
+		// Simulate scroll to the bottom
+		fireEvent.scroll(productCardsContainer);
+
+		// Wait for loading indicator
+		await waitFor(() => {
+			const loading = screen.queryByText('Loading...');
+			expect(loading).not.toBeNull();
+		});
 	});
 });

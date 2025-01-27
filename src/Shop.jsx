@@ -304,7 +304,19 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					<Sorter onSortItemClick={setSortCriteria} />
 				</div>
 			}
-			<div className="productCardsContainer" title="product-cards-container">
+			<div
+				className="productCardsContainer"
+				title="product-cards-container"
+				onScroll={(e) => {
+					// Load new products if there are no new products being loaded when the user scrolled to the bottom of the div
+					const isUserAtTheBottom = e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1;
+					if (!isProductsLoading && isUserAtTheBottom) {
+						// Render loading indicator if the user have scrolled to the bottom
+
+						setIsProductsLoading(true);
+					}
+				}}
+			>
 				{productCards ? productCards : null}
 				{isProductsLoading ? (
 					<div className="loading" title="loading">
