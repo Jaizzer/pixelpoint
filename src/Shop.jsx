@@ -312,7 +312,6 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					const isUserAtTheBottom = e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1;
 					if (!isProductsLoading && isUserAtTheBottom) {
 						// Render loading indicator if the user have scrolled to the bottom
-
 						setIsProductsLoading(true);
 					}
 				}}
