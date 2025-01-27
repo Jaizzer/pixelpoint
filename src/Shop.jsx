@@ -5,7 +5,7 @@ import PriceRangeController from './PriceRangeController';
 import { useEffect, useState } from 'react';
 import Sorter from './Sorter';
 
-function Shop({ products, error, loading, onAddItemToCart }) {
+function Shop({ products, error, loading, onAddItemToCart, getNewProducts }) {
 	const [genreFilters, setGenreFilters] = useState([]);
 	const [platformFilters, setPlatformFilters] = useState([]);
 	const [ageRatingFilters, setAgeRatingFilters] = useState([]);
@@ -13,10 +13,12 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 	const [priceRangeFilters, setPriceRangeFilters] = useState({ min: null, max: null });
 	const [isProductsLoading, setIsProductsLoading] = useState(loading);
 
-	// Update isProductsLoading if the parent component passed a new loading prop
+	// Remove the loading indicator if the parent component passed the newly requested products
 	useEffect(() => {
-		setIsProductsLoading(loading);
-	}, [loading]);
+		if (products.length > 0) {
+			setIsProductsLoading(false);
+		}
+	}, [products]);
 
 	// Check if the updated products have been fetched
 	const hasFetchedAllUpdatedProducts = products.length !== 0;
@@ -313,6 +315,10 @@ function Shop({ products, error, loading, onAddItemToCart }) {
 					if (!isProductsLoading && isUserAtTheBottom) {
 						// Render loading indicator if the user have scrolled to the bottom
 						setIsProductsLoading(true);
+						// Get the new products
+						if (getNewProducts) {
+							getNewProducts();
+						}
 					}
 				}}
 			>
@@ -336,6 +342,7 @@ Shop.propTypes = {
 	onAddItemToCart: PropTypes.func,
 	loading: PropTypes.bool,
 	error: PropTypes.bool,
+	getNewProducts: PropTypes.func,
 };
 
 export default Shop;

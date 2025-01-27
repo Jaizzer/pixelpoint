@@ -19,15 +19,22 @@ export default function App() {
 	const [clickedProduct, setClickedProduct] = useState(null);
 	const [isClickedProductLoading, setIsClickedProductLoading] = useState(true);
 	const [clickedProductError, setClickedProductError] = useState(false);
+	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
 
 	// Cart is composed of products that have product cart quantity greater than zero
 	const cart = products.filter((product) => product.productCartQuantity > 0);
+
+	function getNewProducts() {
+		setPageToRequestFromAPI((prev) => prev + 1);
+	}
 
 	// Fetch the products using the RAWG GAMES API
 	useEffect(() => {
 		(async function () {
 			try {
-				const response = await fetch('https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&page=1&page_size=100');
+				const response = await fetch(
+					`https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&page=${pageToRequestFromAPI}&page_size=100`
+				);
 				const jsonData = await response.json();
 				const modifiedProducts = jsonData.results.map((product) => {
 					return {
@@ -43,14 +50,15 @@ export default function App() {
 						esrbRating: product.esrb_rating ? product.esrb_rating.name : 'Unrated',
 					};
 				});
-				setProducts(modifiedProducts);
+
+				setProducts(products.concat(modifiedProducts));
 			} catch (error) {
 				setError(error ? true : false);
 			} finally {
 				setLoading(false);
 			}
 		})();
-	}, []);
+	}, [pageToRequestFromAPI]);
 
 	// Clear the previously loaded products details when moving to a different page that is not 'gameDetails'
 	if (content != 'gameDetails' && clickedProduct !== null) {
@@ -115,7 +123,7 @@ export default function App() {
 				) : content === 'account' ? (
 					<Account />
 				) : content === 'shop' ? (
-					<Shop onAddItemToCart={onAddItemToCart} products={products} error={error} loading={loading} />
+					<Shop onAddItemToCart={onAddItemToCart} products={products} error={error} loading={loading} getNewProducts={getNewProducts} />
 				) : content === 'about' ? (
 					<About />
 				) : content === 'cart' ? (
