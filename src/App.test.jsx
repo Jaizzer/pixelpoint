@@ -1,86 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { userEvent } from '@testing-library/user-event';
 import App from './App';
 
 describe('App component', () => {
-	beforeEach(() => {
-		window.fetch = vi
-			.fn()
-			// Mock the fetch for getting the products
-			.mockResolvedValueOnce(
-				Promise.resolve({
-					json: () =>
-						Promise.resolve({
-							results: [
-								{
-									background_image: 'imageLink',
-									name: 'product1',
-									id: 1,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product2',
-									id: 2,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product3',
-									id: 3,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product4',
-									id: 4,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product5',
-									id: 5,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-							],
-						}),
-				})
-			)
-			// Mock the fetch for getting the details of the clicked product
-			.mockResolvedValueOnce(
-				Promise.resolve({
-					json: () =>
-						Promise.resolve({
-							id: 1,
-							name: 'Witcher 3',
-							description_raw: 'This is the product description',
-							esrb_rating: 4.1,
-							developers: [{ name: 'Developer A' }, { name: 'Developer B' }],
-							released: '2024-01-12',
-							platforms: [{ platform: { name: 'Windows' } }, { platform: { name: 'Xbox' } }, { platform: { name: 'PS5' } }],
-							genres: [{ name: 'Action' }, { name: 'Puzzle' }, { name: 'Adventure' }],
-						}),
-				})
-			);
-	});
-
 	it('contains the sidebar', async () => {
 		render(
 			<MemoryRouter initialEntries={['/about']}>
@@ -205,6 +129,64 @@ describe('App component', () => {
 	});
 
 	it('increments the cart icon count indicator by 1 when an "Add to Cart" button is pressed in a product card', async () => {
+		window.fetch = vi
+			.fn()
+			// Mock the fetch for getting the products
+			.mockResolvedValueOnce(
+				Promise.resolve({
+					json: () =>
+						Promise.resolve({
+							results: [
+								{
+									background_image: 'imageLink',
+									name: 'product1',
+									id: 1,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product2',
+									id: 2,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product3',
+									id: 3,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product4',
+									id: 4,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product5',
+									id: 5,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+							],
+						}),
+				})
+			);
+
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/shop']}>
@@ -234,6 +216,63 @@ describe('App component', () => {
 	});
 
 	it('enables the incrementation of a product added to the cart when the corresponding "+" is clicked', async () => {
+		window.fetch = vi
+			.fn()
+			// Mock the fetch for getting the products
+			.mockResolvedValueOnce(
+				Promise.resolve({
+					json: () =>
+						Promise.resolve({
+							results: [
+								{
+									background_image: 'imageLink',
+									name: 'product1',
+									id: 1,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product2',
+									id: 2,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product3',
+									id: 3,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product4',
+									id: 4,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product5',
+									id: 5,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+							],
+						}),
+				})
+			);
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/shop']}>
@@ -266,6 +305,64 @@ describe('App component', () => {
 	});
 
 	it('enables the decrementation of a product added to the cart when the corresponding "-" is clicked', async () => {
+		window.fetch = vi
+			.fn()
+			// Mock the fetch for getting the products
+			.mockResolvedValueOnce(
+				Promise.resolve({
+					json: () =>
+						Promise.resolve({
+							results: [
+								{
+									background_image: 'imageLink',
+									name: 'product1',
+									id: 1,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product2',
+									id: 2,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product3',
+									id: 3,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product4',
+									id: 4,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product5',
+									id: 5,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+							],
+						}),
+				})
+			);
+
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/shop']}>
@@ -308,6 +405,64 @@ describe('App component', () => {
 	});
 
 	it('enables the changes in the order quantity input box to reflect on the cart contents', async () => {
+		window.fetch = vi
+			.fn()
+			// Mock the fetch for getting the products
+			.mockResolvedValueOnce(
+				Promise.resolve({
+					json: () =>
+						Promise.resolve({
+							results: [
+								{
+									background_image: 'imageLink',
+									name: 'product1',
+									id: 1,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product2',
+									id: 2,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product3',
+									id: 3,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product4',
+									id: 4,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product5',
+									id: 5,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+							],
+						}),
+				})
+			);
+
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/']}>
@@ -342,6 +497,80 @@ describe('App component', () => {
 	});
 
 	it("renders the details page of the game when a game's image is clicked", async () => {
+		window.fetch = vi
+			.fn()
+			// Mock the fetch for getting the products
+			.mockResolvedValueOnce(
+				Promise.resolve({
+					json: () =>
+						Promise.resolve({
+							results: [
+								{
+									background_image: 'imageLink',
+									name: 'product1',
+									id: 1,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product2',
+									id: 2,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product3',
+									id: 3,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product4',
+									id: 4,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+								{
+									background_image: 'imageLink',
+									name: 'product5',
+									id: 5,
+									genres: [{ name: 'Action' }],
+									platforms: [{ name: 'Windows' }],
+									released: '2024-01-24',
+									esrb_rating: { name: 'Everyone' },
+								},
+							],
+						}),
+				})
+			)
+			// Mock the fetch for getting the details of the clicked product
+			.mockResolvedValueOnce(
+				Promise.resolve({
+					json: () =>
+						Promise.resolve({
+							id: 1,
+							name: 'Witcher 3',
+							description_raw: 'This is the product description',
+							esrb_rating: 4.1,
+							developers: [{ name: 'Developer A' }, { name: 'Developer B' }],
+							released: '2024-01-12',
+							platforms: [{ platform: { name: 'Windows' } }, { platform: { name: 'Xbox' } }, { platform: { name: 'PS5' } }],
+							genres: [{ name: 'Action' }, { name: 'Puzzle' }, { name: 'Adventure' }],
+						}),
+				})
+			);
+
 		// Render the app with initial route pointing to game details
 		render(
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
