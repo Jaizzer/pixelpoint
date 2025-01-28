@@ -567,6 +567,26 @@ describe('App component', () => {
 							released: '2024-01-12',
 							platforms: [{ platform: { name: 'Windows' } }, { platform: { name: 'Xbox' } }, { platform: { name: 'PS5' } }],
 							genres: [{ name: 'Action' }, { name: 'Puzzle' }, { name: 'Adventure' }],
+							background_image: 'fakeImageLink',
+						}),
+				})
+			)
+			// Mock the fetch for getting the screenshots of the clicked product
+			.mockResolvedValueOnce(
+				Promise.resolve({
+					json: () =>
+						Promise.resolve({
+							results: [
+								{
+									image: 'fakeImageLink1',
+								},
+								{
+									image: 'fakeImageLink2',
+								},
+								{
+									image: 'fakeImageLink3',
+								},
+							],
 						}),
 				})
 			);

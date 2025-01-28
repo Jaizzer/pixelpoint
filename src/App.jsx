@@ -77,18 +77,21 @@ export default function App() {
 		if (id !== undefined) {
 			(async function () {
 				try {
-					const response = await fetch(`https://api.rawg.io/api/games/${id}?key=99ef179fc1ee4d77a91ccee7e1bb59e6`);
-					const jsonData = await response.json();
+					const detailsResponse = await fetch(`https://api.rawg.io/api/games/${id}?key=99ef179fc1ee4d77a91ccee7e1bb59e6`);
+					const jsonDataDetails = await detailsResponse.json();
+					const screenshotsResponse = await fetch(`https://api.rawg.io/api/games/${id}/screenshots?key=99ef179fc1ee4d77a91ccee7e1bb59e6`);
+					const jsonDataImages = await screenshotsResponse.json();
 					const modifiedProduct = {
-						id: jsonData.id,
-						title: jsonData.name,
-						description: jsonData.description_raw,
-						rating: jsonData.rating,
+						id: jsonDataDetails.id,
+						title: jsonDataDetails.name,
+						description: jsonDataDetails.description_raw,
+						rating: jsonDataDetails.rating,
 						price: 45,
-						developers: jsonData.developers.map((developer) => developer.name),
-						genres: jsonData.genres.map((genre) => genre.name),
-						releaseDate: jsonData.released,
-						platforms: jsonData.platforms.map((platform) => platform.platform.name),
+						developers: jsonDataDetails.developers.map((developer) => developer.name),
+						genres: jsonDataDetails.genres.map((genre) => genre.name),
+						releaseDate: jsonDataDetails.released,
+						platforms: jsonDataDetails.platforms.map((platform) => platform.platform.name),
+						screenshots: [jsonDataDetails.background_image, ...jsonDataImages.results.map((result) => result.image)],
 					};
 					setClickedProduct(modifiedProduct);
 				} catch (error) {
