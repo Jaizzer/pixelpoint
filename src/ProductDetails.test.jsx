@@ -1,6 +1,18 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import ProductDetails from './ProductDetails';
+
+vi.mock('./ImageSlider', () => ({
+	default: ({ imageLinks }) => {
+		return (
+			<div className="imageSlider">
+				{imageLinks.map((imageLink, index) => {
+					<img src={imageLink} key={index}></img>;
+				})}
+			</div>
+		);
+	},
+}));
 
 describe('Product description', () => {
 	it('renders the loading indicator if the products are still being fetched', () => {
@@ -25,6 +37,7 @@ describe('Product description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
+			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productTitle = screen.queryByText('Witcher 3');
@@ -41,6 +54,7 @@ describe('Product description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
+			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productDescription = screen.queryByText('This is the product description');
@@ -57,6 +71,7 @@ describe('Product description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
+			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productRating = screen.queryByText('4.1');
@@ -73,6 +88,7 @@ describe('Product description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
+			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productPrice = screen.queryByText(/\$41/);
@@ -89,6 +105,7 @@ describe('Product description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
+			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productDeveloper = screen.queryByText('Developer A, Developer B');
@@ -105,6 +122,7 @@ describe('Product description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
+			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productReleaseDate = screen.queryByText('January 12, 2024');
@@ -121,6 +139,7 @@ describe('Product description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
+			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productPlatforms = screen.queryByText('Windows, Xbox, PS4');
@@ -137,6 +156,7 @@ describe('Product description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
+			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
 		const productGenres = screen.queryByText('Action, Puzzle, Adventure');
