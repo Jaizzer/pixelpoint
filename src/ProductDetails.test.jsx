@@ -74,7 +74,7 @@ describe('Product description', () => {
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productRating = screen.queryByText('4.1');
+		const productRating = screen.queryByText(/4.1/);
 		expect(productRating).not.toBeNull();
 	});
 

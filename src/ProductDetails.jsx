@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import ImageSlider from './ImageSlider';
+import StarRating from './StarRating';
 
 function ProductDetails({ product, loading, error }) {
 	return (
@@ -17,7 +18,15 @@ function ProductDetails({ product, loading, error }) {
 					<h1 className="productTitle">{product.title}</h1>
 					<div className="productRating">
 						<div className="productRatingHeading">Rating</div>
-						<div className="productRatingContent">{product.rating ? product.rating : 'No Rating'}</div>
+						<div className="productRatingContent">
+							{product.rating ? (
+								<>
+									<StarRating rating={product.rating} />({product.rating})
+								</>
+							) : (
+								'No Rating'
+							)}
+						</div>
 					</div>
 					{product.screenshots.length > 1 && <ImageSlider imageLinks={product.screenshots}></ImageSlider>}
 					<div className="productDescriptionContainer">
