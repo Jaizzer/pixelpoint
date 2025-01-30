@@ -5,7 +5,7 @@ import PriceRangeController from './PriceRangeController';
 import { useEffect, useState } from 'react';
 import Sorter from './Sorter';
 
-function Shop({ products, error, loading, onAddItemToCart, getNewProducts }) {
+function Shop({ products, error, loading, getNewProducts }) {
 	const [genreFilters, setGenreFilters] = useState([]);
 	const [platformFilters, setPlatformFilters] = useState([]);
 	const [ageRatingFilters, setAgeRatingFilters] = useState([]);
@@ -213,7 +213,6 @@ function Shop({ products, error, loading, onAddItemToCart, getNewProducts }) {
 						imageLink={product.imageLink}
 						productName={product.productName}
 						productPrice={product.productPrice}
-						onAddItemToCart={onAddItemToCart}
 						productCartQuantity={product.productCartQuantity}
 						productId={product.productId}
 					/>

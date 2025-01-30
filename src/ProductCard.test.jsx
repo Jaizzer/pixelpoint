@@ -1,11 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { screen, render } from '@testing-library/react';
 import ProductCard from './ProductCard';
 import { MemoryRouter } from 'react-router-dom';
-
-vi.mock('./OrderCountController', () => ({
-	default: () => <button>Add to Cart</button>,
-}));
 
 describe('Item Card Component', () => {
 	it('contains the product image', () => {
@@ -38,15 +34,5 @@ describe('Item Card Component', () => {
 			/[$\xA2-\xA5\u058F\u060B\u09F2\u09F3\u09FB\u0AF1\u0BF9\u0E3F\u17DB\u20A0-\u20BD\uA838\uFDFC\uFE69\uFF04\uFFE0\uFFE1\uFFE5\uFFE6]/
 		);
 		expect(productPrice).not.toBeNull();
-	});
-
-	it('contains the order count controller', () => {
-		render(
-			<MemoryRouter>
-				<ProductCard />{' '}
-			</MemoryRouter>
-		);
-		const addToCartButton = screen.queryByText('Add to Cart');
-		expect(addToCartButton).not.toBeNull();
 	});
 });

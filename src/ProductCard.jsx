@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import OrderCountController from './OrderCountController';
 import { Link } from 'react-router-dom';
 
-function ProductCard({ imageLink, productName, productPrice, productId, onAddItemToCart, productCartQuantity = 0 }) {
+function ProductCard({ imageLink, productName, productPrice, productId }) {
 	return (
 		<div className="ProductCard" title="product-card">
 			<Link to={`/gameDetails/${productId}`}>
@@ -12,12 +11,6 @@ function ProductCard({ imageLink, productName, productPrice, productId, onAddIte
 				</div>
 				<div className="price">{'$' + productPrice}</div>
 			</Link>
-			<OrderCountController
-				onAddItemToCart={(productCartQuantity) => {
-					onAddItemToCart(productId, productCartQuantity);
-				}}
-				productCartQuantity={productCartQuantity}
-			/>
 		</div>
 	);
 }
@@ -27,8 +20,6 @@ ProductCard.propTypes = {
 	productName: PropTypes.string,
 	productPrice: PropTypes.number,
 	productId: PropTypes.string,
-	onAddItemToCart: PropTypes.func,
-	productCartQuantity: PropTypes.number,
 };
 
 export default ProductCard;

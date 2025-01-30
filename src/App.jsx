@@ -82,7 +82,7 @@ export default function App() {
 				) : content === 'account' ? (
 					<Account />
 				) : content === 'shop' ? (
-					<Shop onAddItemToCart={onAddItemToCart} products={products} error={error} loading={loading} getNewProducts={getNewProducts} />
+					<Shop products={products} error={error} loading={loading} getNewProducts={getNewProducts} />
 				) : content === 'about' ? (
 					<About />
 				) : content === 'cart' ? (
