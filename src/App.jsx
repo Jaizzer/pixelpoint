@@ -9,6 +9,7 @@ import TopBar from './TopBar';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ProductDetails from './ProductDetails';
+import useFetchProduct from './useFetchProduct';
 
 export default function App() {
 	const { content } = useParams();
@@ -16,9 +17,7 @@ export default function App() {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const { id } = useParams();
-	const [clickedProduct, setClickedProduct] = useState(null);
-	const [isClickedProductLoading, setIsClickedProductLoading] = useState(true);
-	const [clickedProductError, setClickedProductError] = useState(false);
+	const { product, isProductHaveError, isProductLoading } = useFetchProduct(id);
 	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
 
 	// Cart is composed of products that have product cart quantity greater than zero
@@ -60,49 +59,6 @@ export default function App() {
 		})();
 	}, [pageToRequestFromAPI]);
 
-	// Clear the previously loaded products details when moving to a different page that is not 'gameDetails'
-	if (content != 'gameDetails' && clickedProduct !== null) {
-		setClickedProduct(null);
-		setIsClickedProductLoading(true);
-	}
-
-	// Clear the previously loaded product details when new product was clicked in the search dropdown while in '/gameDetails' route
-	if (content === 'gameDetails' && id && clickedProduct && parseInt(id) !== clickedProduct.id) {
-		setClickedProduct(null);
-		setIsClickedProductLoading(true);
-	}
-
-	// Get the necessary details about the clicked product
-	useEffect(() => {
-		if (id !== undefined) {
-			(async function () {
-				try {
-					const detailsResponse = await fetch(`https://api.rawg.io/api/games/${id}?key=99ef179fc1ee4d77a91ccee7e1bb59e6`);
-					const jsonDataDetails = await detailsResponse.json();
-					const screenshotsResponse = await fetch(`https://api.rawg.io/api/games/${id}/screenshots?key=99ef179fc1ee4d77a91ccee7e1bb59e6`);
-					const jsonDataImages = await screenshotsResponse.json();
-					const modifiedProduct = {
-						id: jsonDataDetails.id,
-						title: jsonDataDetails.name,
-						description: jsonDataDetails.description_raw,
-						rating: jsonDataDetails.rating,
-						price: 45,
-						developers: jsonDataDetails.developers.map((developer) => developer.name),
-						genres: jsonDataDetails.genres.map((genre) => genre.name),
-						releaseDate: jsonDataDetails.released,
-						platforms: jsonDataDetails.platforms.map((platform) => platform.platform.name),
-						screenshots: [jsonDataDetails.background_image, ...jsonDataImages.results.map((result) => result.image)],
-					};
-					setClickedProduct(modifiedProduct);
-				} catch (error) {
-					setClickedProductError(error ? true : false);
-				} finally {
-					setIsClickedProductLoading(false);
-				}
-			})();
-		}
-	}, [id]);
-
 	function onAddItemToCart(productId, productCartQuantity) {
 		// Update the products
 		const updatedProducts = products.map((existingCartItem) =>
@@ -132,7 +88,7 @@ export default function App() {
 				) : content === 'cart' ? (
 					<Cart onAddItemToCart={onAddItemToCart} products={cart} />
 				) : content === 'gameDetails' && id !== undefined ? (
-					<ProductDetails key={id} product={clickedProduct} loading={isClickedProductLoading} error={clickedProductError} />
+					<ProductDetails key={id} product={product} loading={isProductLoading} error={isProductHaveError} />
 				) : (
 					<Error />
 				)}
