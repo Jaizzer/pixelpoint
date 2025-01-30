@@ -27,7 +27,7 @@ describe('Item Card Component', () => {
 	it('contains the product price', () => {
 		render(
 			<MemoryRouter>
-				<ProductCard productPrice="$56.00" />{' '}
+				<ProductCard productPrice={56.0} />{' '}
 			</MemoryRouter>
 		);
 		const productPrice = screen.queryByText(
