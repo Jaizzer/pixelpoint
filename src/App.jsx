@@ -20,9 +20,6 @@ export default function App() {
 	const { product, isProductHaveError, isProductLoading } = useFetchProduct(id);
 	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
 
-	// Cart is composed of products that have product cart quantity greater than zero
-	const cart = products.filter((product) => product.productCartQuantity > 0);
-
 	function getNewProducts() {
 		setPageToRequestFromAPI((prev) => prev + 1);
 	}
@@ -41,7 +38,6 @@ export default function App() {
 						productName: product.name,
 						productPrice: Math.floor(Math.random() * (100 - 50) + 50),
 						productId: `${product.id}`,
-						productCartQuantity: 0,
 						genre: product.genres.map((genre) => genre.name),
 						platforms: product.platforms.map((platform) => platform.name),
 						unitsSold: Math.floor(Math.random() * 1000000),
@@ -59,23 +55,10 @@ export default function App() {
 		})();
 	}, [pageToRequestFromAPI]);
 
-	function onAddItemToCart(productId, productCartQuantity) {
-		// Update the products
-		const updatedProducts = products.map((existingCartItem) =>
-			existingCartItem.productId === productId ? { ...existingCartItem, productCartQuantity: productCartQuantity } : existingCartItem
-		);
-		setProducts(updatedProducts);
-	}
-
-	function getCartLength() {
-		const cartItemsQuantity = cart.map((item) => item.productCartQuantity).reduce((acc, curr) => acc + curr, 0);
-		return cartItemsQuantity;
-	}
-
 	return (
 		<>
 			<Sidebar></Sidebar>
-			<TopBar cartContentCount={getCartLength()}></TopBar>
+			<TopBar cartContentCount={0}></TopBar>
 			<main>
 				{!content ? (
 					<Home />
@@ -86,7 +69,7 @@ export default function App() {
 				) : content === 'about' ? (
 					<About />
 				) : content === 'cart' ? (
-					<Cart onAddItemToCart={onAddItemToCart} products={cart} />
+					<Cart />
 				) : content === 'gameDetails' && id !== undefined ? (
 					<ProductDetails key={id} product={product} loading={isProductLoading} error={isProductHaveError} />
 				) : (
