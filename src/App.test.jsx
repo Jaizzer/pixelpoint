@@ -4,6 +4,26 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { userEvent } from '@testing-library/user-event';
 import App from './App';
 
+vi.mock('./useFetchProduct.jsx', () => ({
+	default: () => {
+		const product = {
+			id: '1',
+			title: 'Product',
+			description: 'This is the product',
+			rating: 4.47,
+			price: 45,
+			developers: ['Developer A', 'Developer B'],
+			genres: ['Action'],
+			releaseDate: '2012-12-12',
+			platforms: ['platform1', 'platform2'],
+			screenshots: ['fakeLink1', 'fakeLink2', 'fakeLink3'],
+		};
+		const isProductHaveError = false;
+		const isProductLoading = false;
+		return { product, isProductHaveError, isProductLoading };
+	},
+}));
+
 describe('App component', () => {
 	it('contains the sidebar', async () => {
 		render(
@@ -497,100 +517,6 @@ describe('App component', () => {
 	});
 
 	it("renders the details page of the game when a game's image is clicked", async () => {
-		window.fetch = vi
-			.fn()
-			// Mock the fetch for getting the products
-			.mockResolvedValueOnce(
-				Promise.resolve({
-					json: () =>
-						Promise.resolve({
-							results: [
-								{
-									background_image: 'imageLink',
-									name: 'product1',
-									id: 1,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product2',
-									id: 2,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product3',
-									id: 3,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product4',
-									id: 4,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product5',
-									id: 5,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-							],
-						}),
-				})
-			)
-			// Mock the fetch for getting the details of the clicked product
-			.mockResolvedValueOnce(
-				Promise.resolve({
-					json: () =>
-						Promise.resolve({
-							id: 1,
-							name: 'Witcher 3',
-							description_raw: 'This is the product description',
-							esrb_rating: 4.1,
-							developers: [{ name: 'Developer A' }, { name: 'Developer B' }],
-							released: '2024-01-12',
-							platforms: [{ platform: { name: 'Windows' } }, { platform: { name: 'Xbox' } }, { platform: { name: 'PS5' } }],
-							genres: [{ name: 'Action' }, { name: 'Puzzle' }, { name: 'Adventure' }],
-							background_image: 'fakeImageLink',
-						}),
-				})
-			)
-			// Mock the fetch for getting the screenshots of the clicked product
-			.mockResolvedValueOnce(
-				Promise.resolve({
-					json: () =>
-						Promise.resolve({
-							results: [
-								{
-									image: 'fakeImageLink1',
-								},
-								{
-									image: 'fakeImageLink2',
-								},
-								{
-									image: 'fakeImageLink3',
-								},
-							],
-						}),
-				})
-			);
-
 		// Render the app with initial route pointing to game details
 		render(
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
