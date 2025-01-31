@@ -24,6 +24,11 @@ export default function App() {
 		setCart(cart.concat({ ...productToAdd }));
 	}
 
+	function removeItem(productID) {
+		// Remove an item from the cart
+		setCart(cart.filter((item) => item.id !== productID));
+	}
+
 	return (
 		<>
 			<Sidebar></Sidebar>
@@ -38,7 +43,7 @@ export default function App() {
 				) : content === 'about' ? (
 					<About />
 				) : content === 'cart' ? (
-					<Cart />
+					<Cart content={cart} removeItem={removeItem} />
 				) : content === 'gameDetails' && id !== undefined ? (
 					<ProductDetails key={id} product={product} loading={isProductLoading} error={isProductHaveError} onAddItemToCart={addToCart} />
 				) : (

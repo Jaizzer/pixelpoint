@@ -258,4 +258,39 @@ describe('App component', () => {
 
 		expect(cartContentCountIndicator.textContent).toEqual('1');
 	});
+
+	it('allows user to remove a product in the cart', async () => {
+		const user = userEvent.setup();
+		render(
+			<MemoryRouter initialEntries={['/gameDetails/1']}>
+				<Routes>
+					<Route path="/" element={<App />} />
+					<Route path="/:content" element={<App />} />
+					<Route path="/:content/:id" element={<App />} />
+				</Routes>
+			</MemoryRouter>
+		);
+
+		// Add an item to cart
+		const addToCarButton = screen.queryByText(/Add to Cart/i);
+		await user.click(addToCarButton);
+
+		// Go to Cart page
+		const cart = screen.queryByTitle('cart-icon');
+		await user.click(cart);
+
+		// Remove a product in the cart
+		const removeItemButton = screen.getByTitle('remove-item');
+		await user.click(removeItemButton);
+
+		await waitFor(() => {
+			// Check if the cart count indicator in the topbar disappeared
+			const isCartCountIndicatorGone = screen.queryByTitle('cart-count-indicator') === null;
+
+			// Check if the cart contents in the cart page disappeared
+			const isCartContentGone = screen.queryByTitle('cart-content-card') === null;
+
+			expect(isCartContentGone && isCartCountIndicatorGone).toBeTruthy();
+		});
+	});
 });
