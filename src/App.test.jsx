@@ -3,6 +3,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { userEvent } from '@testing-library/user-event';
 import App from './App';
+import { useState } from 'react';
 
 vi.mock('./useFetchProduct.jsx', () => ({
 	default: () => {
@@ -23,6 +24,44 @@ vi.mock('./useFetchProduct.jsx', () => ({
 		return { product, isProductHaveError, isProductLoading };
 	},
 }));
+
+vi.mock('./useFetchProducts.jsx', () => {
+	return {
+		default: () => {
+			const [products, setProducts] = useState([
+				{
+					productName: 'product1',
+					productPrice: 50,
+					productId: '1',
+					genre: ['Genre 1', 'Genre 2', 'Genre 3'],
+					platforms: ['Platform 1', 'Platform 2', 'Platform 3'],
+					unitsSold: 300,
+					releaseDate: '2024-01-24',
+					esrbRating: 'Everyone',
+				},
+			]);
+			const isProductsLoading = false;
+			const isProductsHaveError = false;
+			const getNewProducts = vi.fn(() => {
+				setProducts((products) =>
+					products.concat([
+						{
+							productName: 'product2',
+							productPrice: 50,
+							productId: '2',
+							genre: ['Genre 1', 'Genre 2', 'Genre 3'],
+							platforms: ['Platform 1', 'Platform 2', 'Platform 3'],
+							unitsSold: 300,
+							releaseDate: '2024-01-24',
+							esrbRating: 'Everyone',
+						},
+					])
+				);
+			});
+			return [products, isProductsHaveError, isProductsLoading, getNewProducts];
+		},
+	};
+});
 
 describe('App component', () => {
 	it('contains the sidebar', async () => {
@@ -147,7 +186,7 @@ describe('App component', () => {
 			expect(cartPageContent).not.toBeNull();
 		});
 	});
-    
+
 	it("renders the details page of the game when a game's image is clicked", async () => {
 		// Render the app with initial route pointing to game details
 		render(
@@ -168,120 +207,6 @@ describe('App component', () => {
 	});
 
 	it('renders the new products when the user scroll to the bottom', async () => {
-		// Create new fetch mock for getting a second wave of products
-		window.fetch = vi
-			.fn()
-			// Mock the fetch for getting the first wave of products
-			.mockResolvedValueOnce(
-				Promise.resolve({
-					json: () =>
-						Promise.resolve({
-							results: [
-								{
-									background_image: 'imageLink',
-									name: 'product1',
-									id: 1,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product2',
-									id: 2,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product3',
-									id: 3,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product4',
-									id: 4,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product5',
-									id: 5,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-							],
-						}),
-				})
-			)
-			// Mock the fetch for getting the second wave of products
-			.mockResolvedValueOnce(
-				Promise.resolve({
-					json: () =>
-						Promise.resolve({
-							results: [
-								{
-									background_image: 'imageLink',
-									name: 'product6',
-									id: 6,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product7',
-									id: 7,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product8',
-									id: 8,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product9',
-									id: 9,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-								{
-									background_image: 'imageLink',
-									name: 'product10',
-									id: 10,
-									genres: [{ name: 'Action' }],
-									platforms: [{ name: 'Windows' }],
-									released: '2024-01-24',
-									esrb_rating: { name: 'Everyone' },
-								},
-							],
-						}),
-				})
-			);
-
 		render(
 			<MemoryRouter initialEntries={['/shop']}>
 				<Routes>
@@ -291,19 +216,19 @@ describe('App component', () => {
 			</MemoryRouter>
 		);
 
-		await waitFor(async () => {
-			// The number of product cards before scrolling to the bottom
-			const productCardCountBeforeBottomScroll = screen.queryAllByTitle('product-card').length;
+		// The number of product cards before scrolling to the bottom
+		const productCardCountBeforeBottomScroll = screen.queryAllByTitle('product-card').length;
 
-			if (screen.queryAllByTitle('product-card').length > 0) {
-				// Mock the user's action of scrolling to the bottom
-				const productCardsContainer = screen.getByTitle('product-cards-container');
-				Object.defineProperty(productCardsContainer, 'scrollHeight', { value: 1000 });
-				Object.defineProperty(productCardsContainer, 'clientHeight', { value: 300 });
-				Object.defineProperty(productCardsContainer, 'scrollTop', { value: 700 });
-				fireEvent.scroll(productCardsContainer);
-			}
+		if (screen.queryAllByTitle('product-card').length > 0) {
+			// Mock the user's action of scrolling to the bottom
+			const productCardsContainer = screen.getByTitle('product-cards-container');
+			Object.defineProperty(productCardsContainer, 'scrollHeight', { value: 1000 });
+			Object.defineProperty(productCardsContainer, 'clientHeight', { value: 300 });
+			Object.defineProperty(productCardsContainer, 'scrollTop', { value: 700 });
+			fireEvent.scroll(productCardsContainer);
+		}
 
+		await waitFor(() => {
 			// The number of product cards after scrolling to the bottom
 			const productCardCountAfterBottomScroll = screen.queryAllByTitle('product-card').length;
 
