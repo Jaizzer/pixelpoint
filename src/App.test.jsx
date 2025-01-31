@@ -236,4 +236,26 @@ describe('App component', () => {
 			expect(productCardCountAfterBottomScroll).toEqual(productCardCountBeforeBottomScroll * 2);
 		});
 	});
+
+	it('allows user to add products to card when inside the product details page', async () => {
+		const user = userEvent.setup();
+		render(
+			<MemoryRouter initialEntries={['/gameDetails/1']}>
+				<Routes>
+					<Route path="/" element={<App />} />
+					<Route path="/:content" element={<App />} />
+					<Route path="/:content/:id" element={<App />} />
+				</Routes>
+			</MemoryRouter>
+		);
+
+		// Click the add to cart button
+		const addToCarButton = screen.queryByText(/Add to Cart/i);
+		await user.click(addToCarButton);
+
+		// Check the cart content count indicator
+		const cartContentCountIndicator = screen.queryByTitle('cart-content-count');
+
+		expect(cartContentCountIndicator.textContent).toEqual('1');
+	});
 });

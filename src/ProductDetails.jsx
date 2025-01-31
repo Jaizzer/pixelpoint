@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import ImageSlider from './ImageSlider';
 import StarRating from './StarRating';
+import AddToCartButton from './AddToCartButton';
 
-function ProductDetails({ product, loading, error }) {
+function ProductDetails({ product, loading, error, onAddItemToCart }) {
 	return (
 		<>
 			{loading ? (
@@ -34,6 +35,11 @@ function ProductDetails({ product, loading, error }) {
 						<div className="productDescriptionContent">{product.description ? product.description : 'No available description.'}</div>
 					</div>
 					<div className="productPrice">{product.price ? `$${product.price}` : 'Price Unavailable'}</div>
+					<AddToCartButton
+						onAddItemToCart={() => {
+							onAddItemToCart(product);
+						}}
+					/>
 					<div className="otherDetails">
 						<div className="productGenre">
 							<h2 className="productGenreHeading">Genre</h2>
@@ -68,6 +74,7 @@ ProductDetails.propTypes = {
 	product: PropTypes.object,
 	loading: PropTypes.bool,
 	error: PropTypes.bool,
+	onAddItemToCart: PropTypes.func,
 };
 
 export default ProductDetails;
