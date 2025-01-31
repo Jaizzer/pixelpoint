@@ -51,6 +51,6 @@ describe('Cart component', () => {
 		render(<Cart removeItem={removeItem} content={cartContent} />);
 		const removeItemButton = screen.queryByTitle('remove-item');
 		await user.click(removeItemButton);
-		expect(removeItem).toHaveBeenCalled();
+		expect(removeItem).toHaveBeenCalledWith(1);
 	});
 });

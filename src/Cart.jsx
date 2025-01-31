@@ -13,7 +13,7 @@ function Cart({ content, clearCart, removeItem }) {
 					title={item.title}
 					price={item.price}
 					image={item.screenshots[0]}
-					removeItem={removeItem}
+					removeItem={() => removeItem(item.id)}
 				/>
 			);
 		});
