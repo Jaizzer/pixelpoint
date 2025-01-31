@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function AddToCartButton({ onAddItemToCart }) {
-	const [isClicked, setIsClicked] = useState(false);
+function AddToCartButton({ onAddItemToCart, isProductAdded }) {
+	const [isAddToCartClicked, setIsAddToCartClicked] = useState(isProductAdded);
 	return (
 		<>
-			{isClicked ? (
+			{isAddToCartClicked ? (
 				<div className="productAdditionIndicator">Added ✓</div>
 			) : (
 				<button
 					className="addToCart"
 					onClick={() => {
 						onAddItemToCart();
-						setIsClicked(true);
+						setIsAddToCartClicked(true);
 					}}
 				>
 					Add To Cart +
@@ -24,6 +24,7 @@ function AddToCartButton({ onAddItemToCart }) {
 
 AddToCartButton.propTypes = {
 	onAddItemToCart: PropTypes.func,
+	isProductAdded: PropTypes.bool,
 };
 
 export default AddToCartButton;

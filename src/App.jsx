@@ -50,7 +50,14 @@ export default function App() {
 				) : content === 'cart' ? (
 					<Cart content={cart} removeItem={removeItem} clearCart={clearCart} />
 				) : content === 'gameDetails' && id !== undefined ? (
-					<ProductDetails key={id} product={product} loading={isProductLoading} error={isProductHaveError} onAddItemToCart={addToCart} />
+					<ProductDetails
+						key={id}
+						product={product}
+						loading={isProductLoading}
+						error={isProductHaveError}
+						onAddItemToCart={addToCart}
+						isProductInCart={cart.filter((item) => item.id === product.id).length === 1}
+					/>
 				) : (
 					<Error />
 				)}

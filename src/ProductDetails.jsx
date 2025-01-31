@@ -3,7 +3,7 @@ import ImageSlider from './ImageSlider';
 import StarRating from './StarRating';
 import AddToCartButton from './AddToCartButton';
 
-function ProductDetails({ product, loading, error, onAddItemToCart }) {
+function ProductDetails({ product, loading, error, onAddItemToCart, isProductInCart }) {
 	return (
 		<>
 			{loading ? (
@@ -36,6 +36,7 @@ function ProductDetails({ product, loading, error, onAddItemToCart }) {
 					</div>
 					<div className="productPrice">{product.price ? `$${product.price}` : 'Price Unavailable'}</div>
 					<AddToCartButton
+						isProductAdded={isProductInCart}
 						onAddItemToCart={() => {
 							onAddItemToCart(product);
 						}}
@@ -75,6 +76,7 @@ ProductDetails.propTypes = {
 	loading: PropTypes.bool,
 	error: PropTypes.bool,
 	onAddItemToCart: PropTypes.func,
+	isProductInCart: PropTypes.bool,
 };
 
 export default ProductDetails;
