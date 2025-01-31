@@ -29,6 +29,11 @@ export default function App() {
 		setCart(cart.filter((item) => item.id !== productID));
 	}
 
+	function clearCart() {
+		// Clear all the contents of the cart
+		setCart([]);
+	}
+
 	return (
 		<>
 			<Sidebar></Sidebar>
@@ -43,7 +48,7 @@ export default function App() {
 				) : content === 'about' ? (
 					<About />
 				) : content === 'cart' ? (
-					<Cart content={cart} removeItem={removeItem} />
+					<Cart content={cart} removeItem={removeItem} clearCart={clearCart} />
 				) : content === 'gameDetails' && id !== undefined ? (
 					<ProductDetails key={id} product={product} loading={isProductLoading} error={isProductHaveError} onAddItemToCart={addToCart} />
 				) : (
