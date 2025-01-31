@@ -237,7 +237,7 @@ describe('App component', () => {
 		});
 	});
 
-	it('allows user to add products to card when inside the product details page', async () => {
+	it('allows user to add products to cart when inside the product details page', async () => {
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
