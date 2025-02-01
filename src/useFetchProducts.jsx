@@ -33,7 +33,7 @@ export default function useFetchProducts() {
 							productPrice: getPrice(product.id),
 							productId: `${product.id}`,
 							genre: product.genres.map((genre) => genre.name),
-							platforms: product.platforms.map((platform) => platform.name),
+							platforms: product.platforms.map((platform) => platform.platform.name),
 							unitsSold: Math.floor(Math.random() * 1000000),
 							releaseDate: product.released,
 							esrbRating: product.esrb_rating ? product.esrb_rating.name : 'Unrated',
