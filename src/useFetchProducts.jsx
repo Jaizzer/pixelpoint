@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import getPrice from './getPrice';
 
 export default function useFetchProducts() {
 	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
@@ -29,7 +30,7 @@ export default function useFetchProducts() {
 						return {
 							imageLink: product.background_image,
 							productName: product.name,
-							productPrice: Math.floor(Math.random() * (100 - 50) + 50),
+							productPrice: getPrice(product.id),
 							productId: `${product.id}`,
 							genre: product.genres.map((genre) => genre.name),
 							platforms: product.platforms.map((platform) => platform.name),

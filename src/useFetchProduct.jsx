@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import getPrice from './getPrice';
 
 function useFetchProduct(id) {
 	const [product, setProduct] = useState(null);
@@ -22,7 +23,7 @@ function useFetchProduct(id) {
 						title: jsonDataDetails.name,
 						description: jsonDataDetails.description_raw,
 						rating: jsonDataDetails.rating,
-						price: 45,
+						price: getPrice(jsonDataDetails.id),
 						developers: jsonDataDetails.developers.map((developer) => developer.name),
 						genres: jsonDataDetails.genres.map((genre) => genre.name),
 						releaseDate: jsonDataDetails.released,
