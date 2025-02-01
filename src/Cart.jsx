@@ -19,9 +19,12 @@ function Cart({ content, clearCart, removeItem }) {
 			);
 		});
 		// Calculate the total price
-		totalPrice = content.reduce((previous, current) => {
-			return previous + current.price;
-		}, 0);
+		totalPrice =
+			Math.ceil(
+				content.reduce((previous, current) => {
+					return previous + current.price;
+				}, 0) * 100
+			) / 100;
 	}
 	return (
 		<div title="cart">
