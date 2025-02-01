@@ -3,6 +3,7 @@ import CartContentCard from './CartContentCard';
 
 function Cart({ content, clearCart, removeItem }) {
 	let cartContentCards = [];
+	let totalPrice = 0;
 	if (content) {
 		// Create the cart content cards
 		cartContentCards = content.map((item) => {
@@ -17,6 +18,10 @@ function Cart({ content, clearCart, removeItem }) {
 				/>
 			);
 		});
+		// Calculate the total price
+		totalPrice = content.reduce((previous, current) => {
+			return previous + current.price;
+		}, 0);
 	}
 	return (
 		<div title="cart">
@@ -24,6 +29,7 @@ function Cart({ content, clearCart, removeItem }) {
 			<button title="clear-cart" className="clearCartButton" onClick={clearCart}>
 				Clear
 			</button>
+			{content && content.length > 0 && <div className="totalPrice">Total Price: ${totalPrice} </div>}
 		</div>
 	);
 }

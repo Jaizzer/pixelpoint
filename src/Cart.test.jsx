@@ -53,4 +53,14 @@ describe('Cart component', () => {
 		await user.click(removeItemButton);
 		expect(removeItem).toHaveBeenCalledWith(1);
 	});
+
+	it('calculates the total price of all the cart contents', () => {
+		const cartContent = [
+			{ title: 'Game 1', id: 1, price: 45, screenshots: ['fakeLink1', 'fakeLink2'] },
+			{ title: 'Game 2', id: 2, price: 55, screenshots: ['fakeLink1', 'fakeLink2'] },
+		];
+		render(<Cart content={cartContent} />);
+		const totalPrice = screen.queryByText(/100/i);
+		expect(totalPrice).not.toBeNull();
+	});
 });
