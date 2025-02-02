@@ -248,6 +248,7 @@ function Shop({ products, error, loading, getNewProducts }) {
 								});
 								setGenreFilters(updatedGenreFilters);
 							}}
+							numberOfShowLessItems={7}
 						/>
 					) : null
 				}
@@ -271,6 +272,7 @@ function Shop({ products, error, loading, getNewProducts }) {
 								});
 								setPlatformFilters(updatedPlatformFilters);
 							}}
+							numberOfShowLessItems={7}
 						/>
 					) : null
 				}
