@@ -7,7 +7,7 @@ const SorterContainer = styled.div`
 	box-sizing: border-box;
 	margin: 0px;
 
-	min-width: 245px;
+	width: clamp(200px, 80%, 320px);
 	padding: 10px 18px;
 	border-radius: 10px;
 	background-color: #1b1e22;
@@ -57,23 +57,37 @@ const SortOption = styled.div`
 	color: ${(props) => (props.isClicked ? 'white' : '#858585')};
 `;
 
+const FilterActions = styled.div`
+	box-sizing: border-box;
+	margin: 0px;
+
+	display: flex;
+	justify-content: space-between;
+	padding-top: 15px;
+	font-size: 13px;
+	color: white;
+`;
+
 function Sorter({ onSortItemClick }) {
-	const [isEverySortOptionVisible, setIsEverySortOptionVisible] = useState(false);
+	const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 	const [selectedSortOption, setSelectedSortOption] = useState(null);
+	const [isEverySortItemsVisible, setIsEverySortItemsVisible] = useState(false);
 
 	// Create the sort option items to be put in DOM
 	const sortOptions = [
 		'Popularity: High to Low',
-		'Popularity: Low to High',
 		'Release Date: Newest First',
+		'Price: Low to High',
+		'Price: High to Low',
+		'Popularity: Low to High',
 		'Release Date: Oldest First',
 		'Name: A to Z',
 		'Name: Z to A',
-		'Price: Low to High',
-		'Price: High to Low',
 	];
-	const sortOptionsDOM = sortOptions.map((sortOption) => {
-		return (
+
+	let sortOptionsDOM = [];
+	if (isEverySortItemsVisible) {
+		sortOptionsDOM = sortOptions.map((sortOption) => (
 			<SortOption
 				key={sortOption}
 				title="sort-option"
@@ -87,20 +101,64 @@ function Sorter({ onSortItemClick }) {
 			>
 				{sortOption}
 			</SortOption>
-		);
-	});
+		));
+	} else {
+		let numberOfShowLessItems = 3;
+		// Limit the number of dropdown items to 'numberOfShowLessItems' if 'numberOfShowLessItems' was provided
+		for (let index = 0; index < numberOfShowLessItems; index++) {
+			let item = sortOptions[index];
+			sortOptionsDOM.push(
+				<SortOption
+					key={item}
+					title="sort-option"
+					onClick={(e) => {
+						// Set the clicked sort option else unset the clicked sort option if its the currently selected sort option
+						let newlySelectedSortOption = e.target.textContent !== selectedSortOption ? e.target.textContent : null;
+						onSortItemClick(newlySelectedSortOption);
+						setSelectedSortOption(newlySelectedSortOption);
+					}}
+					isClicked={item === selectedSortOption}
+				>
+					{item}
+				</SortOption>
+			);
+		}
+	}
 
 	return (
 		<SorterContainer>
 			<SortButton
 				onClick={() => {
-					setIsEverySortOptionVisible(!isEverySortOptionVisible);
+					setIsDropdownVisible(!isDropdownVisible);
 				}}
 			>
 				Sort
-				<DropdownIcon isDropdownCollapsed={!isEverySortOptionVisible} />
+				<DropdownIcon isDropdownCollapsed={!isDropdownVisible} />
 			</SortButton>
-			{isEverySortOptionVisible && <PopOver>{sortOptionsDOM}</PopOver>}
+			{isDropdownVisible && (
+				<PopOver>
+					{sortOptionsDOM}
+					<FilterActions>
+						<div
+							onClick={() => {
+								setIsEverySortItemsVisible(!isEverySortItemsVisible);
+							}}
+						>
+							{isEverySortItemsVisible ? 'Show less' : 'Show more'}
+						</div>
+						<div
+							className="clear"
+							onClick={() => {
+								// Unset the currently selected sort option
+								onSortItemClick(null);
+								setSelectedSortOption(null);
+							}}
+						>
+							Clear
+						</div>
+					</FilterActions>
+				</PopOver>
+			)}
 		</SorterContainer>
 	);
 }
