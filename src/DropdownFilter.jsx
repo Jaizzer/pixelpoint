@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import styled from 'styled-components';
+import DropdownIcon from './DropDownIcon';
 
 const DropdownFilterContainer = styled.div`
 	box-sizing: border-box;
@@ -32,6 +33,11 @@ const FilterButton = styled.button`
 	padding: 5px 15px;
 	border-radius: 10px;
 	border: 0px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
 	background-color: transparent;
 	font-size: 16px;
 	font-weight: 600;
@@ -164,6 +170,7 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 				}}
 			>
 				{title}
+				<DropdownIcon isDropdownCollapsed={!isDropdownVisible} />
 			</FilterButton>
 			{isDropdownVisible && (
 				<PopOver>
