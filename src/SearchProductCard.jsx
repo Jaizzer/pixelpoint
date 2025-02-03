@@ -1,14 +1,49 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Container = styled.div`
+	box-sizing: border-box;
+	margin: 0px;
+
+	padding: 10px;
+	border-radius: 10px;
+	color: white;
+
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 20px;
+	align-items: center;
+
+	&:hover {
+		background-color: #373737;
+	}
+`;
+
+const ProductInfo = styled.div`
+	grid-column: 2 / 3;
+	display: grid;
+	grid-template-rows: auto auto;
+
+	font-size: 15px;
+`;
+
+const Image = styled.img`
+	width: 50px;
+	object-fit: cover;
+	border-radius: 3px;
+`;
 
 function SearchProductCard({ image, name, price, onClickCallback, id }) {
 	return (
 		<Link to={`/gameDetails/${id}`}>
-			<div className="searchProductCard" role="search-product-card" onClick={onClickCallback}>
-				<img src={image} alt={name} />
-				<div className="productName">{name}</div>
-				<div className="productPrice">${price}</div>
-			</div>
+			<Container role="search-product-card" onClick={onClickCallback}>
+				<Image src={image} alt={name} />
+				<ProductInfo>
+					<div>{name}</div>
+					<div>${price}</div>
+				</ProductInfo>
+			</Container>
 		</Link>
 	);
 }
