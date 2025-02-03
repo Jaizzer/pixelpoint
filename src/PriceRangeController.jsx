@@ -64,6 +64,7 @@ const Input = styled.input`
 	width: 120px;
 	padding: 2px 10px;
 	overflow: scroll;
+	border: 3px solid white;
 	border-radius: 5px;
 	outline: none;
 	font: inherit;
@@ -72,6 +73,10 @@ const Input = styled.input`
 	&::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
+	}
+
+	&:focus {
+		border-color: #099ea6;
 	}
 `;
 
