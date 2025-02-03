@@ -1,24 +1,93 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import styled from 'styled-components';
+import DropdownIcon from './DropDownIcon';
+
+const DropdownFilterContainer = styled.div`
+	box-sizing: border-box;
+	margin: 0px;
+
+	min-width: 245px;
+	padding: 10px 18px;
+	border-radius: 10px;
+	background-color: #1b1e22;
+`;
+
+const PopOver = styled.div`
+	box-sizing: border-box;
+	margin: 0px;
+
+	display: grid;
+	gap: 10px;
+	align-content: space-around;
+	padding: 15px;
+	background-color: transparent;
+	font-family: 'Poppins';
+`;
+
+const DropdownButton = styled.button`
+	box-sizing: border-box;
+	margin: 0px;
+
+	width: 100%;
+	padding: 5px 15px;
+	border-radius: 10px;
+	border: 0px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	background-color: transparent;
+	font-size: 16px;
+	font-weight: 600;
+	text-align: justify;
+	color: white;
+`;
+
+const PopOverItem = styled.div`
+	box-sizing: border-box;
+	margin: 0px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+	font-size: 14px;
+	color: white;
+`;
+
+const Input = styled.input`
+	box-sizing: border-box;
+	margin: 0px;
+
+	width: 120px;
+	padding: 2px 10px;
+	overflow: scroll;
+	border-radius: 5px;
+	outline: none;
+	font: inherit;
+`;
 
 function PriceRangeController({ onPriceRangeSet }) {
 	const [isPriceRangeDropdownVisible, setIsPriceRangeDropdownVisible] = useState(false);
 	const [priceRange, setPriceRange] = useState({ min: '', max: '' });
 	return (
-		<div className="priceRangeController">
-			<button
+		<DropdownFilterContainer>
+			<DropdownButton
 				className="priceRangeControllerTitle"
 				onClick={() => {
 					setIsPriceRangeDropdownVisible(!isPriceRangeDropdownVisible);
 				}}
 			>
 				Price
-			</button>
+				<DropdownIcon isDropdownCollapsed={!isPriceRangeDropdownVisible} />
+			</DropdownButton>
 			{isPriceRangeDropdownVisible ? (
-				<div className="priceRangeControllerDropdown" title="price-range-controller-dropdown">
-					<div className="minimumPriceController">
+				<PopOver title="price-range-controller-dropdown">
+					<PopOverItem>
 						<label htmlFor="minimumPrice">Min</label>
-						<input
+						<Input
 							type="number"
 							min={1}
 							id="minimumPrice"
@@ -33,10 +102,10 @@ function PriceRangeController({ onPriceRangeSet }) {
 								onPriceRangeSet({ min: minValueToBeReturnedToParent, max: maxValueToBeReturnedToParent });
 							}}
 						/>
-					</div>
-					<div className="maximumPriceController">
+					</PopOverItem>
+					<PopOverItem>
 						<label htmlFor="maximumPrice">Max</label>
-						<input
+						<Input
 							type="number"
 							min={1}
 							id="maximumPrice"
@@ -51,10 +120,10 @@ function PriceRangeController({ onPriceRangeSet }) {
 								onPriceRangeSet({ min: minValueToBeReturnedToParent, max: maxValueToBeReturnedToParent });
 							}}
 						/>
-					</div>
-				</div>
+					</PopOverItem>
+				</PopOver>
 			) : null}
-		</div>
+		</DropdownFilterContainer>
 	);
 }
 
