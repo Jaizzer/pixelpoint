@@ -7,7 +7,7 @@ const SorterContainer = styled.div`
 	box-sizing: border-box;
 	margin: 0px;
 
-	width: clamp(200px, 80%, 320px);
+	width: clamp(200px, 80%, 360px);
 	padding: 10px 18px;
 	border-radius: 10px;
 	background-color: #1b1e22;
@@ -30,6 +30,7 @@ const SortButton = styled.button`
 	margin: 0px;
 
 	width: 100%;
+	height: 40px;
 	padding: 5px 15px;
 	border-radius: 10px;
 	border: 0px;
@@ -66,6 +67,28 @@ const FilterActions = styled.div`
 	padding-top: 15px;
 	font-size: 13px;
 	color: white;
+`;
+
+const CurrentlySelectedSortOption = styled.div`
+	box-sizing: border-box;
+	margin: 0px;
+
+	padding: 3px 10px;
+	border-radius: 3px;
+	background-color: white;
+	font-size: 13px;
+	color: #1c1c1c;
+`;
+
+const ButtonContent = styled.div`
+	box-sizing: border-box;
+	margin: 0px;
+
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: auto 1fr;
+	gap: 10px;
+	align-items: center;
 `;
 
 function Sorter({ onSortItemClick, numberOfShowLessItems }) {
@@ -133,7 +156,7 @@ function Sorter({ onSortItemClick, numberOfShowLessItems }) {
 					setIsDropdownVisible(!isDropdownVisible);
 				}}
 			>
-				Sort
+				<SortButtonContent selectedSortOption={selectedSortOption} />
 				<DropdownIcon isDropdownCollapsed={!isDropdownVisible} />
 			</SortButton>
 			{isDropdownVisible && (
@@ -163,6 +186,17 @@ function Sorter({ onSortItemClick, numberOfShowLessItems }) {
 		</SorterContainer>
 	);
 }
+
+function SortButtonContent({ selectedSortOption }) {
+	return (
+		<ButtonContent>
+			Sort by {selectedSortOption ? <CurrentlySelectedSortOption>{selectedSortOption}</CurrentlySelectedSortOption> : null}
+		</ButtonContent>
+	);
+}
+SortButtonContent.propTypes = {
+	selectedSortOption: PropTypes.string,
+};
 
 Sorter.propTypes = {
 	onSortItemClick: PropTypes.func,

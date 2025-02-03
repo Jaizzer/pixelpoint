@@ -7,7 +7,7 @@ describe('Sorter Component', () => {
 	it('has a dropdown that can be expanded to see the sort options', async () => {
 		const user = userEvent.setup();
 		render(<Sorter />);
-		const sorterDropdown = screen.queryByText('Sort');
+		const sorterDropdown = screen.queryByText('Sort by');
 		await user.click(sorterDropdown);
 
 		const expectedSortOptions = [
