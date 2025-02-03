@@ -67,6 +67,12 @@ const Input = styled.input`
 	border-radius: 5px;
 	outline: none;
 	font: inherit;
+
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
 `;
 
 function PriceRangeController({ onPriceRangeSet }) {
