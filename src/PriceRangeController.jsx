@@ -62,7 +62,7 @@ const Input = styled.input`
 	margin: 0px;
 
 	width: 120px;
-	padding: 2px 10px;
+	padding: 5px 7px;
 	overflow: scroll;
 	border: 3px solid white;
 	border-radius: 5px;
