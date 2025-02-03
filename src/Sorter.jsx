@@ -68,7 +68,7 @@ const FilterActions = styled.div`
 	color: white;
 `;
 
-function Sorter({ onSortItemClick }) {
+function Sorter({ onSortItemClick, numberOfShowLessItems }) {
 	const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 	const [selectedSortOption, setSelectedSortOption] = useState(null);
 	const [isEverySortItemsVisible, setIsEverySortItemsVisible] = useState(false);
@@ -86,7 +86,9 @@ function Sorter({ onSortItemClick }) {
 	];
 
 	let sortOptionsDOM = [];
-	if (isEverySortItemsVisible) {
+	if (isEverySortItemsVisible || !numberOfShowLessItems || numberOfShowLessItems >= sortOptions.length) {
+		/* Render all dropdown items if the dropdown is in 'Show more' mode or if there is no numberOfShowLessItems provided  
+        or if the numberOfShowLessItems is greater than the original number of sort options (which is impossible) */
 		sortOptionsDOM = sortOptions.map((sortOption) => (
 			<SortOption
 				key={sortOption}
@@ -103,7 +105,6 @@ function Sorter({ onSortItemClick }) {
 			</SortOption>
 		));
 	} else {
-		let numberOfShowLessItems = 3;
 		// Limit the number of dropdown items to 'numberOfShowLessItems' if 'numberOfShowLessItems' was provided
 		for (let index = 0; index < numberOfShowLessItems; index++) {
 			let item = sortOptions[index];
@@ -165,6 +166,7 @@ function Sorter({ onSortItemClick }) {
 
 Sorter.propTypes = {
 	onSortItemClick: PropTypes.func,
+	numberOfShowLessItems: PropTypes.number,
 };
 
 export default Sorter;

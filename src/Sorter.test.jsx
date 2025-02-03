@@ -12,13 +12,13 @@ describe('Sorter Component', () => {
 
 		const expectedSortOptions = [
 			'Popularity: High to Low',
-			'Popularity: Low to High',
 			'Release Date: Newest First',
+			'Price: Low to High',
+			'Price: High to Low',
+			'Popularity: Low to High',
 			'Release Date: Oldest First',
 			'Name: A to Z',
 			'Name: Z to A',
-			'Price: Low to High',
-			'Price: High to Low',
 		];
 		const sortOptions = screen.queryAllByTitle('sort-option').map((sortItem) => sortItem.textContent);
 		expect(sortOptions).toEqual(expectedSortOptions);
