@@ -304,7 +304,7 @@ function Shop({ products, error, loading, getNewProducts }) {
 			</div>
 			{
 				<div className="otherTools">
-					<Sorter onSortItemClick={setSortCriteria} numberOfShowLessItems={3}/>
+					<Sorter onSortItemClick={setSortCriteria} numberOfShowLessItems={3} />
 				</div>
 			}
 			<div
