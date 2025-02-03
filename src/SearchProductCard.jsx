@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import blankImage from './assets/images/blank-image.jpg';
 
 const Container = styled.div`
 	box-sizing: border-box;
@@ -38,7 +39,7 @@ function SearchProductCard({ image, name, price, onClickCallback, id }) {
 	return (
 		<Link to={`/gameDetails/${id}`}>
 			<Container role="search-product-card" onClick={onClickCallback}>
-				<Image src={image} alt={name} />
+				<Image src={image ? image : blankImage} alt={name} />
 				<ProductInfo>
 					<div>{name}</div>
 					<div>${price}</div>
