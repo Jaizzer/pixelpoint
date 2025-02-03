@@ -22,6 +22,9 @@ const Container = styled.div`
 `;
 
 const ProductInfo = styled.div`
+	box-sizing: border-box;
+	margin: 0px;
+
 	grid-column: 2 / 3;
 	display: grid;
 	grid-template-rows: auto auto;
@@ -30,6 +33,9 @@ const ProductInfo = styled.div`
 `;
 
 const Image = styled.img`
+	box-sizing: border-box;
+	margin: 0px;
+    
 	width: 50px;
 	object-fit: cover;
 	border-radius: 3px;
