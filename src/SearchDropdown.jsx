@@ -9,13 +9,17 @@ const PopOver = styled.div`
 	width: 100%;
 	max-height: 356px;
 	padding: 15px 25px;
-	border-radius: 0px;
+	border-radius: 0px 0px 10px 10px;
 	overflow: scroll;
-	border-top: 3px solid #099ea6;
 	color: var(--color);
 
 	display: grid;
 	gap: 10px;
+	top: 47px;
+	position: absolute;
+	z-index: 1000;
+
+	background-color: #242629;
 `;
 
 function SearchDropdown({ loading, data, error, onSearchResultItemClick }) {

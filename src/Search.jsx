@@ -12,12 +12,9 @@ const SearchContainer = styled.div`
 	background-color: #242629;
 	--color: #858585;
 
-	display: grid;
-	grid-template-rows: auto;
-	grid-auto-rows: 1fr;
-	position: absolute;
-	z-index: 1000;
 	font-family: 'Poppins';
+
+	position: relative;
 `;
 
 const SearchBar = styled.div`
