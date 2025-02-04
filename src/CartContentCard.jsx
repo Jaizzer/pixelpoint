@@ -48,9 +48,10 @@ const ProductInfo = styled.div`
 
 	grid-column: 2 / 3;
 	display: grid;
-	grid-template-rows: auto auto;
+	grid-template-columns: 300px 1fr 200px;
+	align-items: center;
+	grid-template-rows: 1fr;
 	gap: 5px;
-
 	font-size: 15px;
 `;
 
@@ -80,7 +81,7 @@ function CartContentCard({ title, price, image, id, rating, removeItem }) {
 					<Image src={image ? image : blankImage} />
 					<ProductInfo>
 						<div className="cartContentCartTitle">{title ? title : 'Title Unavailable'}</div>
-						<StarRating rating={rating} />
+						<StarRating rating={rating} pixelSize={25} />
 						<div className="cartContentCardPrice">{price ? `$${price}` : 'Price Unavailable'}</div>
 					</ProductInfo>
 				</CardContent>
