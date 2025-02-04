@@ -59,7 +59,8 @@ const Image = styled.img`
 	box-sizing: border-box;
 	margin: 0px;
 
-	width: 100px;
+	width: 80px;
+	height: 80px;
 	object-fit: cover;
 	border-radius: 3px;
 `;
