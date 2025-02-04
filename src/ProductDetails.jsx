@@ -34,7 +34,7 @@ function ProductDetails({ product, loading, error, onAddItemToCart, isProductInC
 						<h2 className="productDescriptionHeading">Description</h2>
 						<div className="productDescriptionContent">{product.description ? product.description : 'No available description.'}</div>
 					</div>
-					<div className="productPrice">{product.price ? `$${product.price}` : 'Price Unavailable'}</div>
+					<div className="productPrice">{product.price ? `$${product.price.toFixed(2)}` : 'Price Unavailable'}</div>
 					<AddToCartButton
 						isProductAdded={isProductInCart}
 						onAddItemToCart={() => {

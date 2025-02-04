@@ -33,7 +33,7 @@ function Cart({ content, clearCart, removeItem }) {
 			<button title="clear-cart" className="clearCartButton" onClick={clearCart}>
 				Clear
 			</button>
-			{content && content.length > 0 && <div className="totalPrice">Total Price: ${totalPrice} </div>}
+			{content && content.length > 0 && <div className="totalPrice">Total Price: ${totalPrice.toFixed(2)} </div>}
 		</div>
 	);
 }

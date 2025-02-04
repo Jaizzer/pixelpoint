@@ -88,7 +88,7 @@ function CartContentCard({ title, price, image, id, rating, removeItem }) {
 					<ProductInfo>
 						<div className="cartContentCartTitle">{title ? title : 'Title Unavailable'}</div>
 						<StarRating rating={rating} pixelSize={25} />
-						<ProductPrice>{price ? `$${price}` : 'Price Unavailable'}</ProductPrice>
+						<ProductPrice>{price ? `$${price.toFixed(2)}` : 'Price Unavailable'}</ProductPrice>
 					</ProductInfo>
 				</CardContent>
 			</StyledLink>

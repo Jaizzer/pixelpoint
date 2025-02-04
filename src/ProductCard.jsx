@@ -50,7 +50,7 @@ function ProductCard({ imageLink, productName, productPrice, productId }) {
 				<ProductCardImage src={imageLink} role="image" alt={productName}></ProductCardImage>
 				<ProductInfo>
 					<Text data-testid="productName">{productName}</Text>
-					<Text emphasize={true}>{'$' + productPrice}</Text>
+					<Text emphasize={true}>{productPrice ? '$' + productPrice.toFixed(2) : null}</Text>
 				</ProductInfo>
 			</Container>
 		</Link>

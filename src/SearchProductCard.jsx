@@ -48,7 +48,7 @@ function SearchProductCard({ image, name, price, onClickCallback, id }) {
 				<Image src={image ? image : blankImage} alt={name} />
 				<ProductInfo>
 					<div>{name}</div>
-					<div>${price}</div>
+					<div>${price.toFixed(2)}</div>
 				</ProductInfo>
 			</Container>
 		</Link>
