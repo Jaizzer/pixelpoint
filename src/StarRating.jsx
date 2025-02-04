@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Star = styled.span`
-	font-size: 40px;
+	font-size: calc(${(props) => (props.pixelSize ? props.pixelSize : 20)} * 1px);
 	color: transparent;
 	background-clip: text;
 	background-color: grey;
@@ -14,7 +14,7 @@ const StarsContainer = styled.div`
 	gap: 10px;
 `;
 
-function StarRating({ rating }) {
+function StarRating({ rating, pixelSize }) {
 	let numOfFullyColoredStars = Math.floor(rating);
 	let decimalPartOfTheRating = rating - numOfFullyColoredStars;
 	let numberOfStarsToCreate = 5;
@@ -25,7 +25,7 @@ function StarRating({ rating }) {
 		if (numOfFullyColoredStars !== 0) {
 			// Create the fully colored stars first
 			stars.push(
-				<Star key={i} amount={100} className="star">
+				<Star key={i} amount={100} className="star" pixelSize={pixelSize}>
 					★
 				</Star>
 			);
@@ -33,7 +33,7 @@ function StarRating({ rating }) {
 		} else {
 			// Create the uncolored or partially uncolored stars
 			stars.push(
-				<Star key={i} amount={decimalPartOfTheRating * 100} className="star">
+				<Star key={i} amount={decimalPartOfTheRating * 100} className="star" pixelSize={pixelSize}>
 					★
 				</Star>
 			);
@@ -44,5 +44,6 @@ function StarRating({ rating }) {
 }
 StarRating.propTypes = {
 	rating: PropTypes.number,
+	pixelSize: PropTypes.number,
 };
 export default StarRating;
