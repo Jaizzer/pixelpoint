@@ -11,18 +11,26 @@ const SorterContainer = styled.div`
 	padding: 10px 18px;
 	border-radius: 10px;
 	background-color: #1b1e22;
+	position: relative;
 `;
 
 const PopOver = styled.div`
 	box-sizing: border-box;
 	margin: 0px;
 
+	width: 100%;
+	border-radius: 0px 0px 10px 10px;
+
 	display: grid;
 	gap: 10px;
 	align-content: space-around;
-	padding: 15px;
-	background-color: transparent;
+	padding: 10px 33px 33px 33px;
+	background-color: #1b1e22;
 	font-family: 'Poppins';
+
+	position: absolute;
+	right: 0;
+	z-index: 900;
 `;
 
 const SortButton = styled.button`
