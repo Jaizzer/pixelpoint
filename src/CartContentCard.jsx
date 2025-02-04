@@ -73,6 +73,12 @@ const DeleteButton = styled.button`
 	border: 0px;
 `;
 
+const ProductPrice = styled.div`
+	justify-self: center;
+	font-weight: 500;
+	font-size: 18px;
+`;
+
 function CartContentCard({ title, price, image, id, rating, removeItem }) {
 	return (
 		<Container title="cart-content-card">
@@ -82,7 +88,7 @@ function CartContentCard({ title, price, image, id, rating, removeItem }) {
 					<ProductInfo>
 						<div className="cartContentCartTitle">{title ? title : 'Title Unavailable'}</div>
 						<StarRating rating={rating} pixelSize={25} />
-						<div className="cartContentCardPrice">{price ? `$${price}` : 'Price Unavailable'}</div>
+						<ProductPrice>{price ? `$${price}` : 'Price Unavailable'}</ProductPrice>
 					</ProductInfo>
 				</CardContent>
 			</StyledLink>
