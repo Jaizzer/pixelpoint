@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import SearchDropdown from './SearchDropDown';
 import styled from 'styled-components';
+import getPrice from './getPrice';
 
 const SearchContainer = styled.div`
 	box-sizing: border-box;
@@ -80,7 +81,7 @@ function Search() {
 				let searchResults = jsonData.results.map((product) => ({
 					name: product.name,
 					id: product.id,
-					price: 89,
+					price: getPrice(product.id),
 					image: product.background_image,
 				}));
 				setData(searchResults);
