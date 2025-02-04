@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import blankImage from './assets/images/blank-image.jpg';
+import StarRating from './StarRating.jsx';
 
 const StyledLink = styled(Link)`
 	text-decoration: none;
@@ -71,7 +72,7 @@ const DeleteButton = styled.button`
 	border: 0px;
 `;
 
-function CartContentCard({ title, price, image, id, removeItem }) {
+function CartContentCard({ title, price, image, id, rating, removeItem }) {
 	return (
 		<Container title="cart-content-card">
 			<StyledLink to={`/gameDetails/${id}`}>
@@ -79,6 +80,7 @@ function CartContentCard({ title, price, image, id, removeItem }) {
 					<Image src={image ? image : blankImage} />
 					<ProductInfo>
 						<div className="cartContentCartTitle">{title ? title : 'Title Unavailable'}</div>
+						<StarRating rating={rating} />
 						<div className="cartContentCardPrice">{price ? `$${price}` : 'Price Unavailable'}</div>
 					</ProductInfo>
 				</CardContent>
@@ -120,6 +122,7 @@ CartContentCard.propTypes = {
 	price: PropTypes.number,
 	image: PropTypes.string,
 	id: PropTypes.number,
+	rating: PropTypes.number,
 	removeItem: PropTypes.func,
 };
 
