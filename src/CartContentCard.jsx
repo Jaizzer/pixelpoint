@@ -37,22 +37,10 @@ const CardContent = styled.div`
 	color: white;
 
 	display: grid;
-	grid-template-columns: auto 1fr;
-	gap: 20px;
-	align-items: center;
-`;
-
-const ProductInfo = styled.div`
-	box-sizing: border-box;
-	margin: 0px;
-
-	grid-column: 2 / 3;
-	display: grid;
-	grid-template-columns: 275px 175px 350px 175px;
+	grid-template-columns: 80px 200px 175px 1fr 150px;
 	align-items: center;
 	grid-template-rows: 1fr;
 	gap: 30px;
-	font-size: 15px;
 `;
 
 const Image = styled.img`
@@ -68,6 +56,9 @@ const Image = styled.img`
 const DeleteButton = styled.button`
 	grid-template-columns: 2 / 3;
 	grid-template-rows: 1 / 2;
+    justify-self: center;
+    width: 40px;
+    height: 40px;
 
 	background-color: #eb4747;
 	border-radius: 5px;
@@ -86,12 +77,10 @@ function CartContentCard({ title, price, image, id, rating, platform, removeItem
 			<StyledLink to={`/gameDetails/${id}`}>
 				<CardContent className="cartContentCardInfo">
 					<Image src={image ? image : blankImage} />
-					<ProductInfo>
-						<div className="cartContentCartTitle">{title ? title : 'Title Unavailable'}</div>
-						<StarRating rating={rating} pixelSize={25} />
-						<div>{platform ? platform.join(', ') : null}</div>
-						<ProductPrice>{price ? `$${price.toFixed(2)}` : 'Price Unavailable'}</ProductPrice>
-					</ProductInfo>
+					<div className="cartContentCartTitle">{title ? title : 'Title Unavailable'}</div>
+					<StarRating rating={rating} pixelSize={25} />
+					<div>{platform ? platform.join(', ') : null}</div>
+					<ProductPrice>{price ? `$${price.toFixed(2)}` : 'Price Unavailable'}</ProductPrice>
 				</CardContent>
 			</StyledLink>
 			<DeleteButton title="remove-item" onClick={removeItem}>
