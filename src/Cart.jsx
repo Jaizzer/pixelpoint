@@ -15,6 +15,7 @@ function Cart({ content, clearCart, removeItem }) {
 					price={item.price}
 					rating={item.rating}
 					image={item.screenshots[0]}
+					platform={item.platforms}
 					removeItem={() => removeItem(item.id)}
 				/>
 			);

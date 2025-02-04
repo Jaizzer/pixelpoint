@@ -48,10 +48,10 @@ const ProductInfo = styled.div`
 
 	grid-column: 2 / 3;
 	display: grid;
-	grid-template-columns: 300px 1fr 200px;
+	grid-template-columns: 275px 175px 350px 175px;
 	align-items: center;
 	grid-template-rows: 1fr;
-	gap: 5px;
+	gap: 30px;
 	font-size: 15px;
 `;
 
@@ -80,7 +80,7 @@ const ProductPrice = styled.div`
 	font-size: 18px;
 `;
 
-function CartContentCard({ title, price, image, id, rating, removeItem }) {
+function CartContentCard({ title, price, image, id, rating, platform, removeItem }) {
 	return (
 		<Container title="cart-content-card">
 			<StyledLink to={`/gameDetails/${id}`}>
@@ -89,6 +89,7 @@ function CartContentCard({ title, price, image, id, rating, removeItem }) {
 					<ProductInfo>
 						<div className="cartContentCartTitle">{title ? title : 'Title Unavailable'}</div>
 						<StarRating rating={rating} pixelSize={25} />
+						<div>{platform ? platform.join(', ') : null}</div>
 						<ProductPrice>{price ? `$${price.toFixed(2)}` : 'Price Unavailable'}</ProductPrice>
 					</ProductInfo>
 				</CardContent>
@@ -131,6 +132,7 @@ CartContentCard.propTypes = {
 	image: PropTypes.string,
 	id: PropTypes.number,
 	rating: PropTypes.number,
+	platform: PropTypes.array,
 	removeItem: PropTypes.func,
 };
 
