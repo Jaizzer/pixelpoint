@@ -14,7 +14,7 @@ const Container = styled.div`
 
 	padding: 10px 30px;
 	border-radius: 10px;
-	background-color: grey;
+	background-color: #373e48;
 	font-family: 'Poppins';
 
 	display: grid;
@@ -68,7 +68,7 @@ const DeleteButton = styled.button`
 	grid-template-columns: 2 / 3;
 	grid-template-rows: 1 / 2;
 
-	background-color: #c45b5b;
+	background-color: #eb4747;
 	border-radius: 5px;
 	border: 0px;
 `;
