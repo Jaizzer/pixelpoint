@@ -1,4 +1,4 @@
 export default function getPrice(digit) {
 	const lengthOfDigit = digit.toString().length;
-	return Math.ceil((digit / Math.pow(10, lengthOfDigit)) * 10000) / 100;
+	return (Math.ceil((digit / Math.pow(10, lengthOfDigit)) * 10000) / 100).toFixed(2);
 }
