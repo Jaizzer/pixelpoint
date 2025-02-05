@@ -38,7 +38,11 @@ describe('Cart component', () => {
 	it('calls the callback function clearCart when "Clear" button is clicked', async () => {
 		const user = userEvent.setup();
 		const clearCart = vi.fn();
-		render(<Cart clearCart={clearCart} />);
+		const cartContent = [
+			{ title: 'Game 1', id: 1, price: 45, screenshots: ['fakeLink1', 'fakeLink2'] },
+			{ title: 'Game 2', id: 2, price: 45, screenshots: ['fakeLink1', 'fakeLink2'] },
+		];
+		render(<Cart content={cartContent} clearCart={clearCart} />);
 		const clearButton = screen.queryByTitle('clear-cart');
 		await user.click(clearButton);
 		expect(clearCart).toHaveBeenCalled();
