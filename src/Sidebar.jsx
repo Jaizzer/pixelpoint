@@ -1,10 +1,48 @@
 import { Link } from 'react-router-dom';
+import { HomeIcon, AccountIcon, ShopIcon, AboutIcon } from './Icons';
+import styled from 'styled-components';
+
+const Nav = styled.nav`
+	box-sizing: border-box;
+	margin: 0px;
+
+	width: 250px;
+	background-color: #121519;
+	padding-top: 100px;
+	font-family: 'Poppins';
+`;
+
+const StyledLink = styled(Link)`
+	box-sizing: border-box;
+	margin: 0px;
+
+	text-decoration: none;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 10px;
+
+	color: white;
+	stroke: white;
+
+	&:hover {
+		stroke: #099ea6;
+		color: #099ea6;
+	}
+`;
+
+const List = styled.ul`
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+`;
+
 export default function Sidebar() {
 	return (
-		<nav>
-			<ul>
+		<Nav>
+			<List>
 				<li>
-					<Link to="/">Logo</Link>
+					<StyledLink to="/">Logo</StyledLink>
 				</li>
 				<li>
 					<div className="user">
@@ -13,18 +51,30 @@ export default function Sidebar() {
 					</div>
 				</li>
 				<li>
-					<Link to="/">Home</Link>
+					<StyledLink to="/">
+						<HomeIcon />
+						Home
+					</StyledLink>
 				</li>
 				<li>
-					<Link to="/shop">Shop</Link>
+					<StyledLink to="/shop">
+						<ShopIcon />
+						Shop
+					</StyledLink>
 				</li>
 				<li>
-					<Link to="/account">Account</Link>
+					<StyledLink to="/account">
+						<AccountIcon />
+						Account
+					</StyledLink>
 				</li>
 				<li>
-					<Link to="/about">About</Link>
+					<StyledLink to="/about">
+						<AboutIcon />
+						About
+					</StyledLink>
 				</li>
-			</ul>
-		</nav>
+			</List>
+		</Nav>
 	);
 }
