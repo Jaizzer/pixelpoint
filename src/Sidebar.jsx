@@ -42,12 +42,12 @@ export default function Sidebar() {
 		<Nav>
 			<List>
 				<li>
-					<StyledLink to="/">Logo</StyledLink>
+					<StyledLink to="/">PixelPoint</StyledLink>
 				</li>
 				<li>
 					<div className="user">
 						<img className="userProfilePicture" />
-						<div className="userName">Username</div>
+						<div className="userName">Jaizzer</div>
 					</div>
 				</li>
 				<li>
