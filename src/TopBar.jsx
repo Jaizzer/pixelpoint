@@ -3,6 +3,7 @@ import CartIconWithCount from './CartIconWithCount';
 import { Link } from 'react-router-dom';
 import Search from './Search';
 import NotificationIconWithCount from './NotificationIconWithCount';
+import LogOutIcon from './LogOutIcon';
 
 function TopBar({ cartContentCount }) {
 	return (
@@ -12,7 +13,7 @@ function TopBar({ cartContentCount }) {
 			<Link to="/cart">
 				<CartIconWithCount cartContentCount={cartContentCount} />
 			</Link>
-			<button className="logout">Logout</button>
+			<LogOutIcon />
 		</div>
 	);
 }
