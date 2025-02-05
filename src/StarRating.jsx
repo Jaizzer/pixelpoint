@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Star = styled.span`
+    height: fit-content;
 	font-size: calc(${(props) => (props.pixelSize ? props.pixelSize : 20)} * 1px);
 	color: transparent;
 	background-clip: text;
