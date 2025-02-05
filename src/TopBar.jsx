@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import CartIcon from './CartIcon';
+import CartIconWithCount from './CartIconWithCount';
 import { Link } from 'react-router-dom';
 import Search from './Search';
 
@@ -9,7 +9,7 @@ function TopBar({ cartContentCount }) {
 			<Search />
 			<button className="notification">Notification</button>
 			<Link to="/cart">
-				<CartIcon cartContentCount={cartContentCount}></CartIcon>
+				<CartIconWithCount cartContentCount={cartContentCount} />
 			</Link>
 			<button className="logout">Logout</button>
 		</div>

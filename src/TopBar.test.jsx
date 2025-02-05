@@ -3,7 +3,7 @@ import { screen, render } from '@testing-library/react';
 import TopBar from './TopBar';
 import { MemoryRouter } from 'react-router-dom';
 
-vi.mock('./CartIcon', () => ({
+vi.mock('./CartIconWithCount', () => ({
 	default: ({ cartContentCount }) => <button>{cartContentCount}</button>,
 }));
 
