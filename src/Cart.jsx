@@ -31,9 +31,11 @@ function Cart({ content, clearCart, removeItem }) {
 	return (
 		<div title="cart">
 			<div className="cartContentsContainer">{cartContentCards}</div>
-			<button title="clear-cart" className="clearCartButton" onClick={clearCart}>
-				Clear
-			</button>
+			{content && content.length > 0 && (
+				<button title="clear-cart" className="clearCartButton" onClick={clearCart}>
+					Clear
+				</button>
+			)}
 			{content && content.length > 0 && <div className="totalPrice">Total Price: ${totalPrice.toFixed(2)} </div>}
 		</div>
 	);
