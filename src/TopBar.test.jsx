@@ -18,13 +18,13 @@ describe('TopBar component', () => {
 		expect(searchBar).not.toBeNull();
 	});
 
-	it('has 3 buttons for notification, shopping, cart', () => {
+	it('has 3 buttons for notification, shopping car, and logout', () => {
 		render(
 			<MemoryRouter>
 				<TopBar />
 			</MemoryRouter>
 		);
-		const buttons = screen.queryAllByRole('button');
+		const buttons = screen.queryAllByRole('topbar-actions');
 		expect(buttons.length).toEqual(3);
 	});
 

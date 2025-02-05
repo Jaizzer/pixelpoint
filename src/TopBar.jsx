@@ -9,11 +9,15 @@ function TopBar({ cartContentCount }) {
 	return (
 		<div className="topBar">
 			<Search />
-			<NotificationIconWithCount notificationContentCount={2} />
-			<Link to="/cart">
+			<Link to={'/notifications'} role="topbar-actions">
+				<NotificationIconWithCount notificationContentCount={2} />
+			</Link>
+			<Link to="/cart" role="topbar-actions">
 				<CartIconWithCount cartContentCount={cartContentCount} />
 			</Link>
-			<LogOutIcon />
+			<Link to="/logout" role="topbar-actions">
+				<LogOutIcon />
+			</Link>
 		</div>
 	);
 }
