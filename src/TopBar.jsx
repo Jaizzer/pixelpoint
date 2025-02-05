@@ -2,12 +2,13 @@ import PropTypes from 'prop-types';
 import CartIconWithCount from './CartIconWithCount';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+import NotificationIconWithCount from './NotificationIconWithCount';
 
 function TopBar({ cartContentCount }) {
 	return (
 		<div className="topBar">
 			<Search />
-			<button className="notification">Notification</button>
+			<NotificationIconWithCount notificationContentCount={2} />
 			<Link to="/cart">
 				<CartIconWithCount cartContentCount={cartContentCount} />
 			</Link>
