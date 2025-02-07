@@ -34,7 +34,7 @@ export default function useFetchProducts() {
 							productId: `${product.id}`,
 							genre: product.genres.map((genre) => genre.name),
 							platforms: product.platforms.map((platform) => platform.platform.name),
-							unitsSold: Math.floor(Math.random() * 1000000),
+							unitsSold: product.added_by_status.owned,
 							releaseDate: product.released,
 							esrbRating: product.esrb_rating ? product.esrb_rating.name : 'Unrated',
 						};
