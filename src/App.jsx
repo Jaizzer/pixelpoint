@@ -9,14 +9,15 @@ import TopBar from './TopBar';
 import { useParams } from 'react-router-dom';
 import ProductDetails from './ProductDetails';
 import useFetchProduct from './useFetchProduct';
-import useFetchProducts from './useFetchProducts';
+import useFetchGames from './useFetchGames';
 import { useState } from 'react';
 
 export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
 	const [product, isProductHaveError, isProductLoading] = useFetchProduct(id);
-	const [products, isProductsHaveError, isProductsLoading, getNewProducts] = useFetchProducts();
+	const [games, gamesError, isGamesLoading, getNewGames] = useFetchGames();
+
 	const [cart, setCart] = useState([]);
 
 	function addToCart(productToAdd) {
@@ -44,7 +45,7 @@ export default function App() {
 				) : pageToDisplay === 'account' ? (
 					<Account />
 				) : pageToDisplay === 'shop' ? (
-					<Shop products={products} error={isProductsHaveError} loading={isProductsLoading} getNewProducts={getNewProducts} />
+					<Shop products={games} error={gamesError} loading={isGamesLoading} getNewProducts={getNewGames} />
 				) : pageToDisplay === 'about' ? (
 					<About />
 				) : pageToDisplay === 'cart' ? (
