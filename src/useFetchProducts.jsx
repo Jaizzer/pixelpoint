@@ -6,20 +6,20 @@ export default function useFetchProducts() {
 	const [products, setProducts] = useState([]);
 	const [isProductsLoading, setIsProductsLoading] = useState(true);
 	const [isProductsHaveError, setIsProductsHaveError] = useState(false);
-	const hasFetchingBeenApproved = useRef(true);
+	const isFetchingApproved = useRef(true);
 
 	function getNewProducts() {
 		// Move to next page
 		setPageToRequestFromAPI((prev) => prev + 1);
 
 		// Allow fetching since new page was requested
-		hasFetchingBeenApproved.current = true;
+		isFetchingApproved.current = true;
 	}
 
 	useEffect(() => {
-		if (hasFetchingBeenApproved.current) {
+		if (isFetchingApproved.current) {
 			// Prevent double fetch request caused by StrictMode
-			hasFetchingBeenApproved.current = false;
+			isFetchingApproved.current = false;
 			(async function () {
 				try {
 					const response = await fetch(
