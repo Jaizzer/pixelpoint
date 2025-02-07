@@ -15,7 +15,7 @@ import { useState } from 'react';
 export default function App() {
 	const { content } = useParams();
 	const { id } = useParams();
-	const { product, isProductHaveError, isProductLoading } = useFetchProduct(id);
+	const [product, isProductHaveError, isProductLoading] = useFetchProduct(id);
 	const [products, isProductsHaveError, isProductsLoading, getNewProducts] = useFetchProducts();
 	const [cart, setCart] = useState([]);
 

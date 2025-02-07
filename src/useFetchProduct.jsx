@@ -39,7 +39,7 @@ function useFetchProduct(id) {
 			})();
 		}
 	}, [id]);
-	return { product, isProductHaveError, isProductLoading };
+	return [ product, isProductHaveError, isProductLoading ];
 }
 
 useFetchProduct.propTypes = {
