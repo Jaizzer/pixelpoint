@@ -6,7 +6,7 @@ export default function useFetchLatestProducts() {
 	const [latestProducts, setLatestProducts] = useState([]);
 	const [isLatestProductsLoading, setIsLatestProductsLoading] = useState(true);
 	const [isLatestProductsHaveError, setIsLatestProductsHaveError] = useState(false);
-	const hasFetchingBeenApproved = useRef(true);
+	const isFetchingApproved = useRef(true);
 	const productCountPerRequest = 20;
 
 	// Create a 1 year interval
@@ -20,13 +20,13 @@ export default function useFetchLatestProducts() {
 		setPageToRequestFromAPI((prev) => prev + 1);
 
 		// Allow fetching since new page was requested
-		hasFetchingBeenApproved.current = true;
+		isFetchingApproved.current = true;
 	}
 
 	useEffect(() => {
-		if (hasFetchingBeenApproved.current) {
+		if (isFetchingApproved.current) {
 			// Prevent double fetch request caused by StrictMode
-			hasFetchingBeenApproved.current = false;
+			isFetchingApproved.current = false;
 			(async function () {
 				try {
 					const response = await fetch(
