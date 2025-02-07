@@ -21,7 +21,7 @@ vi.mock('./useFetchProduct.jsx', () => ({
 		};
 		const isProductHaveError = false;
 		const isProductLoading = false;
-		return [product, isProductHaveError, isProductLoading ];
+		return [product, isProductHaveError, isProductLoading];
 	},
 }));
 
@@ -64,12 +64,12 @@ vi.mock('./useFetchProducts.jsx', () => {
 });
 
 describe('App component', () => {
-	it('contains the sidebar', async () => {
+	it('renders the sidebar', async () => {
 		render(
 			<MemoryRouter initialEntries={['/about']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
@@ -80,12 +80,12 @@ describe('App component', () => {
 		});
 	});
 
-	it('contains main content', async () => {
+	it('renders the main content', async () => {
 		render(
 			<MemoryRouter initialEntries={['/about']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
@@ -96,94 +96,94 @@ describe('App component', () => {
 		});
 	});
 
-	it("renders Home content in '/' route", async () => {
+	it("renders the Home page in '/' route", async () => {
 		render(
 			<MemoryRouter initialEntries={['/']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
 		await waitFor(() => {
-			const homePageContent = screen.queryByTitle('home');
-			expect(homePageContent).not.toBeNull();
+			const homePage = screen.queryByTitle('home');
+			expect(homePage).not.toBeNull();
 		});
 	});
 
-	it("renders Account content in '/account' route", async () => {
+	it("renders the Account page in '/account' route", async () => {
 		render(
 			<MemoryRouter initialEntries={['/account']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
 		await waitFor(() => {
-			const accountPageContent = screen.queryByTitle('account');
-			expect(accountPageContent).not.toBeNull();
+			const accountPage = screen.queryByTitle('account');
+			expect(accountPage).not.toBeNull();
 		});
 	});
 
-	it("renders Shop content in '/shop' route", async () => {
+	it("renders the Shop page in '/shop' route", async () => {
 		render(
 			<MemoryRouter initialEntries={['/shop']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
 		await waitFor(() => {
-			const shopPageContent = screen.queryByTitle('shop');
-			expect(shopPageContent).not.toBeNull();
+			const shopPage = screen.queryByTitle('shop');
+			expect(shopPage).not.toBeNull();
 		});
 	});
 
-	it("renders About content in '/about' route", async () => {
+	it("renders the About page in '/about' route", async () => {
 		render(
 			<MemoryRouter initialEntries={['/about']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
 		await waitFor(() => {
-			const aboutPageContent = screen.queryByTitle('about');
-			expect(aboutPageContent).not.toBeNull();
+			const aboutPage = screen.queryByTitle('about');
+			expect(aboutPage).not.toBeNull();
 		});
 	});
 
-	it('renders Error page if the path does not exist', async () => {
+	it('renders the Error page if the path does not exist', async () => {
 		render(
 			<MemoryRouter initialEntries={['/nonExistentPath']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
 		await waitFor(() => {
-			const errorPageContent = screen.queryByTitle('error');
-			expect(errorPageContent).not.toBeNull();
+			const errorPage = screen.queryByTitle('error');
+			expect(errorPage).not.toBeNull();
 		});
 	});
 
-	it("renders Cart content in '/cart' route", async () => {
+	it("renders the Cart page in '/cart' route", async () => {
 		render(
 			<MemoryRouter initialEntries={['/cart']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
 
 		await waitFor(() => {
-			const cartPageContent = screen.queryByTitle('cart');
-			expect(cartPageContent).not.toBeNull();
+			const cartPage = screen.queryByTitle('cart');
+			expect(cartPage).not.toBeNull();
 		});
 	});
 
@@ -193,8 +193,8 @@ describe('App component', () => {
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
-					<Route path="/:content/:id" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
+					<Route path="/:pageToDisplay/:id" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
@@ -211,7 +211,7 @@ describe('App component', () => {
 			<MemoryRouter initialEntries={['/shop']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
@@ -237,14 +237,14 @@ describe('App component', () => {
 		});
 	});
 
-	it('allows user to add products to cart when inside the product details page', async () => {
+	it('allows the user to add products to cart when inside the product details page', async () => {
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
-					<Route path="/:content/:id" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
+					<Route path="/:pageToDisplay/:id" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
@@ -259,14 +259,14 @@ describe('App component', () => {
 		expect(cartContentCountIndicator.textContent).toEqual('1');
 	});
 
-	it('allows user to remove a product in the cart', async () => {
+	it('allows the user to remove a product in the cart', async () => {
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
-					<Route path="/:content/:id" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
+					<Route path="/:pageToDisplay/:id" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);
@@ -294,14 +294,14 @@ describe('App component', () => {
 		});
 	});
 
-	it('allows user to remove all products in the cart', async () => {
+	it('allows the user to remove all products in the cart', async () => {
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/:content" element={<App />} />
-					<Route path="/:content/:id" element={<App />} />
+					<Route path="/:pageToDisplay" element={<App />} />
+					<Route path="/:pageToDisplay/:id" element={<App />} />
 				</Routes>
 			</MemoryRouter>
 		);

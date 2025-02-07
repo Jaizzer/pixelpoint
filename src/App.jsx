@@ -13,7 +13,7 @@ import useFetchProducts from './useFetchProducts';
 import { useState } from 'react';
 
 export default function App() {
-	const { content } = useParams();
+	const { pageToDisplay } = useParams();
 	const { id } = useParams();
 	const [product, isProductHaveError, isProductLoading] = useFetchProduct(id);
 	const [products, isProductsHaveError, isProductsLoading, getNewProducts] = useFetchProducts();
@@ -39,17 +39,17 @@ export default function App() {
 			<Sidebar></Sidebar>
 			<TopBar cartContentCount={cart.length}></TopBar>
 			<main>
-				{!content ? (
+				{!pageToDisplay ? (
 					<Home />
-				) : content === 'account' ? (
+				) : pageToDisplay === 'account' ? (
 					<Account />
-				) : content === 'shop' ? (
+				) : pageToDisplay === 'shop' ? (
 					<Shop products={products} error={isProductsHaveError} loading={isProductsLoading} getNewProducts={getNewProducts} />
-				) : content === 'about' ? (
+				) : pageToDisplay === 'about' ? (
 					<About />
-				) : content === 'cart' ? (
+				) : pageToDisplay === 'cart' ? (
 					<Cart content={cart} removeItem={removeItem} clearCart={clearCart} />
-				) : content === 'gameDetails' && id !== undefined ? (
+				) : pageToDisplay === 'gameDetails' && id !== undefined ? (
 					<ProductDetails
 						key={id}
 						product={product}

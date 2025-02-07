@@ -9,12 +9,12 @@ const routes = [
 		element: <App />,
 	},
 	{
-		path: '/:content',
+		path: '/:pageToDisplay',
 		element: <App />,
 	},
 
-    {
-		path: '/:content/:id',
+	{
+		path: '/:pageToDisplay/:id',
 		element: <App />,
 	},
 ];
