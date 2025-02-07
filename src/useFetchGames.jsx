@@ -5,7 +5,7 @@ export default function useFetchGames() {
 	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
 	const [games, setGames] = useState([]);
 	const [isGamesLoading, setIsGamesLoading] = useState(true);
-	const [isGamesHaveError, setIsGamesHaveError] = useState(false);
+	const [gamesError, setGamesError] = useState(null);
 	const isFetchingApproved = useRef(true);
 
 	function getNewGames() {
@@ -44,7 +44,7 @@ export default function useFetchGames() {
 						return game.concat(modifiedGames);
 					});
 				} catch (error) {
-					setIsGamesHaveError(error ? true : false);
+					setGamesError(error);
 				} finally {
 					setIsGamesLoading(false);
 				}
@@ -52,5 +52,5 @@ export default function useFetchGames() {
 		}
 	}, [pageToRequestFromAPI]);
 
-	return [games, isGamesHaveError, isGamesLoading, getNewGames];
+	return [games, gamesError, isGamesLoading, getNewGames];
 }
