@@ -32,9 +32,9 @@ export default function useFetchProducts() {
 							productName: product.name,
 							productPrice: getPrice(product.id),
 							productId: `${product.id}`,
-							genre: product.genres.map((genre) => genre.name),
-							platforms: product.platforms.map((platform) => platform.platform.name),
-							unitsSold: product.added_by_status.owned,
+							genre: product.genres ? product.genres.map((genre) => genre.name) : ['Unknown'],
+							platforms: product.platforms ? product.platforms.map((platform) => platform.platform.name) : ['Unknown'],
+							unitsSold: product.added_by_status && product.added_by_status.owned ? product.added_by_status.owned : 0,
 							releaseDate: product.released,
 							esrbRating: product.esrb_rating ? product.esrb_rating.name : 'Unrated',
 						};
