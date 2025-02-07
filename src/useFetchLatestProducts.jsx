@@ -63,7 +63,7 @@ export default function useFetchLatestProducts() {
 }
 
 function getDateAYearAgo() {
-	let oneYearFromNow = new Date();
-	oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() - 1);
-	return oneYearFromNow;
+	let dateOneYearAgo = new Date();
+	dateOneYearAgo.setFullYear(dateOneYearAgo.getFullYear() - 1);
+	return dateOneYearAgo;
 }
