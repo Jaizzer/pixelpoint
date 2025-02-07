@@ -5,12 +5,12 @@ import { userEvent } from '@testing-library/user-event';
 import App from './App';
 import { useState } from 'react';
 
-vi.mock('./useFetchProduct.jsx', () => ({
+vi.mock('./useFetchGame.jsx', () => ({
 	default: () => {
-		const product = {
+		const game = {
 			id: '1',
-			title: 'Product',
-			description: 'This is the product',
+			title: 'Game 1',
+			description: 'This is the game description',
 			rating: 4.47,
 			price: 45,
 			developers: ['Developer A', 'Developer B'],
@@ -19,46 +19,46 @@ vi.mock('./useFetchProduct.jsx', () => ({
 			platforms: ['platform1', 'platform2'],
 			screenshots: ['fakeLink1', 'fakeLink2', 'fakeLink3'],
 		};
-		const isProductHaveError = false;
-		const isProductLoading = false;
-		return [product, isProductHaveError, isProductLoading];
+		const gameError = null;
+		const isGameLoading = false;
+		return [game, gameError, isGameLoading];
 	},
 }));
 
-vi.mock('./useFetchProducts.jsx', () => {
+vi.mock('./useFetchGames.jsx', () => {
 	return {
 		default: () => {
-			const [products, setProducts] = useState([
+			const [games, setGames] = useState([
 				{
-					productName: 'product1',
-					productPrice: 50,
-					productId: '1',
-					genre: ['Genre 1', 'Genre 2', 'Genre 3'],
+					title: 'Game 1',
+					price: 50,
+					id: '1',
+					genres: ['Genre 1', 'Genre 2', 'Genre 3'],
 					platforms: ['Platform 1', 'Platform 2', 'Platform 3'],
-					unitsSold: 300,
+					ownerCount: 300,
 					releaseDate: '2024-01-24',
 					esrbRating: 'Everyone',
 				},
 			]);
-			const isProductsLoading = false;
-			const isProductsHaveError = false;
-			const getNewProducts = vi.fn(() => {
-				setProducts((products) =>
-					products.concat([
+			const isGamesLoading = false;
+			const gamesError = null;
+			const getNewGames = vi.fn(() => {
+				setGames((games) =>
+					games.concat([
 						{
-							productName: 'product2',
-							productPrice: 50,
-							productId: '2',
-							genre: ['Genre 1', 'Genre 2', 'Genre 3'],
+							title: 'game 2',
+							price: 50,
+							id: '2',
+							genres: ['Genre 1', 'Genre 2', 'Genre 3'],
 							platforms: ['Platform 1', 'Platform 2', 'Platform 3'],
-							unitsSold: 300,
+							ownerCount: 300,
 							releaseDate: '2024-01-24',
 							esrbRating: 'Everyone',
 						},
 					])
 				);
 			});
-			return [products, isProductsHaveError, isProductsLoading, getNewProducts];
+			return [games, gamesError, isGamesLoading, getNewGames];
 		},
 	};
 });
@@ -206,7 +206,7 @@ describe('App component', () => {
 		});
 	});
 
-	it('renders the new products when the user scroll to the bottom', async () => {
+	it('renders the new games when the user scroll to the bottom', async () => {
 		render(
 			<MemoryRouter initialEntries={['/shop']}>
 				<Routes>
@@ -216,28 +216,28 @@ describe('App component', () => {
 			</MemoryRouter>
 		);
 
-		// The number of product cards before scrolling to the bottom
-		const productCardCountBeforeBottomScroll = screen.queryAllByTitle('product-card').length;
+		// The number of game cards before scrolling to the bottom
+		const gameCardCountBeforeBottomScroll = screen.queryAllByTitle('game-card').length;
 
-		if (screen.queryAllByTitle('product-card').length > 0) {
+		if (screen.queryAllByTitle('game-card').length > 0) {
 			// Mock the user's action of scrolling to the bottom
-			const productCardsContainer = screen.getByTitle('product-cards-container');
-			Object.defineProperty(productCardsContainer, 'scrollHeight', { value: 1000 });
-			Object.defineProperty(productCardsContainer, 'clientHeight', { value: 300 });
-			Object.defineProperty(productCardsContainer, 'scrollTop', { value: 700 });
-			fireEvent.scroll(productCardsContainer);
+			const gameCardsContainer = screen.getByTitle('game-cards-container');
+			Object.defineProperty(gameCardsContainer, 'scrollHeight', { value: 1000 });
+			Object.defineProperty(gameCardsContainer, 'clientHeight', { value: 300 });
+			Object.defineProperty(gameCardsContainer, 'scrollTop', { value: 700 });
+			fireEvent.scroll(gameCardsContainer);
 		}
 
 		await waitFor(() => {
-			// The number of product cards after scrolling to the bottom
-			const productCardCountAfterBottomScroll = screen.queryAllByTitle('product-card').length;
+			// The number of game card after scrolling to the bottom
+			const gameCardCountAfterBottomScroll = screen.queryAllByTitle('game-card').length;
 
-			// The product cards should have doubled after the scroll
-			expect(productCardCountAfterBottomScroll).toEqual(productCardCountBeforeBottomScroll * 2);
+			// The game card should have doubled after the scroll
+			expect(gameCardCountAfterBottomScroll).toEqual(gameCardCountBeforeBottomScroll * 2);
 		});
 	});
 
-	it('allows the user to add products to cart when inside the product details page', async () => {
+	it('allows the user to add games to cart when inside the game details page', async () => {
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
@@ -259,7 +259,7 @@ describe('App component', () => {
 		expect(cartContentCountIndicator.textContent).toEqual('1');
 	});
 
-	it('allows the user to remove a product in the cart', async () => {
+	it('allows the user to remove a game in the cart', async () => {
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
@@ -279,7 +279,7 @@ describe('App component', () => {
 		const cart = screen.queryByTitle('cart-icon');
 		await user.click(cart);
 
-		// Remove a product in the cart
+		// Remove a game in the cart
 		const removeItemButton = screen.getByTitle('remove-item');
 		await user.click(removeItemButton);
 
@@ -294,7 +294,7 @@ describe('App component', () => {
 		});
 	});
 
-	it('allows the user to remove all products in the cart', async () => {
+	it('allows the user to remove all games in the cart', async () => {
 		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/gameDetails/1']}>
