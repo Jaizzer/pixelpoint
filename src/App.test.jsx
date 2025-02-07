@@ -21,7 +21,7 @@ vi.mock('./useFetchProduct.jsx', () => ({
 		};
 		const isProductHaveError = false;
 		const isProductLoading = false;
-		return { product, isProductHaveError, isProductLoading };
+		return [product, isProductHaveError, isProductLoading ];
 	},
 }));
 
