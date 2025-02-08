@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import getPrice from './getPrice';
+import PropTypes from 'prop-types';
 
-export default function useFetchGames() {
+export default function useFetchGames(category, gameCountPerRequest) {
 	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
 	const [games, setGames] = useState([]);
 	const [isGamesLoading, setIsGamesLoading] = useState(true);
@@ -22,11 +23,25 @@ export default function useFetchGames() {
 			isFetchingApproved.current = false;
 			(async function () {
 				try {
-					const response = await fetch(
-						`https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&page=${pageToRequestFromAPI}&page_size=100`
-					);
+					let url = `https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&page=${pageToRequestFromAPI}&page_size=${gameCountPerRequest}`;
+
+					if (category === 'latest') {
+						// Get the games released between current day and last year
+						let dateOneYearAgo = new Date();
+						dateOneYearAgo.setFullYear(dateOneYearAgo.getFullYear() - 1);
+						let dateToday = new Date();
+						url += `&dates=${dateOneYearAgo.toISOString().split('T')[0]},${dateToday.toISOString().split('T')[0]}`;
+					} else if (category === 'upcoming') {
+						// Get the games to be released between tomorrow and next year
+						let dateOneYearFromNow = new Date();
+						dateOneYearFromNow.setFullYear(dateOneYearFromNow.getFullYear() + 1);
+						let dateTomorrow = new Date();
+						dateTomorrow.setDate(dateTomorrow.getDate() + 1);
+						url += `&dates=${dateTomorrow.toISOString().split('T')[0]},${dateOneYearFromNow.toISOString().split('T')[0]}`;
+					}
+					const response = await fetch(url);
 					const jsonData = await response.json();
-					const modifiedGames = jsonData.results.map((game) => {
+					const gamesWithDistilledProperties = jsonData.results.map((game) => {
 						return {
 							image: game.background_image,
 							title: game.name,
@@ -41,7 +56,7 @@ export default function useFetchGames() {
 					});
 					// Add the newly requested games to current games array
 					setGames((game) => {
-						return game.concat(modifiedGames);
+						return game.concat(gamesWithDistilledProperties);
 					});
 				} catch (error) {
 					setGamesError(error);
@@ -54,3 +69,8 @@ export default function useFetchGames() {
 
 	return [games, gamesError, isGamesLoading, getNewGames];
 }
+
+useFetchGames.propTypes = {
+	category: PropTypes.string,
+	gameCountPerRequest: PropTypes.number,
+};
