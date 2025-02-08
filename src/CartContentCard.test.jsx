@@ -5,7 +5,7 @@ import CartContentCard from './CartContentCard';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Cart Content Card', () => {
-	it('renders the product name', () => {
+	it('renders the product title', () => {
 		render(
 			<MemoryRouter>
 				<CartContentCard title={'Game 1'} />

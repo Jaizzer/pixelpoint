@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import getPrice from './getPrice';
 
-function useFetchProduct(id) {
-	const [product, setProduct] = useState(null);
-	const [isProductLoading, setIsProductLoading] = useState(true);
-	const [isProductHaveError, setIsProductHaveErrors] = useState(false);
+function useFetchGame(id) {
+	const [game, setGame] = useState(null);
+	const [isGameLoading, setIsGameLoading] = useState(true);
+	const [isGameHaveError, setIsGameHaveErrors] = useState(false);
 
-	// Get the necessary details about the clicked product
+	// Get the necessary details about the clicked game
 	useEffect(() => {
-		// Display loading by default when rendering new product
-		setIsProductLoading(true);
+		// Display loading by default when rendering new game
+		setIsGameLoading(true);
 		if (id !== undefined) {
 			(async function () {
 				try {
@@ -18,7 +18,7 @@ function useFetchProduct(id) {
 					const jsonDataDetails = await detailsResponse.json();
 					const screenshotsResponse = await fetch(`https://api.rawg.io/api/games/${id}/screenshots?key=99ef179fc1ee4d77a91ccee7e1bb59e6`);
 					const jsonDataImages = await screenshotsResponse.json();
-					const modifiedProduct = {
+					const modifiedGame = {
 						id: jsonDataDetails.id,
 						title: jsonDataDetails.name,
 						description: jsonDataDetails.description_raw,
@@ -30,20 +30,20 @@ function useFetchProduct(id) {
 						platforms: jsonDataDetails.platforms.map((platform) => platform.platform.name),
 						screenshots: [jsonDataDetails.background_image, ...jsonDataImages.results.map((result) => result.image)],
 					};
-					setProduct(modifiedProduct);
+					setGame(modifiedGame);
 				} catch (error) {
-					setIsProductHaveErrors(error ? true : false);
+					setIsGameHaveErrors(error ? true : false);
 				} finally {
-					setIsProductLoading(false);
+					setIsGameLoading(false);
 				}
 			})();
 		}
 	}, [id]);
-	return [ product, isProductHaveError, isProductLoading ];
+	return [ game, isGameHaveError, isGameLoading ];
 }
 
-useFetchProduct.propTypes = {
+useFetchGame.propTypes = {
 	id: PropTypes.string,
 };
 
-export default useFetchProduct;
+export default useFetchGame;

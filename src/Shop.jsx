@@ -1,44 +1,44 @@
-import ProductCard from './ProductCard';
+import GameCard from './GameCard';
 import PropTypes from 'prop-types';
 import DropdownFilter from './DropdownFilter';
 import PriceRangeController from './PriceRangeController';
 import { useEffect, useState } from 'react';
 import Sorter from './Sorter';
 
-function Shop({ products, error, loading, getNewProducts }) {
+function Shop({ games, error, loading, getNewGames }) {
 	const [genreFilters, setGenreFilters] = useState([]);
 	const [platformFilters, setPlatformFilters] = useState([]);
 	const [ageRatingFilters, setAgeRatingFilters] = useState([]);
 	const [sortCriteria, setSortCriteria] = useState(null);
 	const [priceRangeFilters, setPriceRangeFilters] = useState({ min: null, max: null });
-	const [isProductsLoading, setIsProductsLoading] = useState(loading);
+	const [isGamesLoading, setIsGamesLoading] = useState(loading);
 
-	// Remove the loading indicator if the parent component passed the newly requested products
+	// Remove the loading indicator if the parent component passed the newly requested games
 	useEffect(() => {
-		if (products.length > 0) {
-			setIsProductsLoading(false);
+		if (games.length > 0) {
+			setIsGamesLoading(false);
 		}
-	}, [products]);
+	}, [games]);
 
-	// Check if the updated products have been fetched
-	const hasFetchedAllUpdatedProducts = products.length !== 0;
+	// Check if the updated games have been fetched
+	const hasFetchedAllUpdatedGames = games.length !== 0;
 
 	// Check if the filters have not yet been set
 	const areGenreFiltersUnset = genreFilters.length === 0;
 
-	// Collect every possible distinct genres from the products
-	// only if the updated products have been fetched and the genre filters have not yet been set
-	if (hasFetchedAllUpdatedProducts && areGenreFiltersUnset) {
+	// Collect every possible distinct genres from the games
+	// only if the updated games have been fetched and the genre filters have not yet been set
+	if (hasFetchedAllUpdatedGames && areGenreFiltersUnset) {
 		let updatedGenreFilters = [
 			...new Set(
-				products
-					.map((product) => {
-						return product.genre;
+				games
+					.map((game) => {
+						return game.genres;
 					})
 					.flat()
 			),
 		].map((genreFilter) => {
-			return { name: genreFilter, isChecked: false };
+			return { title: genreFilter, isChecked: false };
 		});
 		setGenreFilters(updatedGenreFilters);
 	}
@@ -46,19 +46,19 @@ function Shop({ products, error, loading, getNewProducts }) {
 	// Check if the platform filters have not yet been set
 	const arePlatformFiltersUnset = platformFilters.length === 0;
 
-	// Collect every possible distinct platforms from the products
-	// only if the updated products have been fetched and the platform filters have not yet been set
-	if (hasFetchedAllUpdatedProducts && arePlatformFiltersUnset) {
+	// Collect every possible distinct platforms from the games
+	// only if the updated games have been fetched and the platform filters have not yet been set
+	if (hasFetchedAllUpdatedGames && arePlatformFiltersUnset) {
 		let updatedPlatformFilters = [
 			...new Set(
-				products
-					.map((product) => {
-						return product.platforms;
+				games
+					.map((game) => {
+						return game.platforms;
 					})
 					.flat()
 			),
 		].map((platformFilter) => {
-			return { name: platformFilter, isChecked: false };
+			return { title: platformFilter, isChecked: false };
 		});
 		setPlatformFilters(updatedPlatformFilters);
 	}
@@ -66,156 +66,149 @@ function Shop({ products, error, loading, getNewProducts }) {
 	// Check if the age filters have not yet been set
 	const areAgeRatingFiltersUnset = ageRatingFilters.length === 0;
 
-	// Collect every possible distinct age ratings from the products
-	// only if the updated products have been fetched and the age rating filters have not yet been set
-	if (hasFetchedAllUpdatedProducts && areAgeRatingFiltersUnset) {
+	// Collect every possible distinct age ratings from the games
+	// only if the updated games have been fetched and the age rating filters have not yet been set
+	if (hasFetchedAllUpdatedGames && areAgeRatingFiltersUnset) {
 		let updatedAgeRatingFilters = [
 			...new Set(
-				products.map((product) => {
-					return product.esrbRating;
+				games.map((game) => {
+					return game.esrbRating;
 				})
 			),
 		].map((ageRatingFilter) => {
-			return { name: ageRatingFilter, isChecked: false };
+			return { title: ageRatingFilter, isChecked: false };
 		});
 		setAgeRatingFilters(updatedAgeRatingFilters);
 	}
 
-	let productCards;
-	if (products) {
-		// Get all currently checked genre filter items to be used for filtering the products to be rendered
+	let gameCards;
+	if (games) {
+		// Get all currently checked genre filter items to be used for filtering the games to be rendered
 		let checkedGenreFilters;
 		const isThereAtleastOneGenreFilterChecked = genreFilters.filter((genreFilter) => genreFilter.isChecked).length === 0;
 		if (isThereAtleastOneGenreFilterChecked) {
 			// Get all the checked genre filter items
-			checkedGenreFilters = genreFilters.map((genreFilter) => genreFilter.name);
+			checkedGenreFilters = genreFilters.map((genreFilter) => genreFilter.title);
 		} else {
 			// Use all the genre filters if there is currently no checked genre filter
-			checkedGenreFilters = genreFilters.filter((genreFilter) => genreFilter.isChecked).map((genreFilter) => genreFilter.name);
+			checkedGenreFilters = genreFilters.filter((genreFilter) => genreFilter.isChecked).map((genreFilter) => genreFilter.title);
 		}
 
-		// Filter the products by genre
-		const filteredProductsByGenre = products.filter((product) => {
-			return product.genre.reduce((acc, curr) => checkedGenreFilters.includes(curr) || acc, false);
+		// Filter the games by genre
+		const filteredGamesByGenre = games.filter((game) => {
+			return game.genres.reduce((acc, curr) => checkedGenreFilters.includes(curr) || acc, false);
 		});
 
-		// Get all currently checked age rating filter items to be used for filtering the genre-filtered-products
+		// Get all currently checked age rating filter items to be used for filtering the genre-filtered-games
 		let checkedAgeRatingFilters;
 		const isThereAtleastOneAgeRatingFilterChecked = ageRatingFilters.filter((ageRatingFilter) => ageRatingFilter.isChecked).length === 0;
 		if (isThereAtleastOneAgeRatingFilterChecked) {
 			// Get all the checked age rating filter items
-			checkedAgeRatingFilters = ageRatingFilters.map((ageRatingFilter) => ageRatingFilter.name);
+			checkedAgeRatingFilters = ageRatingFilters.map((ageRatingFilter) => ageRatingFilter.title);
 		} else {
 			// Use all the age rating filters if there is currently no checked age rating filter
 			checkedAgeRatingFilters = ageRatingFilters
 				.filter((ageRatingFilter) => ageRatingFilter.isChecked)
-				.map((ageRatingFilter) => ageRatingFilter.name);
+				.map((ageRatingFilter) => ageRatingFilter.title);
 		}
 
-		// Filter the genre-filtered-products by age rating
-		const filteredProductsByAgeRating = filteredProductsByGenre.filter((product) => checkedAgeRatingFilters.includes(product.esrbRating));
+		// Filter the genre-filtered-games by age rating
+		const filteredGamesByAgeRating = filteredGamesByGenre.filter((game) => checkedAgeRatingFilters.includes(game.esrbRating));
 
-		// Get all currently checked platform filter items to be used for filtering the genre-filtered-products
+		// Get all currently checked platform filter items to be used for filtering the genre-filtered-games
 		let checkedPlatformFilters;
 		const isThereAtleastOnePlatformFilterChecked = platformFilters.filter((platformFilter) => platformFilter.isChecked).length === 0;
 		if (isThereAtleastOnePlatformFilterChecked) {
 			// Get all the checked platform filter items
-			checkedPlatformFilters = platformFilters.map((platformFilter) => platformFilter.name);
+			checkedPlatformFilters = platformFilters.map((platformFilter) => platformFilter.title);
 		} else {
 			// Use all the platform filters if there is currently no checked platform filter
 			checkedPlatformFilters = platformFilters
 				.filter((platformFilter) => platformFilter.isChecked)
-				.map((platformFilter) => platformFilter.name);
+				.map((platformFilter) => platformFilter.title);
 		}
 
-		// Filter the age-rating-filtered-products by platform
-		let filteredProductsByPlatform = filteredProductsByAgeRating.filter((filteredProductByGenre) => {
-			return filteredProductByGenre.platforms.reduce((acc, curr) => checkedPlatformFilters.includes(curr) || acc, false);
+		// Filter the age-rating-filtered-games by platform
+		let filteredGamesByPlatform = filteredGamesByAgeRating.filter((filteredGameByGenre) => {
+			return filteredGameByGenre.platforms.reduce((acc, curr) => checkedPlatformFilters.includes(curr) || acc, false);
 		});
 
-		// Filter the products by price range if there is a provided price range
+		// Filter the games by price range if there is a provided price range
 		if (priceRangeFilters.min !== null && priceRangeFilters.max !== null) {
 			// Both minimum and maximum price was provided
-			filteredProductsByPlatform = filteredProductsByPlatform.filter((product) => {
-				return product.productPrice >= priceRangeFilters.min && product.productPrice <= priceRangeFilters.max;
+			filteredGamesByPlatform = filteredGamesByPlatform.filter((game) => {
+				return game.price >= priceRangeFilters.min && game.price <= priceRangeFilters.max;
 			});
 		} else if (priceRangeFilters.min !== null && priceRangeFilters.max === null) {
 			// Only minimum price was provided
-			filteredProductsByPlatform = filteredProductsByPlatform.filter((product) => {
-				return product.productPrice >= priceRangeFilters.min;
+			filteredGamesByPlatform = filteredGamesByPlatform.filter((game) => {
+				return game.price >= priceRangeFilters.min;
 			});
 		} else if (priceRangeFilters.min === null && priceRangeFilters.max !== null) {
 			// Only maximum price was provided
-			filteredProductsByPlatform = filteredProductsByPlatform.filter((product) => {
-				return product.productPrice <= priceRangeFilters.max;
+			filteredGamesByPlatform = filteredGamesByPlatform.filter((game) => {
+				return game.price <= priceRangeFilters.max;
 			});
 		}
 
-		// Sort the products after filtering
+		// Sort the games after filtering
 		switch (sortCriteria) {
 			case 'Popularity: High to Low':
-				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-					return productB.unitsSold - productA.unitsSold;
+				filteredGamesByPlatform = filteredGamesByPlatform.sort((gameA, gameB) => {
+					return gameB.unitsSold - gameA.unitsSold;
 				});
 				break;
 			case 'Popularity: Low to High':
-				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-					return productA.unitsSold - productB.unitsSold;
+				filteredGamesByPlatform = filteredGamesByPlatform.sort((gameA, gameB) => {
+					return gameA.unitsSold - gameB.unitsSold;
 				});
 				break;
 			case 'Release Date: Newest First':
-				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-					const productAReleaseDate = productA.releaseDate;
-					const productBReleaseDate = productB.releaseDate;
-					return productBReleaseDate.localeCompare(productAReleaseDate);
+				filteredGamesByPlatform = filteredGamesByPlatform.sort((gameA, gameB) => {
+					const gameAReleaseDate = gameA.releaseDate;
+					const gameBReleaseDate = gameB.releaseDate;
+					return gameBReleaseDate.localeCompare(gameAReleaseDate);
 				});
 				break;
 			case 'Release Date: Oldest First':
-				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-					const productAReleaseDate = productA.releaseDate;
-					const productBReleaseDate = productB.releaseDate;
-					return productAReleaseDate.localeCompare(productBReleaseDate);
+				filteredGamesByPlatform = filteredGamesByPlatform.sort((gameA, gameB) => {
+					const gameAReleaseDate = gameA.releaseDate;
+					const gameBReleaseDate = gameB.releaseDate;
+					return gameAReleaseDate.localeCompare(gameBReleaseDate);
 				});
 				break;
 			case 'Price: Low to High':
-				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-					return productA.productPrice - productB.productPrice;
+				filteredGamesByPlatform = filteredGamesByPlatform.sort((gameA, gameB) => {
+					return gameA.price - gameB.price;
 				});
 				break;
 			case 'Price: High to Low':
-				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-					return productB.productPrice - productA.productPrice;
+				filteredGamesByPlatform = filteredGamesByPlatform.sort((gameA, gameB) => {
+					return gameB.price - gameA.price;
 				});
 				break;
 			case 'Name: A to Z':
-				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-					const productAName = productA.productName;
-					const productBName = productB.productName;
-					return productAName.localeCompare(productBName);
+				filteredGamesByPlatform = filteredGamesByPlatform.sort((gameA, gameB) => {
+					const gameAName = gameA.title;
+					const gameBName = gameB.title;
+					return gameAName.localeCompare(gameBName);
 				});
 				break;
 			case 'Name: Z to A':
-				filteredProductsByPlatform = filteredProductsByPlatform.sort((productA, productB) => {
-					const productAName = productA.productName;
-					const productBName = productB.productName;
-					return productBName.localeCompare(productAName);
+				filteredGamesByPlatform = filteredGamesByPlatform.sort((gameA, gameB) => {
+					const gameAName = gameA.title;
+					const gameBName = gameB.title;
+					return gameBName.localeCompare(gameAName);
 				});
 				break;
 			default:
 				break;
 		}
 
-		productCards = filteredProductsByPlatform.map((product) => {
-			if (product)
+		gameCards = filteredGamesByPlatform.map((game) => {
+			if (game)
 				return (
-					<ProductCard
-						key={product.productId}
-						imageLink={product.imageLink}
-						productName={product.productName}
-						productPrice={product.productPrice}
-						productCartQuantity={product.productCartQuantity}
-						productId={product.productId}
-					/>
+					<GameCard key={game.id} image={game.image} title={game.title} price={game.price} cartQuantity={game.cartQuantity} id={game.id} />
 				);
 		});
 	}
@@ -237,7 +230,7 @@ function Shop({ products, error, loading, getNewProducts }) {
 							onDropdownItemClick={(clickedItem) => {
 								// Save the Unchecked/Checked status of the genre filter item in the 'genreFilters state array
 								const updatedGenreFilters = genreFilters.map((genreFilter) =>
-									genreFilter.name === clickedItem ? { ...genreFilter, isChecked: !genreFilter.isChecked } : genreFilter
+									genreFilter.title === clickedItem ? { ...genreFilter, isChecked: !genreFilter.isChecked } : genreFilter
 								);
 								setGenreFilters(updatedGenreFilters);
 							}}
@@ -261,7 +254,9 @@ function Shop({ products, error, loading, getNewProducts }) {
 							onDropdownItemClick={(clickedItem) => {
 								// Save the Unchecked/Checked status of the platform filter item in the 'platformFilters state array
 								const updatedPlatformFilters = platformFilters.map((platformFilter) =>
-									platformFilter.name === clickedItem ? { ...platformFilter, isChecked: !platformFilter.isChecked } : platformFilter
+									platformFilter.title === clickedItem
+										? { ...platformFilter, isChecked: !platformFilter.isChecked }
+										: platformFilter
 								);
 								setPlatformFilters(updatedPlatformFilters);
 							}}
@@ -285,7 +280,7 @@ function Shop({ products, error, loading, getNewProducts }) {
 							onDropdownItemClick={(clickedItem) => {
 								// Save the Unchecked/Checked status of the age rating filter item in the 'ageRatingFilters' state array
 								const updatedAgeRatingFilters = ageRatingFilters.map((ageRatingFilter) =>
-									ageRatingFilter.name === clickedItem
+									ageRatingFilter.title === clickedItem
 										? { ...ageRatingFilter, isChecked: !ageRatingFilter.isChecked }
 										: ageRatingFilter
 								);
@@ -308,23 +303,23 @@ function Shop({ products, error, loading, getNewProducts }) {
 				</div>
 			}
 			<div
-				className="productCardsContainer"
-				title="product-cards-container"
+				className="gameCardsContainer"
+				title="game-cards-container"
 				onScroll={(e) => {
-					// Load new products if there are no new products being loaded when the user scrolled to the bottom of the div
+					// Load new games if there are no new games being loaded when the user scrolled to the bottom of the div
 					const isUserAtTheBottom = e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1;
-					if (!isProductsLoading && isUserAtTheBottom) {
+					if (!isGamesLoading && isUserAtTheBottom) {
 						// Render loading indicator if the user have scrolled to the bottom
-						setIsProductsLoading(true);
-						// Get the new products
-						if (getNewProducts) {
-							getNewProducts();
+						setIsGamesLoading(true);
+						// Get the new games
+						if (getNewGames) {
+							getNewGames();
 						}
 					}
 				}}
 			>
-				{productCards ? productCards : null}
-				{isProductsLoading ? (
+				{gameCards ? gameCards : null}
+				{isGamesLoading ? (
 					<div className="loading" title="loading">
 						Loading...
 					</div>
@@ -339,11 +334,11 @@ function Shop({ products, error, loading, getNewProducts }) {
 }
 
 Shop.propTypes = {
-	products: PropTypes.array.isRequired,
+	games: PropTypes.array.isRequired,
 	onAddItemToCart: PropTypes.func,
 	loading: PropTypes.bool,
 	error: PropTypes.bool,
-	getNewProducts: PropTypes.func,
+	getNewGames: PropTypes.func,
 };
 
 export default Shop;

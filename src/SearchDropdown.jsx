@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import SearchProductCard from './SearchProductCard';
+import SearchGameCard from './SearchGameCard';
 import styled from 'styled-components';
 
 const PopOver = styled.div`
@@ -23,16 +23,16 @@ const PopOver = styled.div`
 `;
 
 function SearchDropdown({ loading, data, error, onSearchResultItemClick }) {
-	//Create the product cards to be rendered inside the search drop down
-	let searchProductCards;
+	//Create the game cards to be rendered inside the search drop down
+	let searchGameCards;
 	if (data != null) {
-		searchProductCards = data.map((product) => (
-			<SearchProductCard
-				key={product.id}
-				id={product.id}
-				image={product.image}
-				name={product.name}
-				price={product.price}
+		searchGameCards = data.map((game) => (
+			<SearchGameCard
+				key={game.id}
+				id={game.id}
+				image={game.image}
+				title={game.title}
+				price={game.price}
 				onClickCallback={onSearchResultItemClick}
 			/>
 		));
@@ -51,8 +51,8 @@ function SearchDropdown({ loading, data, error, onSearchResultItemClick }) {
 					Error
 				</div>
 			) : (
-				// Render the product cards
-				searchProductCards
+				// Render the game cards
+				searchGameCards
 			)}
 		</PopOver>
 	);

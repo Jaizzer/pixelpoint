@@ -7,27 +7,27 @@ import Error from './Error';
 import Cart from './Cart';
 import TopBar from './TopBar';
 import { useParams } from 'react-router-dom';
-import ProductDetails from './ProductDetails';
-import useFetchProduct from './useFetchProduct';
+import GameDetails from './GameDetails';
+import useFetchGame from './useFetchGame';
 import useFetchGames from './useFetchGames';
 import { useState } from 'react';
 
 export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
-	const [product, isProductHaveError, isProductLoading] = useFetchProduct(id);
+	const [game, isGameHaveError, isGameLoading] = useFetchGame(id);
 	const [games, gamesError, isGamesLoading, getNewGames] = useFetchGames();
 
 	const [cart, setCart] = useState([]);
 
-	function addToCart(productToAdd) {
-		// Add the product to the cart
-		setCart(cart.concat({ ...productToAdd }));
+	function addToCart(gameToAdd) {
+		// Add the game to the cart
+		setCart(cart.concat({ ...gameToAdd }));
 	}
 
-	function removeItem(productID) {
+	function removeItem(gameID) {
 		// Remove an item from the cart
-		setCart(cart.filter((item) => item.id !== productID));
+		setCart(cart.filter((item) => item.id !== gameID));
 	}
 
 	function clearCart() {
@@ -45,19 +45,19 @@ export default function App() {
 				) : pageToDisplay === 'account' ? (
 					<Account />
 				) : pageToDisplay === 'shop' ? (
-					<Shop products={games} error={gamesError} loading={isGamesLoading} getNewProducts={getNewGames} />
+					<Shop games={games} error={gamesError} loading={isGamesLoading} getNewGames={getNewGames} />
 				) : pageToDisplay === 'about' ? (
 					<About />
 				) : pageToDisplay === 'cart' ? (
 					<Cart content={cart} removeItem={removeItem} clearCart={clearCart} />
 				) : pageToDisplay === 'gameDetails' && id !== undefined ? (
-					<ProductDetails
+					<GameDetails
 						key={id}
-						product={product}
-						loading={isProductLoading}
-						error={isProductHaveError}
+						game={game}
+						loading={isGameLoading}
+						error={isGameHaveError}
 						onAddItemToCart={addToCart}
-						isProductInCart={cart.filter((item) => item.id === product.id).length === 1}
+						isGameInCart={cart.filter((item) => item.id === game.id).length === 1}
 					/>
 				) : (
 					<Error />

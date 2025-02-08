@@ -13,7 +13,7 @@ vi.mock('./SearchDropdown', () => ({
 			content = <div>Error</div>;
 		} else if (data) {
 			{
-				data.map((product) => <div key={product.id}>{product.name}</div>);
+				data.map((game) => <div key={game.id}>{game.title}</div>);
 			}
 		}
 		return (
@@ -31,11 +31,11 @@ describe('Search Component', () => {
 			Promise.resolve({
 				json: () =>
 					Promise.resolve([
-						{ image: 'imageLink', name: 'product1', price: 451, id: 1 },
-						{ image: 'imageLink', name: 'product2', price: 552, id: 2 },
-						{ image: 'imageLink', name: 'product3', price: 653, id: 3 },
-						{ image: 'imageLink', name: 'product4', price: 654, id: 4 },
-						{ image: 'imageLink', name: 'product5', price: 655, id: 5 },
+						{ image: 'imageLink', name: 'game1', price: 451, id: 1 },
+						{ image: 'imageLink', name: 'game2', price: 552, id: 2 },
+						{ image: 'imageLink', name: 'game3', price: 653, id: 3 },
+						{ image: 'imageLink', name: 'game4', price: 654, id: 4 },
+						{ image: 'imageLink', name: 'game5', price: 655, id: 5 },
 					]),
 			})
 		);
@@ -45,7 +45,7 @@ describe('Search Component', () => {
 		const user = userEvent.setup();
 		render(<Search />);
 		const searchBar = screen.queryByRole('textbox');
-		await user.type(searchBar, 'product');
+		await user.type(searchBar, 'game');
 		const searchResultDropdown = screen.queryByTitle('search-result-dropdown');
 		expect(searchResultDropdown).not.toBeNull();
 	});

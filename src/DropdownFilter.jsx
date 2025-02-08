@@ -137,8 +137,8 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 		dropdownItems = items.map((item) => {
 			return (
 				<DropdownItem
-					key={`${item.name}-${item.isChecked}`}
-					name={item.name}
+					key={`${item.title}-${item.isChecked}`}
+					title={item.title}
 					isCheckedInitialValue={item.isChecked}
 					onDropdownItemClick={onDropdownItemClick}
 				/>
@@ -150,8 +150,8 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 			let item = items[index];
 			dropdownItems.push(
 				<DropdownItem
-					key={`${item.name}-${item.isChecked}`}
-					name={item.name}
+					key={`${item.title}-${item.isChecked}`}
+					title={item.title}
 					isCheckedInitialValue={item.isChecked}
 					onDropdownItemClick={onDropdownItemClick}
 				/>
@@ -199,27 +199,27 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 	);
 }
 
-function DropdownItem({ name, isCheckedInitialValue, onDropdownItemClick }) {
+function DropdownItem({ title, isCheckedInitialValue, onDropdownItemClick }) {
 	const [isChecked, setIsChecked] = useState(isCheckedInitialValue);
 	return (
 		<CheckboxContainer>
 			<Checkbox
 				type="checkbox"
-				id={name}
-				name={name}
+				id={title}
+				name={title}
 				checked={isChecked || false}
 				onChange={() => {
 					setIsChecked(!isChecked);
-					onDropdownItemClick(name);
+					onDropdownItemClick(title);
 				}}
 			></Checkbox>
-			<Label htmlFor={name}>{name}</Label>
+			<Label htmlFor={title}>{title}</Label>
 		</CheckboxContainer>
 	);
 }
 
 DropdownItem.propTypes = {
-	name: PropTypes.string,
+	title: PropTypes.string,
 	isCheckedInitialValue: PropTypes.bool,
 	onDropdownItemClick: PropTypes.func,
 };

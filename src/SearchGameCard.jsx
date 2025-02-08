@@ -21,7 +21,7 @@ const Container = styled.div`
 	}
 `;
 
-const ProductInfo = styled.div`
+const GameInfo = styled.div`
 	box-sizing: border-box;
 	margin: 0px;
 
@@ -41,26 +41,26 @@ const Image = styled.img`
 	border-radius: 3px;
 `;
 
-function SearchProductCard({ image, name, price, onClickCallback, id }) {
+function SearchGameCard({ image, title, price, onClickCallback, id }) {
 	return (
 		<Link to={`/gameDetails/${id}`}>
-			<Container role="search-product-card" onClick={onClickCallback}>
-				<Image src={image ? image : blankImage} alt={name} />
-				<ProductInfo>
-					<div>{name}</div>
+			<Container role="search-game-card" onClick={onClickCallback}>
+				<Image src={image ? image : blankImage} alt={title} />
+				<GameInfo>
+					<div>{title}</div>
 					<div>${price.toFixed(2)}</div>
-				</ProductInfo>
+				</GameInfo>
 			</Container>
 		</Link>
 	);
 }
 
-SearchProductCard.propTypes = {
+SearchGameCard.propTypes = {
 	image: PropTypes.string,
-	name: PropTypes.string,
+	title: PropTypes.string,
 	price: PropTypes.number,
 	onClickCallback: PropTypes.func,
 	id: PropTypes.number,
 };
 
-export default SearchProductCard;
+export default SearchGameCard;

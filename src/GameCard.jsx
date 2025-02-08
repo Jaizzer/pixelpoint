@@ -18,7 +18,7 @@ const Container = styled.div`
 	}
 `;
 
-const ProductCardImage = styled.img`
+const GameCardImage = styled.img`
 	height: 300px;
 	width: 100%;
 	grid-row: 1 / 3;
@@ -26,7 +26,7 @@ const ProductCardImage = styled.img`
 	object-fit: cover;
 `;
 
-const ProductInfo = styled.div`
+const GameInfo = styled.div`
 	padding: 15px;
 	grid-row: 2 / 3;
 	grid-column: 1 / 2;
@@ -43,25 +43,25 @@ const Text = styled.div`
 	font-size: ${(props) => (props.emphasize ? '20px' : '15px')};
 `;
 
-function ProductCard({ imageLink, productName, productPrice, productId }) {
+function GameCard({ image, title, price, id }) {
 	return (
-		<Link to={`/gameDetails/${productId}`}>
-			<Container title="product-card">
-				<ProductCardImage src={imageLink} role="image" alt={productName}></ProductCardImage>
-				<ProductInfo>
-					<Text data-testid="productName">{productName}</Text>
-					<Text emphasize={true}>{productPrice ? '$' + productPrice.toFixed(2) : null}</Text>
-				</ProductInfo>
+		<Link to={`/gameDetails/${id}`}>
+			<Container title="game-card">
+				<GameCardImage src={image} role="image" alt={title}></GameCardImage>
+				<GameInfo>
+					<Text data-testid="title">{title}</Text>
+					<Text emphasize={true}>{price ? '$' + price.toFixed(2) : null}</Text>
+				</GameInfo>
 			</Container>
 		</Link>
 	);
 }
 
-ProductCard.propTypes = {
-	imageLink: PropTypes.string,
-	productName: PropTypes.string,
-	productPrice: PropTypes.number,
-	productId: PropTypes.string,
+GameCard.propTypes = {
+	image: PropTypes.string,
+	title: PropTypes.string,
+	price: PropTypes.number,
+	id: PropTypes.string,
 };
 
-export default ProductCard;
+export default GameCard;

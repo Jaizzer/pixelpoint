@@ -1,0 +1,82 @@
+import PropTypes from 'prop-types';
+import ImageSlider from './ImageSlider';
+import StarRating from './StarRating';
+import AddToCartButton from './AddToCartButton';
+
+function GameDetails({ game, loading, error, onAddItemToCart, isGameInCart }) {
+	return (
+		<>
+			{loading ? (
+				<div title="loading-indicator" className="loadingIndicator">
+					Loading...
+				</div>
+			) : error ? (
+				<div className="errorMessage" title="error-message">
+					Error
+				</div>
+			) : (
+				<div className="details">
+					<h1 className="title">{game.title}</h1>
+					<div className="rating">
+						<div className="ratingHeading">Rating</div>
+						<div className="ratingContent">
+							{game.rating ? (
+								<>
+									<StarRating rating={game.rating} />({game.rating})
+								</>
+							) : (
+								'No Rating'
+							)}
+						</div>
+					</div>
+					{game.screenshots.length > 1 && <ImageSlider imageLinks={game.screenshots}></ImageSlider>}
+					<div className="descriptionContainer">
+						<h2 className="descriptionHeading">Description</h2>
+						<div className="descriptionContent">{game.description ? game.description : 'No available description.'}</div>
+					</div>
+					<div className="price">{game.price ? `$${game.price.toFixed(2)}` : 'Price Unavailable'}</div>
+					<AddToCartButton
+						isGameAdded={isGameInCart}
+						onAddItemToCart={() => {
+							onAddItemToCart(game);
+						}}
+					/>
+					<div className="otherDetails">
+						<div className="genre">
+							<h2 className="genreHeading">Genre</h2>
+							<div className="genreContent">{game.genres ? game.genres.join(', ') : 'Unknown'}</div>
+						</div>
+						<div className="developer">
+							<h2 className="developerHeading">Developer</h2>
+							<div className="developerContent">{game.developers ? game.developers.join(', ') : 'Unknown'}</div>
+						</div>
+						<div className="releaseDate">
+							<h2 className="releaseDateHeading">Release Date</h2>
+							<div className="releaseDateContent">
+								{game.releaseDate
+									? new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(
+											new Date(game.releaseDate)
+									  )
+									: 'Unknown'}
+							</div>
+						</div>
+						<div className="platforms">
+							<h2 className="platformsHeading">Platforms</h2>
+							<div className="platformsContent">{game.platforms ? game.platforms.join(', ') : 'Unknown'}</div>
+						</div>
+					</div>
+				</div>
+			)}
+		</>
+	);
+}
+
+GameDetails.propTypes = {
+	game: PropTypes.object,
+	loading: PropTypes.bool,
+	error: PropTypes.bool,
+	onAddItemToCart: PropTypes.func,
+	isGameInCart: PropTypes.bool,
+};
+
+export default GameDetails;

@@ -3,13 +3,13 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Shop from './Shop';
 import { userEvent } from '@testing-library/user-event';
 
-vi.mock('./ProductCard', () => ({
-	default: ({ imageLink, productName, productPrice }) => {
+vi.mock('./GameCard', () => ({
+	default: ({ image, title, price }) => {
 		return (
 			<div>
-				<img src={imageLink} alt={productName} role="image" />
-				<div title="product-name">{productName}</div>
-				<div>{productPrice}</div>
+				<img src={image} alt={title} role="image" />
+				<div title="game-name">{title}</div>
+				<div>{price}</div>
 			</div>
 		);
 	},
@@ -19,16 +19,16 @@ vi.mock('./DropdownFilter', () => ({
 	default: ({ items, title, onDropdownItemClick }) => {
 		const dropdownItems = items.map((item) => {
 			return (
-				<div key={item.name} className="dropdownItem">
+				<div key={item.title} className="dropdownItem">
 					<input
 						type="checkbox"
-						id={item.name}
-						name={item.name}
+						id={item.title}
+						name={item.title}
 						onChange={() => {
-							onDropdownItemClick(item.name);
+							onDropdownItemClick(item.title);
 						}}
 					/>
-					<label htmlFor={item.name}>{item.name}</label>
+					<label htmlFor={item.title}>{item.title}</label>
 				</div>
 			);
 		});
@@ -132,519 +132,518 @@ vi.mock('./Sorter', () => ({
 }));
 
 describe('Shop component', () => {
-	it('renders the entire products if no filter is applied', () => {
-		const products = [
+	it('renders the entire games if no filter is applied', () => {
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'product',
-				productPrice: '$45',
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'game',
+				price: '$45',
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'product',
-				productPrice: '$55',
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'game',
+				price: '$55',
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 			},
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+			{ image: 'fakeLink', title: 'game', price: '$65', id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
-		render(<Shop products={products} />);
+		render(<Shop games={games} />);
 
-		// Existence of an image guarantees the existence of a product card
-		const images = screen.queryAllByAltText('product');
+		// Existence of an image guarantees the existence of a game card
+		const images = screen.queryAllByAltText('game');
 
-		expect(images.length).toBe(products.length);
+		expect(images.length).toBe(games.length);
 	});
 
-	it('renders the loading message if the products are currently loading', () => {
-		render(<Shop loading={true} products={[]} error={false} />);
+	it('renders the loading message if the games are currently loading', () => {
+		render(<Shop loading={true} games={[]} error={false} />);
 		const loadingMessage = screen.queryByTitle('loading');
 		expect(loadingMessage).not.toBeNull();
 	});
 
 	it('renders the error message if there is an error', () => {
-		render(<Shop loading={false} products={[]} error={true} />);
+		render(<Shop loading={false} games={[]} error={true} />);
 		const errorMessage = screen.queryByTitle('error');
 		expect(errorMessage).not.toBeNull();
 	});
 
-	it('filters the product when a dropdown filter is clicked', async () => {
+	it('filters the game when a dropdown filter is clicked', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'product',
-				productPrice: '$45',
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'game',
+				price: '$45',
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'product',
-				productPrice: '$55',
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'game',
+				price: '$55',
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 			},
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+			{ image: 'fakeLink', title: 'game', price: '$65', id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
 		// Filter all 'Action'
 		const actionDropdownFilter = screen.queryByText('Action');
 		await user.click(actionDropdownFilter);
 
-		// Check if the products that are 'Action' genre the only products that remained
-		// by checking if the number of images corresponds to the number of Action products provided which is 2
+		// Check if the games that are 'Action' genre the only games that remained
+		// by checking if the number of images corresponds to the number of Action games provided which is 2
 		const isActionGenresRemained = screen.queryAllByRole('image');
 
 		expect(isActionGenresRemained.length).toEqual(2);
 	});
 
-	it('filters the products by platform', async () => {
+	it('filters the games by platform', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'product',
-				productPrice: '$45',
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'game',
+				price: '$45',
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'product',
-				productPrice: '$55',
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'game',
+				price: '$55',
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 			},
-			{ imageLink: 'fakeLink', productName: 'product', productPrice: '$65', productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+			{ image: 'fakeLink', title: 'game', price: '$65', id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
-		render(<Shop loading={false} products={products} error={false} />);
-		// Filter all products available for 'PC' platform
+		render(<Shop loading={false} games={games} error={false} />);
+		// Filter all games available for 'PC' platform
 		const pcDropdownFilter = screen.queryByText('PC');
 		await user.click(pcDropdownFilter);
 
-		const isProductsForPCRemained = screen.queryAllByRole('image').length === 2;
-		expect(isProductsForPCRemained).toBeTruthy();
+		const isGamesForPCRemained = screen.queryAllByRole('image').length === 2;
+		expect(isGamesForPCRemained).toBeTruthy();
 	});
 
-	it('filters the products by age rating', async () => {
+	it('filters the games by age rating', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'product',
-				productPrice: '$45',
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'game',
+				price: '$45',
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				esrbRating: 'Everyone 10+',
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'product',
-				productPrice: '$55',
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'game',
+				price: '$55',
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				esrbRating: 'Mature',
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'product',
-				productPrice: '$65',
-				productId: '3',
-				genre: ['Mystery', 'Puzzle'],
+				image: 'fakeLink',
+				title: 'game',
+				price: '$65',
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				esrbRating: 'Mature',
 			},
 		];
-		render(<Shop loading={false} products={products} error={false} />);
-		// Filter all products that are age rated as 'Mature'
+		render(<Shop loading={false} games={games} error={false} />);
+		// Filter all games that are age rated as 'Mature'
 		const ageRatingDropdownFilter = screen.queryByText('Mature');
 		await user.click(ageRatingDropdownFilter);
 
-		const isMatureRatedProductsRemained = screen.queryAllByRole('image').length === 2;
-		expect(isMatureRatedProductsRemained).toBeTruthy();
+		const isMatureRatedGamesRemained = screen.queryAllByRole('image').length === 2;
+		expect(isMatureRatedGamesRemained).toBeTruthy();
 	});
 
-	it('filters the products base on the price range', async () => {
+	it('filters the games base on the price range', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'product1',
-				productPrice: 650,
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'game1',
+				price: 650,
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				unitsSold: 10,
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'product2',
-				productPrice: 23,
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'game2',
+				price: 23,
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				unitsSold: 20,
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'product3',
-				productPrice: 55,
-				productId: '3',
-				genre: ['Mystery', 'Puzzle'],
+				image: 'fakeLink',
+				title: 'game3',
+				price: 55,
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				unitsSold: 30,
 			},
 		];
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 		const priceRangeControllerMock = screen.queryByText('Price Range Controller');
 		await user.click(priceRangeControllerMock);
 
-		const productThatFitsThePriceRange = screen.queryAllByTitle('product-name')[0];
-		expect(productThatFitsThePriceRange.textContent).toEqual('product3');
+		const gameThatFitsThePriceRange = screen.queryAllByTitle('game-name')[0];
+		expect(gameThatFitsThePriceRange.textContent).toEqual('game3');
 	});
 
-	it('sorts the products by popularity from high to low', async () => {
+	it('sorts the games by popularity from high to low', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeThird',
-				productPrice: 65,
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'thisShouldBeThird',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				unitsSold: 10,
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeSecond',
-				productPrice: 45,
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'thisShouldBeSecond',
+				price: 45,
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				unitsSold: 20,
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeFirst',
-				productPrice: 55,
-				productId: '3',
-				genre: ['Mystery', 'Puzzle'],
+				image: 'fakeLink',
+				title: 'thisShouldBeFirst',
+				price: 55,
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				unitsSold: 30,
 			},
 		];
-		const expectedNamesOfProductsSortedByPopularity = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+		const expectedNamesOfGamesSortedByPopularity = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
 		// Click the 'Popularity: High to Low' sort option
 		const popularitySorterOption = screen.queryByText('Popularity: High to Low');
 		await user.click(popularitySorterOption);
 
-		// Get the product names
-		const productNames = screen.queryAllByTitle('product-name').map((productName) => productName.textContent);
+		// Get the game names
+		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
 
-		expect(productNames).toEqual(expectedNamesOfProductsSortedByPopularity);
+		expect(titles).toEqual(expectedNamesOfGamesSortedByPopularity);
 	});
 
-	it('sorts the products by popularity from low to high', async () => {
+	it('sorts the games by popularity from low to high', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeSecond',
-				productPrice: 65,
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'thisShouldBeSecond',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				unitsSold: 20,
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeThird',
-				productPrice: 45,
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'thisShouldBeThird',
+				price: 45,
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				unitsSold: 30,
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeFirst',
-				productPrice: 55,
-				productId: '3',
-				genre: ['Mystery', 'Puzzle'],
+				image: 'fakeLink',
+				title: 'thisShouldBeFirst',
+				price: 55,
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				unitsSold: 10,
 			},
 		];
-		const expectedNamesOfProductsSortedByPopularity = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+		const expectedNamesOfGamesSortedByPopularity = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
 		// Click the 'Popularity: Low to High' sort option
 		const popularitySorterOption = screen.queryByText('Popularity: Low to High');
 		await user.click(popularitySorterOption);
 
-		// Get the product names
-		const productNames = screen.queryAllByTitle('product-name').map((productName) => productName.textContent);
-		expect(productNames).toEqual(expectedNamesOfProductsSortedByPopularity);
+		// Get the game names
+		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
+		expect(titles).toEqual(expectedNamesOfGamesSortedByPopularity);
 	});
 
-	it('sorts the products by price from low to high', async () => {
+	it('sorts the games by price from low to high', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeThird',
-				productPrice: 65,
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'thisShouldBeThird',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeFirst',
-				productPrice: 45,
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'thisShouldBeFirst',
+				price: 45,
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeSecond',
-				productPrice: 55,
-				productId: '3',
-				genre: ['Mystery', 'Puzzle'],
+				image: 'fakeLink',
+				title: 'thisShouldBeSecond',
+				price: 55,
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 			},
 		];
-		const expectedNamesOfProductsSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+		const expectedNamesOfGamesSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
 		// Click the 'Price: Low to High' sort option
 		const priceSorterOption = screen.queryByText('Price: Low to High');
 		await user.click(priceSorterOption);
 
-		// Get the product names
-		const productNames = screen.queryAllByTitle('product-name').map((productName) => productName.textContent);
+		// Get the game names
+		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
 
-		expect(productNames).toEqual(expectedNamesOfProductsSortedByPrice);
+		expect(titles).toEqual(expectedNamesOfGamesSortedByPrice);
 	});
 
-	it('sorts the products by price from high to low', async () => {
+	it('sorts the games by price from high to low', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeFirst',
-				productPrice: 65,
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'thisShouldBeFirst',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeThird',
-				productPrice: 45,
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'thisShouldBeThird',
+				price: 45,
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeSecond',
-				productPrice: 55,
-				productId: '3',
-				genre: ['Mystery', 'Puzzle'],
+				image: 'fakeLink',
+				title: 'thisShouldBeSecond',
+				price: 55,
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 			},
 		];
-		const expectedNamesOfProductsSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+		const expectedNamesOfGamesSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
 		// Click the 'Price: High to Low' sort option
 		const priceSorterOption = screen.queryByText('Price: High to Low');
 		await user.click(priceSorterOption);
 
-		// Get the product names
-		const productNames = screen.queryAllByTitle('product-name').map((productName) => productName.textContent);
+		// Get the game names
+		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
 
-		expect(productNames).toEqual(expectedNamesOfProductsSortedByPrice);
+		expect(titles).toEqual(expectedNamesOfGamesSortedByPrice);
 	});
 
-	it('sorts the products by name from A to Z', async () => {
+	it('sorts the games by name from A to Z', async () => {
 		const user = userEvent.setup();
-		const products = [
-			{ imageLink: 'fakeLink', productName: 'C', productPrice: 65, productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
-			{ imageLink: 'fakeLink', productName: 'B', productPrice: 45, productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'] },
-			{ imageLink: 'fakeLink', productName: 'A', productPrice: 55, productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+		const games = [
+			{ image: 'fakeLink', title: 'C', price: 65, id: '1', genres: ['Action', 'Adventure'], platforms: ['Mobile'] },
+			{ image: 'fakeLink', title: 'B', price: 45, id: '2', genres: ['Action', 'Open World'], platforms: ['PC'] },
+			{ image: 'fakeLink', title: 'A', price: 55, id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
-		const expectedNamesOfProductsSortedByName = ['A', 'B', 'C'];
+		const expectedNamesOfGamesSortedByName = ['A', 'B', 'C'];
 
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
 		// Click the 'Name: A to Z' sort option
 		const nameSorterOption = screen.queryByText('Name: A to Z');
 		await user.click(nameSorterOption);
 
-		// Get the product names
-		const productNames = screen.queryAllByTitle('product-name').map((productName) => productName.textContent);
+		// Get the game names
+		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
 
-		expect(productNames).toEqual(expectedNamesOfProductsSortedByName);
+		expect(titles).toEqual(expectedNamesOfGamesSortedByName);
 	});
 
-	it('sorts the products by name from Z to A', async () => {
+	it('sorts the games by name from Z to A', async () => {
 		const user = userEvent.setup();
-		const products = [
-			{ imageLink: 'fakeLink', productName: 'A', productPrice: 65, productId: '1', genre: ['Action', 'Adventure'], platforms: ['Mobile'] },
-			{ imageLink: 'fakeLink', productName: 'B', productPrice: 45, productId: '2', genre: ['Action', 'Open World'], platforms: ['PC'] },
-			{ imageLink: 'fakeLink', productName: 'C', productPrice: 55, productId: '3', genre: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+		const games = [
+			{ image: 'fakeLink', title: 'A', price: 65, id: '1', genres: ['Action', 'Adventure'], platforms: ['Mobile'] },
+			{ image: 'fakeLink', title: 'B', price: 45, id: '2', genres: ['Action', 'Open World'], platforms: ['PC'] },
+			{ image: 'fakeLink', title: 'C', price: 55, id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
-		const expectedNamesOfProductsSortedByName = ['C', 'B', 'A'];
+		const expectedNamesOfGamesSortedByName = ['C', 'B', 'A'];
 
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
 		// Click the 'Name: Z to A' sort option
 		const nameSorterOption = screen.queryByText('Name: Z to A');
 		await user.click(nameSorterOption);
 
-		// Get the product names
-		const productNames = screen.queryAllByTitle('product-name').map((productName) => productName.textContent);
+		// Get the game names
+		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
 
-		expect(productNames).toEqual(expectedNamesOfProductsSortedByName);
+		expect(titles).toEqual(expectedNamesOfGamesSortedByName);
 	});
 
-	it('sorts the products by release date, newest first', async () => {
+	it('sorts the games by release date, newest first', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeFirst',
-				productPrice: 65,
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'thisShouldBeFirst',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				releaseDate: '2024-01-03',
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeThird',
-				productPrice: 45,
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'thisShouldBeThird',
+				price: 45,
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				releaseDate: '2024-01-01',
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeSecond',
-				productPrice: 55,
-				productId: '3',
-				genre: ['Mystery', 'Puzzle'],
+				image: 'fakeLink',
+				title: 'thisShouldBeSecond',
+				price: 55,
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				releaseDate: '2024-01-02',
 			},
 		];
-		const expectedNamesOfProductsSortedByDate = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+		const expectedNamesOfGamesSortedByDate = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
 		// Click the 'Release Date: Newest First' sort option
 		const dateSorterOption = screen.queryByText('Release Date: Newest First');
 		await user.click(dateSorterOption);
 
-		// Get the product names
-		const productNames = screen.queryAllByTitle('product-name').map((productName) => productName.textContent);
+		// Get the game names
+		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
 
-		expect(productNames).toEqual(expectedNamesOfProductsSortedByDate);
+		expect(titles).toEqual(expectedNamesOfGamesSortedByDate);
 	});
 
-	it('sorts the products by release date, oldest first', async () => {
+	it('sorts the games by release date, oldest first', async () => {
 		const user = userEvent.setup();
-		const products = [
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeThird',
-				productPrice: 65,
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'thisShouldBeThird',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				releaseDate: '2024-01-03',
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeFirst',
-				productPrice: 45,
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'thisShouldBeFirst',
+				price: 45,
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				releaseDate: '2024-01-01',
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeSecond',
-				productPrice: 55,
-				productId: '3',
-				genre: ['Mystery', 'Puzzle'],
+				image: 'fakeLink',
+				title: 'thisShouldBeSecond',
+				price: 55,
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				releaseDate: '2024-01-02',
 			},
 		];
-		const expectedNamesOfProductsSortedByDate = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
+		const expectedNamesOfGamesSortedByDate = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
 		// Click the 'Release Date: Oldest First' sort option
 		const dateSorterOption = screen.queryByText('Release Date: Oldest First');
 		await user.click(dateSorterOption);
 
-		// Get the product names
-		const productNames = screen.queryAllByTitle('product-name').map((productName) => productName.textContent);
+		// Get the game names
+		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
 
-		expect(productNames).toEqual(expectedNamesOfProductsSortedByDate);
+		expect(titles).toEqual(expectedNamesOfGamesSortedByDate);
 	});
 
-	it('renders a loading indicator if the user has scrolled all the way to the bottom of the product card container', async () => {
-		const products = [
+	it('renders a loading indicator if the user has scrolled all the way to the bottom of the game card container', async () => {
+		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'thisShouldBeThird',
-				productPrice: 65,
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'thisShouldBeThird',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				releaseDate: '2024-01-03',
 			},
-			// Add more products here...
 		];
 
-		render(<Shop loading={false} products={products} error={false} />);
+		render(<Shop loading={false} games={games} error={false} />);
 
-		const productCardsContainer = screen.getByTitle('product-cards-container');
+		const gameCardsContainer = screen.getByTitle('game-cards-container');
 
 		// Mock scrollHeight, clientHeight, and scroll top to simulate user going on the bottom of the container
-		Object.defineProperty(productCardsContainer, 'scrollHeight', { value: 1000 });
-		Object.defineProperty(productCardsContainer, 'clientHeight', { value: 300 });
-		Object.defineProperty(productCardsContainer, 'scrollTop', { value: 700 });
+		Object.defineProperty(gameCardsContainer, 'scrollHeight', { value: 1000 });
+		Object.defineProperty(gameCardsContainer, 'clientHeight', { value: 300 });
+		Object.defineProperty(gameCardsContainer, 'scrollTop', { value: 700 });
 
 		// Simulate scroll to the bottom
-		fireEvent.scroll(productCardsContainer);
+		fireEvent.scroll(gameCardsContainer);
 
 		// Wait for loading indicator
 		await waitFor(() => {

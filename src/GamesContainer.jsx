@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ProductCard from './ProductCard';
+import ProductCard from './GameCard';
 
 function GamesContainer({ games }) {
 	const gameCards = games.map((game) => (

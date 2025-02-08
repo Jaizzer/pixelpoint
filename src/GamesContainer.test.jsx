@@ -2,13 +2,13 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import GamesContainer from './GamesContainer.jsx';
 
-vi.mock('./ProductCard', () => ({
-	default: ({ imageLink, productName, productPrice }) => {
+vi.mock('./GameCard', () => ({
+	default: ({ image, title, price }) => {
 		return (
 			<div>
-				<img src={imageLink} alt={productName} role="image" />
-				<div title="product-name">{productName}</div>
-				<div>{productPrice}</div>
+				<img src={image} alt={title} role="image" />
+				<div title="game-title">{title}</div>
+				<div>{price}</div>
 			</div>
 		);
 	},
@@ -18,19 +18,19 @@ describe('Games Container Component', () => {
 	it('renders the games', () => {
 		const games = [
 			{
-				imageLink: 'fakeLink',
-				productName: 'Game 1',
-				productPrice: 45,
-				productId: '1',
-				genre: ['Action', 'Adventure'],
+				image: 'fakeLink',
+				title: 'Game 1',
+				price: 45,
+				id: '1',
+				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 			},
 			{
-				imageLink: 'fakeLink',
-				productName: 'Game 2',
-				productPrice: 55,
-				productId: '2',
-				genre: ['Action', 'Open World'],
+				image: 'fakeLink',
+				title: 'Game 2',
+				price: 55,
+				id: '2',
+				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 			},
 		];

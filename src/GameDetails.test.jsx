@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import ProductDetails from './ProductDetails';
+import GameDetails from './GameDetails';
 
 vi.mock('./ImageSlider', () => ({
 	default: ({ imageLinks }) => {
@@ -14,23 +14,23 @@ vi.mock('./ImageSlider', () => ({
 	},
 }));
 
-describe('Product description', () => {
-	it('renders the loading indicator if the products are still being fetched', () => {
-		render(<ProductDetails product={null} loading={true} error={false} />);
+describe('Game description', () => {
+	it('renders the loading indicator if the games are still being fetched', () => {
+		render(<GameDetails game={null} loading={true} error={false} />);
 		const loadingIndicator = screen.queryByTitle('loading-indicator');
 		expect(loadingIndicator).not.toBeNull();
 	});
 
-	it('renders the error message if there is an error fetching the product', () => {
-		render(<ProductDetails product={null} loading={false} error={true} />);
+	it('renders the error message if there is an error fetching the game', () => {
+		render(<GameDetails game={null} loading={false} error={true} />);
 		const errorMessage = screen.queryByTitle('error-message');
 		expect(errorMessage).not.toBeNull();
 	});
 
 	it('renders the game title', () => {
-		const product = {
+		const game = {
 			title: 'Witcher 3',
-			description: 'This is the product description',
+			description: 'This is the game description',
 			rating: 4.1,
 			price: 45,
 			developers: ['Developer A', 'Developer B'],
@@ -39,15 +39,15 @@ describe('Product description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productTitle = screen.queryByText('Witcher 3');
-		expect(productTitle).not.toBeNull();
+		render(<GameDetails game={game} loading={false} error={false} />);
+		const gameTitle = screen.queryByText('Witcher 3');
+		expect(gameTitle).not.toBeNull();
 	});
 
-	it('renders the product description', () => {
-		const product = {
+	it('renders the game description', () => {
+		const game = {
 			title: 'Witcher 3',
-			description: 'This is the product description',
+			description: 'This is the game description',
 			rating: 4.1,
 			price: 45,
 			developers: ['Developer A', 'Developer B'],
@@ -56,15 +56,15 @@ describe('Product description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productDescription = screen.queryByText('This is the product description');
-		expect(productDescription).not.toBeNull();
+		render(<GameDetails game={game} loading={false} error={false} />);
+		const gameDescription = screen.queryByText('This is the game description');
+		expect(gameDescription).not.toBeNull();
 	});
 
 	it('renders the rating', () => {
-		const product = {
+		const game = {
 			title: 'Witcher 3',
-			description: 'This is the product description',
+			description: 'This is the game description',
 			rating: 4.1,
 			price: 45,
 			developers: ['Developer A', 'Developer B'],
@@ -73,15 +73,15 @@ describe('Product description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productRating = screen.queryByText(/4.1/);
-		expect(productRating).not.toBeNull();
+		render(<GameDetails game={game} loading={false} error={false} />);
+		const gameRating = screen.queryByText(/4.1/);
+		expect(gameRating).not.toBeNull();
 	});
 
 	it('renders the price', () => {
-		const product = {
+		const game = {
 			title: 'Witcher 3',
-			description: 'This is the product description',
+			description: 'This is the game description',
 			rating: 4.1,
 			price: 41,
 			developers: ['Developer A', 'Developer B'],
@@ -90,15 +90,15 @@ describe('Product description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productPrice = screen.queryByText(/\$41/);
-		expect(productPrice).not.toBeNull();
+		render(<GameDetails game={game} loading={false} error={false} />);
+		const gamePrice = screen.queryByText(/\$41/);
+		expect(gamePrice).not.toBeNull();
 	});
 
-	it('renders the developer/s of the product', () => {
-		const product = {
+	it('renders the developer/s of the game', () => {
+		const game = {
 			title: 'Witcher 3',
-			description: 'This is the product description',
+			description: 'This is the game description',
 			rating: 4.1,
 			price: 45,
 			developers: ['Developer A', 'Developer B'],
@@ -107,15 +107,15 @@ describe('Product description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productDeveloper = screen.queryByText('Developer A, Developer B');
-		expect(productDeveloper).not.toBeNull();
+		render(<GameDetails game={game} loading={false} error={false} />);
+		const gameDeveloper = screen.queryByText('Developer A, Developer B');
+		expect(gameDeveloper).not.toBeNull();
 	});
 
-	it('renders the release date of the product', () => {
-		const product = {
+	it('renders the release date of the game', () => {
+		const game = {
 			title: 'Witcher 3',
-			description: 'This is the product description',
+			description: 'This is the game description',
 			rating: 4.1,
 			price: 45,
 			developers: ['Developer A', 'Developer B'],
@@ -124,15 +124,15 @@ describe('Product description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productReleaseDate = screen.queryByText('January 12, 2024');
-		expect(productReleaseDate).not.toBeNull();
+		render(<GameDetails game={game} loading={false} error={false} />);
+		const gameReleaseDate = screen.queryByText('January 12, 2024');
+		expect(gameReleaseDate).not.toBeNull();
 	});
 
-	it('renders the platforms of the product', () => {
-		const product = {
+	it('renders the platforms of the game', () => {
+		const game = {
 			title: 'Witcher 3',
-			description: 'This is the product description',
+			description: 'This is the game description',
 			rating: 4.1,
 			price: 45,
 			developers: ['Developer A', 'Developer B'],
@@ -141,15 +141,15 @@ describe('Product description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productPlatforms = screen.queryByText('Windows, Xbox, PS4');
-		expect(productPlatforms).not.toBeNull();
+		render(<GameDetails game={game} loading={false} error={false} />);
+		const gamePlatforms = screen.queryByText('Windows, Xbox, PS4');
+		expect(gamePlatforms).not.toBeNull();
 	});
 
-	it('renders the genres of the product', () => {
-		const product = {
+	it('renders the genres of the game', () => {
+		const game = {
 			title: 'Witcher 3',
-			description: 'This is the product description',
+			description: 'This is the game description',
 			rating: 4.1,
 			price: 45,
 			developers: ['Developer A', 'Developer B'],
@@ -158,8 +158,8 @@ describe('Product description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<ProductDetails product={product} loading={false} error={false} />);
-		const productGenres = screen.queryByText('Action, Puzzle, Adventure');
-		expect(productGenres).not.toBeNull();
+		render(<GameDetails game={game} loading={false} error={false} />);
+		const gameGenres = screen.queryByText('Action, Puzzle, Adventure');
+		expect(gameGenres).not.toBeNull();
 	});
 });

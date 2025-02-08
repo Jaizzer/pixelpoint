@@ -75,11 +75,11 @@ function Search() {
 				// Get the search results
 				const response = await fetch(`https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&search=${inputValue}`);
 				const jsonData = await response.json();
-				let searchResults = jsonData.results.map((product) => ({
-					name: product.name,
-					id: product.id,
-					price: getPrice(product.id),
-					image: product.background_image,
+				let searchResults = jsonData.results.map((game) => ({
+					title: game.name,
+					id: game.id,
+					price: getPrice(game.id),
+					image: game.background_image,
 				}));
 				setData(searchResults);
 			} catch {

@@ -2,12 +2,12 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import SearchDropdown from './SearchDropDown';
 
-// Mock the Search Product Card component
-vi.mock('./SearchProductCard', () => ({
-	default: ({ name }) => {
+// Mock the Search Game Card component
+vi.mock('./SearchGameCard', () => ({
+	default: ({ title }) => {
 		return (
-			<div className="productName" title="product-name">
-				{name}
+			<div className="gameName" title="game-title">
+				{title}
 			</div>
 		);
 	},
@@ -26,16 +26,16 @@ describe('Search Dropdown Component', () => {
 		expect(errorIndicator).not.toBeNull();
 	});
 
-	it('displays the products if the results have been collected', () => {
+	it('displays the games if the results have been collected', () => {
 		const data = [
-			{ name: 'productA', id: 'productA' },
-			{ name: 'productB', id: 'productB' },
-			{ name: 'productC', id: 'productC' },
+			{ title: 'gameA', id: 'gameA' },
+			{ title: 'gameB', id: 'gameB' },
+			{ title: 'gameC', id: 'gameC' },
 		];
 		render(<SearchDropdown loading={false} data={data} error={false} />);
-		const searchProductCard = screen
-			.queryAllByTitle('product-name')
-			.map((productCard) => ({ name: productCard.textContent, id: productCard.textContent }));
-		expect(searchProductCard).toEqual(data);
+		const searchGameCard = screen
+			.queryAllByTitle('game-title')
+			.map((gameCard) => ({ title: gameCard.textContent, id: gameCard.textContent }));
+		expect(searchGameCard).toEqual(data);
 	});
 });
