@@ -3,10 +3,10 @@ import ImageSlider from './ImageSlider';
 import StarRating from './StarRating';
 import AddToCartButton from './AddToCartButton';
 
-function GameDetails({ game, loading, error, onAddItemToCart, isGameInCart }) {
+function GameDetails({ game, isLoading, error, onAddItemToCart, isGameInCart }) {
 	return (
 		<>
-			{loading ? (
+			{isLoading ? (
 				<div title="loading-indicator" className="loadingIndicator">
 					Loading...
 				</div>
@@ -73,8 +73,8 @@ function GameDetails({ game, loading, error, onAddItemToCart, isGameInCart }) {
 
 GameDetails.propTypes = {
 	game: PropTypes.object,
-	loading: PropTypes.bool,
-	error: PropTypes.bool,
+	isLoading: PropTypes.bool,
+	error: PropTypes.error,
 	onAddItemToCart: PropTypes.func,
 	isGameInCart: PropTypes.bool,
 };

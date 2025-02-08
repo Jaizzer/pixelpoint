@@ -16,13 +16,13 @@ vi.mock('./ImageSlider', () => ({
 
 describe('Game description', () => {
 	it('renders the loading indicator if the games are still being fetched', () => {
-		render(<GameDetails game={null} loading={true} error={false} />);
+		render(<GameDetails game={null} isLoading={true} error={null} />);
 		const loadingIndicator = screen.queryByTitle('loading-indicator');
 		expect(loadingIndicator).not.toBeNull();
 	});
 
 	it('renders the error message if there is an error fetching the game', () => {
-		render(<GameDetails game={null} loading={false} error={true} />);
+		render(<GameDetails game={null} isLoading={false} error={true} />);
 		const errorMessage = screen.queryByTitle('error-message');
 		expect(errorMessage).not.toBeNull();
 	});
@@ -39,7 +39,7 @@ describe('Game description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<GameDetails game={game} loading={false} error={false} />);
+		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameTitle = screen.queryByText('Witcher 3');
 		expect(gameTitle).not.toBeNull();
 	});
@@ -56,7 +56,7 @@ describe('Game description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<GameDetails game={game} loading={false} error={false} />);
+		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameDescription = screen.queryByText('This is the game description');
 		expect(gameDescription).not.toBeNull();
 	});
@@ -73,7 +73,7 @@ describe('Game description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<GameDetails game={game} loading={false} error={false} />);
+		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameRating = screen.queryByText(/4.1/);
 		expect(gameRating).not.toBeNull();
 	});
@@ -90,7 +90,7 @@ describe('Game description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<GameDetails game={game} loading={false} error={false} />);
+		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gamePrice = screen.queryByText(/\$41/);
 		expect(gamePrice).not.toBeNull();
 	});
@@ -107,7 +107,7 @@ describe('Game description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<GameDetails game={game} loading={false} error={false} />);
+		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameDeveloper = screen.queryByText('Developer A, Developer B');
 		expect(gameDeveloper).not.toBeNull();
 	});
@@ -124,7 +124,7 @@ describe('Game description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<GameDetails game={game} loading={false} error={false} />);
+		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameReleaseDate = screen.queryByText('January 12, 2024');
 		expect(gameReleaseDate).not.toBeNull();
 	});
@@ -141,7 +141,7 @@ describe('Game description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<GameDetails game={game} loading={false} error={false} />);
+		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gamePlatforms = screen.queryByText('Windows, Xbox, PS4');
 		expect(gamePlatforms).not.toBeNull();
 	});
@@ -158,7 +158,7 @@ describe('Game description', () => {
 			genres: ['Action', 'Puzzle', 'Adventure'],
 			screenshots: ['fakeLink1', 'fakeLink2'],
 		};
-		render(<GameDetails game={game} loading={false} error={false} />);
+		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameGenres = screen.queryByText('Action, Puzzle, Adventure');
 		expect(gameGenres).not.toBeNull();
 	});

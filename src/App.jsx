@@ -15,7 +15,7 @@ import { useState } from 'react';
 export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
-	const [game, isGameHaveError, isGameLoading] = useFetchGame(id);
+	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(id);
 	const [games, gamesError, isGamesLoading, getNewGames] = useFetchGames();
 
 	const [cart, setCart] = useState([]);
@@ -53,11 +53,11 @@ export default function App() {
 				) : pageToDisplay === 'gameDetails' && id !== undefined ? (
 					<GameDetails
 						key={id}
-						game={game}
-						loading={isGameLoading}
-						error={isGameHaveError}
+						game={clickedGame}
+						isLoading={isClickedGameLoading}
+						error={clickedGameError}
 						onAddItemToCart={addToCart}
-						isGameInCart={cart.filter((item) => item.id === game.id).length === 1}
+						isGameInCart={cart.filter((item) => item.id === clickedGame.id).length === 1}
 					/>
 				) : (
 					<Error />
