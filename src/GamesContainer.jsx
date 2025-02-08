@@ -1,16 +1,9 @@
 import PropTypes from 'prop-types';
-import ProductCard from './GameCard';
+import GameCard from './GameCard';
 
 function GamesContainer({ games }) {
 	const gameCards = games.map((game) => (
-		<ProductCard
-			key={game.productId}
-			imageLink={game.imageLink}
-			productName={game.productName}
-			productPrice={game.productPrice}
-			productCartQuantity={game.productCartQuantity}
-			productId={game.productId}
-		/>
+		<GameCard key={game.id} image={game.image} title={game.title} price={game.price} quantity={game.productCartQuantity} id={game.productId} />
 	));
 
 	return <div className="gamesContainer">{gameCards}</div>;
