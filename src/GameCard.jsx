@@ -48,7 +48,7 @@ function GameCard({ image, title, price, id }) {
 	return (
 		<Link to={`/gameDetails/${id}`}>
 			<Container title="game-card">
-				<GameCardImage src={null} role="image" alt={title} className={'image'} />
+				<GameCardImage src={image} role="image" alt={title} className={'image'} />
 				<GameInfo>
 					<Text data-testid="title">{title}</Text>
 					<Text emphasize={true}>{price ? '$' + price.toFixed(2) : null}</Text>
