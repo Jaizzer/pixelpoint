@@ -45,7 +45,7 @@ export default function App() {
 				) : pageToDisplay === 'account' ? (
 					<Account />
 				) : pageToDisplay === 'shop' ? (
-					<Shop games={games} error={gamesError} loading={isGamesLoading} getNewGames={getNewGames} />
+					<Shop games={games} gamesError={gamesError} getNewGames={getNewGames} />
 				) : pageToDisplay === 'about' ? (
 					<About />
 				) : pageToDisplay === 'cart' ? (
