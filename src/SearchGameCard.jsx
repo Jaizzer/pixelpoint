@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import blankImage from './assets/images/blank-image.jpg';
+import Image from './Image';
 
 const Container = styled.div`
 	box-sizing: border-box;
@@ -32,10 +32,10 @@ const GameInfo = styled.div`
 	font-size: 15px;
 `;
 
-const Image = styled.img`
+const StyledImage = styled(Image)`
 	box-sizing: border-box;
 	margin: 0px;
-    
+
 	width: 50px;
 	object-fit: cover;
 	border-radius: 3px;
@@ -45,7 +45,7 @@ function SearchGameCard({ image, title, price, onClickCallback, id }) {
 	return (
 		<Link to={`/gameDetails/${id}`}>
 			<Container role="search-game-card" onClick={onClickCallback}>
-				<Image src={image ? image : blankImage} alt={title} />
+				<StyledImage src={image} alt={title} />
 				<GameInfo>
 					<div>{title}</div>
 					<div>${price.toFixed(2)}</div>

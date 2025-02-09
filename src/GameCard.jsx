@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Image from './Image';
 
 const Container = styled.div`
 	min-width: 300px;
@@ -18,7 +19,7 @@ const Container = styled.div`
 	}
 `;
 
-const GameCardImage = styled.img`
+const GameCardImage = styled(Image)`
 	height: 300px;
 	width: 100%;
 	grid-row: 1 / 3;
@@ -47,7 +48,7 @@ function GameCard({ image, title, price, id }) {
 	return (
 		<Link to={`/gameDetails/${id}`}>
 			<Container title="game-card">
-				<GameCardImage src={image} role="image" alt={title}></GameCardImage>
+				<GameCardImage src={null} role="image" alt={title} className={'image'} />
 				<GameInfo>
 					<Text data-testid="title">{title}</Text>
 					<Text emphasize={true}>{price ? '$' + price.toFixed(2) : null}</Text>

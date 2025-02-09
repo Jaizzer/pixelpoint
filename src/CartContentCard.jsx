@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import blankImage from './assets/images/blank-image.jpg';
 import StarRating from './StarRating.jsx';
+import Image from './Image.jsx';
 
 const StyledLink = styled(Link)`
 	text-decoration: none;
@@ -43,7 +44,7 @@ const CardContent = styled.div`
 	gap: 30px;
 `;
 
-const Image = styled.img`
+const StyledImage = styled(Image)`
 	box-sizing: border-box;
 	margin: 0px;
 
@@ -76,7 +77,7 @@ function CartContentCard({ title, price, image, id, rating, platform, removeItem
 		<Container title="cart-content-card">
 			<StyledLink to={`/gameDetails/${id}`}>
 				<CardContent className="cartContentCardInfo">
-					<Image src={image ? image : blankImage} />
+					<StyledImage src={image ? image : blankImage} />
 					<div className="cartContentCartTitle">{title ? title : 'Title Unavailable'}</div>
 					<StarRating rating={rating} pixelSize={25} />
 					<div>{platform ? platform.join(', ') : null}</div>
