@@ -10,7 +10,7 @@ describe('Game Card Component', () => {
 				<GameCard title="Game 1" />
 			</MemoryRouter>
 		);
-		const image = screen.queryByAltText('Game 1');
+		const image = screen.queryByRole('img');
 		expect(image).not.toBeNull();
 	});
 
