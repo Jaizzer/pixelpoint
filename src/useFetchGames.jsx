@@ -9,7 +9,7 @@ export default function useFetchGames(category, gameCountPerRequest) {
 	const [gamesError, setGamesError] = useState(null);
 	const isFetchingApproved = useRef(true);
 
-	function getNewGames() {
+	function fetchMoreGames() {
 		// Move to next page
 		setPageToRequestFromAPI((prev) => prev + 1);
 
@@ -67,7 +67,7 @@ export default function useFetchGames(category, gameCountPerRequest) {
 		}
 	}, [pageToRequestFromAPI]);
 
-	return [games, gamesError, isGamesLoading, getNewGames];
+	return [games, gamesError, isGamesLoading, fetchMoreGames];
 }
 
 useFetchGames.propTypes = {
