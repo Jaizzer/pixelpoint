@@ -8,13 +8,9 @@ function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll }) {
 
 	// Remove the loading indicator if the parent component passed the newly requested games
 	useEffect(() => {
-		if (gamesError) {
+		if (gamesError || games.length > 0) {
+			setIsGamesLoading(false);
 			setError(gamesError);
-			setIsGamesLoading(false);
-		}
-
-		if (games.length > 0) {
-			setIsGamesLoading(false);
 		}
 	}, [games, gamesError]);
 
