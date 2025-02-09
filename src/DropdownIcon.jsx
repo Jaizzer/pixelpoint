@@ -9,6 +9,8 @@ const Icon = styled.svg`
 	width: 1.2em;
 	height: 1.2em;
 	fill: white;
+
+	// Flip the icon vertically
 	transform: scaleY(${(props) => (props.isDropdownCollapsed ? 1 : -1)});
 `;
 
