@@ -144,6 +144,7 @@ describe('Shop component', () => {
 				id: '1',
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -152,8 +153,17 @@ describe('Shop component', () => {
 				id: '2',
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
 			},
-			{ image: 'fakeLink', title: 'game', price: '$65', id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+			{
+				image: 'fakeLink',
+				title: 'game',
+				price: '$65',
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
+				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
+			},
 		];
 		render(<Shop games={games} />);
 
@@ -173,6 +183,7 @@ describe('Shop component', () => {
 				id: '1',
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -181,8 +192,17 @@ describe('Shop component', () => {
 				id: '2',
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
 			},
-			{ image: 'fakeLink', title: 'game', price: '$65', id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+			{
+				image: 'fakeLink',
+				title: 'game',
+				price: '$65',
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
+				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
+			},
 		];
 		render(<Shop games={games} gamesError={false} />);
 
@@ -207,6 +227,7 @@ describe('Shop component', () => {
 				id: '1',
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -215,8 +236,17 @@ describe('Shop component', () => {
 				id: '2',
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
 			},
-			{ image: 'fakeLink', title: 'game', price: '$65', id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+			{
+				image: 'fakeLink',
+				title: 'game',
+				price: '$65',
+				id: '3',
+				genres: ['Mystery', 'Puzzle'],
+				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
+			},
 		];
 		render(<Shop games={games} gamesError={false} />);
 		// Filter all games available for 'PC' platform
@@ -237,7 +267,7 @@ describe('Shop component', () => {
 				id: '1',
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
-				esrbRating: 'Everyone 10+',
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -246,7 +276,7 @@ describe('Shop component', () => {
 				id: '2',
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
-				esrbRating: 'Mature',
+				esrbRating: ['Mature'],
 			},
 			{
 				image: 'fakeLink',
@@ -255,7 +285,7 @@ describe('Shop component', () => {
 				id: '3',
 				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
-				esrbRating: 'Mature',
+				esrbRating: ['Mature'],
 			},
 		];
 		render(<Shop games={games} gamesError={false} />);
@@ -278,6 +308,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				unitsSold: 10,
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -287,6 +318,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				unitsSold: 20,
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -296,6 +328,7 @@ describe('Shop component', () => {
 				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				unitsSold: 30,
+				esrbRating: ['Everyone 10+'],
 			},
 		];
 		render(<Shop games={games} gamesError={false} />);
@@ -317,6 +350,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				unitsSold: 10,
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -326,6 +360,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				unitsSold: 20,
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -335,6 +370,7 @@ describe('Shop component', () => {
 				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				unitsSold: 30,
+				esrbRating: ['Everyone 10+'],
 			},
 		];
 		const expectedNamesOfGamesSortedByPopularity = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
@@ -362,6 +398,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				unitsSold: 20,
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -371,6 +408,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				unitsSold: 30,
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -380,6 +418,7 @@ describe('Shop component', () => {
 				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				unitsSold: 10,
+				esrbRating: ['Everyone 10+'],
 			},
 		];
 		const expectedNamesOfGamesSortedByPopularity = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
@@ -405,6 +444,7 @@ describe('Shop component', () => {
 				id: '1',
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -413,6 +453,7 @@ describe('Shop component', () => {
 				id: '2',
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -421,6 +462,7 @@ describe('Shop component', () => {
 				id: '3',
 				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
 			},
 		];
 		const expectedNamesOfGamesSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
@@ -447,6 +489,7 @@ describe('Shop component', () => {
 				id: '1',
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -455,6 +498,7 @@ describe('Shop component', () => {
 				id: '2',
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -463,6 +507,7 @@ describe('Shop component', () => {
 				id: '3',
 				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
+				esrbRating: ['Everyone 10+'],
 			},
 		];
 		const expectedNamesOfGamesSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
@@ -482,9 +527,17 @@ describe('Shop component', () => {
 	it('sorts the games by name from A to Z', async () => {
 		const user = userEvent.setup();
 		const games = [
-			{ image: 'fakeLink', title: 'C', price: 65, id: '1', genres: ['Action', 'Adventure'], platforms: ['Mobile'] },
-			{ image: 'fakeLink', title: 'B', price: 45, id: '2', genres: ['Action', 'Open World'], platforms: ['PC'] },
-			{ image: 'fakeLink', title: 'A', price: 55, id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+			{
+				image: 'fakeLink',
+				title: 'C',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
+				platforms: ['Mobile'],
+				esrbRating: ['Everyone 10+'],
+			},
+			{ image: 'fakeLink', title: 'B', price: 45, id: '2', genres: ['Action', 'Open World'], platforms: ['PC'], esrbRating: ['Everyone 10+'] },
+			{ image: 'fakeLink', title: 'A', price: 55, id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'], esrbRating: ['Everyone 10+'] },
 		];
 		const expectedNamesOfGamesSortedByName = ['A', 'B', 'C'];
 
@@ -503,9 +556,17 @@ describe('Shop component', () => {
 	it('sorts the games by name from Z to A', async () => {
 		const user = userEvent.setup();
 		const games = [
-			{ image: 'fakeLink', title: 'A', price: 65, id: '1', genres: ['Action', 'Adventure'], platforms: ['Mobile'] },
-			{ image: 'fakeLink', title: 'B', price: 45, id: '2', genres: ['Action', 'Open World'], platforms: ['PC'] },
-			{ image: 'fakeLink', title: 'C', price: 55, id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
+			{
+				image: 'fakeLink',
+				title: 'A',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
+				platforms: ['Mobile'],
+				esrbRating: ['Everyone 10+'],
+			},
+			{ image: 'fakeLink', title: 'B', price: 45, id: '2', genres: ['Action', 'Open World'], platforms: ['PC'], esrbRating: ['Everyone 10+'] },
+			{ image: 'fakeLink', title: 'C', price: 55, id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'], esrbRating: ['Everyone 10+'] },
 		];
 		const expectedNamesOfGamesSortedByName = ['C', 'B', 'A'];
 
@@ -532,6 +593,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				releaseDate: '2024-01-03',
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -541,6 +603,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				releaseDate: '2024-01-01',
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -550,6 +613,7 @@ describe('Shop component', () => {
 				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				releaseDate: '2024-01-02',
+				esrbRating: ['Everyone 10+'],
 			},
 		];
 		const expectedNamesOfGamesSortedByDate = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
@@ -577,6 +641,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Adventure'],
 				platforms: ['Mobile'],
 				releaseDate: '2024-01-03',
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -586,6 +651,7 @@ describe('Shop component', () => {
 				genres: ['Action', 'Open World'],
 				platforms: ['PC'],
 				releaseDate: '2024-01-01',
+				esrbRating: ['Everyone 10+'],
 			},
 			{
 				image: 'fakeLink',
@@ -595,6 +661,7 @@ describe('Shop component', () => {
 				genres: ['Mystery', 'Puzzle'],
 				platforms: ['PC'],
 				releaseDate: '2024-01-02',
+				esrbRating: ['Everyone 10+'],
 			},
 		];
 		const expectedNamesOfGamesSortedByDate = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
