@@ -65,7 +65,7 @@ export default function useFetchGames(category, gameCountPerRequest) {
 				}
 			})();
 		}
-	}, [pageToRequestFromAPI]);
+	}, [pageToRequestFromAPI, category, gameCountPerRequest]);
 
 	return [games, gamesError, isGamesLoading, fetchMoreGames];
 }
