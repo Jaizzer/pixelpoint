@@ -26,7 +26,6 @@ function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll }) {
 					// Render loading indicator if the user have scrolled to the bottom
 					setIsGamesLoading(true);
 					fetchNewGamesOnBottomScroll();
-					console.log('hi');
 				}
 			}}
 		>
