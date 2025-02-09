@@ -3,18 +3,6 @@ import { render, screen } from '@testing-library/react';
 import Shop from './Shop';
 import { userEvent } from '@testing-library/user-event';
 
-vi.mock('./GameCard', () => ({
-	default: ({ image, title, price }) => {
-		return (
-			<div>
-				<img src={image} alt={title} role="image" />
-				<div title="game-name">{title}</div>
-				<div>{price}</div>
-			</div>
-		);
-	},
-}));
-
 vi.mock('./DropdownFilter', () => ({
 	default: ({ items, title, onDropdownItemClick }) => {
 		const dropdownItems = items.map((item) => {
