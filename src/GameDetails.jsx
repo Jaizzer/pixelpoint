@@ -24,7 +24,6 @@ function GameDetails({ game, isLoading, error, onAddItemToCart, isGameInCart }) 
 				<div className="details">
 					<h1 className="title">{game.title}</h1>
 					<div className="rating">
-						<div className="ratingHeading">Rating</div>
 						<div className="ratingContent">
 							{game.rating ? (
 								<>
