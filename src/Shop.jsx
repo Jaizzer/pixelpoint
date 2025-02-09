@@ -1,4 +1,3 @@
-import GameCard from './GameCard';
 import PropTypes from 'prop-types';
 import DropdownFilter from './DropdownFilter';
 import PriceRangeController from './PriceRangeController';

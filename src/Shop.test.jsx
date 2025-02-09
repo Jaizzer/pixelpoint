@@ -3,6 +3,21 @@ import { render, screen } from '@testing-library/react';
 import Shop from './Shop';
 import { userEvent } from '@testing-library/user-event';
 
+vi.mock('./GamesContainer', () => ({
+	default: ({ games }) => {
+		const gameCards = games.map((game) => {
+			return (
+				<div key={game.id}>
+					<img src={game.image} alt={game.title} role="image" />
+					<div title="game-title">{game.title}</div>
+					<div>{game.price}</div>
+				</div>
+			);
+		});
+		return <div>{gameCards}</div>;
+	},
+}));
+
 vi.mock('./DropdownFilter', () => ({
 	default: ({ items, title, onDropdownItemClick }) => {
 		const dropdownItems = items.map((item) => {
@@ -287,7 +302,7 @@ describe('Shop component', () => {
 		const priceRangeControllerMock = screen.queryByText('Price Range Controller');
 		await user.click(priceRangeControllerMock);
 
-		const gameThatFitsThePriceRange = screen.queryAllByTitle('game-name')[0];
+		const gameThatFitsThePriceRange = screen.queryAllByTitle('game-title')[0];
 		expect(gameThatFitsThePriceRange.textContent).toEqual('game3');
 	});
 
@@ -331,7 +346,7 @@ describe('Shop component', () => {
 		await user.click(popularitySorterOption);
 
 		// Get the game names
-		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
+		const titles = screen.queryAllByTitle('game-title').map((title) => title.textContent);
 
 		expect(titles).toEqual(expectedNamesOfGamesSortedByPopularity);
 	});
@@ -376,7 +391,7 @@ describe('Shop component', () => {
 		await user.click(popularitySorterOption);
 
 		// Get the game names
-		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
+		const titles = screen.queryAllByTitle('game-title').map((title) => title.textContent);
 		expect(titles).toEqual(expectedNamesOfGamesSortedByPopularity);
 	});
 
@@ -417,7 +432,7 @@ describe('Shop component', () => {
 		await user.click(priceSorterOption);
 
 		// Get the game names
-		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
+		const titles = screen.queryAllByTitle('game-title').map((title) => title.textContent);
 
 		expect(titles).toEqual(expectedNamesOfGamesSortedByPrice);
 	});
@@ -459,7 +474,7 @@ describe('Shop component', () => {
 		await user.click(priceSorterOption);
 
 		// Get the game names
-		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
+		const titles = screen.queryAllByTitle('game-title').map((title) => title.textContent);
 
 		expect(titles).toEqual(expectedNamesOfGamesSortedByPrice);
 	});
@@ -480,7 +495,7 @@ describe('Shop component', () => {
 		await user.click(nameSorterOption);
 
 		// Get the game names
-		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
+		const titles = screen.queryAllByTitle('game-title').map((title) => title.textContent);
 
 		expect(titles).toEqual(expectedNamesOfGamesSortedByName);
 	});
@@ -501,7 +516,7 @@ describe('Shop component', () => {
 		await user.click(nameSorterOption);
 
 		// Get the game names
-		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
+		const titles = screen.queryAllByTitle('game-title').map((title) => title.textContent);
 
 		expect(titles).toEqual(expectedNamesOfGamesSortedByName);
 	});
@@ -546,7 +561,7 @@ describe('Shop component', () => {
 		await user.click(dateSorterOption);
 
 		// Get the game names
-		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
+		const titles = screen.queryAllByTitle('game-title').map((title) => title.textContent);
 
 		expect(titles).toEqual(expectedNamesOfGamesSortedByDate);
 	});
@@ -591,7 +606,7 @@ describe('Shop component', () => {
 		await user.click(dateSorterOption);
 
 		// Get the game names
-		const titles = screen.queryAllByTitle('game-name').map((title) => title.textContent);
+		const titles = screen.queryAllByTitle('game-title').map((title) => title.textContent);
 
 		expect(titles).toEqual(expectedNamesOfGamesSortedByDate);
 	});
