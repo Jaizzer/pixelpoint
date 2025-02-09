@@ -40,6 +40,12 @@ export default function useFetchGames(category, gameCountPerRequest) {
 						url += `&dates=${dateTomorrow.toISOString().split('T')[0]},${dateOneYearFromNow.toISOString().split('T')[0]}`;
 					}
 					const response = await fetch(url);
+
+					// Throw error if response is 404
+					if (!response.ok) {
+						throw new Error('No games found');
+					}
+
 					const jsonData = await response.json();
 					const gamesWithDistilledProperties = jsonData.results.map((game) => {
 						return {
