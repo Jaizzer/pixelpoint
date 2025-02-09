@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Sorter from './Sorter';
 import GamesContainer from './GamesContainer';
 
-function Shop({ games, error, loading, getNewGames }) {
+function Shop({ games, gamesError, getNewGames }) {
 	const [genreFilters, setGenreFilters] = useState([]);
 	const [platformFilters, setPlatformFilters] = useState([]);
 	const [ageRatingFilters, setAgeRatingFilters] = useState([]);
@@ -287,16 +287,14 @@ function Shop({ games, error, loading, getNewGames }) {
 					<Sorter onSortItemClick={setSortCriteria} numberOfShowLessItems={3} />
 				</div>
 			}
-			<GamesContainer games={filteredGames} error={error} fetchNewGamesOnBottomScroll={getNewGames} />
+			<GamesContainer games={filteredGames} gamesError={gamesError} fetchNewGamesOnBottomScroll={getNewGames} />
 		</div>
 	);
 }
 
 Shop.propTypes = {
-	games: PropTypes.array.isRequired,
-	onAddItemToCart: PropTypes.func,
-	loading: PropTypes.bool,
-	error: PropTypes.bool,
+	games: PropTypes.array,
+	gamesError: PropTypes.error,
 	getNewGames: PropTypes.func,
 };
 

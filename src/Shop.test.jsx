@@ -184,7 +184,7 @@ describe('Shop component', () => {
 			},
 			{ image: 'fakeLink', title: 'game', price: '$65', id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 
 		// Filter all 'Action'
 		const actionDropdownFilter = screen.queryByText('Action');
@@ -218,7 +218,7 @@ describe('Shop component', () => {
 			},
 			{ image: 'fakeLink', title: 'game', price: '$65', id: '3', genres: ['Mystery', 'Puzzle'], platforms: ['PC'] },
 		];
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 		// Filter all games available for 'PC' platform
 		const pcDropdownFilter = screen.queryByText('PC');
 		await user.click(pcDropdownFilter);
@@ -258,7 +258,7 @@ describe('Shop component', () => {
 				esrbRating: 'Mature',
 			},
 		];
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 		// Filter all games that are age rated as 'Mature'
 		const ageRatingDropdownFilter = screen.queryByText('Mature');
 		await user.click(ageRatingDropdownFilter);
@@ -298,7 +298,7 @@ describe('Shop component', () => {
 				unitsSold: 30,
 			},
 		];
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 		const priceRangeControllerMock = screen.queryByText('Price Range Controller');
 		await user.click(priceRangeControllerMock);
 
@@ -339,7 +339,7 @@ describe('Shop component', () => {
 		];
 		const expectedNamesOfGamesSortedByPopularity = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 
 		// Click the 'Popularity: High to Low' sort option
 		const popularitySorterOption = screen.queryByText('Popularity: High to Low');
@@ -384,7 +384,7 @@ describe('Shop component', () => {
 		];
 		const expectedNamesOfGamesSortedByPopularity = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 
 		// Click the 'Popularity: Low to High' sort option
 		const popularitySorterOption = screen.queryByText('Popularity: Low to High');
@@ -425,7 +425,7 @@ describe('Shop component', () => {
 		];
 		const expectedNamesOfGamesSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 
 		// Click the 'Price: Low to High' sort option
 		const priceSorterOption = screen.queryByText('Price: Low to High');
@@ -467,7 +467,7 @@ describe('Shop component', () => {
 		];
 		const expectedNamesOfGamesSortedByPrice = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 
 		// Click the 'Price: High to Low' sort option
 		const priceSorterOption = screen.queryByText('Price: High to Low');
@@ -488,7 +488,7 @@ describe('Shop component', () => {
 		];
 		const expectedNamesOfGamesSortedByName = ['A', 'B', 'C'];
 
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 
 		// Click the 'Name: A to Z' sort option
 		const nameSorterOption = screen.queryByText('Name: A to Z');
@@ -509,7 +509,7 @@ describe('Shop component', () => {
 		];
 		const expectedNamesOfGamesSortedByName = ['C', 'B', 'A'];
 
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 
 		// Click the 'Name: Z to A' sort option
 		const nameSorterOption = screen.queryByText('Name: Z to A');
@@ -554,7 +554,7 @@ describe('Shop component', () => {
 		];
 		const expectedNamesOfGamesSortedByDate = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 
 		// Click the 'Release Date: Newest First' sort option
 		const dateSorterOption = screen.queryByText('Release Date: Newest First');
@@ -599,7 +599,7 @@ describe('Shop component', () => {
 		];
 		const expectedNamesOfGamesSortedByDate = ['thisShouldBeFirst', 'thisShouldBeSecond', 'thisShouldBeThird'];
 
-		render(<Shop loading={false} games={games} error={false} />);
+		render(<Shop games={games} gamesError={false} />);
 
 		// Click the 'Release Date: Oldest First' sort option
 		const dateSorterOption = screen.queryByText('Release Date: Oldest First');
