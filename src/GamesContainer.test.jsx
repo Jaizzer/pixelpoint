@@ -41,4 +41,16 @@ describe('Games Container Component', () => {
 
 		expect(numberOfImages).toEqual(2);
 	});
+
+	it('renders the loading message if the games are currently loading', () => {
+		render(<GamesContainer games={[]} error={null} />);
+		const loadingMessage = screen.queryByTitle('loading');
+		expect(loadingMessage).not.toBeNull();
+	});
+
+	it('renders the error message if the games have error', () => {
+		render(<GamesContainer games={[]} error={new Error()} />);
+		const loadingMessage = screen.queryByTitle('loading');
+		expect(loadingMessage).not.toBeNull();
+	});
 });

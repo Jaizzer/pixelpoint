@@ -160,18 +160,6 @@ describe('Shop component', () => {
 		expect(images.length).toBe(games.length);
 	});
 
-	it('renders the loading message if the games are currently loading', () => {
-		render(<Shop loading={true} games={[]} error={false} />);
-		const loadingMessage = screen.queryByTitle('loading');
-		expect(loadingMessage).not.toBeNull();
-	});
-
-	it('renders the error message if there is an error', () => {
-		render(<Shop loading={false} games={[]} error={true} />);
-		const errorMessage = screen.queryByTitle('error');
-		expect(errorMessage).not.toBeNull();
-	});
-
 	it('filters the game when a dropdown filter is clicked', async () => {
 		const user = userEvent.setup();
 		const games = [
