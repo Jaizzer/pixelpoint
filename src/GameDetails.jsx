@@ -2,6 +2,12 @@ import PropTypes from 'prop-types';
 import ImageSlider from './ImageSlider';
 import StarRating from './StarRating';
 import AddToCartButton from './AddToCartButton';
+import Image from './Image';
+import styled from 'styled-components';
+
+const Teaser = styled.div`
+	width: fit-content;
+`;
 
 function GameDetails({ game, isLoading, error, onAddItemToCart, isGameInCart }) {
 	return (
@@ -29,7 +35,7 @@ function GameDetails({ game, isLoading, error, onAddItemToCart, isGameInCart }) 
 							)}
 						</div>
 					</div>
-					{game.screenshots.length > 1 && <ImageSlider imageLinks={game.screenshots}></ImageSlider>}
+					<Teaser>{game.screenshots.length > 1 ? <ImageSlider imageLinks={game.screenshots}></ImageSlider> : <Image src={null} />}</Teaser>
 					<div className="descriptionContainer">
 						<h2 className="descriptionHeading">Description</h2>
 						<div className="descriptionContent">{game.description ? game.description : 'No available description.'}</div>
