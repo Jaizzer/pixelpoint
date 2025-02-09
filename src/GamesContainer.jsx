@@ -4,13 +4,19 @@ import { useState, useEffect } from 'react';
 
 function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll }) {
 	const [isGamesLoading, setIsGamesLoading] = useState(true);
+	const [error, setError] = useState(gamesError);
 
 	// Remove the loading indicator if the parent component passed the newly requested games
 	useEffect(() => {
+		if (gamesError) {
+			setError(gamesError);
+			setIsGamesLoading(false);
+		}
+
 		if (games.length > 0) {
 			setIsGamesLoading(false);
 		}
-	}, [games]);
+	}, [games, gamesError]);
 
 	// Create the game cards to be placed in DOM
 	const gameCards = games.map((game) => <GameCard key={game.id} image={game.image} title={game.title} price={game.price} id={game.id} />);
@@ -34,9 +40,9 @@ function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll }) {
 				<div className="loading" title="loading">
 					Loading...
 				</div>
-			) : gamesError ? (
+			) : error ? (
 				<div className="error" title="error">
-					There was an error.
+					{`${error}`}
 				</div>
 			) : null}
 		</div>
