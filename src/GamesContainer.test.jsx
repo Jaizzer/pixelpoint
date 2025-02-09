@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import GamesContainer from './GamesContainer.jsx';
 
 vi.mock('./GameCard', () => ({
@@ -52,5 +52,37 @@ describe('Games Container Component', () => {
 		render(<GamesContainer games={[]} error={new Error()} />);
 		const loadingMessage = screen.queryByTitle('loading');
 		expect(loadingMessage).not.toBeNull();
+	});
+
+	it('renders a loading indicator if the user has scrolled all the way to the bottom of the game card container', async () => {
+		const games = [
+			{
+				image: 'fakeLink',
+				title: 'thisShouldBeThird',
+				price: 65,
+				id: '1',
+				genres: ['Action', 'Adventure'],
+				platforms: ['Mobile'],
+				releaseDate: '2024-01-03',
+			},
+		];
+
+		render(<GamesContainer games={games} error={null} fetchNewGamesOnBottomScroll={vi.fn()} />);
+
+		const gameCardsContainer = screen.getByTitle('game-cards-container');
+
+		// Mock scrollHeight, clientHeight, and scroll top to simulate user going on the bottom of the container
+		Object.defineProperty(gameCardsContainer, 'scrollHeight', { value: 1000 });
+		Object.defineProperty(gameCardsContainer, 'clientHeight', { value: 300 });
+		Object.defineProperty(gameCardsContainer, 'scrollTop', { value: 700 });
+
+		// Simulate scroll to the bottom
+		fireEvent.scroll(gameCardsContainer);
+
+		// Wait for loading indicator
+		await waitFor(() => {
+			const loading = screen.queryByText('Loading...');
+			expect(loading).not.toBeNull();
+		});
 	});
 });
