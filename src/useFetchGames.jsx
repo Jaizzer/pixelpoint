@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import getPrice from './getPrice';
 import PropTypes from 'prop-types';
 
-export default function useFetchGames(category, gameCountPerRequest) {
+export default function useFetchGames(category, gameCountPerRequest = 40) {
 	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
 	const [games, setGames] = useState([]);
 	const [isGamesLoading, setIsGamesLoading] = useState(true);
