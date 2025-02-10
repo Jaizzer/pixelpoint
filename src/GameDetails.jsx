@@ -69,6 +69,10 @@ function GameDetails({ game, isLoading, error, onAddItemToCart, isGameInCart }) 
 							<h2 className="platformsHeading">Platforms</h2>
 							<div className="platformsContent">{game.platforms ? game.platforms.join(', ') : 'Unknown'}</div>
 						</div>
+						<div className="ageRating">
+							<h2 className="ageRatingHeading">Age Rating</h2>
+							<div className="ageRatingContent">{game.esrbRating ? game.esrbRating.join(', ') : 'Unknown'}</div>
+						</div>
 					</div>
 				</div>
 			)}
