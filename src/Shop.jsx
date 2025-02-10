@@ -32,22 +32,6 @@ function Shop({ games, gamesError, getNewGames }) {
 		gamesToDisplay = sortGames(gamesToDisplay, sortCriteria);
 	}
 
-	function clearDropdown(setFilters) {
-		// Clear all dropdown checks
-		setFilters((prevFilters) =>
-			prevFilters.map((filter) => {
-				return { ...filter, isChecked: false };
-			})
-		);
-	}
-
-	function checkOrUncheckItem(clickedDropdownItem, setFilters) {
-		// Save the Unchecked/Checked status of the clicked filter item
-		setFilters((prevFilters) =>
-			prevFilters.map((filter) => (filter.title === clickedDropdownItem ? { ...filter, isChecked: !filter.isChecked } : filter))
-		);
-	}
-
 	return (
 		<div title="shop">
 			<div className="dropdownFiltersContainer">
@@ -99,6 +83,22 @@ function Shop({ games, gamesError, getNewGames }) {
 			{<div className="otherTools">{!isEveryFiltersUnset && <Sorter onSortItemClick={setSortCriteria} numberOfShowLessItems={3} />}</div>}
 			<GamesContainer games={gamesToDisplay} gamesError={gamesError} fetchNewGamesOnBottomScroll={getNewGames} />
 		</div>
+	);
+}
+
+function clearDropdown(setFilters) {
+	// Clear all dropdown checks
+	setFilters((prevFilters) =>
+		prevFilters.map((filter) => {
+			return { ...filter, isChecked: false };
+		})
+	);
+}
+
+function checkOrUncheckItem(clickedDropdownItem, setFilters) {
+	// Save the Unchecked/Checked status of the clicked filter item
+	setFilters((prevFilters) =>
+		prevFilters.map((filter) => (filter.title === clickedDropdownItem ? { ...filter, isChecked: !filter.isChecked } : filter))
 	);
 }
 
