@@ -58,7 +58,7 @@ function Shop({ games, gamesError, getNewGames }) {
 				></PriceRangeController>
 				{
 					// Only render the genre dropdown filter if there are available genre filter
-					genreFilters.length > 0 ? (
+					genreFilters.length > 0 && (
 						<DropdownFilter
 							items={genreFilters}
 							title="Genre"
@@ -70,11 +70,11 @@ function Shop({ games, gamesError, getNewGames }) {
 							}}
 							numberOfShowLessItems={7}
 						/>
-					) : null
+					)
 				}
 				{
 					// Only render the platform dropdown filter if there are available platform filter
-					platformFilters.length > 0 ? (
+					platformFilters.length > 0 && (
 						<DropdownFilter
 							items={platformFilters}
 							title="Platform"
@@ -86,11 +86,11 @@ function Shop({ games, gamesError, getNewGames }) {
 							}}
 							numberOfShowLessItems={7}
 						/>
-					) : null
+					)
 				}
 				{
 					// Only render the age rating dropdown filter if there are available age rating filter
-					ageRatingFilters.length > 0 ? (
+					ageRatingFilters.length > 0 && (
 						<DropdownFilter
 							items={ageRatingFilters}
 							title="Age Rating"
@@ -101,7 +101,7 @@ function Shop({ games, gamesError, getNewGames }) {
 								clearDropdown(setAgeRatingFilters);
 							}}
 						/>
-					) : null
+					)
 				}
 			</div>
 			{
