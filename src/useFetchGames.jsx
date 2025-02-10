@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 export default function useFetchGames(category, gameCountPerRequest = 40) {
 	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
 	const [games, setGames] = useState([]);
-	const [isGamesLoading, setIsGamesLoading] = useState(true);
 	const [gamesError, setGamesError] = useState(null);
 	const isFetchingApproved = useRef(true);
 
@@ -66,14 +65,12 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 					});
 				} catch (error) {
 					setGamesError(error);
-				} finally {
-					setIsGamesLoading(false);
 				}
 			})();
 		}
 	}, [pageToRequestFromAPI, category, gameCountPerRequest]);
 
-	return [games, gamesError, isGamesLoading, fetchMoreGames];
+	return [games, gamesError, fetchMoreGames];
 }
 
 useFetchGames.propTypes = {

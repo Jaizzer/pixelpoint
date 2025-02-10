@@ -16,7 +16,7 @@ export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
 	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(id);
-	const [games, gamesError, isGamesLoading, getNewGames] = useFetchGames();
+	const [games, gamesError, getNewGames] = useFetchGames();
 
 	const [cart, setCart] = useState([]);
 

@@ -40,7 +40,6 @@ vi.mock('./useFetchGames.jsx', () => {
 					esrbRating: ['Everyone'],
 				},
 			]);
-			const isGamesLoading = false;
 			const gamesError = null;
 			const getNewGames = vi.fn(() => {
 				setGames((games) =>
@@ -58,7 +57,7 @@ vi.mock('./useFetchGames.jsx', () => {
 					])
 				);
 			});
-			return [games, gamesError, isGamesLoading, getNewGames];
+			return [games, gamesError, getNewGames];
 		},
 	};
 });
