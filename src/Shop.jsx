@@ -32,12 +32,20 @@ function Shop({ games, gamesError, getNewGames }) {
 		gamesToDisplay = sortGames(gamesToDisplay, sortCriteria);
 	}
 
-	function handleClearDropdownChecks(filters, setFilters) {
+	function clearDropdown(setFilters) {
 		// Clear all dropdown checks
-		const updatedFilters = filters.map((filter) => {
-			return { ...filter, isChecked: false };
-		});
-		setFilters(updatedFilters);
+		setFilters((prevFilters) =>
+			prevFilters.map((filter) => {
+				return { ...filter, isChecked: false };
+			})
+		);
+	}
+
+	function checkOrUncheckItem(clickedDropdownItem, setFilters) {
+		// Save the Unchecked/Checked status of the clicked filter item
+		setFilters((prevFilters) =>
+			prevFilters.map((filter) => (filter.title === clickedDropdownItem ? { ...filter, isChecked: !filter.isChecked } : filter))
+		);
 	}
 
 	return (
@@ -55,14 +63,10 @@ function Shop({ games, gamesError, getNewGames }) {
 							items={genreFilters}
 							title="Genre"
 							onDropdownItemClick={(clickedItem) => {
-								// Save the Unchecked/Checked status of the genre filter item in the 'genreFilters state array
-								const updatedGenreFilters = genreFilters.map((genreFilter) =>
-									genreFilter.title === clickedItem ? { ...genreFilter, isChecked: !genreFilter.isChecked } : genreFilter
-								);
-								setGenreFilters(updatedGenreFilters);
+								checkOrUncheckItem(clickedItem, setGenreFilters);
 							}}
 							onClearClick={() => {
-								handleClearDropdownChecks(genreFilters, setGenreFilters);
+								clearDropdown(setGenreFilters);
 							}}
 							numberOfShowLessItems={7}
 						/>
@@ -75,16 +79,10 @@ function Shop({ games, gamesError, getNewGames }) {
 							items={platformFilters}
 							title="Platform"
 							onDropdownItemClick={(clickedItem) => {
-								// Save the Unchecked/Checked status of the platform filter item in the 'platformFilters state array
-								const updatedPlatformFilters = platformFilters.map((platformFilter) =>
-									platformFilter.title === clickedItem
-										? { ...platformFilter, isChecked: !platformFilter.isChecked }
-										: platformFilter
-								);
-								setPlatformFilters(updatedPlatformFilters);
+								checkOrUncheckItem(clickedItem, setPlatformFilters);
 							}}
 							onClearClick={() => {
-								handleClearDropdownChecks(platformFilters, setPlatformFilters);
+								clearDropdown(setPlatformFilters);
 							}}
 							numberOfShowLessItems={7}
 						/>
@@ -97,16 +95,10 @@ function Shop({ games, gamesError, getNewGames }) {
 							items={ageRatingFilters}
 							title="Age Rating"
 							onDropdownItemClick={(clickedItem) => {
-								// Save the Unchecked/Checked status of the age rating filter item in the 'ageRatingFilters' state array
-								const updatedAgeRatingFilters = ageRatingFilters.map((ageRatingFilter) =>
-									ageRatingFilter.title === clickedItem
-										? { ...ageRatingFilter, isChecked: !ageRatingFilter.isChecked }
-										: ageRatingFilter
-								);
-								setAgeRatingFilters(updatedAgeRatingFilters);
+								checkOrUncheckItem(clickedItem, setAgeRatingFilters);
 							}}
 							onClearClick={() => {
-								handleClearDropdownChecks(ageRatingFilters, setAgeRatingFilters);
+								clearDropdown(setAgeRatingFilters);
 							}}
 						/>
 					) : null
