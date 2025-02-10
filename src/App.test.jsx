@@ -37,7 +37,7 @@ vi.mock('./useFetchGames.jsx', () => {
 					platforms: ['Platform 1', 'Platform 2', 'Platform 3'],
 					ownerCount: 300,
 					releaseDate: '2024-01-24',
-					esrbRating: 'Everyone',
+					esrbRating: ['Everyone'],
 				},
 			]);
 			const isGamesLoading = false;
@@ -53,7 +53,7 @@ vi.mock('./useFetchGames.jsx', () => {
 							platforms: ['Platform 1', 'Platform 2', 'Platform 3'],
 							ownerCount: 300,
 							releaseDate: '2024-01-24',
-							esrbRating: 'Everyone',
+							esrbRating: ['Everyone'],
 						},
 					])
 				);
