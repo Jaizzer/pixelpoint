@@ -51,64 +51,52 @@ function Shop({ games, gamesError, getNewGames }) {
 	return (
 		<div title="shop">
 			<div className="dropdownFiltersContainer">
-				<PriceRangeController
-					onPriceRangeSet={(range) => {
-						setPriceRangeFilters(range);
-					}}
-				></PriceRangeController>
 				{
-					// Only render the genre dropdown filter if there are available genre filter
-					genreFilters.length > 0 && (
-						<DropdownFilter
-							items={genreFilters}
-							title="Genre"
-							onDropdownItemClick={(clickedItem) => {
-								checkOrUncheckItem(clickedItem, setGenreFilters);
-							}}
-							onClearClick={() => {
-								clearDropdown(setGenreFilters);
-							}}
-							numberOfShowLessItems={7}
-						/>
-					)
-				}
-				{
-					// Only render the platform dropdown filter if there are available platform filter
-					platformFilters.length > 0 && (
-						<DropdownFilter
-							items={platformFilters}
-							title="Platform"
-							onDropdownItemClick={(clickedItem) => {
-								checkOrUncheckItem(clickedItem, setPlatformFilters);
-							}}
-							onClearClick={() => {
-								clearDropdown(setPlatformFilters);
-							}}
-							numberOfShowLessItems={7}
-						/>
-					)
-				}
-				{
-					// Only render the age rating dropdown filter if there are available age rating filter
-					ageRatingFilters.length > 0 && (
-						<DropdownFilter
-							items={ageRatingFilters}
-							title="Age Rating"
-							onDropdownItemClick={(clickedItem) => {
-								checkOrUncheckItem(clickedItem, setAgeRatingFilters);
-							}}
-							onClearClick={() => {
-								clearDropdown(setAgeRatingFilters);
-							}}
-						/>
+					// Render the dropdowns if all filters have been set
+					!isEveryFiltersUnset && (
+						<>
+							<PriceRangeController
+								onPriceRangeSet={(range) => {
+									setPriceRangeFilters(range);
+								}}
+							></PriceRangeController>
+							<DropdownFilter
+								items={genreFilters}
+								title="Genre"
+								onDropdownItemClick={(clickedItem) => {
+									checkOrUncheckItem(clickedItem, setGenreFilters);
+								}}
+								onClearClick={() => {
+									clearDropdown(setGenreFilters);
+								}}
+								numberOfShowLessItems={7}
+							/>
+							<DropdownFilter
+								items={platformFilters}
+								title="Platform"
+								onDropdownItemClick={(clickedItem) => {
+									checkOrUncheckItem(clickedItem, setPlatformFilters);
+								}}
+								onClearClick={() => {
+									clearDropdown(setPlatformFilters);
+								}}
+								numberOfShowLessItems={7}
+							/>
+							<DropdownFilter
+								items={ageRatingFilters}
+								title="Age Rating"
+								onDropdownItemClick={(clickedItem) => {
+									checkOrUncheckItem(clickedItem, setAgeRatingFilters);
+								}}
+								onClearClick={() => {
+									clearDropdown(setAgeRatingFilters);
+								}}
+							/>
+						</>
 					)
 				}
 			</div>
-			{
-				<div className="otherTools">
-					<Sorter onSortItemClick={setSortCriteria} numberOfShowLessItems={3} />
-				</div>
-			}
+			{<div className="otherTools">{!isEveryFiltersUnset && <Sorter onSortItemClick={setSortCriteria} numberOfShowLessItems={3} />}</div>}
 			<GamesContainer games={gamesToDisplay} gamesError={gamesError} fetchNewGamesOnBottomScroll={getNewGames} />
 		</div>
 	);
