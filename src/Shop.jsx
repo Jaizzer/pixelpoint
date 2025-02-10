@@ -32,6 +32,14 @@ function Shop({ games, gamesError, getNewGames }) {
 		gamesToDisplay = sortGames(gamesToDisplay, sortCriteria);
 	}
 
+	function handleClearDropdownChecks(filters, setFilters) {
+		// Clear all dropdown checks
+		const updatedFilters = filters.map((filter) => {
+			return { ...filter, isChecked: false };
+		});
+		setFilters(updatedFilters);
+	}
+
 	return (
 		<div title="shop">
 			<div className="dropdownFiltersContainer">
@@ -54,11 +62,7 @@ function Shop({ games, gamesError, getNewGames }) {
 								setGenreFilters(updatedGenreFilters);
 							}}
 							onClearClick={() => {
-								// Save the unchecking of all genre filter items in the 'genreFilters state array
-								const updatedGenreFilters = genreFilters.map((genreFilter) => {
-									return { ...genreFilter, isChecked: false };
-								});
-								setGenreFilters(updatedGenreFilters);
+								handleClearDropdownChecks(genreFilters, setGenreFilters);
 							}}
 							numberOfShowLessItems={7}
 						/>
@@ -80,11 +84,7 @@ function Shop({ games, gamesError, getNewGames }) {
 								setPlatformFilters(updatedPlatformFilters);
 							}}
 							onClearClick={() => {
-								// Save the unchecking of all platform filter items in the 'platformFilters state array
-								const updatedPlatformFilters = platformFilters.map((platformFilter) => {
-									return { ...platformFilter, isChecked: false };
-								});
-								setPlatformFilters(updatedPlatformFilters);
+								handleClearDropdownChecks(platformFilters, setPlatformFilters);
 							}}
 							numberOfShowLessItems={7}
 						/>
@@ -106,11 +106,7 @@ function Shop({ games, gamesError, getNewGames }) {
 								setAgeRatingFilters(updatedAgeRatingFilters);
 							}}
 							onClearClick={() => {
-								// Save the unchecking of all age rating filter items in the 'ageRatingFilters' state array
-								const updatedAgeRatingFilters = ageRatingFilters.map((ageRatingFilter) => {
-									return { ...ageRatingFilter, isChecked: false };
-								});
-								setAgeRatingFilters(updatedAgeRatingFilters);
+								handleClearDropdownChecks(ageRatingFilters, setAgeRatingFilters);
 							}}
 						/>
 					) : null
