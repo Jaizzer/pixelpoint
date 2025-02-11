@@ -39,14 +39,8 @@ function TopBar({ cartContentCount }) {
 		<Container>
 			<Search />
 			<Actions>
-				<StyledLink to={'/notifications'} role="topbar-actions">
-					<NotificationIconWithCount notificationContentCount={2} />
-				</StyledLink>
 				<StyledLink to="/cart" role="topbar-actions">
 					<CartIconWithCount cartContentCount={cartContentCount} />
-				</StyledLink>
-				<StyledLink to="/logout" role="topbar-actions">
-					<LogOutIcon />
 				</StyledLink>
 			</Actions>
 		</Container>

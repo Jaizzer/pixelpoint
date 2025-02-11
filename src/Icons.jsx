@@ -64,23 +64,4 @@ function AboutIcon() {
 	);
 }
 
-function NotificationIcon() {
-	return (
-		<Icon viewBox="0 0 24 24">
-			<path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" />
-			<path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" />
-		</Icon>
-	);
-}
-
-function LogOutIcon() {
-	return (
-		<Icon viewBox="0 0 24 24">
-			<path d="M8.90002 7.55999C9.21002 3.95999 11.06 2.48999 15.11 2.48999H15.24C19.71 2.48999 21.5 4.27999 21.5 8.74999V15.27C21.5 19.74 19.71 21.53 15.24 21.53H15.11C11.09 21.53 9.24002 20.08 8.91002 16.54" />
-			<path d="M15 12H3.62" />
-			<path d="M5.85 8.65002L2.5 12L5.85 15.35" />
-		</Icon>
-	);
-}
-
-export { HomeIcon, AboutIcon, AccountIcon, ShopIcon, CartIcon, NotificationIcon, LogOutIcon };
+export { HomeIcon, AboutIcon, AccountIcon, ShopIcon, CartIcon };

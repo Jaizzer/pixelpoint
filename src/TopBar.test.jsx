@@ -18,14 +18,14 @@ describe('TopBar component', () => {
 		expect(searchBar).not.toBeNull();
 	});
 
-	it('has 3 buttons for notification, shopping car, and logout', () => {
+	it('has shopping cart button', () => {
 		render(
 			<MemoryRouter>
 				<TopBar />
 			</MemoryRouter>
 		);
 		const buttons = screen.queryAllByRole('topbar-actions');
-		expect(buttons.length).toEqual(3);
+		expect(buttons.length).toEqual(1);
 	});
 
 	it('passes the right order count to the Cart icon', () => {
