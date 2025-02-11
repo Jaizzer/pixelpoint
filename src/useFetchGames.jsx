@@ -7,12 +7,28 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 	const [games, setGames] = useState([]);
 	const [gamesError, setGamesError] = useState(null);
 	const isFetchingApproved = useRef(true);
+	const [genres, setGenres] = useState([]);
+	const [platforms, setPlatforms] = useState([]);
 
 	function fetchMoreGames() {
 		// Move to next page
 		setPageToRequestFromAPI((prev) => prev + 1);
 
 		// Allow fetching since new page was requested
+		isFetchingApproved.current = true;
+	}
+
+	function getSpecificGenres(genres) {
+		// Update genres
+		setGenres(genres);
+		// Allow fetching since new genres were requested
+		isFetchingApproved.current = true;
+	}
+
+	function getSpecificPlatforms(platforms) {
+		// Update platforms
+		setPlatforms(platforms);
+		// Allow fetching since new platforms were requested
 		isFetchingApproved.current = true;
 	}
 
@@ -38,6 +54,17 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 						dateTomorrow.setDate(dateTomorrow.getDate() + 1);
 						url += `&dates=${dateTomorrow.toISOString().split('T')[0]},${dateOneYearFromNow.toISOString().split('T')[0]}`;
 					}
+
+					// Add genres if provided
+					if (genres.length > 0) {
+						url += `&genres=${genres.join(', ')}`;
+					}
+
+					// Add platforms if provided
+					if (platforms.length > 0) {
+						url += `&platforms=${platforms.join(', ')}`;
+					}
+
 					const response = await fetch(url);
 
 					// Throw error if response is 404
@@ -68,9 +95,9 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 				}
 			})();
 		}
-	}, [pageToRequestFromAPI, category, gameCountPerRequest]);
+	}, [pageToRequestFromAPI, category, gameCountPerRequest, genres, platforms]);
 
-	return [games, gamesError, fetchMoreGames];
+	return [games, gamesError, fetchMoreGames, getSpecificGenres, getSpecificPlatforms];
 }
 
 useFetchGames.propTypes = {
