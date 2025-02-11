@@ -86,9 +86,18 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 							esrbRating: [game.esrb_rating ? game.esrb_rating.name : 'Unrated'],
 						};
 					});
-					// Add the newly requested games to current games array
-					setGames((game) => {
-						return game.concat(gamesWithDistilledProperties);
+
+					// Add the newly requested games to the current games array
+					setGames((prev) => {
+						const updatedGames = [...prev];
+						// Insert newly fetched games if they haven't been added yet to the games state array
+						gamesWithDistilledProperties.forEach((game) => {
+							const isGameNotYetAdded = prev.filter((element) => element.id === game.id).length === 0;
+							if (isGameNotYetAdded) {
+								updatedGames.push(game);
+							}
+						});
+						return updatedGames;
 					});
 				} catch (error) {
 					setGamesError(error);
