@@ -12,6 +12,6 @@ describe('Sidebar component', () => {
 		);
 		const sidebar = screen.getByRole('navigation');
 		const navigationItems = getAllByRole(sidebar, 'listitem');
-		expect(navigationItems.length).toEqual(6);
+		expect(navigationItems.length).toEqual(5);
 	});
 });

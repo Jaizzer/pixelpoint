@@ -63,12 +63,6 @@ export default function Sidebar() {
 					</StyledLink>
 				</li>
 				<li>
-					<StyledLink to="/account">
-						<AccountIcon />
-						Account
-					</StyledLink>
-				</li>
-				<li>
 					<StyledLink to="/about">
 						<AboutIcon />
 						About

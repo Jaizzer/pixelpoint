@@ -110,21 +110,6 @@ describe('App component', () => {
 		});
 	});
 
-	it("renders the Account page in '/account' route", async () => {
-		render(
-			<MemoryRouter initialEntries={['/account']}>
-				<Routes>
-					<Route path="/" element={<App />} />
-					<Route path="/:pageToDisplay" element={<App />} />
-				</Routes>
-			</MemoryRouter>
-		);
-		await waitFor(() => {
-			const accountPage = screen.queryByTitle('account');
-			expect(accountPage).not.toBeNull();
-		});
-	});
-
 	it("renders the Shop page in '/shop' route", async () => {
 		render(
 			<MemoryRouter initialEntries={['/shop']}>
