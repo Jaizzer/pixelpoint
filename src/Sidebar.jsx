@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { HomeIcon, AccountIcon, ShopIcon, AboutIcon } from './Icons';
+import { HomeIcon, ShopIcon, AboutIcon } from './Icons';
 import styled from 'styled-components';
 
 const Nav = styled.nav`

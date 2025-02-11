@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import CartIconWithCount from './CartIconWithCount';
 import { Link } from 'react-router-dom';
 import Search from './Search';
-import NotificationIconWithCount from './NotificationIconWithCount';
-import LogOutIcon from './LogOutIcon';
 import styled from 'styled-components';
 
 const Container = styled.div`
