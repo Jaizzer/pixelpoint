@@ -83,7 +83,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 							platforms: game.platforms ? game.platforms.map((platform) => platform.platform.name) : ['Unknown'],
 							ownerCount: game.added_by_status && game.added_by_status.owned ? game.added_by_status.owned : 0,
 							releaseDate: game.released,
-							esrbRating: [game.esrb_rating ? game.esrb_rating.name : 'Unrated'],
+							esrbRating: [game.esrb_rating ? game.esrb_rating.name : 'Rating Pending'],
 						};
 					});
 
