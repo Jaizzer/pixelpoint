@@ -92,7 +92,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 							image: game.background_image,
 							title: game.name,
 							price: getPrice(game.id),
-							id: `${game.id}`,
+							id: game.id,
 							genres: game.genres ? game.genres.map((genre) => genre.name) : ['Unknown'],
 							platforms: game.platforms ? game.platforms.map((platform) => platform.platform.name) : ['Unknown'],
 							parentPlatforms: game.parent_platforms.map((parentPlatform) => parentPlatform.platform.name),
