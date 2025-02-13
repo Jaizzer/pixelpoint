@@ -16,7 +16,9 @@ function Shop({ games, gamesError, getNewGames }) {
 	if (isGamesLoaded && isEveryFiltersUnset) {
 		setGenreFilters(initializeFilters(games, 'genres'));
 		setPlatformFilters(initializeFilters(games, 'platforms'));
-		setAgeRatingFilters(initializeFilters(games, 'esrbRating'));
+		setAgeRatingFilters(
+			['Everyone', 'Everyone 10+', 'Teen', 'Mature', 'Adults Only', 'Rating Pending'].map((filter) => ({ name: filter, isChecked: false }))
+		);
 	}
 
 	let gamesToDisplay = games;
