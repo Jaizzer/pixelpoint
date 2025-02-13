@@ -19,8 +19,8 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 	}
 
 	function getSpecificGenres(genres) {
-		// Update genres and ensure the elements are in lower case for API request compliance
-		setGenres(genres.map((genre) => genre.toLowerCase()));
+		// Update genres using an array of genre IDs
+		setGenres(genres.map(genres));
 
 		// Start again at page 1
 		setPageToRequestFromAPI(1);
@@ -33,8 +33,8 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 	}
 
 	function getSpecificPlatforms(platforms) {
-		// Update platforms and ensure the elements are in lower case for API request compliance
-		setPlatforms(platforms.map((platform) => platform.toLowerCase()));
+		// Update platforms using an array of platform IDs
+		setPlatforms(platforms);
 
 		// Start again at page 1
 		setPageToRequestFromAPI(1);
