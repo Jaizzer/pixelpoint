@@ -46,4 +46,15 @@ describe('Game Card Component', () => {
 
 		expect(rating).not.toBeNull();
 	});
+
+	it("contains the game's quantity sold", () => {
+		render(
+			<MemoryRouter>
+				<GameCard quantitySold={51000} />{' '}
+			</MemoryRouter>
+		);
+		const quantitySold = screen.queryByText('51k');
+
+		expect(quantitySold).not.toBeNull();
+	});
 });

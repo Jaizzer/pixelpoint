@@ -44,7 +44,7 @@ const Text = styled.div`
 	font-size: ${(props) => (props.emphasize ? '20px' : '15px')};
 `;
 
-function GameCard({ image, title, price, rating, id }) {
+function GameCard({ image, title, price, rating, quantitySold, id }) {
 	return (
 		<Link to={`/gameDetails/${id}`}>
 			<Container title="game-card">
@@ -55,10 +55,25 @@ function GameCard({ image, title, price, rating, id }) {
 					<div className="rating">
 						<div className="rating-content">{rating}</div>
 					</div>
+					<div className="quantitySold">
+						<div className="quantitySoldContent">{nFormatter(quantitySold)}</div>
+					</div>
 				</GameInfo>
 			</Container>
 		</Link>
 	);
+}
+function nFormatter(num) {
+	if (num >= 1000000000) {
+		return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+	}
+	if (num >= 1000000) {
+		return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+	}
+	if (num >= 1000) {
+		return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+	}
+	return num;
 }
 
 GameCard.propTypes = {
@@ -67,6 +82,7 @@ GameCard.propTypes = {
 	price: PropTypes.number,
 	id: PropTypes.string,
 	rating: PropTypes.number,
+	quantitySold: PropTypes.number,
 };
 
 export default GameCard;
