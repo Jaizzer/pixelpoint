@@ -217,17 +217,15 @@ describe('Shop component', () => {
 				esrbRating: ['Everyone 10+'],
 			},
 		];
-		render(<Shop games={games} gamesError={false} />);
+		const mockFunction = vi.fn();
+		render(<Shop games={games} gamesError={false} getSpecificGenres={mockFunction} />);
 
 		// Filter all 'Action'
 		const actionDropdownFilter = screen.queryByText('Action');
 		await user.click(actionDropdownFilter);
 
-		// Check if the games that are 'Action' genre the only games that remained
-		// by checking if the number of images corresponds to the number of Action games provided which is 2
-		const isActionGenresRemained = screen.queryAllByRole('image');
-
-		expect(isActionGenresRemained.length).toEqual(2);
+		// getSpecificGenres must be called with an array of genres' IDs in which for this test, the genre ID of Action is '1'
+		expect(mockFunction).toHaveBeenCalledWith([1]);
 	});
 
 	it('filters the games by platform', async () => {

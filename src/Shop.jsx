@@ -6,7 +6,7 @@ import GamesContainer from './GamesContainer';
 import useFetchGenres from './useFetchGenres';
 import useFetchPlatforms from './useFetchPlatforms';
 
-function Shop({ games, gamesError, getNewGames }) {
+function Shop({ games, gamesError, getNewGames, getSpecificGenres }) {
 	const [genres, genresError] = useFetchGenres();
 	const [platforms, platformsError] = useFetchPlatforms();
 
@@ -54,7 +54,14 @@ function Shop({ games, gamesError, getNewGames }) {
 								items={genreFilters}
 								title="Genre"
 								onDropdownItemClick={(clickedItem) => {
+									// Add/Remove Checkmark
 									checkOrUncheckItem(clickedItem, setGenreFilters);
+
+									// Get the genre IDs (genre IDs are used by the API used for fetching games of specific genres)
+									const checkedGenreIDs = getCheckedFiltersForTheNextRender(clickedItem, genreFilters).map((genre) => genre.id);
+
+									// Request games that matches the checked genre filters via API
+									getSpecificGenres(checkedGenreIDs);
 								}}
 								onClearClick={() => {
 									clearDropdown(setGenreFilters);
@@ -165,6 +172,7 @@ Shop.propTypes = {
 	games: PropTypes.array,
 	gamesError: PropTypes.error,
 	getNewGames: PropTypes.func,
+	getSpecificGenres: PropTypes.func,
 };
 
 export default Shop;
