@@ -147,6 +147,20 @@ function filterGamesByPrice(games, min, max) {
 	return filteredGames;
 }
 
+function getCheckedFiltersForTheNextRender(clickedItem, filters) {
+	// If the clicked item was checked before clicking, then it would be unchecked after the click
+	const isClickedItemUnchecked = filters.filter((filter) => filter.name === clickedItem)[0].isChecked;
+	let remainingCheckedFilters;
+	if (isClickedItemUnchecked) {
+		// Remove the clicked item from the checked filters array
+		remainingCheckedFilters = [...filters.filter((filter) => filter.name !== clickedItem && filter.isChecked).map((item) => item.name)];
+	} else {
+		// Add the clicked item to checked filters array
+		remainingCheckedFilters = [...filters.filter((item) => item.isChecked).map((item) => item.name), clickedItem];
+	}
+	return remainingCheckedFilters;
+}
+
 Shop.propTypes = {
 	games: PropTypes.array,
 	gamesError: PropTypes.error,
