@@ -16,7 +16,7 @@ export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
 	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(id);
-	const [games, gamesError, getNewGames, getSpecificGenres] = useFetchGames();
+	const [games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
 	const [cart, setCart] = useState([]);
 
 	function addToCart(gameToAdd) {
@@ -44,7 +44,13 @@ export default function App() {
 				) : pageToDisplay === 'account' ? (
 					<Account />
 				) : pageToDisplay === 'shop' ? (
-					<Shop games={games} gamesError={gamesError} getNewGames={getNewGames} getSpecificGenres={getSpecificGenres} />
+					<Shop
+						games={games}
+						gamesError={gamesError}
+						getNewGames={getNewGames}
+						getSpecificGenres={getSpecificGenres}
+						getSpecificPlatforms={getSpecificPlatforms}
+					/>
 				) : pageToDisplay === 'about' ? (
 					<About />
 				) : pageToDisplay === 'cart' ? (

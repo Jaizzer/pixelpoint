@@ -6,7 +6,7 @@ import GamesContainer from './GamesContainer';
 import useFetchGenres from './useFetchGenres';
 import useFetchPlatforms from './useFetchPlatforms';
 
-function Shop({ games, gamesError, getNewGames, getSpecificGenres }) {
+function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms }) {
 	const [genres, genresError] = useFetchGenres();
 	const [platforms, platformsError] = useFetchPlatforms();
 
@@ -72,7 +72,16 @@ function Shop({ games, gamesError, getNewGames, getSpecificGenres }) {
 								items={platformFilters}
 								title="Platform"
 								onDropdownItemClick={(clickedItem) => {
+									// Add/Remove Checkmark
 									checkOrUncheckItem(clickedItem, setPlatformFilters);
+
+									// Get the platform IDs (platform IDs are used by the API used for fetching games for specific platforms)
+									const checkedPlatformIDs = getCheckedFiltersForTheNextRender(clickedItem, platformFilters).map(
+										(platform) => platform.id
+									);
+
+									// Request games that matches the checked platform filters via API
+									getSpecificPlatforms(checkedPlatformIDs);
 								}}
 								onClearClick={() => {
 									clearDropdown(setPlatformFilters);
@@ -173,6 +182,7 @@ Shop.propTypes = {
 	gamesError: PropTypes.error,
 	getNewGames: PropTypes.func,
 	getSpecificGenres: PropTypes.func,
+	getSpecificPlatforms: PropTypes.func,
 };
 
 export default Shop;

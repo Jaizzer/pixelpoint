@@ -259,13 +259,15 @@ describe('Shop component', () => {
 				esrbRating: ['Everyone 10+'],
 			},
 		];
-		render(<Shop games={games} gamesError={false} />);
+		const mockFunction = vi.fn();
+		render(<Shop games={games} gamesError={false} getSpecificPlatforms={mockFunction} />);
+
 		// Filter all games available for 'PC' platform
 		const pcDropdownFilter = screen.queryByText('PC');
 		await user.click(pcDropdownFilter);
 
-		const isGamesForPCRemained = screen.queryAllByRole('image').length === 2;
-		expect(isGamesForPCRemained).toBeTruthy();
+		// getSpecificPlatforms must be called with an array of platforms' IDs in which for this test, the platform ID of PC is '1'
+		expect(mockFunction).toHaveBeenCalledWith([1]);
 	});
 
 	it('filters the games by age rating', async () => {
