@@ -115,7 +115,7 @@ vi.mock('./DropdownFilter', () => ({
 						id={item.name}
 						name={item.name}
 						onChange={() => {
-							onDropdownItemClick(item.name);
+							onDropdownItemClick(item);
 						}}
 					/>
 					<label htmlFor={item.name}>{item.name}</label>

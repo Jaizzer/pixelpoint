@@ -104,7 +104,7 @@ function clearDropdown(setFilters) {
 function checkOrUncheckItem(clickedDropdownItem, setFilters) {
 	// Save the Unchecked/Checked status of the clicked filter item
 	setFilters((prevFilters) =>
-		prevFilters.map((filter) => (filter.name === clickedDropdownItem ? { ...filter, isChecked: !filter.isChecked } : filter))
+		prevFilters.map((filter) => (filter.name === clickedDropdownItem.name ? { ...filter, isChecked: !filter.isChecked } : filter))
 	);
 }
 
@@ -149,14 +149,14 @@ function filterGamesByPrice(games, min, max) {
 
 function getCheckedFiltersForTheNextRender(clickedItem, filters) {
 	// If the clicked item was checked before clicking, then it would be unchecked after the click
-	const isClickedItemUnchecked = filters.filter((filter) => filter.name === clickedItem)[0].isChecked;
+	const isClickedItemUnchecked = filters.filter((filter) => filter.name === clickedItem.name)[0].isChecked;
 	let remainingCheckedFilters;
 	if (isClickedItemUnchecked) {
 		// Remove the clicked item from the checked filters array
-		remainingCheckedFilters = [...filters.filter((filter) => filter.name !== clickedItem && filter.isChecked).map((item) => item.name)];
+		remainingCheckedFilters = [...filters.filter((filter) => filter.name !== clickedItem && filter.isChecked)];
 	} else {
 		// Add the clicked item to checked filters array
-		remainingCheckedFilters = [...filters.filter((item) => item.isChecked).map((item) => item.name), clickedItem];
+		remainingCheckedFilters = [...filters.filter((item) => item.isChecked), clickedItem];
 	}
 	return remainingCheckedFilters;
 }
