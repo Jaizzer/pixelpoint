@@ -3,6 +3,93 @@ import { render, screen } from '@testing-library/react';
 import Shop from './Shop';
 import { userEvent } from '@testing-library/user-event';
 
+vi.mock('./useFetchGenres.jsx', () => ({
+	default: () => {
+		const genres = [
+			{ id: 1, name: 'Action' },
+			{ id: 2, name: 'Indie' },
+			{ id: 3, name: 'Adventure' },
+			{ id: 4, name: 'RPG' },
+			{ id: 5, name: 'Strategy' },
+			{ id: 6, name: 'Shooter' },
+			{ id: 7, name: 'Casual' },
+			{ id: 8, name: 'Simulation' },
+			{ id: 9, name: 'Puzzle' },
+			{ id: 10, name: 'Arcade' },
+			{ id: 11, name: 'Platformer' },
+			{ id: 12, name: 'Massively Multiplayer' },
+			{ id: 13, name: 'Racing' },
+			{ id: 14, name: 'Sports' },
+			{ id: 15, name: 'Fighting' },
+			{ id: 16, name: 'Family' },
+			{ id: 17, name: 'Board Games' },
+			{ id: 18, name: 'Educational' },
+			{ id: 19, name: 'Card' },
+		];
+		const genresError = null;
+		return [genres, genresError];
+	},
+}));
+
+vi.mock('./useFetchPlatforms.jsx', () => ({
+	default: () => {
+		const platforms = [
+			{ id: 1, name: 'PC' },
+			{ id: 2, name: 'PlayStation 5' },
+			{ id: 3, name: 'Xbox One' },
+			{ id: 4, name: 'PlayStation 4' },
+			{ id: 5, name: 'Xbox Series S/X' },
+			{ id: 6, name: 'Nintendo Switch' },
+			{ id: 7, name: 'iOS' },
+			{ id: 8, name: 'Android' },
+			{ id: 9, name: 'Nintendo 3DS' },
+			{ id: 10, name: 'Nintendo DS' },
+			{ id: 11, name: 'Nintendo DSi' },
+			{ id: 12, name: 'macOS' },
+			{ id: 13, name: 'Linux' },
+			{ id: 14, name: 'Xbox 360' },
+			{ id: 15, name: 'Xbox' },
+			{ id: 16, name: 'PlayStation 3' },
+			{ id: 17, name: 'PlayStation 2' },
+			{ id: 18, name: 'PlayStation' },
+			{ id: 19, name: 'PS Vita' },
+			{ id: 20, name: 'PSP' },
+			{ id: 21, name: 'Wii U' },
+			{ id: 22, name: 'Wii' },
+			{ id: 23, name: 'GameCube' },
+			{ id: 24, name: 'Nintendo 64' },
+			{ id: 25, name: 'Game Boy Advance' },
+			{ id: 26, name: 'Game Boy Color' },
+			{ id: 27, name: 'Game Boy' },
+			{ id: 28, name: 'SNES' },
+			{ id: 29, name: 'NES' },
+			{ id: 30, name: 'Classic Macintosh' },
+			{ id: 31, name: 'Apple II' },
+			{ id: 32, name: 'Commodore / Amiga' },
+			{ id: 33, name: 'Atari 7800' },
+			{ id: 34, name: 'Atari 5200' },
+			{ id: 35, name: 'Atari 2600' },
+			{ id: 36, name: 'Atari Flashback' },
+			{ id: 37, name: 'Atari 8-bit' },
+			{ id: 38, name: 'Atari ST' },
+			{ id: 39, name: 'Atari Lynx' },
+			{ id: 40, name: 'Atari XEGS' },
+			{ id: 41, name: 'Genesis' },
+			{ id: 42, name: 'SEGA Saturn' },
+			{ id: 43, name: 'SEGA CD' },
+			{ id: 44, name: 'SEGA 32X' },
+			{ id: 45, name: 'SEGA Master System' },
+			{ id: 46, name: 'Dreamcast' },
+			{ id: 47, name: '3DO' },
+			{ id: 48, name: 'Jaguar' },
+			{ id: 49, name: 'Game Gear' },
+			{ id: 50, name: 'Neo Geo' },
+		];
+		const platformsError = null;
+		return [platforms, platformsError];
+	},
+}));
+
 vi.mock('./GamesContainer', () => ({
 	default: ({ games }) => {
 		const gameCards = games.map((game) => {
@@ -69,7 +156,7 @@ describe('Shop component', () => {
 				price: '$45',
 				id: '1',
 				genres: ['Action', 'Adventure'],
-				platforms: ['Mobile'],
+				platforms: ['Android'],
 				esrbRating: ['Everyone 10+'],
 			},
 			{
@@ -77,7 +164,7 @@ describe('Shop component', () => {
 				title: 'game',
 				price: '$55',
 				id: '2',
-				genres: ['Action', 'Open World'],
+				genres: ['Action', 'Shooter'],
 				platforms: ['PC'],
 				esrbRating: ['Everyone 10+'],
 			},
@@ -108,7 +195,7 @@ describe('Shop component', () => {
 				price: '$45',
 				id: '1',
 				genres: ['Action', 'Adventure'],
-				platforms: ['Mobile'],
+				platforms: ['Android'],
 				esrbRating: ['Everyone 10+'],
 			},
 			{
@@ -116,7 +203,7 @@ describe('Shop component', () => {
 				title: 'game',
 				price: '$55',
 				id: '2',
-				genres: ['Action', 'Open World'],
+				genres: ['Action', 'Shooter'],
 				platforms: ['PC'],
 				esrbRating: ['Everyone 10+'],
 			},
@@ -152,7 +239,7 @@ describe('Shop component', () => {
 				price: '$45',
 				id: '1',
 				genres: ['Action', 'Adventure'],
-				platforms: ['Mobile'],
+				platforms: ['Android'],
 				esrbRating: ['Everyone 10+'],
 			},
 			{
@@ -160,7 +247,7 @@ describe('Shop component', () => {
 				title: 'game',
 				price: '$55',
 				id: '2',
-				genres: ['Action', 'Open World'],
+				genres: ['Action', 'Shooter'],
 				platforms: ['PC'],
 				esrbRating: ['Everyone 10+'],
 			},
@@ -192,7 +279,7 @@ describe('Shop component', () => {
 				price: '$45',
 				id: '1',
 				genres: ['Action', 'Adventure'],
-				platforms: ['Mobile'],
+				platforms: ['Android'],
 				esrbRating: ['Everyone 10+'],
 			},
 			{
@@ -200,7 +287,7 @@ describe('Shop component', () => {
 				title: 'game',
 				price: '$55',
 				id: '2',
-				genres: ['Action', 'Open World'],
+				genres: ['Action', 'Shooter'],
 				platforms: ['PC'],
 				esrbRating: ['Mature'],
 			},
@@ -232,7 +319,7 @@ describe('Shop component', () => {
 				price: 650,
 				id: '1',
 				genres: ['Action', 'Adventure'],
-				platforms: ['Mobile'],
+				platforms: ['Android'],
 				unitsSold: 10,
 				esrbRating: ['Everyone 10+'],
 			},
@@ -241,7 +328,7 @@ describe('Shop component', () => {
 				title: 'game2',
 				price: 23,
 				id: '2',
-				genres: ['Action', 'Open World'],
+				genres: ['Action', 'Shooter'],
 				platforms: ['PC'],
 				unitsSold: 20,
 				esrbRating: ['Everyone 10+'],
