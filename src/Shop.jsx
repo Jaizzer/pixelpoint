@@ -6,7 +6,7 @@ import GamesContainer from './GamesContainer';
 import useFetchGenres from './useFetchGenres';
 import useFetchPlatforms from './useFetchPlatforms';
 
-function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms }) {
+function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms, checkIfGameIsInCart }) {
 	const [genres, genresError] = useFetchGenres();
 	const [platforms, platformsError] = useFetchPlatforms();
 
@@ -111,7 +111,12 @@ function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPl
 				}
 			</div>
 			{<div className="otherTools"></div>}
-			<GamesContainer games={gamesToDisplay} gamesError={gamesError} fetchNewGamesOnBottomScroll={getNewGames} />
+			<GamesContainer
+				games={gamesToDisplay}
+				gamesError={gamesError}
+				fetchNewGamesOnBottomScroll={getNewGames}
+				checkIfGameIsInCart={checkIfGameIsInCart}
+			/>
 		</div>
 	);
 }
@@ -191,6 +196,7 @@ Shop.propTypes = {
 	getNewGames: PropTypes.func,
 	getSpecificGenres: PropTypes.func,
 	getSpecificPlatforms: PropTypes.func,
+	checkIfGameIsInCart: PropTypes.func,
 };
 
 export default Shop;
