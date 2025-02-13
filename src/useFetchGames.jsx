@@ -95,6 +95,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 							id: `${game.id}`,
 							genres: game.genres ? game.genres.map((genre) => genre.name) : ['Unknown'],
 							platforms: game.platforms ? game.platforms.map((platform) => platform.platform.name) : ['Unknown'],
+							parentPlatforms: game.parent_platforms.map((parentPlatform) => parentPlatform.platform.name),
 							ownerCount: game.added_by_status && game.added_by_status.owned ? game.added_by_status.owned : 0,
 							rating: game.rating,
 							releaseDate: game.released,
