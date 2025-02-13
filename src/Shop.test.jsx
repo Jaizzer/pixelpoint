@@ -22,16 +22,16 @@ vi.mock('./DropdownFilter', () => ({
 	default: ({ items, title, onDropdownItemClick }) => {
 		const dropdownItems = items.map((item) => {
 			return (
-				<div key={item.title} className="dropdownItem">
+				<div key={item.name} className="dropdownItem">
 					<input
 						type="checkbox"
-						id={item.title}
-						name={item.title}
+						id={item.name}
+						name={item.name}
 						onChange={() => {
-							onDropdownItemClick(item.title);
+							onDropdownItemClick(item.name);
 						}}
 					/>
-					<label htmlFor={item.title}>{item.title}</label>
+					<label htmlFor={item.name}>{item.name}</label>
 				</div>
 			);
 		});

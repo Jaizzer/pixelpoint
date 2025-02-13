@@ -94,7 +94,7 @@ function clearDropdown(setFilters) {
 function checkOrUncheckItem(clickedDropdownItem, setFilters) {
 	// Save the Unchecked/Checked status of the clicked filter item
 	setFilters((prevFilters) =>
-		prevFilters.map((filter) => (filter.title === clickedDropdownItem ? { ...filter, isChecked: !filter.isChecked } : filter))
+		prevFilters.map((filter) => (filter.name === clickedDropdownItem ? { ...filter, isChecked: !filter.isChecked } : filter))
 	);
 }
 
@@ -109,7 +109,7 @@ function initializeFilters(games, property) {
 				.flat()
 		),
 	].map((filter) => {
-		return { title: filter, isChecked: false };
+		return { name: filter, isChecked: false };
 	});
 	return filters;
 }
@@ -119,10 +119,10 @@ function filterGamesUsingCheckbox(games, checkboxFilter, property) {
 	const isThereAtleastOneFilterChecked = checkboxFilter.filter((filter) => filter.isChecked).length === 0;
 	if (isThereAtleastOneFilterChecked) {
 		// Get all the checked filter items
-		checkedFilters = checkboxFilter.map((filter) => filter.title);
+		checkedFilters = checkboxFilter.map((filter) => filter.name);
 	} else {
 		// Use all the filters if there is currently no checked filter
-		checkedFilters = checkboxFilter.filter((filter) => filter.isChecked).map((filter) => filter.title);
+		checkedFilters = checkboxFilter.filter((filter) => filter.isChecked).map((filter) => filter.name);
 	}
 
 	// Filter the games

@@ -137,8 +137,8 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 		dropdownItems = items.map((item) => {
 			return (
 				<DropdownItem
-					key={`${item.title}-${item.isChecked}`}
-					title={item.title}
+					key={`${item.name}-${item.isChecked}`}
+					title={item.name}
 					isCheckedInitialValue={item.isChecked}
 					onDropdownItemClick={onDropdownItemClick}
 				/>
@@ -150,8 +150,8 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 			let item = items[index];
 			dropdownItems.push(
 				<DropdownItem
-					key={`${item.title}-${item.isChecked}`}
-					title={item.title}
+					key={`${item.name}-${item.isChecked}`}
+					title={item.name}
 					isCheckedInitialValue={item.isChecked}
 					onDropdownItemClick={onDropdownItemClick}
 				/>
