@@ -35,4 +35,15 @@ describe('Game Card Component', () => {
 		);
 		expect(price).not.toBeNull();
 	});
+
+	it('contains the game ratings', () => {
+		render(
+			<MemoryRouter>
+				<GameCard rating={4.5} />{' '}
+			</MemoryRouter>
+		);
+		const rating = screen.queryByText('4.5');
+
+		expect(rating).not.toBeNull();
+	});
 });

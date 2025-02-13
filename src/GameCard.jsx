@@ -44,7 +44,7 @@ const Text = styled.div`
 	font-size: ${(props) => (props.emphasize ? '20px' : '15px')};
 `;
 
-function GameCard({ image, title, price, id }) {
+function GameCard({ image, title, price, rating, id }) {
 	return (
 		<Link to={`/gameDetails/${id}`}>
 			<Container title="game-card">
@@ -52,6 +52,9 @@ function GameCard({ image, title, price, id }) {
 				<GameInfo>
 					<Text data-testid="title">{title}</Text>
 					<Text emphasize={true}>{price ? '$' + price.toFixed(2) : null}</Text>
+					<div className="rating">
+						<div className="rating-content">{rating}</div>
+					</div>
 				</GameInfo>
 			</Container>
 		</Link>
@@ -63,6 +66,7 @@ GameCard.propTypes = {
 	title: PropTypes.string,
 	price: PropTypes.number,
 	id: PropTypes.string,
+	rating: PropTypes.number,
 };
 
 export default GameCard;
