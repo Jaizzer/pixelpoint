@@ -64,7 +64,11 @@ function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPl
 									getSpecificGenres(checkedGenreIDs);
 								}}
 								onClearClick={() => {
+									// Remove checkmarks
 									clearDropdown(setGenreFilters);
+
+									// Clear genres request via API
+									getSpecificGenres([]);
 								}}
 								numberOfShowLessItems={7}
 							/>
@@ -84,7 +88,11 @@ function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPl
 									getSpecificPlatforms(checkedPlatformIDs);
 								}}
 								onClearClick={() => {
+									// Remove checkmarks
 									clearDropdown(setPlatformFilters);
+
+									// Clear platforms request via API
+									getSpecificPlatforms([]);
 								}}
 								numberOfShowLessItems={7}
 							/>
