@@ -19,6 +19,10 @@ export default function App() {
 	const [games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
 	const [cart, setCart] = useState([]);
 
+	function checkIfGameIsInCart(gameID) {
+		return cart.filter((game) => game.id === gameID).length > 0;
+	}
+
 	function addToCart(gameToAdd) {
 		// Add the game to the cart
 		setCart(cart.concat({ ...gameToAdd }));
@@ -62,7 +66,7 @@ export default function App() {
 						isLoading={isClickedGameLoading}
 						error={clickedGameError}
 						onAddItemToCart={addToCart}
-						isGameInCart={cart.filter((item) => item.id === clickedGame.id).length === 1}
+						isGameInCart={checkIfGameIsInCart(parseInt(id))}
 					/>
 				) : (
 					<Error />
