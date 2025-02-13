@@ -3,8 +3,16 @@ import DropdownFilter from './DropdownFilter';
 import PriceRangeController from './PriceRangeController';
 import { useState } from 'react';
 import GamesContainer from './GamesContainer';
+import useFetchGenres from './useFetchGenres';
+import useFetchPlatforms from './useFetchPlatforms';
 
 function Shop({ games, gamesError, getNewGames }) {
+	const [genres, genresError] = useFetchGenres();
+	const [platforms, platformsError] = useFetchPlatforms();
+
+	const isGenresLoaded = genres.length > 0;
+	const isPlatformsLoaded = platforms.length > 0;
+
 	const [genreFilters, setGenreFilters] = useState([]);
 	const [platformFilters, setPlatformFilters] = useState([]);
 	const [ageRatingFilters, setAgeRatingFilters] = useState([]);
@@ -13,9 +21,9 @@ function Shop({ games, gamesError, getNewGames }) {
 	const isEveryFiltersUnset = genreFilters.length === 0 && platformFilters.length === 0 && ageRatingFilters.length === 0;
 
 	//  Initialize the genre, platform and age rating filters if they are not set yet
-	if (isGamesLoaded && isEveryFiltersUnset) {
-		setGenreFilters(initializeFilters(games, 'genres'));
-		setPlatformFilters(initializeFilters(games, 'platforms'));
+	if (isGamesLoaded && isEveryFiltersUnset && isGenresLoaded && isPlatformsLoaded) {
+		setGenreFilters(genres.map((filter) => ({ ...filter, isChecked: false })));
+		setPlatformFilters(platforms.map((filter) => ({ ...filter, isChecked: false })));
 		setAgeRatingFilters(
 			['Everyone', 'Everyone 10+', 'Teen', 'Mature', 'Adults Only', 'Rating Pending'].map((filter) => ({ name: filter, isChecked: false }))
 		);
@@ -98,22 +106,6 @@ function checkOrUncheckItem(clickedDropdownItem, setFilters) {
 	setFilters((prevFilters) =>
 		prevFilters.map((filter) => (filter.name === clickedDropdownItem ? { ...filter, isChecked: !filter.isChecked } : filter))
 	);
-}
-
-function initializeFilters(games, property) {
-	// Get all distinct values for a given game property
-	const filters = [
-		...new Set(
-			games
-				.map((game) => {
-					return game[property];
-				})
-				.flat()
-		),
-	].map((filter) => {
-		return { name: filter, isChecked: false };
-	});
-	return filters;
 }
 
 function filterGamesUsingCheckbox(games, checkboxFilter, property) {
