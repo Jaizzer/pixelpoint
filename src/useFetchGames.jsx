@@ -20,7 +20,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 
 	function getSpecificGenres(genres) {
 		// Update genres using an array of genre IDs
-		setGenres(genres.map(genres));
+		setGenres(genres);
 
 		// Start again at page 1
 		setPageToRequestFromAPI(1);
