@@ -2,14 +2,12 @@ import PropTypes from 'prop-types';
 import DropdownFilter from './DropdownFilter';
 import PriceRangeController from './PriceRangeController';
 import { useState } from 'react';
-import Sorter from './Sorter';
 import GamesContainer from './GamesContainer';
 
 function Shop({ games, gamesError, getNewGames }) {
 	const [genreFilters, setGenreFilters] = useState([]);
 	const [platformFilters, setPlatformFilters] = useState([]);
 	const [ageRatingFilters, setAgeRatingFilters] = useState([]);
-	const [sortCriteria, setSortCriteria] = useState(null);
 	const [priceRangeFilters, setPriceRangeFilters] = useState({ min: null, max: null });
 	const isGamesLoaded = games.length > 0;
 	const isEveryFiltersUnset = genreFilters.length === 0 && platformFilters.length === 0 && ageRatingFilters.length === 0;
@@ -28,8 +26,6 @@ function Shop({ games, gamesError, getNewGames }) {
 		gamesToDisplay = filterGamesUsingCheckbox(gamesToDisplay, platformFilters, 'platforms');
 		gamesToDisplay = filterGamesUsingCheckbox(gamesToDisplay, ageRatingFilters, 'esrbRating');
 		gamesToDisplay = filterGamesByPrice(gamesToDisplay, priceRangeFilters.min, priceRangeFilters.max);
-		// Sort the games
-		gamesToDisplay = sortGames(gamesToDisplay, sortCriteria);
 	}
 
 	return (
@@ -80,7 +76,7 @@ function Shop({ games, gamesError, getNewGames }) {
 					)
 				}
 			</div>
-			{<div className="otherTools">{!isEveryFiltersUnset && <Sorter onSortItemClick={setSortCriteria} numberOfShowLessItems={3} />}</div>}
+			{<div className="otherTools"></div>}
 			<GamesContainer games={gamesToDisplay} gamesError={gamesError} fetchNewGamesOnBottomScroll={getNewGames} />
 		</div>
 	);
@@ -133,63 +129,6 @@ function filterGamesUsingCheckbox(games, checkboxFilter, property) {
 	return games.filter((game) => {
 		return game[property].reduce((acc, curr) => checkedFilters.includes(curr) || acc, false);
 	});
-}
-
-function sortGames(games, sortCriteria) {
-	let sortedGames = games;
-	switch (sortCriteria) {
-		case 'Popularity: High to Low':
-			sortedGames = sortedGames.sort((gameA, gameB) => {
-				return gameB.unitsSold - gameA.unitsSold;
-			});
-			break;
-		case 'Popularity: Low to High':
-			sortedGames = sortedGames.sort((gameA, gameB) => {
-				return gameA.unitsSold - gameB.unitsSold;
-			});
-			break;
-		case 'Release Date: Newest First':
-			sortedGames = sortedGames.sort((gameA, gameB) => {
-				const gameAReleaseDate = gameA.releaseDate;
-				const gameBReleaseDate = gameB.releaseDate;
-				return gameBReleaseDate.localeCompare(gameAReleaseDate);
-			});
-			break;
-		case 'Release Date: Oldest First':
-			sortedGames = sortedGames.sort((gameA, gameB) => {
-				const gameAReleaseDate = gameA.releaseDate;
-				const gameBReleaseDate = gameB.releaseDate;
-				return gameAReleaseDate.localeCompare(gameBReleaseDate);
-			});
-			break;
-		case 'Price: Low to High':
-			sortedGames = sortedGames.sort((gameA, gameB) => {
-				return gameA.price - gameB.price;
-			});
-			break;
-		case 'Price: High to Low':
-			sortedGames = sortedGames.sort((gameA, gameB) => {
-				return gameB.price - gameA.price;
-			});
-			break;
-		case 'Name: A to Z':
-			sortedGames = sortedGames.sort((gameA, gameB) => {
-				const gameAName = gameA.title;
-				const gameBName = gameB.title;
-				return gameAName.localeCompare(gameBName);
-			});
-			break;
-		case 'Name: Z to A':
-			sortedGames = sortedGames.sort((gameA, gameB) => {
-				const gameAName = gameA.title;
-				const gameBName = gameB.title;
-				return gameBName.localeCompare(gameAName);
-			});
-			break;
-		default:
-			break;
-	}
-	return sortedGames;
 }
 
 function filterGamesByPrice(games, min, max) {
