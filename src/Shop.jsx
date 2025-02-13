@@ -160,7 +160,7 @@ function getCheckedFiltersForTheNextRender(clickedItem, filters) {
 	let remainingCheckedFilters;
 	if (isClickedItemUnchecked) {
 		// Remove the clicked item from the checked filters array
-		remainingCheckedFilters = [...filters.filter((filter) => filter.name !== clickedItem && filter.isChecked)];
+		remainingCheckedFilters = [...filters.filter((filter) => filter.name !== clickedItem.name && filter.isChecked)];
 	} else {
 		// Add the clicked item to checked filters array
 		remainingCheckedFilters = [...filters.filter((item) => item.isChecked), clickedItem];
