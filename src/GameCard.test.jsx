@@ -1,7 +1,19 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { screen, render } from '@testing-library/react';
 import GameCard from './GameCard';
 import { MemoryRouter } from 'react-router-dom';
+
+vi.mock('./GamingPlatforms', () => ({
+	default: ({ platforms }) => {
+		if (platforms) {
+			let platformsDOM = [];
+			platforms.forEach((platform) => {
+				platformsDOM.push(<div key={platform}>{platform}</div>);
+			});
+			return <div>{platformsDOM}</div>;
+		}
+	},
+}));
 
 describe('Game Card Component', () => {
 	it('contains the game image', () => {

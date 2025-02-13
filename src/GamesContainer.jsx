@@ -23,6 +23,7 @@ function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll }) {
 			price={game.price}
 			id={game.id}
 			quantitySold={game.ownerCount}
+			parentPlatforms={game.parentPlatforms}
 			rating={game.rating}
 		/>
 	));

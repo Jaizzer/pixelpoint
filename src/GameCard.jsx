@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Image from './Image';
+import GamingPlatforms from './GamingPlatforms';
 
 const Container = styled.div`
 	min-width: 300px;
@@ -44,7 +45,7 @@ const Text = styled.div`
 	font-size: ${(props) => (props.emphasize ? '20px' : '15px')};
 `;
 
-function GameCard({ image, title, price, rating, quantitySold, id }) {
+function GameCard({ image, title, price, rating, quantitySold, parentPlatforms, id }) {
 	return (
 		<Link to={`/gameDetails/${id}`}>
 			<Container title="game-card">
@@ -57,6 +58,9 @@ function GameCard({ image, title, price, rating, quantitySold, id }) {
 					</div>
 					<div className="quantitySold">
 						<div className="quantitySoldContent">{nFormatter(quantitySold)}</div>
+					</div>
+					<div className="platforms">
+						<GamingPlatforms platforms={parentPlatforms} maximumNumberOfIconsToRender={5} />
 					</div>
 				</GameInfo>
 			</Container>
@@ -84,6 +88,7 @@ GameCard.propTypes = {
 	id: PropTypes.string,
 	rating: PropTypes.number,
 	quantitySold: PropTypes.number,
+	parentPlatforms: PropTypes.array,
 };
 
 export default GameCard;
