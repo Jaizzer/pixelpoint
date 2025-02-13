@@ -15,7 +15,17 @@ function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll }) {
 	}, [games, gamesError]);
 
 	// Create the game cards to be placed in DOM
-	const gameCards = games.map((game) => <GameCard key={game.id} image={game.image} title={game.title} price={game.price} id={game.id} />);
+	const gameCards = games.map((game) => (
+		<GameCard
+			key={game.id}
+			image={game.image}
+			title={game.title}
+			price={game.price}
+			id={game.id}
+			quantitySold={game.ownerCount}
+			rating={game.rating}
+		/>
+	));
 
 	return (
 		<div
