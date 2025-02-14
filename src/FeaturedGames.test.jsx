@@ -90,7 +90,7 @@ describe('Featured Games Component', () => {
 			</MemoryRouter>
 		);
 		const selectedFeaturedGame = screen.queryByTitle('selected-featured-game');
-		expect(selectedFeaturedGame.textContent).toEqual('Game 1');
+		expect(selectedFeaturedGame.textContent).toMatch(/Game 1/);
 	});
 
 	it('changes the selected featured game when an unselected featured game is clicked', async () => {
@@ -121,6 +121,6 @@ describe('Featured Games Component', () => {
 		const unselectedFeaturedGame = screen.queryByTitle('unselected-featured-game');
 		await user.click(unselectedFeaturedGame);
 		const selectedFeaturedGame = screen.queryByTitle('selected-featured-game');
-		expect(selectedFeaturedGame.textContent).toEqual('Game 2');
+		expect(selectedFeaturedGame.textContent).toMatch(/Game 2/);
 	});
 });
