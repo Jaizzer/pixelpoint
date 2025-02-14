@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import Image from './Image';
 import { Link } from 'react-router-dom';
+import AddToCartButton from './AddToCartButton';
 
-function FeaturedGames({ games, gamesError }) {
+function FeaturedGames({ games, gamesError, addToCart }) {
 	const [isGamesLoading, setIsGamesLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [selectedFeaturedGameIndex, setSelectedFeaturedGameIndex] = useState(0);
@@ -28,7 +29,7 @@ function FeaturedGames({ games, gamesError }) {
 	if (isGamesLoaded) {
 		featuredGames = games.map((game) => {
 			if (game.id === games[selectedFeaturedGameIndex].id) {
-				return <SelectedFeaturedGame game={game} key={game.id} description={game.description} />;
+				return <SelectedFeaturedGame game={game} key={game.id} description={game.description} addToCart={addToCart} />;
 			} else {
 				return <UnselectedFeaturedGame game={game} key={game.id} onClick={() => setSelectedFeaturedGameIndex(games.indexOf(game))} />;
 			}
@@ -48,19 +49,22 @@ function FeaturedGames({ games, gamesError }) {
 	);
 }
 
-function SelectedFeaturedGame({ game, description }) {
+function SelectedFeaturedGame({ game, description, addToCart }) {
 	return (
-		<Link to={`/gameDetails/${game.id}`}>
-			<div key={game.id} title="selected-featured-game" className="selectedFeaturedGame">
-				<Image src={game.images[0]} title={game.title} className={'selectedFeaturedGameImage'} />
-				<div className="content">
-					<div className="selectedFeaturedGameTitle" title="game-title">
-						{game.title}
+		<div className="container">
+			<Link to={`/gameDetails/${game.id}`}>
+				<div key={game.id} title="selected-featured-game" className="selectedFeaturedGame">
+					<Image src={game.images[0]} title={game.title} className={'selectedFeaturedGameImage'} />
+					<div className="content">
+						<div className="selectedFeaturedGameTitle" title="game-title">
+							{game.title}
+						</div>
+						<div className="description">{description}</div>
 					</div>
-					<div className="description">{description}</div>
 				</div>
-			</div>
-		</Link>
+			</Link>
+			<AddToCartButton onAddItemToCart={() => addToCart(game)} isGameAdded={game.isAddedToCart} />
+		</div>
 	);
 }
 
@@ -78,6 +82,7 @@ function UnselectedFeaturedGame({ game, onClick }) {
 SelectedFeaturedGame.propTypes = {
 	game: PropTypes.object,
 	description: PropTypes.string,
+	addToCart: PropTypes.func,
 };
 
 UnselectedFeaturedGame.propTypes = {
@@ -88,6 +93,7 @@ UnselectedFeaturedGame.propTypes = {
 FeaturedGames.propTypes = {
 	games: PropTypes.array,
 	gamesError: PropTypes.gamesError,
+	addToCart: PropTypes.func,
 };
 
 export default FeaturedGames;

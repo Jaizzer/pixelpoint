@@ -93,6 +93,7 @@ export default function App() {
 						latestGamesError={latestGamesError}
 						featuredGames={upcomingGamesToDisplay}
 						featuredGamesError={upcomingGamesError}
+						addToCart={addToCart}
 					/>
 				) : pageToDisplay === 'account' ? (
 					<Account />
