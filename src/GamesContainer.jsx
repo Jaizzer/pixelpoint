@@ -20,7 +20,7 @@ function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll, checkI
 		return (
 			<GameCard
 				key={game.id}
-				image={game.image}
+				image={game.images[0]}
 				title={game.title}
 				price={game.price}
 				id={game.id}

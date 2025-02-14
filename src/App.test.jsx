@@ -38,6 +38,7 @@ vi.mock('./useFetchGames.jsx', () => {
 					ownerCount: 300,
 					releaseDate: '2024-01-24',
 					esrbRating: ['Everyone'],
+					images: ['fakeLink1', 'fakeLink2', 'fakeLink3'],
 				},
 			]);
 			const gamesError = null;

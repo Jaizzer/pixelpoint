@@ -89,7 +89,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 					const jsonData = await response.json();
 					const gamesWithDistilledProperties = jsonData.results.map((game) => {
 						return {
-							image: game.background_image,
+							images: [game.background_image],
 							title: game.name,
 							price: getPrice(game.id),
 							id: game.id,

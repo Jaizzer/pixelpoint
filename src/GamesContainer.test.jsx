@@ -18,7 +18,7 @@ describe('Games Container Component', () => {
 	it('renders the games', () => {
 		const games = [
 			{
-				image: 'fakeLink',
+				images: ['fakeLink'],
 				title: 'Game 1',
 				price: 45,
 				id: '1',
@@ -26,7 +26,7 @@ describe('Games Container Component', () => {
 				platforms: ['Mobile'],
 			},
 			{
-				image: 'fakeLink',
+				images: ['fakeLink'],
 				title: 'Game 2',
 				price: 55,
 				id: '2',
@@ -57,7 +57,7 @@ describe('Games Container Component', () => {
 	it('renders a loading indicator if the user has scrolled all the way to the bottom of the game card container', async () => {
 		const games = [
 			{
-				image: 'fakeLink',
+				images: ['fakeLink'],
 				title: 'thisShouldBeThird',
 				price: 65,
 				id: '1',
