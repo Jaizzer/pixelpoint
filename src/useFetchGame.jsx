@@ -32,6 +32,7 @@ function useFetchGame(id) {
 						genres: gameDetails.genres.map((genre) => genre.name),
 						releaseDate: gameDetails.released,
 						platforms: gameDetails.platforms.map((platform) => platform.platform.name),
+                        parentPlatforms: gameDetails.parent_platforms.map(parentPlatform => parentPlatform.platform.name),
 						esrbRating: [gameDetails.esrb_rating ? gameDetails.esrb_rating.name : 'Rating Pending'],
 						images: [gameDetails.background_image, ...gameScreenshots.results.map((result) => result.image)],
 					};
