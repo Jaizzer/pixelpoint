@@ -58,7 +58,39 @@ vi.mock('./useFetchGames.jsx', () => {
 					])
 				);
 			});
-			return [games, gamesError, getNewGames];
+
+			function getSpecificPlatforms() {
+				setGames([
+					{
+						title: 'Game 10',
+						price: 50,
+						id: '1',
+						genres: ['Genre 6'],
+						platforms: ['Platform 5', 'Platform 5', 'Platform 5'],
+						ownerCount: 300,
+						releaseDate: '2024-01-24',
+						esrbRating: ['Everyone'],
+						images: ['fakeLink1', 'fakeLink2', 'fakeLink3'],
+					},
+				]);
+			}
+
+			function getSpecificGenres() {
+				setGames([
+					{
+						title: 'Game 10',
+						price: 50,
+						id: '1',
+						genres: ['Genre 12', 'Genre 9'],
+						platforms: ['Platform 1', 'Platform 2'],
+						ownerCount: 300,
+						releaseDate: '2024-01-24',
+						esrbRating: ['Everyone'],
+						images: ['fakeLink1', 'fakeLink2', 'fakeLink3'],
+					},
+				]);
+			}
+			return [games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms];
 		},
 	};
 });
