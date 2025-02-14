@@ -33,6 +33,18 @@ export default function App() {
 	}
 
 	// Add add to cart status
+	let upcomingGamesToDisplay = upcomingGames;
+	if (!upcomingGamesError && upcomingGames.length > 0) {
+		upcomingGamesToDisplay = upcomingGames.map((game) => ({ ...game, isAddedToCart: checkIfGameIsInCart(game.id) }));
+	}
+
+	// Add add to cart status
+	let latestGamesToDisplay = latestGames;
+	if (!latestGamesError && latestGames.length > 0) {
+		latestGamesToDisplay = latestGames.map((game) => ({ ...game, isAddedToCart: checkIfGameIsInCart(game.id) }));
+	}
+
+	// Add add to cart status
 	let clickedGameToDisplay = clickedGame;
 	if (!clickedGameError && clickedGame) {
 		clickedGameToDisplay = { ...clickedGame, isAddedToCart: checkIfGameIsInCart(clickedGame.id) };
@@ -75,9 +87,9 @@ export default function App() {
 			<main>
 				{!pageToDisplay ? (
 					<Home
-						latestGames={latestGames}
+						latestGames={latestGamesToDisplay}
 						latestGamesError={latestGamesError}
-						featuredGames={upcomingGames}
+						featuredGames={upcomingGamesToDisplay}
 						featuredGamesError={upcomingGamesError}
 					/>
 				) : pageToDisplay === 'account' ? (
