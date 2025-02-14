@@ -18,7 +18,7 @@ export default function App() {
 	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(id);
 	const [shopGames, shopGamesError, getNewShopGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
 	const [latestGames, latestGamesError] = useFetchGames('latest', 10);
-	const [upcomingGames, upcomingGamesError] = useFetchGames('upcoming', 5);
+	const [upcomingGames, upcomingGamesError] = useFetchGames('upcoming', 5, true);
 
 	const [cart, setCart] = useState([]);
 

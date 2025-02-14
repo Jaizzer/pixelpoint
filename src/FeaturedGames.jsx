@@ -38,7 +38,7 @@ function FeaturedGames({ games, gamesError }) {
 	if (isGamesLoaded) {
 		featuredGames = games.map((game) => {
 			if (game.id === games[selectedFeaturedGameIndex].id) {
-				return <SelectedFeaturedGame game={game} key={game.id} />;
+				return <SelectedFeaturedGame game={game} key={game.id} description={game.description} />;
 			} else {
 				return <UnselectedFeaturedGame game={game} key={game.id} onClick={() => setSelectedFeaturedGameIndex(games.indexOf(game))} />;
 			}
@@ -58,13 +58,16 @@ function FeaturedGames({ games, gamesError }) {
 	);
 }
 
-function SelectedFeaturedGame({ game }) {
+function SelectedFeaturedGame({ game, description }) {
 	return (
 		<Link to={`/gameDetails/${game.id}`}>
 			<div key={game.id} title="selected-featured-game" className="selectedFeaturedGame">
 				<Image src={game.images[0]} title={game.title} className={'selectedFeaturedGameImage'} />
-				<div className="selectedFeaturedGameTitle" title="game-title">
-					{game.title}
+				<div className="content">
+					<div className="selectedFeaturedGameTitle" title="game-title">
+						{game.title}
+					</div>
+					<div className="description">{description}</div>
 				</div>
 			</div>
 		</Link>
@@ -84,6 +87,7 @@ function UnselectedFeaturedGame({ game, onClick }) {
 
 SelectedFeaturedGame.propTypes = {
 	game: PropTypes.object,
+	description: PropTypes.string,
 };
 
 UnselectedFeaturedGame.propTypes = {
