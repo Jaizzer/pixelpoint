@@ -19,8 +19,21 @@ export default function App() {
 	const [games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
 	const [cart, setCart] = useState([]);
 
+
 	function checkIfGameIsInCart(gameID) {
 		return cart.filter((game) => game.id === gameID).length > 0;
+	}
+
+	// Add add to cart status
+    let gamesToDisplay = games;
+	if (!gamesError && games.length > 0) {
+		gamesToDisplay = games.map((game) => ({ ...game, isAddedToCart: checkIfGameIsInCart(game.id) }));
+	}
+
+	// Add add to cart status
+    let clickedGameToDisplay = clickedGame;
+	if (!clickedGameError && clickedGame) {
+		clickedGameToDisplay = { ...clickedGame, isAddedToCart: checkIfGameIsInCart(clickedGame.id) };
 	}
 
 	function addToCart(gameToAdd) {
@@ -64,7 +77,7 @@ export default function App() {
 					<Account />
 				) : pageToDisplay === 'shop' ? (
 					<Shop
-						games={games}
+						games={gamesToDisplay}
 						gamesError={gamesError}
 						getNewGames={getNewGames}
 						getSpecificGenres={getSpecificGenres}
@@ -78,7 +91,7 @@ export default function App() {
 				) : pageToDisplay === 'gameDetails' && id !== undefined ? (
 					<GameDetails
 						key={id}
-						game={clickedGame}
+						game={clickedGameToDisplay}
 						isLoading={isClickedGameLoading}
 						error={clickedGameError}
 						onAddItemToCart={addToCart}
