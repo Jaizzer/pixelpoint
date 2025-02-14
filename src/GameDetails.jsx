@@ -9,7 +9,7 @@ const Teaser = styled.div`
 	width: fit-content;
 `;
 
-function GameDetails({ game, isLoading, error, onAddItemToCart, isGameInCart }) {
+function GameDetails({ game, isLoading, error, onAddItemToCart }) {
 	return (
 		<>
 			{isLoading ? (
@@ -41,7 +41,7 @@ function GameDetails({ game, isLoading, error, onAddItemToCart, isGameInCart }) 
 					</div>
 					<div className="price">{game.price ? `$${game.price.toFixed(2)}` : 'Price Unavailable'}</div>
 					<AddToCartButton
-						isGameAdded={isGameInCart}
+						isGameAdded={game.isAddedToCart}
 						onAddItemToCart={() => {
 							onAddItemToCart(game);
 						}}
@@ -85,7 +85,6 @@ GameDetails.propTypes = {
 	isLoading: PropTypes.bool,
 	error: PropTypes.error,
 	onAddItemToCart: PropTypes.func,
-	isGameInCart: PropTypes.bool,
 };
 
 export default GameDetails;

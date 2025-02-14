@@ -19,19 +19,18 @@ export default function App() {
 	const [games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
 	const [cart, setCart] = useState([]);
 
-
 	function checkIfGameIsInCart(gameID) {
 		return cart.filter((game) => game.id === gameID).length > 0;
 	}
 
 	// Add add to cart status
-    let gamesToDisplay = games;
+	let gamesToDisplay = games;
 	if (!gamesError && games.length > 0) {
 		gamesToDisplay = games.map((game) => ({ ...game, isAddedToCart: checkIfGameIsInCart(game.id) }));
 	}
 
 	// Add add to cart status
-    let clickedGameToDisplay = clickedGame;
+	let clickedGameToDisplay = clickedGame;
 	if (!clickedGameError && clickedGame) {
 		clickedGameToDisplay = { ...clickedGame, isAddedToCart: checkIfGameIsInCart(clickedGame.id) };
 	}
@@ -95,7 +94,6 @@ export default function App() {
 						isLoading={isClickedGameLoading}
 						error={clickedGameError}
 						onAddItemToCart={addToCart}
-						isGameInCart={checkIfGameIsInCart(parseInt(id))}
 					/>
 				) : (
 					<Error />
