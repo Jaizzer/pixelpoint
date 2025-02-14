@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Image from './Image';
 import GamingPlatforms from './GamingPlatforms';
+import AddToCartButton from './AddToCartButton';
 
 const Container = styled.div`
 	min-width: 300px;
@@ -45,26 +46,29 @@ const Text = styled.div`
 	font-size: ${(props) => (props.emphasize ? '20px' : '15px')};
 `;
 
-function GameCard({ image, title, price, rating, quantitySold, parentPlatforms, isGameInCart, id }) {
+function GameCard({ image, title, price, rating, quantitySold, parentPlatforms, isGameInCart, addToCart, id }) {
 	return (
-		<Link to={`/gameDetails/${id}`}>
-			<Container title="game-card">
-				<GameCardImage src={image} role="image" alt={title} className={'image'} />
-				<GameInfo>
-					<Text data-testid="title">{title}</Text>
-					<Text emphasize={true}>{price ? '$' + price.toFixed(2) : null}</Text>
-					<div className="rating">
-						<div className="rating-content">{rating}</div>
-					</div>
-					<div className="quantitySold">
-						<div className="quantitySoldContent">{nFormatter(quantitySold)}</div>
-					</div>
-					<div className="platforms">
-						<GamingPlatforms platforms={parentPlatforms} maximumNumberOfIconsToRender={5} />
-					</div>
-				</GameInfo>
-			</Container>
-		</Link>
+		<div className="container">
+			<Link to={`/gameDetails/${id}`}>
+				<Container title="game-card">
+					<GameCardImage src={image} role="image" alt={title} className={'image'} />
+					<GameInfo>
+						<Text data-testid="title">{title}</Text>
+						<Text emphasize={true}>{price ? '$' + price.toFixed(2) : null}</Text>
+						<div className="rating">
+							<div className="rating-content">{rating}</div>
+						</div>
+						<div className="quantitySold">
+							<div className="quantitySoldContent">{nFormatter(quantitySold)}</div>
+						</div>
+						<div className="platforms">
+							<GamingPlatforms platforms={parentPlatforms} maximumNumberOfIconsToRender={5} />
+						</div>
+					</GameInfo>
+				</Container>
+			</Link>
+			<AddToCartButton isGameAdded={isGameInCart} onAddItemToCart={addToCart}></AddToCartButton>
+		</div>
 	);
 }
 
@@ -90,6 +94,7 @@ GameCard.propTypes = {
 	quantitySold: PropTypes.number,
 	parentPlatforms: PropTypes.array,
 	isGameInCart: PropTypes.bool,
+	addToCart: PropTypes.func,
 };
 
 export default GameCard;

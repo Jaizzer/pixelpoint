@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import GameCard from './GameCard';
 import { useState, useEffect } from 'react';
 
-function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll }) {
+function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll, addToCart }) {
 	const [isGamesLoading, setIsGamesLoading] = useState(true);
 	const [error, setError] = useState(gamesError);
 
@@ -27,6 +27,9 @@ function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll }) {
 				parentPlatforms={game.parentPlatforms}
 				isGameInCart={game.isAddedToCart}
 				rating={game.rating}
+				addToCart={() => {
+					addToCart(game);
+				}}
 			/>
 		);
 	});
@@ -64,6 +67,7 @@ GamesContainer.propTypes = {
 	isGamesLoading: PropTypes.bool,
 	gamesError: PropTypes.error,
 	fetchNewGamesOnBottomScroll: PropTypes.func,
+	addToCart: PropTypes.func,
 };
 
 export default GamesContainer;
