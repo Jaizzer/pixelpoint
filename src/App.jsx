@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import GameDetails from './GameDetails';
 import useFetchGame from './useFetchGame';
 import useFetchGames from './useFetchGames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function App() {
 	const { pageToDisplay } = useParams();
@@ -74,11 +74,13 @@ export default function App() {
 		setCart([]);
 	}
 
-	// Reset the game genres and platforms when moving outside the shop
-	if (shopGames.length > 1 && pageToDisplay !== 'shop') {
-		getSpecificGenres([]);
-		getSpecificPlatforms([]);
-	}
+	useEffect(() => {
+		// Reset the game genres and platforms when moving outside the shop
+		if (pageToDisplay !== 'shop') {
+			getSpecificGenres([]);
+			getSpecificPlatforms([]);
+		}
+	}, [pageToDisplay]);
 
 	return (
 		<>
