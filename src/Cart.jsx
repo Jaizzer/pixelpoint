@@ -15,7 +15,7 @@ function Cart({ content, clearCart, removeItem }) {
 					price={item.price}
 					rating={item.rating}
 					image={item.images[0]}
-					platform={item.platforms}
+					parentPlatforms={item.parentPlatforms}
 					removeItem={() => removeItem(item.id)}
 				/>
 			);

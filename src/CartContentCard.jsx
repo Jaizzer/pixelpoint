@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import blankImage from './assets/images/blank-image.jpg';
 import StarRating from './StarRating.jsx';
 import Image from './Image.jsx';
+import GamingPlatforms from './GamingPlatforms.jsx';
 
 const StyledLink = styled(Link)`
 	text-decoration: none;
@@ -57,9 +58,9 @@ const StyledImage = styled(Image)`
 const DeleteButton = styled.button`
 	grid-template-columns: 2 / 3;
 	grid-template-rows: 1 / 2;
-    justify-self: center;
-    width: 40px;
-    height: 40px;
+	justify-self: center;
+	width: 40px;
+	height: 40px;
 
 	background-color: #eb4747;
 	border-radius: 5px;
@@ -72,7 +73,7 @@ const ProductPrice = styled.div`
 	font-size: 18px;
 `;
 
-function CartContentCard({ title, price, image, id, rating, platform, removeItem }) {
+function CartContentCard({ title, price, image, id, rating, parentPlatforms, removeItem }) {
 	return (
 		<Container title="cart-content-card">
 			<StyledLink to={`/gameDetails/${id}`}>
@@ -80,7 +81,7 @@ function CartContentCard({ title, price, image, id, rating, platform, removeItem
 					<StyledImage src={image ? image : blankImage} />
 					<div className="cartContentCartTitle">{title ? title : 'Title Unavailable'}</div>
 					<StarRating rating={rating} pixelSize={25} />
-					<div>{platform ? platform.join(', ') : null}</div>
+					<GamingPlatforms platforms={parentPlatforms} maximumNumberOfIconsToRender={6} />
 					<ProductPrice>{price ? `$${price.toFixed(2)}` : 'Price Unavailable'}</ProductPrice>
 				</CardContent>
 			</StyledLink>
@@ -122,7 +123,7 @@ CartContentCard.propTypes = {
 	image: PropTypes.string,
 	id: PropTypes.number,
 	rating: PropTypes.number,
-	platform: PropTypes.array,
+	parentPlatforms: PropTypes.array,
 	removeItem: PropTypes.func,
 };
 
