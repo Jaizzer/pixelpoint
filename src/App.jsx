@@ -27,6 +27,7 @@ export default function App() {
 		// Add the game to the cart
 		setCart(
 			cart.concat({
+				id: gameToAdd.id,
 				title: gameToAdd.title,
 				rating: gameToAdd.rating,
 				parentPlatforms: gameToAdd.parentPlatforms,
