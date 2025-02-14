@@ -33,7 +33,7 @@ function useFetchGame(id) {
 						releaseDate: gameDetails.released,
 						platforms: gameDetails.platforms.map((platform) => platform.platform.name),
 						esrbRating: [gameDetails.esrb_rating ? gameDetails.esrb_rating.name : 'Unrated'],
-						screenshots: [gameDetails.background_image, ...gameScreenshots.results.map((result) => result.image)],
+						images: [gameDetails.background_image, ...gameScreenshots.results.map((result) => result.image)],
 					};
 
 					setGame(gameWithDistilledProperties);

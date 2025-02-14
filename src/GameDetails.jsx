@@ -34,7 +34,7 @@ function GameDetails({ game, isLoading, error, onAddItemToCart, isGameInCart }) 
 							)}
 						</div>
 					</div>
-					<Teaser>{game.screenshots.length > 1 ? <ImageSlider imageLinks={game.screenshots}></ImageSlider> : <Image src={null} />}</Teaser>
+					<Teaser>{game.images.length > 1 ? <ImageSlider imageLinks={game.images}></ImageSlider> : <Image src={null} />}</Teaser>
 					<div className="descriptionContainer">
 						<h2 className="descriptionHeading">Description</h2>
 						<div className="descriptionContent">{game.description ? game.description : 'No available description.'}</div>

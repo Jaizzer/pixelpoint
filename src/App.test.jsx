@@ -17,7 +17,7 @@ vi.mock('./useFetchGame.jsx', () => ({
 			genres: ['Action'],
 			releaseDate: '2012-12-12',
 			platforms: ['platform1', 'platform2'],
-			screenshots: ['fakeLink1', 'fakeLink2', 'fakeLink3'],
+			images: ['fakeLink1', 'fakeLink2', 'fakeLink3'],
 		};
 		const gameError = null;
 		const isGameLoading = false;

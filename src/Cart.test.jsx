@@ -27,8 +27,8 @@ describe('Cart component', () => {
 
 	it('render cart content', () => {
 		const cartContent = [
-			{ title: 'Game 1', id: 1, price: 45, screenshots: ['fakeLink1', 'fakeLink2'] },
-			{ title: 'Game 2', id: 2, price: 45, screenshots: ['fakeLink1', 'fakeLink2'] },
+			{ title: 'Game 1', id: 1, price: 45, images: ['fakeLink1', 'fakeLink2'] },
+			{ title: 'Game 2', id: 2, price: 45, images: ['fakeLink1', 'fakeLink2'] },
 		];
 		render(<Cart content={cartContent} />);
 		const cartContentCards = screen.queryAllByTitle('cart-content-card');
@@ -39,8 +39,8 @@ describe('Cart component', () => {
 		const user = userEvent.setup();
 		const clearCart = vi.fn();
 		const cartContent = [
-			{ title: 'Game 1', id: 1, price: 45, screenshots: ['fakeLink1', 'fakeLink2'] },
-			{ title: 'Game 2', id: 2, price: 45, screenshots: ['fakeLink1', 'fakeLink2'] },
+			{ title: 'Game 1', id: 1, price: 45, images: ['fakeLink1', 'fakeLink2'] },
+			{ title: 'Game 2', id: 2, price: 45, images: ['fakeLink1', 'fakeLink2'] },
 		];
 		render(<Cart content={cartContent} clearCart={clearCart} />);
 		const clearButton = screen.queryByTitle('clear-cart');
@@ -51,7 +51,7 @@ describe('Cart component', () => {
 	it('calls the callback function removeItem when "Remove Item" button is clicked', async () => {
 		const user = userEvent.setup();
 		const removeItem = vi.fn();
-		const cartContent = [{ title: 'Game 1', id: 1, price: 45, screenshots: ['fakeLink1', 'fakeLink2'] }];
+		const cartContent = [{ title: 'Game 1', id: 1, price: 45, images: ['fakeLink1', 'fakeLink2'] }];
 		render(<Cart removeItem={removeItem} content={cartContent} />);
 		const removeItemButton = screen.queryByTitle('remove-item');
 		await user.click(removeItemButton);
@@ -60,8 +60,8 @@ describe('Cart component', () => {
 
 	it('calculates the total price of all the cart contents', () => {
 		const cartContent = [
-			{ title: 'Game 1', id: 1, price: 45, screenshots: ['fakeLink1', 'fakeLink2'] },
-			{ title: 'Game 2', id: 2, price: 55, screenshots: ['fakeLink1', 'fakeLink2'] },
+			{ title: 'Game 1', id: 1, price: 45, images: ['fakeLink1', 'fakeLink2'] },
+			{ title: 'Game 2', id: 2, price: 55, images: ['fakeLink1', 'fakeLink2'] },
 		];
 		render(<Cart content={cartContent} />);
 		const totalPrice = screen.queryByText(/100/i);

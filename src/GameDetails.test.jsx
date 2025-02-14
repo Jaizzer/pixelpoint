@@ -37,7 +37,7 @@ describe('Game description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
-			screenshots: ['fakeLink1', 'fakeLink2'],
+			images: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameTitle = screen.queryByText('Witcher 3');
@@ -54,7 +54,7 @@ describe('Game description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
-			screenshots: ['fakeLink1', 'fakeLink2'],
+			images: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameDescription = screen.queryByText('This is the game description');
@@ -71,7 +71,7 @@ describe('Game description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
-			screenshots: ['fakeLink1', 'fakeLink2'],
+			images: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameRating = screen.queryByText(/4.1/);
@@ -88,7 +88,7 @@ describe('Game description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
-			screenshots: ['fakeLink1', 'fakeLink2'],
+			images: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gamePrice = screen.queryByText(/\$41/);
@@ -105,7 +105,7 @@ describe('Game description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
-			screenshots: ['fakeLink1', 'fakeLink2'],
+			images: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameDeveloper = screen.queryByText('Developer A, Developer B');
@@ -122,7 +122,7 @@ describe('Game description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
-			screenshots: ['fakeLink1', 'fakeLink2'],
+			images: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameReleaseDate = screen.queryByText('January 12, 2024');
@@ -139,7 +139,7 @@ describe('Game description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
-			screenshots: ['fakeLink1', 'fakeLink2'],
+			images: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gamePlatforms = screen.queryByText('Windows, Xbox, PS4');
@@ -156,7 +156,7 @@ describe('Game description', () => {
 			releaseDate: '2024-01-12',
 			platforms: ['Windows, Xbox, PS4'],
 			genres: ['Action', 'Puzzle', 'Adventure'],
-			screenshots: ['fakeLink1', 'fakeLink2'],
+			images: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<GameDetails game={game} isLoading={false} error={false} />);
 		const gameGenres = screen.queryByText('Action, Puzzle, Adventure');
