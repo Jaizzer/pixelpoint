@@ -25,7 +25,15 @@ export default function App() {
 
 	function addToCart(gameToAdd) {
 		// Add the game to the cart
-		setCart(cart.concat({ ...gameToAdd }));
+		setCart(
+			cart.concat({
+				title: gameToAdd.title,
+				rating: gameToAdd.rating,
+				parentPlatforms: gameToAdd.parentPlatforms,
+				price: gameToAdd.price,
+				images: gameToAdd.images,
+			})
+		);
 	}
 
 	function removeItem(gameID) {
