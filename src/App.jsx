@@ -16,7 +16,7 @@ export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
 	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(id);
-	const [games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
+	const [shopGames, shopGamesError, getNewShopGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
 	const [cart, setCart] = useState([]);
 
 	function checkIfGameIsInCart(gameID) {
@@ -24,9 +24,9 @@ export default function App() {
 	}
 
 	// Add add to cart status
-	let gamesToDisplay = games;
-	if (!gamesError && games.length > 0) {
-		gamesToDisplay = games.map((game) => ({ ...game, isAddedToCart: checkIfGameIsInCart(game.id) }));
+	let shopGamesToDisplay = shopGames;
+	if (!shopGamesError && shopGames.length > 0) {
+		shopGamesToDisplay = shopGames.map((game) => ({ ...game, isAddedToCart: checkIfGameIsInCart(game.id) }));
 	}
 
 	// Add add to cart status
@@ -60,7 +60,7 @@ export default function App() {
 	}
 
 	// Reset the game genres and platforms when moving outside the shop
-	if (games.length > 1 && pageToDisplay !== 'shop') {
+	if (shopGames.length > 1 && pageToDisplay !== 'shop') {
 		getSpecificGenres([]);
 		getSpecificPlatforms([]);
 	}
@@ -76,9 +76,9 @@ export default function App() {
 					<Account />
 				) : pageToDisplay === 'shop' ? (
 					<Shop
-						games={gamesToDisplay}
-						gamesError={gamesError}
-						getNewGames={getNewGames}
+						games={shopGamesToDisplay}
+						gamesError={shopGamesError}
+						getNewShopGames={getNewShopGames}
 						getSpecificGenres={getSpecificGenres}
 						getSpecificPlatforms={getSpecificPlatforms}
 						checkIfGameIsInCart={checkIfGameIsInCart}
