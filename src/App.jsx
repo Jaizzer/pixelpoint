@@ -17,8 +17,8 @@ export default function App() {
 	const { id } = useParams();
 	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(id);
 	const [shopGames, shopGamesError, getNewShopGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
-	const [latestGames] = useFetchGames('latest', 20);
-	const [upcomingGames] = useFetchGames('upcoming', 5);
+	const [latestGames, latestGamesError] = useFetchGames('latest', 10);
+	const [upcomingGames, upcomingGamesError] = useFetchGames('upcoming', 5);
 
 	const [cart, setCart] = useState([]);
 
@@ -74,7 +74,12 @@ export default function App() {
 			<TopBar cartContentCount={cart.length}></TopBar>
 			<main>
 				{!pageToDisplay ? (
-					<Home />
+					<Home
+						latestGames={latestGames}
+						latestGamesError={latestGamesError}
+						featuredGames={upcomingGames}
+						featuredGamesError={upcomingGamesError}
+					/>
 				) : pageToDisplay === 'account' ? (
 					<Account />
 				) : pageToDisplay === 'shop' ? (
