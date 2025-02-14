@@ -9,16 +9,6 @@ function FeaturedGames({ games, gamesError }) {
 	const [selectedFeaturedGameIndex, setSelectedFeaturedGameIndex] = useState(0);
 	const isGamesLoaded = games.length > 0;
 
-	// Switch the selected featured games every 10 seconds
-	useEffect(() => {
-		const autoNextFeaturedGames = setTimeout(() => {
-			setSelectedFeaturedGameIndex((prev) => (prev + 1) % games.length);
-		}, 10000);
-		return () => {
-			clearTimeout(autoNextFeaturedGames);
-		};
-	}, [selectedFeaturedGameIndex, games]);
-
 	useEffect(() => {
 		if (gamesError) {
 			setError(gamesError);
