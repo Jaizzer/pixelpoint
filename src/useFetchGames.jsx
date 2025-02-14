@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import getPrice from './getPrice';
 import PropTypes from 'prop-types';
 
-export default function useFetchGames(category, gameCountPerRequest = 40) {
+export default function useFetchGames(category, gameCountPerRequest = 40, isThereDescription = false) {
 	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
 	const [games, setGames] = useState([]);
 	const [gamesError, setGamesError] = useState(null);
@@ -87,7 +87,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 					}
 
 					const jsonData = await response.json();
-					const gamesWithDistilledProperties = jsonData.results.map((game) => {
+					let gamesWithDistilledProperties = jsonData.results.map((game) => {
 						return {
 							images: [game.background_image],
 							title: game.name,
@@ -100,8 +100,20 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 							rating: game.rating,
 							releaseDate: game.released,
 							esrbRating: [game.esrb_rating ? game.esrb_rating.name : 'Rating Pending'],
+							description: null,
 						};
 					});
+
+					// Fetch game description if needed
+					if (isThereDescription) {
+						gamesWithDistilledProperties = await Promise.all(
+							gamesWithDistilledProperties.map(async (game) => {
+								let response = await fetch(`https://api.rawg.io/api/games/${game.id}?key=7316558e23f844788817eccdda2769a2`);
+								let gameDescription = (await response.json()).description_raw;
+								return { ...game, description: gameDescription };
+							})
+						);
+					}
 
 					// Add the newly requested games to the current games array
 					setGames((prev) => {
