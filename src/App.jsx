@@ -47,6 +47,12 @@ export default function App() {
 		setCart([]);
 	}
 
+	// Reset the game genres and platforms when moving outside the shop
+	if (games.length > 1 && pageToDisplay !== 'shop') {
+		getSpecificGenres([]);
+		getSpecificPlatforms([]);
+	}
+
 	return (
 		<>
 			<Sidebar></Sidebar>
