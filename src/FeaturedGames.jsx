@@ -62,7 +62,7 @@ function SelectedFeaturedGame({ game }) {
 	return (
 		<Link to={`/gameDetails/${game.id}`}>
 			<div key={game.id} title="selected-featured-game" className="selectedFeaturedGame">
-				<Image src={game.image} title={game.title} className={'selectedFeaturedGameImage'} />
+				<Image src={game.images[0]} title={game.title} className={'selectedFeaturedGameImage'} />
 				<div className="selectedFeaturedGameTitle" title="game-title">
 					{game.title}
 				</div>
@@ -74,7 +74,7 @@ function SelectedFeaturedGame({ game }) {
 function UnselectedFeaturedGame({ game, onClick }) {
 	return (
 		<div key={game.id} title="unselected-featured-game" className="unselectedFeaturedGame" onClick={onClick}>
-			<Image src={game.image} title={game.title} className={'unselectedFeaturedGameImage'} />
+			<Image src={game.images[0]} title={game.title} className={'unselectedFeaturedGameImage'} />
 			<div className="unselectedFeaturedGameTitle" title="game-title">
 				{game.title}
 			</div>

@@ -40,7 +40,7 @@ describe('Featured Games Component', () => {
 	it('displays the featured games', () => {
 		const games = [
 			{
-				image: 'fakeLink',
+				images: ['fakeLink'],
 				title: 'Game 1',
 				price: 45,
 				id: '1',
@@ -48,7 +48,7 @@ describe('Featured Games Component', () => {
 				platforms: ['Mobile'],
 			},
 			{
-				image: 'fakeLink',
+				images: ['fakeLink'],
 				title: 'Game 2',
 				price: 55,
 				id: '2',
@@ -68,7 +68,7 @@ describe('Featured Games Component', () => {
 	it('renders the first game as the selected featured game by default', () => {
 		const games = [
 			{
-				image: 'fakeLink',
+				images: ['fakeLink'],
 				title: 'Game 1',
 				price: 45,
 				id: '1',
@@ -76,7 +76,7 @@ describe('Featured Games Component', () => {
 				platforms: ['Mobile'],
 			},
 			{
-				image: 'fakeLink',
+				images: ['fakeLink'],
 				title: 'Game 2',
 				price: 55,
 				id: '2',
@@ -97,7 +97,7 @@ describe('Featured Games Component', () => {
 		const user = userEvent.setup();
 		const games = [
 			{
-				image: 'fakeLink',
+				images: ['fakeLink'],
 				title: 'Game 1',
 				price: 45,
 				id: '1',
@@ -105,7 +105,7 @@ describe('Featured Games Component', () => {
 				platforms: ['Mobile'],
 			},
 			{
-				image: 'fakeLink',
+				images: ['fakeLink'],
 				title: 'Game 2',
 				price: 55,
 				id: '2',
