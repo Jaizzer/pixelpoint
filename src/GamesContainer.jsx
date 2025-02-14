@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import GameCard from './GameCard';
 import { useState, useEffect } from 'react';
 
-function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll, checkIfGameIsInCart }) {
+function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll }) {
 	const [isGamesLoading, setIsGamesLoading] = useState(true);
 	const [error, setError] = useState(gamesError);
 
@@ -16,7 +16,6 @@ function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll, checkI
 
 	// Create the game cards to be placed in DOM
 	const gameCards = games.map((game) => {
-		const isGameInCart = checkIfGameIsInCart ? checkIfGameIsInCart(game.id) : false;
 		return (
 			<GameCard
 				key={game.id}
@@ -26,7 +25,7 @@ function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll, checkI
 				id={game.id}
 				quantitySold={game.ownerCount}
 				parentPlatforms={game.parentPlatforms}
-				isGameInCart={isGameInCart}
+				isGameInCart={game.isAddedToCart}
 				rating={game.rating}
 			/>
 		);
@@ -65,7 +64,6 @@ GamesContainer.propTypes = {
 	isGamesLoading: PropTypes.bool,
 	gamesError: PropTypes.error,
 	fetchNewGamesOnBottomScroll: PropTypes.func,
-	checkIfGameIsInCart: PropTypes.func,
 };
 
 export default GamesContainer;

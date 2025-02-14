@@ -104,7 +104,6 @@ export default function App() {
 						getNewShopGames={getNewShopGames}
 						getSpecificGenres={getSpecificGenres}
 						getSpecificPlatforms={getSpecificPlatforms}
-						checkIfGameIsInCart={checkIfGameIsInCart}
 					/>
 				) : pageToDisplay === 'about' ? (
 					<About />
