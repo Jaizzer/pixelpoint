@@ -52,7 +52,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40) {
 			isFetchingApproved.current = false;
 			(async function () {
 				try {
-					let url = `https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&page=${pageToRequestFromAPI}&page_size=${gameCountPerRequest}`;
+					let url = `https://api.rawg.io/api/games?key=7316558e23f844788817eccdda2769a2&page=${pageToRequestFromAPI}&page_size=${gameCountPerRequest}`;
 
 					if (category === 'latest') {
 						// Get the games released between current day and last year

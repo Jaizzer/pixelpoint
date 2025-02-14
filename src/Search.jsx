@@ -73,7 +73,7 @@ function Search() {
 		const delaySearch = setTimeout(async () => {
 			try {
 				// Get the search results
-				const response = await fetch(`https://api.rawg.io/api/games?key=99ef179fc1ee4d77a91ccee7e1bb59e6&search=${inputValue}`);
+				const response = await fetch(`https://api.rawg.io/api/games?key=7316558e23f844788817eccdda2769a2&search=${inputValue}`);
 				const jsonData = await response.json();
 				let searchResults = jsonData.results.map((game) => ({
 					title: game.name,
