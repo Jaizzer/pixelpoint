@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import SearchDropdown from './SearchDropDown.jsx';
+import SearchDropdown from './SearchDropdown.jsx';
 import styled from 'styled-components';
 import getPrice from './getPrice.jsx';
 
