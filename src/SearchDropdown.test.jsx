@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import SearchDropdown from './SearchDropDown.jsx';
+import SearchDropdown from './SearchDropdown.jsx';
 
 // Mock the Search Game Card component
 vi.mock('./SearchGameCard', () => ({

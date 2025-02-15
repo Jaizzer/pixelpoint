@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import DropdownIcon from './DropDownIcon.jsx';
+import DropdownIcon from './DropdownIcon.jsx';
 
 const SorterContainer = styled.div`
 	box-sizing: border-box;
