@@ -28,6 +28,9 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 		// Clear the games array before filling it with games that match the updated genres
 		setGames([]);
 
+		// Clear errors
+		setGamesError(null);
+
 		// Allow fetching since new genres were requested
 		isFetchingApproved.current = true;
 	}
@@ -41,6 +44,9 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 
 		// Clear the games array before filling it with games that match the updated platforms
 		setGames([]);
+
+		// Clear errors
+		setGamesError(null);
 
 		// Allow fetching since new platforms were requested
 		isFetchingApproved.current = true;
