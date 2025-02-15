@@ -107,7 +107,7 @@ export default function App() {
 					<Shop
 						games={shopGamesToDisplay}
 						gamesError={shopGamesError}
-						getNewShopGames={getNewShopGames}
+						getNewGames={getNewShopGames}
 						getSpecificGenres={getSpecificGenres}
 						getSpecificPlatforms={getSpecificPlatforms}
 						addToCart={addToCart}
