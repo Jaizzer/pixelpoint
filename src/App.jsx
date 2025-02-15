@@ -132,6 +132,9 @@ export default function App() {
 					<Error />
 				)}
 			</main>
+            <footer>
+				<p>&copy; {new Date().getFullYear()} PixelPoint. All rights reserved.</p>
+			</footer>
 		</>
 	);
 }
