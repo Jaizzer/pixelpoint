@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import SearchGameCard from './SearchGameCard';
+import SearchGameCard from './SearchGameCard.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Search Game Component', () => {

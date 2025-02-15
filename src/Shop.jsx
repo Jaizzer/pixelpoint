@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import DropdownFilter from './DropdownFilter';
-import PriceRangeController from './PriceRangeController';
+import DropdownFilter from './DropdownFilter.jsx';
+import PriceRangeController from './PriceRangeController.jsx';
 import { useState } from 'react';
-import GamesContainer from './GamesContainer';
+import GamesContainer from './GamesContainer.jsx';
 
 function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms, addToCart, genres, platforms }) {
 	const isGenresLoaded = genres.length > 0;

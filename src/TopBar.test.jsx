@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { screen, render } from '@testing-library/react';
-import TopBar from './TopBar';
+import TopBar from './TopBar.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
 vi.mock('./CartIconWithCount', () => ({

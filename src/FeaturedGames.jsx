@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import Image from './Image';
+import Image from './Image.jsx';
 import { Link } from 'react-router-dom';
-import AddToCartButton from './AddToCartButton';
+import AddToCartButton from './AddToCartButton.jsx';
 
 function FeaturedGames({ games, gamesError, addToCart }) {
 	const [isGamesLoading, setIsGamesLoading] = useState(true);

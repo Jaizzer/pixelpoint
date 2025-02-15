@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import SearchDropdown from './SearchDropDown';
+import SearchDropdown from './SearchDropDown.jsx';
 import styled from 'styled-components';
-import getPrice from './getPrice';
+import getPrice from './getPrice.jsx';
 
 const SearchContainer = styled.div`
 	box-sizing: border-box;

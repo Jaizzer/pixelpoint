@@ -7,12 +7,12 @@ import Error from './Error';
 import Cart from './Cart';
 import TopBar from './TopBar';
 import { useParams } from 'react-router-dom';
-import GameDetails from './GameDetails';
-import useFetchGame from './useFetchGame';
-import useFetchGames from './useFetchGames';
+import GameDetails from './GameDetails.jsx';
+import useFetchGame from './useFetchGame.jsx';
+import useFetchGames from './useFetchGames.jsx';
 import { useEffect, useRef, useState } from 'react';
-import useFetchGenres from './useFetchGenres';
-import useFetchPlatforms from './useFetchPlatforms';
+import useFetchGenres from './useFetchGenres.jsx';
+import useFetchPlatforms from './useFetchPlatforms.jsx';
 
 export default function App() {
 	const { pageToDisplay } = useParams();
@@ -132,7 +132,7 @@ export default function App() {
 					<Error />
 				)}
 			</main>
-            <footer>
+			<footer>
 				<p>&copy; {new Date().getFullYear()} PixelPoint. All rights reserved.</p>
 			</footer>
 		</>

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import AddToCartButton from './AddToCartButton';
+import AddToCartButton from './AddToCartButton.jsx';
 
 describe('Add to Cart Button', () => {
 	it('turns "Add To Cart +" to "Added ✓" when clicked', async () => {

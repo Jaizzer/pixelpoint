@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { CartIcon as Icon } from './Icons';
+import { CartIcon as Icon } from './Icons.jsx';
 import styled from 'styled-components';
 
 const Container = styled.div`

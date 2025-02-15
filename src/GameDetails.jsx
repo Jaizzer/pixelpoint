@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import ImageSlider from './ImageSlider';
-import StarRating from './StarRating';
-import AddToCartButton from './AddToCartButton';
-import Image from './Image';
+import ImageSlider from './ImageSlider.jsx';
+import StarRating from './StarRating.jsx';
+import AddToCartButton from './AddToCartButton.jsx';
+import Image from './Image.jsx';
 import styled from 'styled-components';
 
 const Teaser = styled.div`

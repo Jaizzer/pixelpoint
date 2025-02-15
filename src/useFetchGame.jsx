@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import getPrice from './getPrice';
+import getPrice from './getPrice.jsx';
 
 function useFetchGame(id) {
 	const [game, setGame] = useState(null);

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { getAllByRole, render, screen } from '@testing-library/react';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Sidebar component', () => {

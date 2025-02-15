@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import ImageSlider from './ImageSlider';
+import ImageSlider from './ImageSlider.jsx';
 import userEvent from '@testing-library/user-event';
 
 describe('Image Slider component', () => {

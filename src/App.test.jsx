@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { userEvent } from '@testing-library/user-event';
-import App from './App';
+import App from './App.jsx';
 import { useState } from 'react';
 
 vi.mock('./GamesContainer', () => ({

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import SearchGameCard from './SearchGameCard';
+import SearchGameCard from './SearchGameCard.jsx';
 import styled from 'styled-components';
 
 const PopOver = styled.div`

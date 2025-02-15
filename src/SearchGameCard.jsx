@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Image from './Image';
+import Image from './Image.jsx';
 
 const Container = styled.div`
 	box-sizing: border-box;

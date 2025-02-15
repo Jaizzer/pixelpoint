@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import GameCard from './GameCard';
+import GameCard from './GameCard.jsx';
 import { useState, useEffect } from 'react';
 
 function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll, addToCart }) {

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import FeaturedGames from './FeaturedGames';
+import FeaturedGames from './FeaturedGames.jsx';
 
 describe('Featured Games Component', () => {
 	it('displays the Loading indicator while loading the games', () => {

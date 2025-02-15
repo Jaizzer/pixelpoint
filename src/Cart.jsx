@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import CartContentCard from './CartContentCard';
+import CartContentCard from './CartContentCard.jsx';
 import { Link } from 'react-router-dom';
 
 function Cart({ content, clearCart, removeItem }) {

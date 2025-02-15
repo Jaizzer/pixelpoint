@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import getPrice from './getPrice';
+import getPrice from './getPrice.jsx';
 import PropTypes from 'prop-types';
 
 export default function useFetchGames(category, gameCountPerRequest = 40, isThereDescription = false) {

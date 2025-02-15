@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import CartIconWithCount from './CartIconWithCount';
+import CartIconWithCount from './CartIconWithCount.jsx';
 import { Link } from 'react-router-dom';
-import Search from './Search';
+import Search from './Search.jsx';
 import styled from 'styled-components';
 
 const Container = styled.div`

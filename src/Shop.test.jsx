@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Shop from './Shop';
+import Shop from './Shop.jsx';
 import { userEvent } from '@testing-library/user-event';
 
 vi.mock('./GamesContainer', () => ({

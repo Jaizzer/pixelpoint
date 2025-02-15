@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import GamingPlatforms from './GamingPlatforms';
+import GamingPlatforms from './GamingPlatforms.jsx';
 
 describe('Gaming Platforms component', () => {
 	it('renders all icons if the platforms did not exceed 6', () => {

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import FeaturedGames from './FeaturedGames';
-import GamesContainer from './GamesContainer';
+import FeaturedGames from './FeaturedGames.jsx';
+import GamesContainer from './GamesContainer.jsx';
 import { Link } from 'react-router-dom';
 
 function Home({ featuredGames, featuredGamesError, latestGames, latestGamesError, addToCart }) {

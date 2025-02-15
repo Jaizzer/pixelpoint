@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Search from './Search';
+import Search from './Search.jsx';
 
 // Mock the Search Dropdown component
 vi.mock('./SearchDropdown', () => ({

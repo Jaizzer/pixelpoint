@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import CartIconWithCount from './CartIconWithCount';
+import CartIconWithCount from './CartIconWithCount.jsx';
 
 describe('Cart Icon component', () => {
 	it('renders a number base on the cart content count', () => {

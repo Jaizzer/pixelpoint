@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import Sorter from './Sorter';
+import Sorter from './Sorter.jsx';
 
 describe('Sorter Component', () => {
 	it('has a dropdown that can be expanded to see the sort options', async () => {

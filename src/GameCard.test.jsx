@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { screen, render } from '@testing-library/react';
-import GameCard from './GameCard';
+import GameCard from './GameCard.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
 vi.mock('./GamingPlatforms', () => ({
