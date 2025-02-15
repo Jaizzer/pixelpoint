@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import GameDetails from './GameDetails';
 import useFetchGame from './useFetchGame';
 import useFetchGames from './useFetchGames';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useFetchGenres from './useFetchGenres';
 import useFetchPlatforms from './useFetchPlatforms';
 
@@ -27,6 +27,7 @@ export default function App() {
 	const [upcomingGames, upcomingGamesError] = useFetchGames('upcoming', 5, true);
 
 	const [cart, setCart] = useState([]);
+	const previousPage = useRef(pageToDisplay);
 
 	function checkIfGameIsInCart(gameID) {
 		return cart.filter((game) => game.id === gameID).length > 0;
@@ -82,10 +83,11 @@ export default function App() {
 
 	useEffect(() => {
 		// Reset the game genres and platforms when moving outside the shop
-		if (pageToDisplay !== 'shop') {
+		if (previousPage.current === 'shop') {
 			getSpecificGenres([]);
 			getSpecificPlatforms([]);
 		}
+		previousPage.current = pageToDisplay;
 	}, [pageToDisplay]);
 
 	return (
