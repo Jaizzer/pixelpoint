@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Cart from './Cart';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 
 vi.mock('./CartContentCard', () => ({
 	default: ({ title, price, id, image, removeItem }) => {
@@ -20,7 +21,11 @@ vi.mock('./CartContentCard', () => ({
 
 describe('Cart component', () => {
 	it('renders cart', () => {
-		render(<Cart />);
+		render(
+			<MemoryRouter>
+				<Cart content={[]} />
+			</MemoryRouter>
+		);
 		const cart = screen.queryByTitle('cart');
 		expect(cart).not.toBeNull();
 	});
@@ -30,7 +35,11 @@ describe('Cart component', () => {
 			{ title: 'Game 1', id: 1, price: 45, images: ['fakeLink1', 'fakeLink2'] },
 			{ title: 'Game 2', id: 2, price: 45, images: ['fakeLink1', 'fakeLink2'] },
 		];
-		render(<Cart content={cartContent} />);
+		render(
+			<MemoryRouter>
+				<Cart content={cartContent} />
+			</MemoryRouter>
+		);
 		const cartContentCards = screen.queryAllByTitle('cart-content-card');
 		expect(cartContentCards.length).toEqual(cartContent.length);
 	});
@@ -42,7 +51,11 @@ describe('Cart component', () => {
 			{ title: 'Game 1', id: 1, price: 45, images: ['fakeLink1', 'fakeLink2'] },
 			{ title: 'Game 2', id: 2, price: 45, images: ['fakeLink1', 'fakeLink2'] },
 		];
-		render(<Cart content={cartContent} clearCart={clearCart} />);
+		render(
+			<MemoryRouter>
+				<Cart content={cartContent} clearCart={clearCart} />
+			</MemoryRouter>
+		);
 		const clearButton = screen.queryByTitle('clear-cart');
 		await user.click(clearButton);
 		expect(clearCart).toHaveBeenCalled();
@@ -52,7 +65,11 @@ describe('Cart component', () => {
 		const user = userEvent.setup();
 		const removeItem = vi.fn();
 		const cartContent = [{ title: 'Game 1', id: 1, price: 45, images: ['fakeLink1', 'fakeLink2'] }];
-		render(<Cart removeItem={removeItem} content={cartContent} />);
+		render(
+			<MemoryRouter>
+				<Cart removeItem={removeItem} content={cartContent} />
+			</MemoryRouter>
+		);
 		const removeItemButton = screen.queryByTitle('remove-item');
 		await user.click(removeItemButton);
 		expect(removeItem).toHaveBeenCalledWith(1);
@@ -63,8 +80,12 @@ describe('Cart component', () => {
 			{ title: 'Game 1', id: 1, price: 45, images: ['fakeLink1', 'fakeLink2'] },
 			{ title: 'Game 2', id: 2, price: 55, images: ['fakeLink1', 'fakeLink2'] },
 		];
-		render(<Cart content={cartContent} />);
-		const totalPrice = screen.queryByText(/100/i);
+		render(
+			<MemoryRouter>
+				<Cart content={cartContent} />
+			</MemoryRouter>
+		);
+		const totalPrice = screen.queryAllByText(/100/i)[0];
 		expect(totalPrice).not.toBeNull();
 	});
 });
