@@ -169,7 +169,12 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 					setIsDropdownVisible(!isDropdownVisible);
 				}}
 			>
-				{title}
+				<div className="dropdownTitle">{title}</div>
+				{items.filter((item) => item.isChecked).length > 0 && (
+					<div className="checkedFilterCount" title="checked-filter-count-indicator">
+						{items.filter((item) => item.isChecked).length}
+					</div>
+				)}
 				<DropdownIcon isDropdownCollapsed={!isDropdownVisible} />
 			</FilterButton>
 			{isDropdownVisible && (

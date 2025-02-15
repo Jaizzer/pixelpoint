@@ -73,4 +73,36 @@ describe('Dropdown filter', () => {
 
 		expect(numberOfVisibleDropdownItems).toEqual(5);
 	});
+
+	it('shows the number of clicked filter', async () => {
+		const items = [
+			{ name: 'Price', isChecked: true },
+			{ name: 'Name', isChecked: false },
+		];
+		const user = userEvent.setup();
+		render(<DropdownFilter items={items} title="Filter" />);
+		const dropDownFilterButton = screen.queryByText('Filter');
+		// Show the drop down
+		await user.click(dropDownFilterButton);
+
+		const checkedFilterCount = screen.queryByTitle('checked-filter-count-indicator');
+
+		expect(checkedFilterCount.textContent).toEqual('1');
+	});
+
+	it('does not render the checked filter count if there is no clicked filter', async () => {
+		const items = [
+			{ name: 'Price', isChecked: false },
+			{ name: 'Name', isChecked: false },
+		];
+		const user = userEvent.setup();
+		render(<DropdownFilter items={items} title="Filter" />);
+		const dropDownFilterButton = screen.queryByText('Filter');
+		// Show the drop down
+		await user.click(dropDownFilterButton);
+
+		const checkedFilterCount = screen.queryByTitle('checked-filter-count-indicator');
+
+		expect(checkedFilterCount).toBeNull();
+	});
 });
