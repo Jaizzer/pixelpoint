@@ -18,8 +18,8 @@ export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
 
-	const [genres, genresError] = useFetchGenres();
-	const [platforms, platformsError] = useFetchPlatforms();
+	const [genres] = useFetchGenres();
+	const [platforms] = useFetchPlatforms();
 
 	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(id);
 	const [shopGames, shopGamesError, getNewShopGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
