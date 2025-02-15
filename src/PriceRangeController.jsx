@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import styled from 'styled-components';
-import DropdownIcon from './DropDownIcon.jsx';
+import DropdownIcon from './DropdownIcon.jsx';
 
 const DropdownFilterContainer = styled.div`
 	box-sizing: border-box;
