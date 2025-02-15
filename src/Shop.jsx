@@ -66,6 +66,7 @@ function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPl
 									getSpecificGenres([]);
 								}}
 								numberOfShowLessItems={7}
+								isExpanded={true}
 							/>
 							<DropdownFilter
 								items={platformFilters}
@@ -90,6 +91,7 @@ function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPl
 									getSpecificPlatforms([]);
 								}}
 								numberOfShowLessItems={7}
+								isExpanded={true}
 							/>
 							<DropdownFilter
 								items={ageRatingFilters}

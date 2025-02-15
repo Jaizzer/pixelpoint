@@ -122,9 +122,9 @@ const FilterActions = styled.div`
 	color: white;
 `;
 
-function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessItems, onClearClick }) {
+function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessItems, onClearClick, isExpanded = false }) {
 	// State variable that determines whether the dropdown is expanded or collapsed
-	const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+	const [isDropdownVisible, setIsDropdownVisible] = useState(isExpanded);
 
 	// State variable that determines whether the dropdown is in 'Show less' or 'Show more' mode
 	const [isEveryDropdownItemsVisible, setIsEveryDropdownItemsVisible] = useState(false);
@@ -230,6 +230,7 @@ DropdownFilter.propTypes = {
 	onDropdownItemClick: PropTypes.func,
 	onClearClick: PropTypes.func,
 	numberOfShowLessItems: PropTypes.number,
+	isExpanded: PropTypes.bool,
 };
 
 export default DropdownFilter;
