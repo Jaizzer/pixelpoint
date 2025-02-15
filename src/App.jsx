@@ -17,11 +17,12 @@ import useFetchPlatforms from './useFetchPlatforms.jsx';
 export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
+	const integerIdOfClickedGame = /^-?\d+$/.test(id) ? parseInt(id) : undefined;
 
 	const [genres] = useFetchGenres();
 	const [platforms] = useFetchPlatforms();
 
-	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(id);
+	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(integerIdOfClickedGame);
 	const [shopGames, shopGamesError, getNewShopGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
 	const [latestGames, latestGamesError] = useFetchGames('latest', 10);
 	const [upcomingGames, upcomingGamesError] = useFetchGames('upcoming', 5, true);
@@ -120,7 +121,7 @@ export default function App() {
 					<About />
 				) : pageToDisplay === 'cart' ? (
 					<Cart content={cart} removeItem={removeItem} clearCart={clearCart} />
-				) : pageToDisplay === 'gameDetails' && id !== undefined ? (
+				) : pageToDisplay === 'gameDetails' && integerIdOfClickedGame ? (
 					<GameDetails
 						key={id}
 						game={clickedGameToDisplay}
