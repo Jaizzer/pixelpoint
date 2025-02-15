@@ -3,13 +3,8 @@ import DropdownFilter from './DropdownFilter';
 import PriceRangeController from './PriceRangeController';
 import { useState } from 'react';
 import GamesContainer from './GamesContainer';
-import useFetchGenres from './useFetchGenres';
-import useFetchPlatforms from './useFetchPlatforms';
 
-function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms, addToCart }) {
-	const [genres, genresError] = useFetchGenres();
-	const [platforms, platformsError] = useFetchPlatforms();
-
+function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms, addToCart, genres, platforms }) {
 	const isGenresLoaded = genres.length > 0;
 	const isPlatformsLoaded = platforms.length > 0;
 
@@ -192,6 +187,8 @@ Shop.propTypes = {
 	getSpecificGenres: PropTypes.func,
 	getSpecificPlatforms: PropTypes.func,
 	addToCart: PropTypes.func,
+	genres: PropTypes.array,
+	platforms: PropTypes.array,
 };
 
 export default Shop;

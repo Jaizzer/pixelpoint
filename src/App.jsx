@@ -11,10 +11,16 @@ import GameDetails from './GameDetails';
 import useFetchGame from './useFetchGame';
 import useFetchGames from './useFetchGames';
 import { useEffect, useState } from 'react';
+import useFetchGenres from './useFetchGenres';
+import useFetchPlatforms from './useFetchPlatforms';
 
 export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
+
+	const [genres, genresError] = useFetchGenres();
+	const [platforms, platformsError] = useFetchPlatforms();
+
 	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(id);
 	const [shopGames, shopGamesError, getNewShopGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
 	const [latestGames, latestGamesError] = useFetchGames('latest', 10);
@@ -105,6 +111,8 @@ export default function App() {
 						getSpecificGenres={getSpecificGenres}
 						getSpecificPlatforms={getSpecificPlatforms}
 						addToCart={addToCart}
+						genres={genres}
+						platforms={platforms}
 					/>
 				) : pageToDisplay === 'about' ? (
 					<About />
