@@ -46,6 +46,9 @@ function GameDetails({ game, isLoading, error, onAddItemToCart }) {
 							onAddItemToCart(game);
 						}}
 					/>
+					<a href="https://store.steampowered.com/">
+						<button>Buy Now</button>
+					</a>
 					<div className="otherDetails">
 						<div className="genre">
 							<h2 className="genreHeading">Genre</h2>
