@@ -4,7 +4,7 @@ import PriceRangeController from './PriceRangeController.jsx';
 import { useState } from 'react';
 import GamesContainer from './GamesContainer.jsx';
 
-function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms, addToCart, genres, platforms }) {
+function Shop({ games, gamesError, isGamesLoading, getNewGames, getSpecificGenres, getSpecificPlatforms, addToCart, genres, platforms }) {
 	const isGenresLoaded = genres.length > 0;
 	const isPlatformsLoaded = platforms.length > 0;
 
@@ -108,7 +108,13 @@ function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPl
 				}
 			</div>
 			{<div className="otherTools"></div>}
-			<GamesContainer games={gamesToDisplay} gamesError={gamesError} getNewGames={getNewGames} addToCart={addToCart} />
+			<GamesContainer
+				games={gamesToDisplay}
+				gamesError={gamesError}
+				isGamesLoading={isGamesLoading}
+				getNewGames={getNewGames}
+				addToCart={addToCart}
+			/>
 		</div>
 	);
 }
@@ -185,6 +191,7 @@ function getCheckedFiltersForTheNextRender(clickedItem, filters) {
 Shop.propTypes = {
 	games: PropTypes.array,
 	gamesError: PropTypes.error,
+	isGamesLoading: PropTypes.bool,
 	getNewGames: PropTypes.func,
 	getSpecificGenres: PropTypes.func,
 	getSpecificPlatforms: PropTypes.func,

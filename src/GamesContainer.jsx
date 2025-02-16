@@ -2,20 +2,14 @@ import PropTypes from 'prop-types';
 import GameCard from './GameCard.jsx';
 import { useState, useEffect } from 'react';
 
-function GamesContainer({ games, gamesError, getNewGames, addToCart }) {
-	const [isGamesLoading, setIsGamesLoading] = useState(true);
-	const [error, setError] = useState(gamesError);
+function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, addToCart }) {
 	const [showMoreButton, setShowMoreButton] = useState(false);
 
 	// Detect when new games are loaded
 	useEffect(() => {
 		if (gamesError) {
-			setIsGamesLoading(false);
-			setError(gamesError);
 			setShowMoreButton(false);
 		} else if (games.length > 0) {
-			setIsGamesLoading(false);
-
 			// Ensure DOM has mounted all the game cards before showing the 'Show More' Button
 			setTimeout(() => {
 				setShowMoreButton(true);
@@ -48,7 +42,6 @@ function GamesContainer({ games, gamesError, getNewGames, addToCart }) {
 				<button
 					onClick={() => {
 						if (!isGamesLoading && getNewGames) {
-							setIsGamesLoading(true);
 							// Hide button while loading new games
 							setShowMoreButton(false);
 							getNewGames();
@@ -65,9 +58,9 @@ function GamesContainer({ games, gamesError, getNewGames, addToCart }) {
 				</div>
 			)}
 
-			{error && (
+			{gamesError && (
 				<div className="error" title="error">
-					{`${error}`}
+					{`${gamesError}`}
 				</div>
 			)}
 		</div>
@@ -77,6 +70,7 @@ function GamesContainer({ games, gamesError, getNewGames, addToCart }) {
 GamesContainer.propTypes = {
 	games: PropTypes.array.isRequired,
 	gamesError: PropTypes.any,
+	isGamesLoading: PropTypes.bool,
 	getNewGames: PropTypes.func.isRequired,
 	addToCart: PropTypes.func.isRequired,
 };

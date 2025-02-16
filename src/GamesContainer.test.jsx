@@ -35,7 +35,7 @@ describe('Games Container Component', () => {
 				platforms: ['PC'],
 			},
 		];
-		render(<GamesContainer games={games} />);
+		render(<GamesContainer games={games} isGamesLoading={false} />);
 
 		// Check the number of cards rendered by counting the images
 		const numberOfImages = screen.queryAllByRole('image').length;
@@ -44,42 +44,14 @@ describe('Games Container Component', () => {
 	});
 
 	it('renders the loading message if the games are currently loading', () => {
-		render(<GamesContainer games={[]} error={null} />);
+		render(<GamesContainer games={[]} isGamesLoading={true} error={null} />);
 		const loadingMessage = screen.queryByTitle('loading');
 		expect(loadingMessage).not.toBeNull();
 	});
 
 	it('renders the error message if the games have error', () => {
-		render(<GamesContainer games={[]} error={new Error()} />);
+		render(<GamesContainer games={[]} isGamesLoading={true} error={new Error()} />);
 		const loadingMessage = screen.queryByTitle('loading');
 		expect(loadingMessage).not.toBeNull();
-	});
-
-	it('renders a loading indicator if the user clicked show more button', async () => {
-		const user = userEvent.setup();
-
-		const games = [
-			{
-				images: ['fakeLink'],
-				title: 'thisShouldBeThird',
-				price: 65,
-				id: '1',
-				genres: ['Action', 'Adventure'],
-				platforms: ['Mobile'],
-				releaseDate: '2024-01-03',
-			},
-		];
-		render(<GamesContainer games={games} error={null} getNewGames={vi.fn()} />);
-
-		// Add 1500ms delay since Show More button only appears after 1000ms
-		await waitFor(
-			async () => {
-				const showMoreButton = screen.queryByText('Show More');
-				await user.click(showMoreButton);
-				const loading = screen.queryByText('Loading...');
-				expect(loading).not.toBeNull();
-			},
-			{ timeout: 1500 }
-		);
 	});
 });

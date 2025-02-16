@@ -173,6 +173,7 @@ vi.mock('./useFetchGames.jsx', () => {
 				},
 			]);
 			const gamesError = null;
+			const isGamesLoading = false;
 			const getNewGames = vi.fn(() => {
 				setGames((games) =>
 					games.concat([
@@ -373,7 +374,7 @@ vi.mock('./useFetchGames.jsx', () => {
 					},
 				]);
 			}
-			return [games, gamesError, getNewGames, getSpecificGenres, getSpecificPlatforms];
+			return [games, gamesError, isGamesLoading, getNewGames, getSpecificGenres, getSpecificPlatforms];
 		},
 	};
 });

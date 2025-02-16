@@ -6,6 +6,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 	const [pageToRequestFromAPI, setPageToRequestFromAPI] = useState(1);
 	const [games, setGames] = useState([]);
 	const [gamesError, setGamesError] = useState(null);
+	const [isGamesLoading, setIsGamesLoading] = useState(true);
 	const isFetchingApproved = useRef(true);
 	const [genres, setGenres] = useState([]);
 	const [platforms, setPlatforms] = useState([]);
@@ -13,6 +14,9 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 	function fetchMoreGames() {
 		// Move to next page
 		setPageToRequestFromAPI((prev) => prev + 1);
+
+		// Reset loading status
+		setIsGamesLoading(true);
 
 		// Allow fetching since new page was requested
 		isFetchingApproved.current = true;
@@ -31,6 +35,9 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 		// Clear errors
 		setGamesError(null);
 
+		// Reset loading status
+		setIsGamesLoading(true);
+
 		// Allow fetching since new genres were requested
 		isFetchingApproved.current = true;
 	}
@@ -47,6 +54,9 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 
 		// Clear errors
 		setGamesError(null);
+
+		// Reset loading status
+		setIsGamesLoading(true);
 
 		// Allow fetching since new platforms were requested
 		isFetchingApproved.current = true;
@@ -135,12 +145,14 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 					});
 				} catch (error) {
 					setGamesError(error);
+				} finally {
+					setIsGamesLoading(false);
 				}
 			})();
 		}
 	}, [pageToRequestFromAPI, category, gameCountPerRequest, genres, platforms]);
 
-	return [games, gamesError, fetchMoreGames, getSpecificGenres, getSpecificPlatforms];
+	return [games, gamesError, isGamesLoading, fetchMoreGames, getSpecificGenres, getSpecificPlatforms];
 }
 
 useFetchGames.propTypes = {

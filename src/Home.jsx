@@ -3,19 +3,19 @@ import FeaturedGames from './FeaturedGames.jsx';
 import GamesContainer from './GamesContainer.jsx';
 import { Link } from 'react-router-dom';
 
-function Home({ featuredGames, featuredGamesError, latestGames, latestGamesError, addToCart }) {
+function Home({ featuredGames, featuredGamesError, isFeaturedGamesLoading, latestGames, latestGamesError, isLatestGamesLoading, addToCart }) {
 	return (
 		<div className="container" title="home">
 			<div>
 				<h2>Upcoming Games</h2>
-				<FeaturedGames games={featuredGames} gamesError={featuredGamesError} addToCart={addToCart} />
+				<FeaturedGames games={featuredGames} gamesError={featuredGamesError} isGamesLoading={isFeaturedGamesLoading} addToCart={addToCart} />
 			</div>
 			<Link to="/shop">
 				<button>View More</button>
 			</Link>
 			<div>
 				<h2>Latest Games</h2>
-				<GamesContainer games={latestGames} gamesError={latestGamesError} addToCart={addToCart} />
+				<GamesContainer games={latestGames} gamesError={latestGamesError} isGamesLoading={isLatestGamesLoading} addToCart={addToCart} />
 			</div>
 		</div>
 	);
@@ -27,6 +27,8 @@ Home.propTypes = {
 	latestGames: PropTypes.array,
 	latestGamesError: PropTypes.error,
 	addToCart: PropTypes.func,
+	isFeaturedGamesLoading: PropTypes.bool,
+	isLatestGamesLoading: PropTypes.bool,
 };
 
 export default Home;
