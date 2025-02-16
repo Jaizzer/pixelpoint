@@ -78,6 +78,10 @@ const Next = styled.button`
 	font-size: 50px;
 `;
 
+const HiddenImagesContainer = styled.div`
+	display: none;
+`;
+
 function ImageSlider({ imageLinks }) {
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -116,6 +120,12 @@ function ImageSlider({ imageLinks }) {
 				<Arrow isPointingLeft={true} />
 			</Previous>
 			<Image src={imageLinks[currentImageIndex]} alt={`Product Screenshot ${currentImageIndex + 1}`} role="image" loading="eager" />
+			<HiddenImagesContainer>
+				{/* Force mount invisible images to the DOM to download all images in one go which allows the image slider to avoid redownloading images */}
+				{imageLinks.map((imageLink) => (
+					<Image key={imageLink} src={imageLink} role="image" loading="eager" />
+				))}
+			</HiddenImagesContainer>
 			<DotsContainer>{imageIndicatorDots}</DotsContainer>
 			<Next title="next-button" onClick={moveToNextImage}>
 				<Arrow isPointingLeft={false} />
