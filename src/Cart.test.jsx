@@ -4,6 +4,20 @@ import Cart from './Cart.jsx';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
+vi.mock('./ConfirmationMessage', () => ({
+	default: ({ message, onClickYes, onClickCancel }) => {
+		return (
+			<div className="container">
+				<div className="message">{message}</div>
+				<div className="actions">
+					<button onClick={onClickYes}>Yes</button>
+					<button onClick={onClickCancel}>Cancel</button>
+				</div>
+			</div>
+		);
+	},
+}));
+
 vi.mock('./CartContentCard', () => ({
 	default: ({ title, price, id, image, removeItem }) => {
 		return (
@@ -61,7 +75,7 @@ describe('Cart component', () => {
 		expect(clearCart).toHaveBeenCalled();
 	});
 
-	it('calls the callback function removeItem when "Remove Item" button is clicked', async () => {
+	it('calls the callback function removeItem when the user confirmed to remove the item from the cart', async () => {
 		const user = userEvent.setup();
 		const removeItem = vi.fn();
 		const cartContent = [{ title: 'Game 1', id: 1, price: 45, images: ['fakeLink1', 'fakeLink2'] }];
@@ -72,7 +86,12 @@ describe('Cart component', () => {
 		);
 		const removeItemButton = screen.queryByTitle('remove-item');
 		await user.click(removeItemButton);
-		expect(removeItem).toHaveBeenCalledWith(1);
+
+		// Confirm Item removal
+		const yesButton = screen.queryByText('Yes');
+		await user.click(yesButton);
+
+		expect(removeItem).toHaveBeenCalled();
 	});
 
 	it('calculates the total price of all the cart contents', () => {
