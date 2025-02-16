@@ -38,7 +38,7 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, addToC
 			{gameCards.length > 0 ? gameCards : null}
 
 			{/* Ensure button only appears after new games are visible (after they finish loading) */}
-			{!isGamesLoading && showMoreButton && (
+			{getNewGames && !isGamesLoading && showMoreButton && (
 				<button
 					onClick={() => {
 						if (!isGamesLoading && getNewGames) {
