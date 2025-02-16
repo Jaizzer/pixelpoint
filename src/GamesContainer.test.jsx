@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import GamesContainer from './GamesContainer.jsx';
-import userEvent from '@testing-library/user-event';
 
 vi.mock('./GameCard', () => ({
 	default: ({ image, title, price }) => {
