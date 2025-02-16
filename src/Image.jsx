@@ -2,7 +2,7 @@ import blankImage from './assets/images/blank-image.jpg';
 import PropTypes from 'prop-types';
 
 function Image({ src, title, className }) {
-	return <img src={src ? src : blankImage} alt={title} className={className} />;
+	return <img src={src ? src : blankImage} alt={title} className={className} loading="lazy" />;
 }
 
 Image.propTypes = {
