@@ -13,6 +13,7 @@ import useFetchGames from './useFetchGames.jsx';
 import { useEffect, useRef, useState } from 'react';
 import useFetchGenres from './useFetchGenres.jsx';
 import useFetchPlatforms from './useFetchPlatforms.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
 
 export default function App() {
 	const { pageToDisplay } = useParams();
@@ -93,6 +94,7 @@ export default function App() {
 
 	return (
 		<>
+			<ScrollToTop />
 			<Sidebar></Sidebar>
 			<TopBar cartContentCount={cart.length}></TopBar>
 			<main>
