@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import GamesContainer from './GamesContainer.jsx';
+import userEvent from '@testing-library/user-event';
 
 vi.mock('./GameCard', () => ({
 	default: ({ image, title, price }) => {
@@ -54,7 +55,9 @@ describe('Games Container Component', () => {
 		expect(loadingMessage).not.toBeNull();
 	});
 
-	it('renders a loading indicator if the user has scrolled all the way to the bottom of the game card container', async () => {
+	it('renders a loading indicator if the user clicked show more button', async () => {
+		const user = userEvent.setup();
+
 		const games = [
 			{
 				images: ['fakeLink'],
@@ -66,23 +69,17 @@ describe('Games Container Component', () => {
 				releaseDate: '2024-01-03',
 			},
 		];
+		render(<GamesContainer games={games} error={null} getNewGames={vi.fn()} />);
 
-		render(<GamesContainer games={games} error={null} fetchNewGamesOnBottomScroll={vi.fn()} />);
-
-		const gameCardsContainer = screen.getByTitle('game-cards-container');
-
-		// Mock scrollHeight, clientHeight, and scroll top to simulate user going on the bottom of the container
-		Object.defineProperty(gameCardsContainer, 'scrollHeight', { value: 1000 });
-		Object.defineProperty(gameCardsContainer, 'clientHeight', { value: 300 });
-		Object.defineProperty(gameCardsContainer, 'scrollTop', { value: 700 });
-
-		// Simulate scroll to the bottom
-		fireEvent.scroll(gameCardsContainer);
-
-		// Wait for loading indicator
-		await waitFor(() => {
-			const loading = screen.queryByText('Loading...');
-			expect(loading).not.toBeNull();
-		});
+		// Add 1500ms delay since Show More button only appears after 1000ms
+		await waitFor(
+			async () => {
+				const showMoreButton = screen.queryByText('Show More');
+				await user.click(showMoreButton);
+				const loading = screen.queryByText('Loading...');
+				expect(loading).not.toBeNull();
+			},
+			{ timeout: 1500 }
+		);
 	});
 });

@@ -108,7 +108,7 @@ function Shop({ games, gamesError, getNewGames, getSpecificGenres, getSpecificPl
 				}
 			</div>
 			{<div className="otherTools"></div>}
-			<GamesContainer games={gamesToDisplay} gamesError={gamesError} fetchNewGamesOnBottomScroll={getNewGames} addToCart={addToCart} />
+			<GamesContainer games={gamesToDisplay} gamesError={gamesError} getNewGames={getNewGames} addToCart={addToCart} />
 		</div>
 	);
 }

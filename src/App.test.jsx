@@ -506,7 +506,8 @@ describe('App component', () => {
 		});
 	});
 
-	it('renders the new games when the user scroll to the bottom', async () => {
+	it('renders the new games when the user click the Show More', async () => {
+		const user = userEvent.setup();
 		render(
 			<MemoryRouter initialEntries={['/shop']}>
 				<Routes>
@@ -519,22 +520,25 @@ describe('App component', () => {
 		// The number of game cards before scrolling to the bottom
 		const gameCardCountBeforeBottomScroll = screen.queryAllByTitle('game-card').length;
 
-		if (screen.queryAllByTitle('game-card').length > 0) {
-			// Mock the user's action of scrolling to the bottom
-			const gameCardsContainer = screen.getByTitle('game-cards-container');
-			Object.defineProperty(gameCardsContainer, 'scrollHeight', { value: 1000 });
-			Object.defineProperty(gameCardsContainer, 'clientHeight', { value: 300 });
-			Object.defineProperty(gameCardsContainer, 'scrollTop', { value: 700 });
-			fireEvent.scroll(gameCardsContainer);
-		}
+		// Add 1500ms delay since Show More button only appears after 1000ms
+		await waitFor(
+			async () => {
+				const showMoreButton = screen.queryByText('Show More');
+				await user.click(showMoreButton);
+			},
+			{ timeout: 1500 }
+		);
 
-		await waitFor(() => {
-			// The number of game card after scrolling to the bottom
-			const gameCardCountAfterBottomScroll = screen.queryAllByTitle('game-card').length;
+		await waitFor(
+			() => {
+				// The number of game card after clicking show more
+				const gameCardCountAfterClickingShowMore = screen.queryAllByTitle('game-card').length;
 
-			// The game card should have doubled after the scroll
-			expect(gameCardCountAfterBottomScroll).toEqual(gameCardCountBeforeBottomScroll * 2);
-		});
+				// The game card should have doubled after the clicking show more
+				expect(gameCardCountAfterClickingShowMore).toEqual(gameCardCountBeforeBottomScroll * 2);
+			},
+			{ timeout: 2000 }
+		);
 	});
 
 	it('allows the user to add games to cart when inside the game details page', async () => {

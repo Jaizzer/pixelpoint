@@ -2,72 +2,83 @@ import PropTypes from 'prop-types';
 import GameCard from './GameCard.jsx';
 import { useState, useEffect } from 'react';
 
-function GamesContainer({ games, gamesError, fetchNewGamesOnBottomScroll, addToCart }) {
+function GamesContainer({ games, gamesError, getNewGames, addToCart }) {
 	const [isGamesLoading, setIsGamesLoading] = useState(true);
 	const [error, setError] = useState(gamesError);
+	const [showMoreButton, setShowMoreButton] = useState(false);
 
-	// Remove the loading indicator if the parent component passed the newly requested games
+	// Detect when new games are loaded
 	useEffect(() => {
-		if (gamesError || games.length > 0) {
+		if (gamesError) {
 			setIsGamesLoading(false);
 			setError(gamesError);
+			setShowMoreButton(false);
+		} else if (games.length > 0) {
+			setIsGamesLoading(false);
+
+			// Ensure DOM has mounted all the game cards before showing the 'Show More' Button
+			setTimeout(() => {
+				setShowMoreButton(true);
+			}, 1000);
 		}
 	}, [games, gamesError]);
 
-	// Create the game cards to be placed in DOM
-	const gameCards = games.map((game) => {
-		return (
-			<GameCard
-				key={game.id}
-				image={game.images[0]}
-				title={game.title}
-				price={game.price}
-				id={game.id}
-				quantitySold={game.ownerCount}
-				parentPlatforms={game.parentPlatforms}
-				isGameInCart={game.isAddedToCart}
-				rating={game.rating}
-				addToCart={() => {
-					addToCart(game);
-				}}
-			/>
-		);
-	});
+	// Create game cards
+	const gameCards = games.map((game) => (
+		<GameCard
+			key={game.id}
+			image={game.images[0]}
+			title={game.title}
+			price={game.price}
+			id={game.id}
+			quantitySold={game.ownerCount}
+			parentPlatforms={game.parentPlatforms}
+			isGameInCart={game.isAddedToCart}
+			rating={game.rating}
+			addToCart={() => addToCart(game)}
+		/>
+	));
 
 	return (
-		<div
-			className="gamesContainer"
-			title="game-cards-container"
-			onScroll={(e) => {
-				// Load new games if there are no new games being loaded when the user scrolled to the bottom of the div
-				const isUserAtTheBottom = e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1;
-				if (!isGamesLoading && isUserAtTheBottom && fetchNewGamesOnBottomScroll) {
-					// Render loading indicator if the user have scrolled to the bottom
-					setIsGamesLoading(true);
-					fetchNewGamesOnBottomScroll();
-				}
-			}}
-		>
-			{gameCards ? gameCards : null}
-			{isGamesLoading ? (
+		<div className="gamesContainer" title="game-cards-container">
+			{gameCards.length > 0 ? gameCards : null}
+
+			{/* Ensure button only appears after new games are visible (after they finish loading) */}
+			{!isGamesLoading && showMoreButton && (
+				<button
+					onClick={() => {
+						if (!isGamesLoading && getNewGames) {
+							setIsGamesLoading(true);
+							// Hide button while loading new games
+							setShowMoreButton(false);
+							getNewGames();
+						}
+					}}
+				>
+					Show More
+				</button>
+			)}
+
+			{isGamesLoading && (
 				<div className="loading" title="loading">
 					Loading...
 				</div>
-			) : error ? (
+			)}
+
+			{error && (
 				<div className="error" title="error">
 					{`${error}`}
 				</div>
-			) : null}
+			)}
 		</div>
 	);
 }
 
 GamesContainer.propTypes = {
-	games: PropTypes.array,
-	isGamesLoading: PropTypes.bool,
-	gamesError: PropTypes.error,
-	fetchNewGamesOnBottomScroll: PropTypes.func,
-	addToCart: PropTypes.func,
+	games: PropTypes.array.isRequired,
+	gamesError: PropTypes.any,
+	getNewGames: PropTypes.func.isRequired,
+	addToCart: PropTypes.func.isRequired,
 };
 
 export default GamesContainer;
