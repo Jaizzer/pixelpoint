@@ -10,6 +10,14 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 	const isFetchingApproved = useRef(true);
 	const [genres, setGenres] = useState([]);
 	const [platforms, setPlatforms] = useState([]);
+	const [isComponentGoingToRerender, setIsComponentGoingToRerender] = useState(false);
+
+	function refetchGames() {
+		setIsComponentGoingToRerender(!isComponentGoingToRerender);
+
+		// Allow fetching since the user requested refetch
+		isFetchingApproved.current = true;
+	}
 
 	function fetchMoreGames() {
 		// Move to next page
@@ -147,12 +155,13 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 					setGamesError(error);
 				} finally {
 					setIsGamesLoading(false);
+					setIsComponentGoingToRerender(false);
 				}
 			})();
 		}
-	}, [pageToRequestFromAPI, category, gameCountPerRequest, genres, platforms]);
+	}, [pageToRequestFromAPI, category, gameCountPerRequest, genres, platforms, isComponentGoingToRerender]);
 
-	return [games, gamesError, isGamesLoading, fetchMoreGames, getSpecificGenres, getSpecificPlatforms];
+	return [games, gamesError, isGamesLoading, refetchGames, fetchMoreGames, getSpecificGenres, getSpecificPlatforms];
 }
 
 useFetchGames.propTypes = {
