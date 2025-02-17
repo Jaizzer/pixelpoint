@@ -1,15 +1,27 @@
 import PropTypes from 'prop-types';
 import GameCard from './GameCard.jsx';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, addToCart }) {
 	const [showMoreButton, setShowMoreButton] = useState(false);
+	const gamesContainerDOM = useRef(null);
+	const previousGamesCount = useRef(games.length);
 
 	// Detect when new games are loaded
 	useEffect(() => {
 		if (gamesError) {
 			setShowMoreButton(false);
 		} else if (games.length > 0) {
+			// Auto scroll if new games have loaded
+			if (previousGamesCount.current !== 0 && previousGamesCount.current !== games.length) {
+				gamesContainerDOM.current.scrollTo({
+					top: gamesContainerDOM.current.scrollTop + gamesContainerDOM.current.clientHeight,
+					left: 0,
+					behavior: 'smooth',
+				});
+			}
+			previousGamesCount.current = games.length;
+
 			// Ensure DOM has mounted all the game cards before showing the 'Show More' Button
 			setTimeout(() => {
 				setShowMoreButton(true);
@@ -34,7 +46,7 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, addToC
 	));
 
 	return (
-		<div className="gamesContainer" title="game-cards-container">
+		<div className="gamesContainer" title="game-cards-container" ref={gamesContainerDOM}>
 			{gameCards.length > 0 ? gameCards : null}
 
 			{/* Ensure button only appears after new games are visible (after they finish loading) */}
