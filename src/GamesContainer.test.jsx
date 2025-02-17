@@ -101,7 +101,7 @@ describe('Games Container Component', () => {
 		expect(getNewGamesMock).toHaveBeenCalled();
 	});
 
-	it('performs refetch if first games encountered an error on first render', async () => {
+	it('performs refetch of the first game batch if error is encountered', async () => {
 		const user = userEvent.setup();
 		const refetchGames = vi.fn();
 		render(
@@ -120,7 +120,7 @@ describe('Games Container Component', () => {
 		expect(refetchGames).toHaveBeenCalled();
 	});
 
-	it('performs the refetch of new games if new games encountered an error after clicking "Show More" button', async () => {
+	it('performs the refetch of the new game batches if an error is encountered after clicking "Show More" button', async () => {
 		const user = userEvent.setup();
 		const getNewGames = vi.fn();
 		// Create the first games so the system will just get the new games
