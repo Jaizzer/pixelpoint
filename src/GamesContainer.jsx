@@ -72,7 +72,14 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, addToC
 
 			{gamesError && (
 				<div className="error" title="error">
-					{`${gamesError}`}
+					<div>PixelPoint run into a problem</div>
+					<button
+						onClick={() => {
+							getNewGames();
+						}}
+					>
+						Try again
+					</button>
 				</div>
 			)}
 		</div>
