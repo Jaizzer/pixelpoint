@@ -152,7 +152,8 @@ vi.mock('./useFetchGame.jsx', () => ({
 		};
 		const gameError = null;
 		const isGameLoading = false;
-		return [game, gameError, isGameLoading];
+		const refetchGame = vi.fn();
+		return [game, gameError, isGameLoading, refetchGame];
 	},
 }));
 
@@ -374,7 +375,22 @@ vi.mock('./useFetchGames.jsx', () => {
 					},
 				]);
 			}
-			return [games, gamesError, isGamesLoading, getNewGames, getSpecificGenres, getSpecificPlatforms];
+
+			function refetchGames() {
+				setGames({
+					title: 'Game 1',
+					price: 50,
+					id: '1',
+					genres: ['Genre 1', 'Genre 2', 'Genre 3'],
+					platforms: ['Platform 1', 'Platform 2', 'Platform 3'],
+					ownerCount: 300,
+					releaseDate: '2024-01-24',
+					esrbRating: ['Everyone'],
+					images: ['fakeLink1', 'fakeLink2', 'fakeLink3'],
+				});
+			}
+
+			return [games, gamesError, isGamesLoading, refetchGames, getNewGames, getSpecificGenres, getSpecificPlatforms];
 		},
 	};
 });
