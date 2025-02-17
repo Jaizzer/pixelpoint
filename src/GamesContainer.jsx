@@ -78,10 +78,10 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 					<button
 						onClick={() => {
 							if (games.length === 0) {
-								// Refetch the first games if the error is encountered on the first render
+								// Refetch the first game batch
 								refetchGames();
 							} else {
-								// Refetch the new games if the error is encountered when the "Show More" button is clicked
+								// Refetch the new games batch if the error is encountered when the "Show More" button is clicked
 								getNewGames();
 							}
 							setIsErrorNoticeVisible(false);
