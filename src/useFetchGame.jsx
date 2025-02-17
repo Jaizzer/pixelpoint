@@ -6,12 +6,17 @@ function useFetchGame(id) {
 	const [game, setGame] = useState(null);
 	const [isGameLoading, setIsGameLoading] = useState(true);
 	const [gameError, setGameError] = useState(null);
+	const [isComponentGoingToRerender, setIsComponentGoingToRerender] = useState(false);
+
+	function refetchGame() {
+		setIsComponentGoingToRerender(!isComponentGoingToRerender);
+	}
 
 	// Get the necessary details about the clicked game
 	useEffect(() => {
-		// Display loading by default when rendering new game
-		setIsGameLoading(true);
 		if (id !== undefined) {
+			// Display loading by default when rendering new game
+			setIsGameLoading(true);
 			(async function () {
 				try {
 					// Get the details about the game
@@ -32,7 +37,7 @@ function useFetchGame(id) {
 						genres: gameDetails.genres.map((genre) => genre.name),
 						releaseDate: gameDetails.released,
 						platforms: gameDetails.platforms.map((platform) => platform.platform.name),
-                        parentPlatforms: gameDetails.parent_platforms.map(parentPlatform => parentPlatform.platform.name),
+						parentPlatforms: gameDetails.parent_platforms.map((parentPlatform) => parentPlatform.platform.name),
 						esrbRating: [gameDetails.esrb_rating ? gameDetails.esrb_rating.name : 'Rating Pending'],
 						images: [gameDetails.background_image, ...gameScreenshots.results.map((result) => result.image)],
 					};
@@ -45,8 +50,8 @@ function useFetchGame(id) {
 				}
 			})();
 		}
-	}, [id]);
-	return [game, gameError, isGameLoading];
+	}, [id, isComponentGoingToRerender]);
+	return [game, gameError, isGameLoading, refetchGame];
 }
 
 useFetchGame.propTypes = {

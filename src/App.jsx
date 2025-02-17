@@ -23,7 +23,7 @@ export default function App() {
 	const [genres] = useFetchGenres();
 	const [platforms] = useFetchPlatforms();
 
-	const [clickedGame, clickedGameError, isClickedGameLoading] = useFetchGame(integerIdOfClickedGame);
+	const [clickedGame, clickedGameError, isClickedGameLoading, refetchGame] = useFetchGame(integerIdOfClickedGame);
 	const [shopGames, shopGamesError, isShopGamesLoading, getNewShopGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
 	const [latestGames, latestGamesError, isLatestGamesLoading] = useFetchGames('latest', 10);
 	const [upcomingGames, upcomingGamesError, isUpcomingGamesLoading] = useFetchGames('upcoming', 5, true);
@@ -133,6 +133,7 @@ export default function App() {
 						isLoading={isClickedGameLoading}
 						error={clickedGameError}
 						onAddItemToCart={addToCart}
+						refetchGame={refetchGame}
 					/>
 				) : (
 					<Error />

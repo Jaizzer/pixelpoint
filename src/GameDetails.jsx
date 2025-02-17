@@ -4,21 +4,43 @@ import StarRating from './StarRating.jsx';
 import AddToCartButton from './AddToCartButton.jsx';
 import Image from './Image.jsx';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 
 const Teaser = styled.div`
 	width: fit-content;
 `;
 
-function GameDetails({ game, isLoading, error, onAddItemToCart }) {
+function GameDetails({ game, isLoading, error, onAddItemToCart, refetchGame }) {
+	const [isErrorNoticeVisible, setIsErrorNoticeVisible] = useState(error ? true : false);
+
+	// Show error notice if an error is encountered
+	useEffect(() => {
+		if (error) {
+			setIsErrorNoticeVisible(true);
+		}
+	}, [error]);
+
 	return (
 		<>
 			{isLoading ? (
 				<div title="loading-indicator" className="loadingIndicator">
 					Loading...
 				</div>
-			) : error ? (
+			) : isErrorNoticeVisible ? (
 				<div className="errorMessage" title="error-message">
-					Error
+					{isErrorNoticeVisible && (
+						<div className="error" title="error">
+							<div>PixelPoint run into a problem</div>
+							<button
+								onClick={() => {
+									refetchGame();
+									setIsErrorNoticeVisible(false);
+								}}
+							>
+								Try Again
+							</button>
+						</div>
+					)}
 				</div>
 			) : (
 				<div className="details">
@@ -88,6 +110,7 @@ GameDetails.propTypes = {
 	isLoading: PropTypes.bool,
 	error: PropTypes.error,
 	onAddItemToCart: PropTypes.func,
+	refetchGame: PropTypes.func,
 };
 
 export default GameDetails;
