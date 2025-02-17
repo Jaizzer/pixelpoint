@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import GameCard from './GameCard.jsx';
 import { useState, useEffect, useRef } from 'react';
 
-function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, addToCart }) {
+function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetchGames, addToCart }) {
 	const [showMoreButton, setShowMoreButton] = useState(false);
 	const gamesContainerDOM = useRef(null);
 	const [isErrorNoticeVisible, setIsErrorNoticeVisible] = useState(gamesError ? true : false);
@@ -77,7 +77,13 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, addToC
 					<div>PixelPoint run into a problem</div>
 					<button
 						onClick={() => {
-							getNewGames();
+							if (games.length === 0) {
+								// Refetch the first games if the error is encountered on the first render
+								refetchGames();
+							} else {
+								// Refetch the new games if the error is encountered when the "Show More" button is clicked
+								getNewGames();
+							}
 							setIsErrorNoticeVisible(false);
 						}}
 					>
@@ -95,6 +101,7 @@ GamesContainer.propTypes = {
 	isGamesLoading: PropTypes.bool,
 	getNewGames: PropTypes.func.isRequired,
 	addToCart: PropTypes.func.isRequired,
+	refetchGames: PropTypes.func.isRequired,
 };
 
 export default GamesContainer;

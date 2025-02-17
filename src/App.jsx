@@ -24,9 +24,10 @@ export default function App() {
 	const [platforms] = useFetchPlatforms();
 
 	const [clickedGame, clickedGameError, isClickedGameLoading, refetchGame] = useFetchGame(integerIdOfClickedGame);
-	const [shopGames, shopGamesError, isShopGamesLoading, getNewShopGames, getSpecificGenres, getSpecificPlatforms] = useFetchGames();
-	const [latestGames, latestGamesError, isLatestGamesLoading] = useFetchGames('latest', 10);
-	const [upcomingGames, upcomingGamesError, isUpcomingGamesLoading] = useFetchGames('upcoming', 5, true);
+	const [shopGames, shopGamesError, isShopGamesLoading, refetchShopGames, getNewShopGames, getSpecificGenres, getSpecificPlatforms] =
+		useFetchGames();
+	const [latestGames, latestGamesError, isLatestGamesLoading, refetchLatestGames] = useFetchGames('latest', 10);
+	const [upcomingGames, upcomingGamesError, isUpcomingGamesLoading, refetchUpcomingGames] = useFetchGames('upcoming', 5, true);
 
 	const [cart, setCart] = useState([]);
 	const previousPage = useRef(pageToDisplay);
@@ -103,9 +104,11 @@ export default function App() {
 						latestGames={latestGamesToDisplay}
 						latestGamesError={latestGamesError}
 						isLatestGamesLoading={isLatestGamesLoading}
+						refetchLatestGames={refetchLatestGames}
 						featuredGames={upcomingGamesToDisplay}
 						featuredGamesError={upcomingGamesError}
 						isFeaturedGamesLoading={isUpcomingGamesLoading}
+						refetchFeaturedGames={refetchUpcomingGames}
 						addToCart={addToCart}
 					/>
 				) : pageToDisplay === 'account' ? (
@@ -116,6 +119,7 @@ export default function App() {
 						gamesError={shopGamesError}
 						isGamesLoading={isShopGamesLoading}
 						getNewGames={getNewShopGames}
+						refetchGames={refetchShopGames}
 						getSpecificGenres={getSpecificGenres}
 						getSpecificPlatforms={getSpecificPlatforms}
 						addToCart={addToCart}

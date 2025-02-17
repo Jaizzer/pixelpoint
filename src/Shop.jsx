@@ -4,7 +4,18 @@ import PriceRangeController from './PriceRangeController.jsx';
 import { useState } from 'react';
 import GamesContainer from './GamesContainer.jsx';
 
-function Shop({ games, gamesError, isGamesLoading, getNewGames, getSpecificGenres, getSpecificPlatforms, addToCart, genres, platforms }) {
+function Shop({
+	games,
+	gamesError,
+	isGamesLoading,
+	refetchGames,
+	getNewGames,
+	getSpecificGenres,
+	getSpecificPlatforms,
+	addToCart,
+	genres,
+	platforms,
+}) {
 	const isGenresLoaded = genres.length > 0;
 	const isPlatformsLoaded = platforms.length > 0;
 
@@ -114,6 +125,7 @@ function Shop({ games, gamesError, isGamesLoading, getNewGames, getSpecificGenre
 				isGamesLoading={isGamesLoading}
 				getNewGames={getNewGames}
 				addToCart={addToCart}
+				refetchGames={refetchGames}
 			/>
 		</div>
 	);
@@ -198,6 +210,7 @@ Shop.propTypes = {
 	addToCart: PropTypes.func,
 	genres: PropTypes.array,
 	platforms: PropTypes.array,
+	refetchGames: PropTypes.func,
 };
 
 export default Shop;

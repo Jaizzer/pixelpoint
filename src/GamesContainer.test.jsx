@@ -100,4 +100,60 @@ describe('Games Container Component', () => {
 		// Verify getNewGamesMock was called
 		expect(getNewGamesMock).toHaveBeenCalled();
 	});
+
+	it('performs refetch if first games encountered an error on first render', async () => {
+		const user = userEvent.setup();
+		const refetchGames = vi.fn();
+		render(
+			<GamesContainer
+				games={[]}
+				isGamesLoading={false}
+				gamesError={true}
+				getNewGames={vi.fn()}
+				refetchGames={refetchGames}
+				addToCart={vi.fn()}
+			/>
+		);
+		const tryAgainButton = screen.queryByText('Try Again');
+		await user.click(tryAgainButton);
+
+		expect(refetchGames).toHaveBeenCalled();
+	});
+
+	it('performs the refetch of new games if new games encountered an error after clicking "Show More" button', async () => {
+		const user = userEvent.setup();
+		const getNewGames = vi.fn();
+		// Create the first games so the system will just get the new games
+		const games = [
+			{
+				images: ['fakeLink'],
+				title: 'Game 1',
+				price: 45,
+				id: '1',
+				genres: ['Action', 'Adventure'],
+				platforms: ['Mobile'],
+			},
+			{
+				images: ['fakeLink'],
+				title: 'Game 2',
+				price: 55,
+				id: '2',
+				genres: ['Action', 'Open World'],
+				platforms: ['PC'],
+			},
+		];
+		render(
+			<GamesContainer
+				games={games}
+				isGamesLoading={false}
+				gamesError={true}
+				getNewGames={getNewGames}
+				addToCart={vi.fn()}
+				refetchGames={vi.fn()}
+			/>
+		);
+		const tryAgainButton = screen.queryByText('Try Again');
+		await user.click(tryAgainButton);
+		expect(getNewGames).toHaveBeenCalled();
+	});
 });
