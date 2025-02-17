@@ -5,12 +5,14 @@ import { useState, useEffect, useRef } from 'react';
 function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, addToCart }) {
 	const [showMoreButton, setShowMoreButton] = useState(false);
 	const gamesContainerDOM = useRef(null);
+	const [isErrorNoticeVisible, setIsErrorNoticeVisible] = useState(gamesError ? true : false);
 	const previousGamesCount = useRef(games.length);
 
 	// Detect when new games are loaded
 	useEffect(() => {
 		if (gamesError) {
 			setShowMoreButton(false);
+			setIsErrorNoticeVisible(true);
 		} else if (games.length > 0) {
 			// Auto scroll if new games have loaded
 			if (previousGamesCount.current !== 0 && previousGamesCount.current !== games.length) {
@@ -70,15 +72,16 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, addToC
 				</div>
 			)}
 
-			{gamesError && (
+			{isErrorNoticeVisible && (
 				<div className="error" title="error">
 					<div>PixelPoint run into a problem</div>
 					<button
 						onClick={() => {
 							getNewGames();
+							setIsErrorNoticeVisible(false);
 						}}
 					>
-						Try again
+						Try Again
 					</button>
 				</div>
 			)}
