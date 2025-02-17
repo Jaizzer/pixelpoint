@@ -7,6 +7,7 @@ import ConfirmationMessage from './ConfirmationMessage.jsx';
 function Cart({ content, clearCart, removeItem }) {
 	let cartContentCards = [];
 	const [itemToRemove, setItemToRemove] = useState(null);
+	const [isClearCartConfirmationVisible, setIsClearCartConfirmationVisible] = useState(false);
 
 	let totalPrice = 0;
 	if (content) {
@@ -51,12 +52,33 @@ function Cart({ content, clearCart, removeItem }) {
 					}}
 				/>
 			)}
+
+			{isClearCartConfirmationVisible && (
+				<ConfirmationMessage
+					message={`Are you sure you want to remove all items from your cart?`}
+					onClickYes={() => {
+						clearCart();
+						// Hide the Clear Cart confirmation message
+						setIsClearCartConfirmationVisible(false);
+					}}
+					onClickCancel={() => {
+						// Hide the Clear Cart confirmation message
+						setIsClearCartConfirmationVisible(false);
+					}}
+				/>
+			)}
 			<h1>Cart</h1>
 			<h2>{content.length > 1 ? `${content.length} items` : content.length === 1 ? `${content.length} item` : 'Your cart is empty.'}</h2>
 			<div className="cartContentsContainer">{cartContentCards}</div>
 
-			{content && content.length > 0 && (
-				<button title="clear-cart" className="clearCartButton" onClick={clearCart}>
+			{content && content.length > 0 && !isClearCartConfirmationVisible && (
+				<button
+					title="clear-cart"
+					className="clearCartButton"
+					onClick={() => {
+						setIsClearCartConfirmationVisible(true);
+					}}
+				>
 					Clear Cart
 				</button>
 			)}

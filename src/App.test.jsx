@@ -643,6 +643,10 @@ describe('App component', () => {
 		const clearCartButton = screen.getByTitle('clear-cart');
 		await user.click(clearCartButton);
 
+		// Confirm Item removal
+		const yesButton = screen.queryByText('Yes');
+		await user.click(yesButton);
+
 		await waitFor(() => {
 			// Check if the cart count indicator in the topbar disappeared
 			const isCartCountIndicatorGone = screen.queryByTitle('cart-count-indicator') === null;

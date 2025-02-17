@@ -58,7 +58,7 @@ describe('Cart component', () => {
 		expect(cartContentCards.length).toEqual(cartContent.length);
 	});
 
-	it('calls the callback function clearCart when "Clear" button is clicked', async () => {
+	it('calls the callback function clearCart when the user confirmed to remove the item from the cart', async () => {
 		const user = userEvent.setup();
 		const clearCart = vi.fn();
 		const cartContent = [
@@ -72,6 +72,11 @@ describe('Cart component', () => {
 		);
 		const clearButton = screen.queryByTitle('clear-cart');
 		await user.click(clearButton);
+
+		// Confirm Item removal
+		const yesButton = screen.queryByText('Yes');
+		await user.click(yesButton);
+
 		expect(clearCart).toHaveBeenCalled();
 	});
 
