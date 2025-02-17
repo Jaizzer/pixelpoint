@@ -48,7 +48,7 @@ function SearchDropdown({ loading, data, error, onSearchResultItemClick }) {
 			) : error ? (
 				// Display error message
 				<div className="errorMessage" title="error-indicator">
-					Error
+					No results found. Try a different keyword.
 				</div>
 			) : (
 				// Render the game cards
