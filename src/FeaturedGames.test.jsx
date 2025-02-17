@@ -8,7 +8,7 @@ describe('Featured Games Component', () => {
 	it('displays the Loading indicator while loading the games', () => {
 		render(
 			<MemoryRouter>
-				<FeaturedGames games={[]} gamesError={null} />
+				<FeaturedGames games={[]} gamesError={null} isGamesLoading={true} />
 			</MemoryRouter>
 		);
 		const loadingIndicator = screen.queryByTitle('loading-indicator');

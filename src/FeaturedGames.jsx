@@ -4,24 +4,14 @@ import Image from './Image.jsx';
 import { Link } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton.jsx';
 
-function FeaturedGames({ games, gamesError, addToCart }) {
-	const [isGamesLoading, setIsGamesLoading] = useState(true);
-	const [error, setError] = useState(null);
+function FeaturedGames({ games, gamesError, isGamesLoading, addToCart }) {
 	const [selectedFeaturedGameIndex, setSelectedFeaturedGameIndex] = useState(0);
 	const isGamesLoaded = games.length > 0;
 
 	useEffect(() => {
-		if (gamesError) {
-			setError(gamesError);
-			// Remove loading indicator if error had updated
-			setIsGamesLoading(false);
-		}
-
 		if (isGamesLoaded) {
 			// Set the selected featured game as the first game in the games array by default
 			setSelectedFeaturedGameIndex(0);
-			// Remove loading indicator if games had updated
-			setIsGamesLoading(false);
 		}
 	}, [isGamesLoaded, gamesError, games]);
 
@@ -40,7 +30,7 @@ function FeaturedGames({ games, gamesError, addToCart }) {
 		<div className="featured-games-container">
 			{isGamesLoading ? (
 				<div title="loading-indicator">Loading...</div>
-			) : error ? (
+			) : gamesError ? (
 				<div title="error-indicator"></div>
 			) : (
 				<div>{featuredGames}</div>
@@ -94,6 +84,7 @@ FeaturedGames.propTypes = {
 	games: PropTypes.array,
 	gamesError: PropTypes.gamesError,
 	addToCart: PropTypes.func,
+	isGamesLoading: PropTypes.bool,
 };
 
 export default FeaturedGames;
