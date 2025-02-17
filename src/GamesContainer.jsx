@@ -15,7 +15,7 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 			setIsErrorNoticeVisible(true);
 		} else if (games.length > 0) {
 			// Auto scroll if new games have loaded
-			if (previousGamesCount.current !== 0 && previousGamesCount.current !== games.length) {
+			if (previousGamesCount.current !== 0 && previousGamesCount.current < games.length) {
 				gamesContainerDOM.current.scrollTo({
 					top: gamesContainerDOM.current.scrollTop + gamesContainerDOM.current.clientHeight,
 					left: 0,
