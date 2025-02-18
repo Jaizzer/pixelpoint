@@ -70,8 +70,8 @@ function Cart({ content, clearCart, removeItem }) {
 			<h1>Cart</h1>
 			<h2>{content.length > 1 ? `${content.length} items` : content.length === 1 ? `${content.length} item` : 'Your cart is empty.'}</h2>
 			<div className="cartContentsContainer">{cartContentCards}</div>
-
-			{content && content.length > 0 && !isClearCartConfirmationVisible && (
+			{/* Hide clear cart if the individual item removal confirmation is visible, that is, if itemToRemove has a value */}
+			{content && content.length > 0 && !isClearCartConfirmationVisible && !itemToRemove && (
 				<button
 					title="clear-cart"
 					className="clearCartButton"
