@@ -24,6 +24,8 @@ function Cart({ content, clearCart, removeItem }) {
 					parentPlatforms={item.parentPlatforms}
 					removeItem={() => {
 						setItemToRemove(item);
+						// Replace clear cart confirmation message with individual item removal confirmation
+						setIsClearCartConfirmationVisible(false);
 					}}
 				/>
 			);
