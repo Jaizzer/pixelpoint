@@ -527,3 +527,7 @@ main {
 	box-sizing: border-box;
 	margin: 0px;
 }
+
+svg {
+	width: 20px;
+}
