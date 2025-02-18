@@ -70,6 +70,8 @@ function Search() {
 
 	// Wait for the user to stop typing before fetching the search result
 	useEffect(() => {
+		// Reset the error every time the input changes
+		setError(false);
 		const delaySearch = setTimeout(async () => {
 			try {
 				// Get the search results
