@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
 const Teaser = styled.div`
-	width: fit-content;
+	/* width: fit-content; */
 `;
 
 function GameDetails({ game, isLoading, error, onAddItemToCart, refetchGame }) {

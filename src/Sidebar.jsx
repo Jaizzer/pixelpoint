@@ -3,17 +3,17 @@ import { HomeIcon, ShopIcon, AboutIcon } from './Icons.jsx';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 250px;
 	background-color: #121519;
 	padding-top: 100px;
-	font-family: 'Poppins';
+	font-family: 'Poppins'; */
 `;
 
 const StyledLink = styled(Link)`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	text-decoration: none;
@@ -28,13 +28,13 @@ const StyledLink = styled(Link)`
 	&:hover {
 		stroke: #099ea6;
 		color: #099ea6;
-	}
+	} */
 `;
 
 const List = styled.ul`
-	display: flex;
+	/* display: flex;
 	flex-direction: column;
-	gap: 40px;
+	gap: 40px; */
 `;
 
 export default function Sidebar() {

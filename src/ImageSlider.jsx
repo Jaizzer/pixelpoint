@@ -3,18 +3,18 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	position: relative;
 	width: 500px;
 	height: 300px;
 	border-radius: 20px;
-	overflow: hidden;
+	overflow: hidden; */
 `;
 
 const DotsContainer = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	position: absolute;
@@ -30,30 +30,30 @@ const DotsContainer = styled.div`
 	background-color: transparent;
 
 	display: flex;
-	gap: 10px;
+	gap: 10px; */
 `;
 
 const Dot = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 8px;
 	height: 8px;
 	border-radius: 10px;
-	background-color: ${(props) => (props.isActive ? ' #099ea6' : '#ffffff5e;')};
+	background-color: ${(props) => (props.isActive ? ' #099ea6' : '#ffffff5e;')}; */
 `;
 
 const Image = styled.img`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	object-fit: cover; */
 `;
 
 const Previous = styled.button`
-	position: absolute;
+	/* position: absolute;
 	left: 1px;
 	top: 0;
 	bottom: 0;
@@ -62,11 +62,11 @@ const Previous = styled.button`
 	background-color: transparent;
 	border: 0px;
 	color: #ffffff7c;
-	font-size: 50px;
+	font-size: 50px; */
 `;
 
 const Next = styled.button`
-	position: absolute;
+	/* position: absolute;
 	right: 1px;
 	top: 0;
 	bottom: 0;
@@ -75,11 +75,11 @@ const Next = styled.button`
 	background-color: transparent;
 	border: 0px;
 	color: #ffffff7c;
-	font-size: 50px;
+	font-size: 50px; */
 `;
 
 const HiddenImagesContainer = styled.div`
-	display: none;
+	/* display: none; */
 `;
 
 function ImageSlider({ imageLinks }) {

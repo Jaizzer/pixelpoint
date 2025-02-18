@@ -4,17 +4,17 @@ import styled from 'styled-components';
 import DropdownIcon from './DropdownIcon.jsx';
 
 const DropdownFilterContainer = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	min-width: 245px;
 	padding: 10px 18px;
 	border-radius: 10px;
-	background-color: #1b1e22;
+	background-color: #1b1e22; */
 `;
 
 const PopOver = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	display: grid;
@@ -22,11 +22,11 @@ const PopOver = styled.div`
 	align-content: space-around;
 	padding: 15px;
 	background-color: transparent;
-	font-family: 'Poppins';
+	font-family: 'Poppins'; */
 `;
 
 const DropdownButton = styled.button`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 100%;
@@ -42,11 +42,11 @@ const DropdownButton = styled.button`
 	font-size: 16px;
 	font-weight: 600;
 	text-align: justify;
-	color: white;
+	color: white; */
 `;
 
 const PopOverItem = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	display: flex;
@@ -54,11 +54,11 @@ const PopOverItem = styled.div`
 	align-items: center;
 	gap: 10px;
 	font-size: 14px;
-	color: white;
+	color: white; */
 `;
 
 const Input = styled.input`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 120px;
@@ -77,7 +77,7 @@ const Input = styled.input`
 
 	&:focus {
 		border-color: #099ea6;
-	}
+	} */
 `;
 
 function PriceRangeController({ onPriceRangeSet }) {

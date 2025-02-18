@@ -3,7 +3,7 @@ import SearchGameCard from './SearchGameCard.jsx';
 import styled from 'styled-components';
 
 const PopOver = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 100%;
@@ -19,7 +19,7 @@ const PopOver = styled.div`
 	position: absolute;
 	z-index: 1000;
 
-	background-color: #242629;
+	background-color: #242629; */
 `;
 
 function SearchDropdown({ loading, data, error, onSearchResultItemClick }) {

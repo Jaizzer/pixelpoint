@@ -7,11 +7,11 @@ import Image from './Image.jsx';
 import GamingPlatforms from './GamingPlatforms.jsx';
 
 const StyledLink = styled(Link)`
-	text-decoration: none;
+	/* text-decoration: none; */
 `;
 
 const Container = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	padding: 10px 30px;
@@ -27,11 +27,11 @@ const Container = styled.div`
 
 	&:hover {
 		background-color: #373737;
-	}
+	} */
 `;
 
 const CardContent = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	padding: 10px;
@@ -42,21 +42,21 @@ const CardContent = styled.div`
 	grid-template-columns: 80px 200px 175px 1fr 150px;
 	align-items: center;
 	grid-template-rows: 1fr;
-	gap: 30px;
+	gap: 30px; */
 `;
 
 const StyledImage = styled(Image)`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 80px;
 	height: 80px;
 	object-fit: cover;
-	border-radius: 3px;
+	border-radius: 3px; */
 `;
 
 const DeleteButton = styled.button`
-	grid-template-columns: 2 / 3;
+	/* grid-template-columns: 2 / 3;
 	grid-template-rows: 1 / 2;
 	justify-self: center;
 	width: 40px;
@@ -64,13 +64,13 @@ const DeleteButton = styled.button`
 
 	background-color: #eb4747;
 	border-radius: 5px;
-	border: 0px;
+	border: 0px; */
 `;
 
 const ProductPrice = styled.div`
-	justify-self: center;
+	/* justify-self: center;
 	font-weight: 500;
-	font-size: 18px;
+	font-size: 18px; */
 `;
 
 function CartContentCard({ title, price, image, id, rating, parentPlatforms, removeItem }) {

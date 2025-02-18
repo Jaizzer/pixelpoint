@@ -4,17 +4,17 @@ import styled from 'styled-components';
 import DropdownIcon from './DropdownIcon.jsx';
 
 const DropdownFilterContainer = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	min-width: 245px;
 	padding: 10px 18px;
 	border-radius: 10px;
-	background-color: #1b1e22;
+	background-color: #1b1e22; */
 `;
 
 const PopOver = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	display: grid;
@@ -22,11 +22,11 @@ const PopOver = styled.div`
 	align-content: space-around;
 	padding: 15px;
 	background-color: transparent;
-	font-family: 'Poppins';
+	font-family: 'Poppins'; */
 `;
 
 const FilterButton = styled.button`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 100%;
@@ -42,11 +42,11 @@ const FilterButton = styled.button`
 	font-size: 16px;
 	font-weight: 600;
 	text-align: justify;
-	color: white;
+	color: white; */
 `;
 
 const CheckboxContainer = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	display: grid;
@@ -56,11 +56,11 @@ const CheckboxContainer = styled.div`
 	font-size: 15px;
 
 	// Ensure the checkbox border and the label always has the same color
-	--color: #858585;
+	--color: #858585; */
 `;
 
 const Checkbox = styled.input`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	-webkit-appearance: none;
@@ -100,26 +100,26 @@ const Checkbox = styled.input`
 	&:checked::before {
 		// Show the created checkmark
 		transform: scale(1);
-	}
+	} */
 `;
 
 const Label = styled.label`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	font: inherit;
-	color: var(--color);
+	color: var(--color); */
 `;
 
 const FilterActions = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	display: flex;
 	justify-content: space-between;
 	padding-top: 15px;
 	font-size: 13px;
-	color: white;
+	color: white; */
 `;
 
 function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessItems, onClearClick, isExpanded = false }) {

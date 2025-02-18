@@ -1,4 +1,4 @@
-.gamesContainer {
+/* .gamesContainer {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
 	justify-content: space-between;
@@ -318,12 +318,12 @@ a {
 
 .home {
 	display: grid;
-}
-
+} */
+/* 
 .description {
 	overflow: hidden;
 	display: -webkit-box;
-	-webkit-line-clamp: 4; /* number of lines to show */
+	-webkit-line-clamp: 4; 
 	line-clamp: 4;
 	-webkit-box-orient: vertical;
 	grid-row: 2 / 3;
@@ -441,8 +441,8 @@ a {
 	color: white;
 	text-decoration: none;
 	border-radius: 6px;
-}
-
+} */
+/* 
 .ctaButton:hover {
 	background: #0056b3;
 }
@@ -521,4 +521,4 @@ img.error {
 
 main {
     display: grid;
-}
+} */

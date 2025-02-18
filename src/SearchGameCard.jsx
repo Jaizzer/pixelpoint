@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Image from './Image.jsx';
 
 const Container = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	padding: 10px;
@@ -18,27 +18,27 @@ const Container = styled.div`
 
 	&:hover {
 		background-color: #373737;
-	}
+	} */
 `;
 
 const GameInfo = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	grid-column: 2 / 3;
 	display: grid;
 	grid-template-rows: auto auto;
 
-	font-size: 15px;
+	font-size: 15px; */
 `;
 
 const StyledImage = styled(Image)`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 50px;
 	object-fit: cover;
-	border-radius: 3px;
+	border-radius: 3px; */
 `;
 
 function SearchGameCard({ image, title, price, onClickCallback, id }) {

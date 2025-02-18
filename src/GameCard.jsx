@@ -6,7 +6,7 @@ import GamingPlatforms from './GamingPlatforms.jsx';
 import AddToCartButton from './AddToCartButton.jsx';
 
 const Container = styled.div`
-	min-width: 300px;
+	/* min-width: 300px;
 	max-width: 500px;
 	border-radius: 15px;
 	overflow: hidden;
@@ -18,32 +18,32 @@ const Container = styled.div`
 	transition: scale ease-in 150ms;
 	&:hover {
 		scale: 1.05;
-	}
+	} */
 `;
 
 const GameCardImage = styled(Image)`
-	height: 300px;
+	/* height: 300px;
 	width: 100%;
 	grid-row: 1 / 3;
 	grid-column: 1 / 2;
-	object-fit: cover;
+	object-fit: cover; */
 `;
 
 const GameInfo = styled.div`
-	padding: 15px;
+	/* padding: 15px;
 	grid-row: 2 / 3;
 	grid-column: 1 / 2;
 	backdrop-filter: blur(4px);
 	background-color: #00000085;
 	align-self: end;
 	display: grid;
-	gap: 5px;
+	gap: 5px; */
 `;
 
 const Text = styled.div`
-	font-family: 'Poppins';
+	/* font-family: 'Poppins';
 	font-weight: ${(props) => (props.emphasize ? 'bold' : 'normal')};
-	font-size: ${(props) => (props.emphasize ? '20px' : '15px')};
+	font-size: ${(props) => (props.emphasize ? '20px' : '15px')}; */
 `;
 
 function GameCard({ image, title, price, rating, quantitySold, parentPlatforms, isGameInCart, addToCart, id }) {

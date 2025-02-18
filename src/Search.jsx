@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import getPrice from './getPrice.jsx';
 
 const SearchContainer = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: clamp(245px, 80%, 400px);
@@ -14,11 +14,11 @@ const SearchContainer = styled.div`
 
 	font-family: 'Poppins';
 
-	position: relative;
+	position: relative; */
 `;
 
 const SearchBar = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 100%;
@@ -26,28 +26,28 @@ const SearchBar = styled.div`
 
 	display: grid;
 	grid-template-columns: auto 1fr;
-	gap: 10px;
+	gap: 10px; */
 `;
 
 const Input = styled.input`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	border: 0px;
 	outline: none;
 	font: inherit;
 	color: var(--color);
-	background-color: transparent;
+	background-color: transparent; */
 `;
 
 const Label = styled.label`
-	display: grid;
+	/* display: grid;
 	justify-content: center;
-	align-items: center;
+	align-items: center; */
 `;
 
 const Icon = styled.svg`
-	margin: 0px;
+	/* margin: 0px;
 	box-sizing: border-box;
 
 	font: inherit;
@@ -58,7 +58,7 @@ const Icon = styled.svg`
 	stroke: var(--color);
 	stroke-width: 3;
 	stroke-linecap: 'round';
-	stroke-linejoin: 'round';
+	stroke-linejoin: 'round'; */
 `;
 
 function Search() {

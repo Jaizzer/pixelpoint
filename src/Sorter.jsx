@@ -4,18 +4,18 @@ import styled from 'styled-components';
 import DropdownIcon from './DropdownIcon.jsx';
 
 const SorterContainer = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: clamp(200px, 80%, 360px);
 	padding: 10px 18px;
 	border-radius: 10px;
 	background-color: #1b1e22;
-	position: relative;
+	position: relative; */
 `;
 
 const PopOver = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 100%;
@@ -30,11 +30,11 @@ const PopOver = styled.div`
 
 	position: absolute;
 	right: 0;
-	z-index: 900;
+	z-index: 900; */
 `;
 
 const SortButton = styled.button`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	width: 100%;
@@ -51,11 +51,11 @@ const SortButton = styled.button`
 	font-size: 16px;
 	font-weight: 600;
 	text-align: justify;
-	color: white;
+	color: white; */
 `;
 
 const SortOption = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	display: grid;
@@ -63,40 +63,40 @@ const SortOption = styled.div`
 	align-items: center;
 	gap: 10px;
 	font-size: 15px;
-	color: ${(props) => (props.isClicked ? 'white' : '#858585')};
+	color: ${(props) => (props.isClicked ? 'white' : '#858585')}; */
 `;
 
 const FilterActions = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	display: flex;
 	justify-content: space-between;
 	padding-top: 15px;
 	font-size: 13px;
-	color: white;
+	color: white; */
 `;
 
 const CurrentlySelectedSortOption = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	padding: 3px 10px;
 	border-radius: 3px;
 	background-color: white;
 	font-size: 13px;
-	color: #1c1c1c;
+	color: #1c1c1c; */
 `;
 
 const ButtonContent = styled.div`
-	box-sizing: border-box;
+	/* box-sizing: border-box;
 	margin: 0px;
 
 	display: grid;
 	grid-template-rows: auto;
 	grid-template-columns: auto 1fr;
 	gap: 10px;
-	align-items: center;
+	align-items: center; */
 `;
 
 function Sorter({ onSortItemClick, numberOfShowLessItems }) {
