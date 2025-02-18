@@ -531,3 +531,7 @@ main {
 svg {
 	width: 20px;
 }
+
+body {
+	min-height: 100vh;
+}
