@@ -522,3 +522,8 @@ img.error {
 main {
     display: grid;
 } */
+
+* {
+	box-sizing: border-box;
+	margin: 0px;
+}
