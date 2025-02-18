@@ -75,6 +75,12 @@ function Search() {
 				// Get the search results
 				const response = await fetch(`https://api.rawg.io/api/games?key=7316558e23f844788817eccdda2769a2&search=${inputValue}`);
 				const jsonData = await response.json();
+
+				// Throw error if no results found
+				if (jsonData.results.length === 0) {
+					throw new Error('No results found');
+				}
+
 				let searchResults = jsonData.results.map((game) => ({
 					title: game.name,
 					id: game.id,
