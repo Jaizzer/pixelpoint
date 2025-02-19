@@ -13,6 +13,7 @@ const Nav = styled.nav`
 		bottom: 0px;
 		width: 100%;
 		position: fixed;
+		z-index: 1;
 	}
 `;
 
