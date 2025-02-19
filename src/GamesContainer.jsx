@@ -8,6 +8,7 @@ const Container = styled.div`
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	gap: 1.5em;
 	justify-items: center;
+	overflow: auto;
 `;
 
 function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetchGames, addToCart }) {
