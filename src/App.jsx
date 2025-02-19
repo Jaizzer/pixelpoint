@@ -19,6 +19,8 @@ import styled from 'styled-components';
 const MainContent = styled.div`
 	grid-column: 2 / 3;
 	grid-row: 2/ 3;
+	height: 100%;
+    overflow: hidden;
 `;
 
 const Footer = styled.footer`
@@ -154,7 +156,7 @@ export default function App() {
 				) : (
 					<Error />
 				)}
-			</MainContent>            
+			</MainContent>
 		</>
 	);
 }
