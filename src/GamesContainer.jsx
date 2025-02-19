@@ -9,10 +9,10 @@ const Container = styled.div`
 	gap: 1.5em;
 	justify-items: center;
 	overflow: auto;
-    padding: 1.5em;
+	padding: 0 1.5em;
 
 	@media (max-width: ${1000}px) {
-		padding-bottom: 5em;
+		padding: 1.5em 1.5em 5em 1.5em;
 	}
 `;
 
