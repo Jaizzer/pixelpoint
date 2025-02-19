@@ -23,12 +23,6 @@ const MainContent = styled.div`
     overflow: hidden;
 `;
 
-const Footer = styled.footer`
-	grid-column: 1/ -1;
-	grid-row: -1/ -2;
-    margin-bottom: 20em;
-`;
-
 export default function App() {
 	const { pageToDisplay } = useParams();
 	const { id } = useParams();
