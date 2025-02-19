@@ -14,6 +14,17 @@ import { useEffect, useRef, useState } from 'react';
 import useFetchGenres from './useFetchGenres.jsx';
 import useFetchPlatforms from './useFetchPlatforms.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
+import styled from 'styled-components';
+
+const MainContent = styled.div`
+	grid-column: 2 / 3;
+	grid-row: 2/ 3;
+`;
+
+const Footer = styled.footer`
+	grid-column: 1/ -1;
+	grid-row: -1/ -2;
+`;
 
 export default function App() {
 	const { pageToDisplay } = useParams();
@@ -98,7 +109,7 @@ export default function App() {
 			<ScrollToTop />
 			<Sidebar></Sidebar>
 			<TopBar cartContentCount={cart.length}></TopBar>
-			<main>
+			<MainContent>
 				{!pageToDisplay ? (
 					<Home
 						latestGames={latestGamesToDisplay}
@@ -142,10 +153,10 @@ export default function App() {
 				) : (
 					<Error />
 				)}
-			</main>
-			<footer>
+			</MainContent>
+			<Footer>
 				<p>&copy; {new Date().getFullYear()} PixelPoint. All rights reserved.</p>
-			</footer>
+			</Footer>
 		</>
 	);
 }
