@@ -534,6 +534,12 @@ svg {
 
 body {
 	min-height: 100vh;
+	font-family: 'Poppins';
+}
+
+a {
+	text-decoration: none;
+	color: white;
 }
 
 #root {
