@@ -2,39 +2,44 @@ import { Link } from 'react-router-dom';
 import { HomeIcon, ShopIcon, AboutIcon } from './Icons.jsx';
 import styled from 'styled-components';
 
+const breakPoint = 932;
 const Nav = styled.nav`
-	/* box-sizing: border-box;
-	margin: 0px;
+	grid-column: 1 / 2;
+	grid-row: 1 / 3;
+	padding: 0.5em;
+	background-color: #c80c0c; // Temporary color
 
-	width: 250px;
-	background-color: #121519;
-	padding-top: 100px;
-	font-family: 'Poppins'; */
+	@media (max-width: ${breakPoint}px) {
+		bottom: 0px;
+		width: 100%;
+		position: fixed;
+	}
 `;
 
 const StyledLink = styled(Link)`
-	/* box-sizing: border-box;
-	margin: 0px;
-
 	text-decoration: none;
-	display: grid;
-	grid-template-columns: auto 1fr;
-	align-items: center;
-	gap: 10px;
-
-	color: white;
-	stroke: white;
-
-	&:hover {
-		stroke: #099ea6;
-		color: #099ea6;
-	} */
+	display: flex;
+	flex-direction: column;
 `;
 
 const List = styled.ul`
-	/* display: flex;
+	display: flex;
 	flex-direction: column;
-	gap: 40px; */
+	gap: 40px;
+	list-style-type: none;
+
+	@media (max-width: ${breakPoint}px) {
+		flex-direction: row;
+		justify-content: space-around;
+		align-content: center;
+
+		li:nth-child(1) {
+			display: none;
+		}
+		li:nth-child(2) {
+			display: none;
+		}
+	}
 `;
 
 export default function Sidebar() {
