@@ -9,7 +9,10 @@ const Container = styled.div`
 	gap: 1.5em;
 	justify-items: center;
 	overflow: auto;
-    padding-bottom: 5em;
+
+	@media (max-width: ${1000}px) {
+		padding-bottom: 5em;
+	}
 `;
 
 function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetchGames, addToCart }) {
