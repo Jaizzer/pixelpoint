@@ -4,10 +4,16 @@ import astroBot from './assets/images/astrobot.png';
 import valorantPng from './assets/images/valorant.png';
 import dotaPng from './assets/images/dota.png';
 import leagueOFLegendsPng from './assets/images/league-of-legends.png';
+import styled from 'styled-components';
+
+const Container = styled.section`
+	height: 100%;
+	overflow: scroll;
+`;
 
 export default function About() {
 	return (
-		<section className="aboutPage" title="about">
+		<Container className="aboutPage" title="about">
 			<header className="aboutHeader">
 				<h1 className="aboutTitle">Welcome to PixelPoint</h1>
 				<p className="aboutSubtitle">Your ultimate destination for discovering and purchasing digital games.</p>
@@ -67,6 +73,6 @@ export default function About() {
 					</Link>
 				</div>
 			</section>
-		</section>
+		</Container>
 	);
 }
