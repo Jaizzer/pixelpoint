@@ -24,6 +24,7 @@ const MainContent = styled.div`
 const Footer = styled.footer`
 	grid-column: 1/ -1;
 	grid-row: -1/ -2;
+    margin-bottom: 20em;
 `;
 
 export default function App() {
@@ -153,10 +154,7 @@ export default function App() {
 				) : (
 					<Error />
 				)}
-			</MainContent>
-			<Footer>
-				<p>&copy; {new Date().getFullYear()} PixelPoint. All rights reserved.</p>
-			</Footer>
+			</MainContent>            
 		</>
 	);
 }
