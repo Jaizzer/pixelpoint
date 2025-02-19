@@ -6,19 +6,19 @@ import GamingPlatforms from './GamingPlatforms.jsx';
 import AddToCartButton from './AddToCartButton.jsx';
 
 const Container = styled.div`
-	/* min-width: 300px;
-	max-width: 500px;
-	border-radius: 15px;
+	width: 100%;
+	height: 100%;
+	border: 1px solid red;
+	border-radius: 1em;
 	overflow: hidden;
 	color: white;
 	display: grid;
 	grid-template-rows: 1fr;
 	grid-template-columns: 1fr;
-	justify-content: center;
 	transition: scale ease-in 150ms;
 	&:hover {
 		scale: 1.05;
-	} */
+	}
 `;
 
 const GameCardImage = styled(Image)`

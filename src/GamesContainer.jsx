@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types';
 import GameCard from './GameCard.jsx';
 import { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1.5em;
+	justify-items: center;
+`;
 
 function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetchGames, addToCart }) {
 	const [showMoreButton, setShowMoreButton] = useState(false);
@@ -48,7 +56,7 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 	));
 
 	return (
-		<div className="gamesContainer" title="game-cards-container" ref={gamesContainerDOM}>
+		<Container className="gamesContainer" title="game-cards-container" ref={gamesContainerDOM}>
 			{gameCards.length > 0 ? gameCards : null}
 
 			{/* Ensure button only appears after new games are visible (after they finish loading) */}
@@ -91,7 +99,7 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 					</button>
 				</div>
 			)}
-		</div>
+		</Container>
 	);
 }
 
