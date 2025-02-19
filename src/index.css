@@ -537,6 +537,7 @@ body {
 }
 
 #root {
+    max-width: 2000px;
 	margin-inline: auto;
 	display: grid;
 	grid-template-columns: auto 1fr;
