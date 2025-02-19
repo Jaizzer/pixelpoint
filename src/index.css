@@ -535,3 +535,10 @@ svg {
 body {
 	min-height: 100vh;
 }
+
+#root {
+	margin-inline: auto;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr auto;
+}
