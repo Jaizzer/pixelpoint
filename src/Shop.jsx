@@ -3,6 +3,54 @@ import DropdownFilter from './DropdownFilter.jsx';
 import PriceRangeController from './PriceRangeController.jsx';
 import { useState } from 'react';
 import GamesContainer from './GamesContainer.jsx';
+import styled from 'styled-components';
+
+const breakPoint = 1700;
+const Container = styled.div`
+	justify-content: space-between;
+	overflow: hidden;
+	height: 100%;
+	padding-top: 1.5em;
+
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 300px;
+
+	@media (max-width: ${breakPoint}px) {
+		padding-top: 0em;
+		position: relative;
+		grid-template-columns: 1fr;
+	}
+`;
+
+const DropdownFiltersContainer = styled.div`
+	grid-row: 1 / 2;
+	grid-column: 2 / 3;
+	overflow: scroll;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+
+	gap: 0.75em;
+	padding: 0 1.5em;
+
+	@media (max-width: ${breakPoint}px) {
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+		display: flex;
+		flex-direction: row;
+		justify-content: start;
+		overflow: visible;
+		padding-bottom: 0;
+	}
+
+	@media (max-width: 460px) {
+		justify-content: space-between;
+		div {
+			flex-grow: 1;
+		}
+	}
+`;
 
 function Shop({
 	games,
@@ -45,8 +93,8 @@ function Shop({
 	}
 
 	return (
-		<div title="shop">
-			<div className="dropdownFiltersContainer">
+		<Container title="shop">
+			<DropdownFiltersContainer className="dropdownFiltersContainer">
 				{
 					// Render the dropdowns if all filters have been set
 					!isEveryFiltersUnset && (
@@ -117,8 +165,7 @@ function Shop({
 						</>
 					)
 				}
-			</div>
-			{<div className="otherTools"></div>}
+			</DropdownFiltersContainer>
 			<GamesContainer
 				games={gamesToDisplay}
 				gamesError={gamesError}
@@ -127,7 +174,7 @@ function Shop({
 				addToCart={addToCart}
 				refetchGames={refetchGames}
 			/>
-		</div>
+		</Container>
 	);
 }
 

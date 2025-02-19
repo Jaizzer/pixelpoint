@@ -3,7 +3,11 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import DropdownIcon from './DropdownIcon.jsx';
 
+const breakPoint = 1700;
+
 const DropdownFilterContainer = styled.div`
+    display: grid;
+    grid-template-rows: auto 1fr;
 	/* box-sizing: border-box;
 	margin: 0px;
 
@@ -14,6 +18,20 @@ const DropdownFilterContainer = styled.div`
 `;
 
 const PopOver = styled.div`
+	@media (max-width: ${breakPoint}px) {
+        padding: 1em;
+		position: absolute;
+		left: 0px;
+		right: 0px;
+        top: 100%;
+		background-color: white;
+		max-height: 250px;
+        z-index: 1;
+	}
+	display: grid;
+	grid-template-rows: 1fr auto;
+	gap: 0.75em;
+
 	/* box-sizing: border-box;
 	margin: 0px;
 
@@ -25,7 +43,26 @@ const PopOver = styled.div`
 	font-family: 'Poppins'; */
 `;
 
+const FilterItemsContainer = styled.div`
+	overflow: auto;
+	@media (max-width: ${breakPoint}px) {
+		display: grid;
+		grid-template-columns: repeat(3, clamp(80px, 30%, 200px));
+		gap: 0.5em;
+		overflow: auto;
+		/* display: flex;
+		flex-direction: row;
+		align-content: start;
+		flex-wrap: wrap;
+		gap: 0.75em; */
+	}
+`;
+
 const FilterButton = styled.button`
+	width: 100%;
+    height: 100%;
+	display: flex;
+	gap: 1em;
 	/* box-sizing: border-box;
 	margin: 0px;
 
@@ -46,6 +83,8 @@ const FilterButton = styled.button`
 `;
 
 const CheckboxContainer = styled.div`
+	border: 1px solid red;
+	flex-grow: 1;
 	/* box-sizing: border-box;
 	margin: 0px;
 
@@ -112,6 +151,9 @@ const Label = styled.label`
 `;
 
 const FilterActions = styled.div`
+	display: flex;
+	justify-content: space-between;
+
 	/* box-sizing: border-box;
 	margin: 0px;
 
@@ -179,7 +221,7 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 			</FilterButton>
 			{isDropdownVisible && (
 				<PopOver>
-					{dropdownItems}
+					<FilterItemsContainer>{dropdownItems}</FilterItemsContainer>
 					<FilterActions>
 						{
 							// Only show 'Show less' or 'Show more' button if there is a provided number of items to be shown in 'Show less' mode

@@ -3,7 +3,11 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import DropdownIcon from './DropdownIcon.jsx';
 
+const breakPoint = 1700;
+
 const DropdownFilterContainer = styled.div`
+	display: grid;
+	grid-template-rows: auto 1fr;
 	/* box-sizing: border-box;
 	margin: 0px;
 
@@ -14,6 +18,13 @@ const DropdownFilterContainer = styled.div`
 `;
 
 const PopOver = styled.div`
+	@media (max-width: ${breakPoint}px) {
+		padding: 1em;
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		top: 100%;
+	}
 	/* box-sizing: border-box;
 	margin: 0px;
 
@@ -26,6 +37,10 @@ const PopOver = styled.div`
 `;
 
 const DropdownButton = styled.button`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	gap: 1em;
 	/* box-sizing: border-box;
 	margin: 0px;
 
