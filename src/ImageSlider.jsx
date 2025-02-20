@@ -119,7 +119,13 @@ function ImageSlider({ imageLinks }) {
 			<Previous title="previous-button" onClick={moveToPreviousImage}>
 				<Arrow isPointingLeft={true} />
 			</Previous>
-			<Image src={imageLinks[currentImageIndex]} alt={`Product Screenshot ${currentImageIndex + 1}`} role="image" loading="eager" />
+			<Image
+				src={imageLinks[currentImageIndex]}
+				alt={`Product Screenshot ${currentImageIndex + 1}`}
+				role="image"
+				loading="eager"
+				title="visible-image"
+			/>
 			<HiddenImagesContainer>
 				{/* Force mount invisible images to the DOM to download all images in one go which allows the image slider to avoid redownloading images */}
 				{imageLinks.map((imageLink) => (

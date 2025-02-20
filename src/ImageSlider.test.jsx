@@ -8,9 +8,10 @@ describe('Image Slider component', () => {
 		const user = userEvent.setup();
 		render(<ImageSlider imageLinks={['fakeLink1', 'fakeLink2', 'fakeLink3', 'fakeLink4']} />);
 		const nextButton = screen.queryByTitle('next-button');
+
 		await user.click(nextButton);
 		await waitFor(() => {
-			const imageAfterClickingNextButton = screen.queryByRole('image');
+			const imageAfterClickingNextButton = screen.queryByTitle('visible-image');
 			expect(imageAfterClickingNextButton.src).toMatch(/fakeLink2/i);
 		});
 	});
@@ -23,7 +24,7 @@ describe('Image Slider component', () => {
 		await user.click(nextButton);
 		await user.click(previousButton);
 		await waitFor(() => {
-			const imageAfterClickingPreviousButton = screen.queryByRole('image');
+			const imageAfterClickingPreviousButton = screen.queryByTitle('visible-image');
 			expect(imageAfterClickingPreviousButton.src).toMatch(/fakeLink1/i);
 		});
 	});
@@ -34,7 +35,7 @@ describe('Image Slider component', () => {
 		const thirdDot = screen.queryAllByTitle('current-image-indicator')[2];
 		await user.click(thirdDot);
 		await waitFor(() => {
-			const imageAfterClickingTheThirdDot = screen.queryByRole('image');
+			const imageAfterClickingTheThirdDot = screen.queryByTitle('visible-image');
 			expect(imageAfterClickingTheThirdDot.src).toMatch(/fakeLink3/i);
 		});
 	});
