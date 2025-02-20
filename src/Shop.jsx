@@ -17,6 +17,7 @@ const Container = styled.div`
 	grid-template-columns: 1fr 300px;
 
 	@media (max-width: ${breakPoint}px) {
+        grid-template-rows: auto 1fr;
 		padding-top: 0em;
 		position: relative;
 		grid-template-columns: 1fr;
