@@ -57,4 +57,17 @@ describe('Dropdown filter', () => {
 
 		expect(checkedFilterCount).toBeNull();
 	});
+
+	it('calls the onDropdownButtonClick when the dropdownbutton is clicked', async () => {
+		const items = [
+			{ name: 'Price', isChecked: false },
+			{ name: 'Name', isChecked: false },
+		];
+		const user = userEvent.setup();
+		const mockFunction = vi.fn();
+		render(<DropdownFilter items={items} onDropdownButtonClick={mockFunction} title={'Filter'} />);
+		const filterButton = screen.queryByText('Filter');
+		await user.click(filterButton);
+		expect(mockFunction).toHaveBeenCalled();
+	});
 });
