@@ -571,7 +571,7 @@ describe('App component', () => {
 		);
 
 		// Click the add to cart button
-		const addToCarButton = screen.queryByText(/Add to Cart/i);
+		const addToCarButton = screen.queryByTitle('add-to-cart-button');
 		await user.click(addToCarButton);
 
 		// Check the cart content count indicator
@@ -593,7 +593,7 @@ describe('App component', () => {
 		);
 
 		// Add an item to cart
-		const addToCarButton = screen.queryByText(/Add to Cart/i);
+		const addToCarButton = screen.queryByTitle('add-to-cart-button');
 		await user.click(addToCarButton);
 
 		// Go to Cart page
@@ -632,7 +632,7 @@ describe('App component', () => {
 		);
 
 		// Add an item to cart
-		const addToCarButton = screen.queryByText(/Add to Cart/i);
+		const addToCarButton = screen.queryByTitle('add-to-cart-button');
 		await user.click(addToCarButton);
 
 		// Go to Cart page
