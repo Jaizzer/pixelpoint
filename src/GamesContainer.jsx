@@ -14,6 +14,10 @@ const Container = styled.div`
 	@media (max-width: ${1000}px) {
 		padding: 1.5em 1.5em 5em 1.5em;
 	}
+
+    @media (max-width: ${600}px) {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	}
 `;
 
 function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetchGames, addToCart }) {
