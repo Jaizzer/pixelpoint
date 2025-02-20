@@ -3,6 +3,12 @@ import FeaturedGames from './FeaturedGames.jsx';
 import GamesContainer from './GamesContainer.jsx';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+	height: 100%;
+	overflow: scroll;
+`;
 
 function Home({
 	featuredGames,
@@ -25,7 +31,7 @@ function Home({
 	}, [featuredGamesError, latestGamesError]);
 
 	return (
-		<div className="container" title="home">
+		<Container className="container" title="home">
 			{isLatestGamesLoading || isFeaturedGamesLoading ? (
 				<div>Loading...</div>
 			) : isErrorNoticeVisible ? (
@@ -75,7 +81,7 @@ function Home({
 					</div>
 				</>
 			)}
-		</div>
+		</Container>
 	);
 }
 

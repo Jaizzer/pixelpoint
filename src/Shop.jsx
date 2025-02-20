@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import DropdownFilter from './DropdownFilter.jsx';
 import PriceRangeController from './PriceRangeController.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GamesContainer from './GamesContainer.jsx';
 import styled from 'styled-components';
 
@@ -74,6 +74,32 @@ function Shop({
 	const isGamesLoaded = games.length > 0;
 	const isEveryFiltersUnset = genreFilters.length === 0 && platformFilters.length === 0 && ageRatingFilters.length === 0;
 
+	// Expand genre and platform dropdown if the screen is not narrow
+	const [activeDropdowns, setActiveDropdowns] = useState(window.innerWidth < breakPoint ? [] : ['genre', 'platform']);
+	const [isScreenNarrow, setIsScreenNarrow] = useState(window.innerWidth < breakPoint);
+
+	function handleResize() {
+		if (window.innerWidth < breakPoint) {
+			setIsScreenNarrow(true);
+		} else {
+			setIsScreenNarrow(false);
+		}
+	}
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+	});
+
+	useEffect(() => {
+		if (isScreenNarrow) {
+			// Collapse all dropdown if a narrow screen breakpoint is hit
+			setActiveDropdowns([]);
+		} else {
+			// Expand genre and platform dropdown if a wide screen breakpoint is hit
+			setActiveDropdowns(['genre', 'platform']);
+		}
+	}, [isScreenNarrow]);
+
 	//  Initialize the genre, platform and age rating filters if they are not set yet
 	if (isGamesLoaded && isEveryFiltersUnset && isGenresLoaded && isPlatformsLoaded) {
 		setGenreFilters(genres.map((filter) => ({ ...filter, isChecked: false })));
@@ -92,6 +118,29 @@ function Shop({
 		gamesToDisplay = filterGamesByPrice(gamesToDisplay, priceRangeFilters.min, priceRangeFilters.max);
 	}
 
+	function toggleActiveDropdowns(dropdownName) {
+		const isDropdownActive = activeDropdowns.filter((dropdown) => dropdown === dropdownName).length === 1;
+		if (isScreenNarrow) {
+			// Ensure only 1 dropdown is active at a time when the screen is narrow
+			if (isDropdownActive) {
+				// Clear entire active dropdown
+				setActiveDropdowns([]);
+			} else {
+				// Make dropdown the only active dropdown
+				setActiveDropdowns([dropdownName]);
+			}
+		} else {
+			// Allow multiple active dropdowns if the screen is wide
+			if (isDropdownActive) {
+				// Remove current dropdown from the active dropdowns if its already in the active dropdowns
+				setActiveDropdowns((prev) => prev.filter((activeDropdown) => activeDropdown !== dropdownName));
+			} else {
+				// Add dropdown to the active dropdowns if its not yet in the active dropdowns
+				setActiveDropdowns([...activeDropdowns, dropdownName]);
+			}
+		}
+	}
+
 	return (
 		<Container title="shop">
 			<DropdownFiltersContainer className="dropdownFiltersContainer">
@@ -102,6 +151,10 @@ function Shop({
 							<PriceRangeController
 								onPriceRangeSet={(range) => {
 									setPriceRangeFilters(range);
+								}}
+								isExpanded={activeDropdowns.includes('price')}
+								onDropdownButtonClick={() => {
+									toggleActiveDropdowns('price');
 								}}
 							></PriceRangeController>
 							<DropdownFilter
@@ -125,7 +178,10 @@ function Shop({
 									getSpecificGenres([]);
 								}}
 								numberOfShowLessItems={7}
-								isExpanded={true}
+								isExpanded={activeDropdowns.includes('genre')}
+								onDropdownButtonClick={() => {
+									toggleActiveDropdowns('genre');
+								}}
 							/>
 							<DropdownFilter
 								items={platformFilters}
@@ -150,7 +206,10 @@ function Shop({
 									getSpecificPlatforms([]);
 								}}
 								numberOfShowLessItems={7}
-								isExpanded={true}
+								isExpanded={activeDropdowns.includes('platform')}
+								onDropdownButtonClick={() => {
+									toggleActiveDropdowns('platform');
+								}}
 							/>
 							<DropdownFilter
 								items={ageRatingFilters}
@@ -160,6 +219,10 @@ function Shop({
 								}}
 								onClearClick={() => {
 									clearDropdown(setAgeRatingFilters);
+								}}
+								isExpanded={activeDropdowns.includes('ageRating')}
+								onDropdownButtonClick={() => {
+									toggleActiveDropdowns('ageRating');
 								}}
 							/>
 						</>

@@ -6,8 +6,8 @@ import DropdownIcon from './DropdownIcon.jsx';
 const breakPoint = 1700;
 
 const DropdownFilterContainer = styled.div`
-    display: grid;
-    grid-template-rows: auto 1fr;
+	display: grid;
+	grid-template-rows: auto 1fr;
 	/* box-sizing: border-box;
 	margin: 0px;
 
@@ -19,14 +19,14 @@ const DropdownFilterContainer = styled.div`
 
 const PopOver = styled.div`
 	@media (max-width: ${breakPoint}px) {
-        padding: 1em;
+		padding: 1em;
 		position: absolute;
 		left: 0px;
 		right: 0px;
-        top: 100%;
+		top: 100%;
 		background-color: white;
 		max-height: 250px;
-        z-index: 1;
+		z-index: 1;
 	}
 	display: grid;
 	grid-template-rows: 1fr auto;
@@ -60,7 +60,7 @@ const FilterItemsContainer = styled.div`
 
 const FilterButton = styled.button`
 	width: 100%;
-    height: 100%;
+	height: 100%;
 	display: flex;
 	gap: 1em;
 	/* box-sizing: border-box;
@@ -164,10 +164,7 @@ const FilterActions = styled.div`
 	color: white; */
 `;
 
-function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessItems, onClearClick, isExpanded = false }) {
-	// State variable that determines whether the dropdown is expanded or collapsed
-	const [isDropdownVisible, setIsDropdownVisible] = useState(isExpanded);
-
+function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessItems, onClearClick, onDropdownButtonClick, isExpanded = false }) {
 	// State variable that determines whether the dropdown is in 'Show less' or 'Show more' mode
 	const [isEveryDropdownItemsVisible, setIsEveryDropdownItemsVisible] = useState(false);
 
@@ -208,7 +205,7 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 				onClick={() => {
 					// Switch back to 'Show less' mode when expanding or collapsing the dropdown
 					setIsEveryDropdownItemsVisible(false);
-					setIsDropdownVisible(!isDropdownVisible);
+					onDropdownButtonClick();
 				}}
 			>
 				<div className="dropdownTitle">{title}</div>
@@ -217,9 +214,9 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 						{items.filter((item) => item.isChecked).length}
 					</div>
 				)}
-				<DropdownIcon isDropdownCollapsed={!isDropdownVisible} />
+				<DropdownIcon isDropdownCollapsed={!isExpanded} />
 			</FilterButton>
-			{isDropdownVisible && (
+			{isExpanded && (
 				<PopOver>
 					<FilterItemsContainer>{dropdownItems}</FilterItemsContainer>
 					<FilterActions>
@@ -275,6 +272,7 @@ DropdownFilter.propTypes = {
 	items: PropTypes.array,
 	title: PropTypes.string,
 	onDropdownItemClick: PropTypes.func,
+	onDropdownButtonClick: PropTypes.func,
 	onClearClick: PropTypes.func,
 	numberOfShowLessItems: PropTypes.number,
 	isExpanded: PropTypes.bool,

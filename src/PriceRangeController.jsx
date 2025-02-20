@@ -95,21 +95,20 @@ const Input = styled.input`
 	} */
 `;
 
-function PriceRangeController({ onPriceRangeSet }) {
-	const [isPriceRangeDropdownVisible, setIsPriceRangeDropdownVisible] = useState(false);
+function PriceRangeController({ onPriceRangeSet, isExpanded, onDropdownButtonClick }) {
 	const [priceRange, setPriceRange] = useState({ min: '', max: '' });
 	return (
 		<DropdownFilterContainer>
 			<DropdownButton
 				className="priceRangeControllerTitle"
 				onClick={() => {
-					setIsPriceRangeDropdownVisible(!isPriceRangeDropdownVisible);
+					onDropdownButtonClick();
 				}}
 			>
 				Price
-				<DropdownIcon isDropdownCollapsed={!isPriceRangeDropdownVisible} />
+				<DropdownIcon isDropdownCollapsed={!isExpanded} />
 			</DropdownButton>
-			{isPriceRangeDropdownVisible ? (
+			{isExpanded ? (
 				<PopOver title="price-range-controller-dropdown">
 					<PopOverItem>
 						<label htmlFor="minimumPrice">Min</label>
@@ -155,6 +154,8 @@ function PriceRangeController({ onPriceRangeSet }) {
 
 PriceRangeController.propTypes = {
 	onPriceRangeSet: PropTypes.func,
+	isExpanded: PropTypes.bool,
+	onDropdownButtonClick: PropTypes.func,
 };
 
 export default PriceRangeController;
