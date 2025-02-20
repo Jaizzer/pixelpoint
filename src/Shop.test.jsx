@@ -19,7 +19,7 @@ vi.mock('./GamesContainer', () => ({
 }));
 
 vi.mock('./DropdownFilter', () => ({
-	default: ({ items, title, onDropdownItemClick }) => {
+	default: ({ items, title, onDropdownItemClick, isExpanded, onDropdownButtonClick }) => {
 		const dropdownItems = items.map((item) => {
 			return (
 				<div key={item.name} className="dropdownItem">
@@ -38,8 +38,10 @@ vi.mock('./DropdownFilter', () => ({
 
 		return (
 			<div>
-				<div className="filterButton">{title}</div>
-				<div className="dropdown">{dropdownItems}</div>
+				<div className="filterButton" onClick={onDropdownButtonClick}>
+					{title}
+				</div>
+				{isExpanded && <div className="dropdown">{dropdownItems}</div>}
 			</div>
 		);
 	},
@@ -208,6 +210,9 @@ describe('Shop component', () => {
 		const mockFunction = vi.fn();
 		render(<Shop games={games} gamesError={false} getSpecificGenres={mockFunction} genres={genres} platforms={platforms} />);
 
+		const platformFilter = screen.queryByText('Genre');
+		await user.click(platformFilter);
+
 		// Filter all 'Action'
 		const actionDropdownFilter = screen.queryByText('Action');
 		await user.click(actionDropdownFilter);
@@ -250,6 +255,9 @@ describe('Shop component', () => {
 		const mockFunction = vi.fn();
 		render(<Shop games={games} gamesError={false} getSpecificPlatforms={mockFunction} genres={genres} platforms={platforms} />);
 
+		const platformFilter = screen.queryByText('Platform');
+		await user.click(platformFilter);
+
 		// Filter all games available for 'PC' platform
 		const pcDropdownFilter = screen.queryByText('PC');
 		await user.click(pcDropdownFilter);
@@ -290,6 +298,10 @@ describe('Shop component', () => {
 			},
 		];
 		render(<Shop games={games} gamesError={false} genres={genres} platforms={platforms} />);
+
+        const platformFilter = screen.queryByText('Age Rating');
+		await user.click(platformFilter);
+
 		// Filter all games that are age rated as 'Mature'
 		const ageRatingDropdownFilter = screen.queryByText('Mature');
 		await user.click(ageRatingDropdownFilter);
