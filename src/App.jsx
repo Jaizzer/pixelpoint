@@ -16,7 +16,7 @@ import useFetchPlatforms from './useFetchPlatforms.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
 import styled from 'styled-components';
 
-const MainContent = styled.div`
+const MainContent = styled.main`
 	grid-column: 2 / 3;
 	grid-row: 2/ 3;
 	height: 100%;
