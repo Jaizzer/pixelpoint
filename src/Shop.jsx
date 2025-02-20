@@ -46,10 +46,8 @@ const DropdownFiltersContainer = styled.div`
 	}
 
 	@media (max-width: 460px) {
-		justify-content: space-between;
-		div {
-			flex-grow: 1;
-		}
+		justify-content: start;
+        flex-wrap: wrap;
 	}
 `;
 
