@@ -15,8 +15,8 @@ const Container = styled.div`
 		padding: 1.5em 1.5em 5em 1.5em;
 	}
 
-    @media (max-width: ${600}px) {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	@media (max-width: ${600}px) {
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 	}
 `;
 
@@ -25,6 +25,7 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 	const gamesContainerDOM = useRef(null);
 	const [isErrorNoticeVisible, setIsErrorNoticeVisible] = useState(gamesError ? true : false);
 	const previousGamesCount = useRef(games.length);
+	const isShowMoreButtonClicked = useRef(false);
 
 	// Detect when new games are loaded
 	useEffect(() => {
@@ -32,13 +33,15 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 			setShowMoreButton(false);
 			setIsErrorNoticeVisible(true);
 		} else if (games.length > 0) {
-			// Auto scroll if new games have loaded
-			if (previousGamesCount.current !== 0 && previousGamesCount.current < games.length) {
+			// Auto scroll if new games have loaded via clicking 'Show More'
+			if (isShowMoreButtonClicked.current && previousGamesCount.current !== 0 && previousGamesCount.current < games.length) {
 				gamesContainerDOM.current.scrollTo({
 					top: gamesContainerDOM.current.scrollTop + gamesContainerDOM.current.clientHeight,
 					left: 0,
 					behavior: 'smooth',
 				});
+				// Reset Show More button click tracker
+				isShowMoreButtonClicked.current = false;
 			}
 			previousGamesCount.current = games.length;
 
@@ -77,6 +80,7 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 							// Hide button while loading new games
 							setShowMoreButton(false);
 							getNewGames();
+							isShowMoreButtonClicked.current = true;
 						}
 					}}
 				>
