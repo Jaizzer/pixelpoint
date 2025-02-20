@@ -21,6 +21,10 @@ const MainContent = styled.main`
 	grid-row: 2/ 3;
 	height: 100%;
     overflow: hidden;
+
+    @media (max-width: ${600}px) {
+        font-size: 0.6em;
+	}
 `;
 
 export default function App() {
