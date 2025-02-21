@@ -18,13 +18,9 @@ import styled from 'styled-components';
 
 const MainContent = styled.main`
 	grid-column: 2 / 3;
-	grid-row: 2/ 3;
+	grid-row: 2 / 3;
 	height: 100%;
-    overflow: hidden;
-
-    @media (max-width: ${600}px) {
-        font-size: 0.6em;
-	}
+	overflow: hidden;
 `;
 
 export default function App() {

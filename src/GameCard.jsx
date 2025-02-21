@@ -23,7 +23,6 @@ const Container = styled.div`
 	color: white;
 
 	transition: scale ease-in 150ms;
-
 	&:hover {
 		scale: 1.05;
 	}
@@ -37,10 +36,9 @@ const GameCardImage = styled(Image)`
 const GameInfo = styled.div`
 	grid-row: 2 / 3;
 	grid-column: 1 / 2;
+	align-self: end;
 
 	padding: 1em;
-
-	align-self: end;
 
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -51,21 +49,21 @@ const GameInfo = styled.div`
 	backdrop-filter: blur(3px);
 	background-color: #00000085;
 
-	div:nth-child(1) {
+	& > div:nth-child(1) {
 		grid-column: 1 / 3;
 	}
 
-	div:nth-child(2) {
-		grid-column: 1 / 2;
+	& > div:nth-child(2) {
+		grid-column: 1 / 3;
+        
+		display: grid;
+		grid-template-columns: auto 1fr;
+		justify-content: space-around;
+		justify-items: end;
+		align-items: center;
 	}
 
-	div:nth-child(3) {
-		grid-column: 2 / 3;
-		display: flex;
-		justify-content: end;
-	}
-
-	div:nth-child(4) {
+	& > div:nth-child(3) {
 		grid-column: 1 / 3;
 	}
 `;
@@ -81,7 +79,7 @@ const ModifiedAddToCartButton = styled(AddToCartButton)`
 const Text = styled.div`
 	font-family: 'Poppins';
 	font-weight: ${(props) => (props.emphasize ? 'bold' : 'normal')};
-	font-size: ${(props) => (props.emphasize ? '1.5em' : '1em')};
+	font-size: ${(props) => (props.emphasize ? '1.2em' : '1em')};
 `;
 
 const Statistics = styled.div`
@@ -97,8 +95,9 @@ function GameCard({ image, title, price, rating, quantitySold, parentPlatforms, 
 					<GameCardImage src={image} role="image" alt={title} className={'image'} />
 					<GameInfo>
 						<Text data-testid="title">{title}</Text>
-						<Text emphasize={true}>{price ? '$' + price.toFixed(2) : null}</Text>
 						<div>
+							<Text emphasize={true}>{price ? '$' + price.toFixed(2) : null}</Text>
+
 							<GamingPlatforms platforms={parentPlatforms} maximumNumberOfIconsToRender={4} />
 						</div>
 						<Statistics>
