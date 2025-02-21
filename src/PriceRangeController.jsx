@@ -23,7 +23,7 @@ const DropdownFilterContainer = styled.div`
 	}
 
 	@media (max-width: ${breakPoint}px) {
-		border: ${(props) => (props.isexpanded ? '1px' : '0px')} solid red;
+		border: ${(props) => (props.isexpanded ? '1px' : '0px')} solid #067f97;
 	}
 `;
 
@@ -56,7 +56,7 @@ const PopOver = styled.div`
 	}
 
 	@media (max-width: 430px) {
-		gap: 2em;
+		gap: 1.2em;
 		padding-bottom: 1.5em;
 		font-size: 0.55em;
 	}

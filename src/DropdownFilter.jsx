@@ -23,7 +23,7 @@ const DropdownFilterContainer = styled.div`
 	}
 
 	@media (max-width: ${breakPoint}px) {
-		border: ${(props) => (props.isexpanded ? '1px' : '0px')} solid red;
+		border: ${(props) => (props.isexpanded ? '1px' : '0px')} solid #067f97;
 	}
 `;
 
@@ -84,8 +84,24 @@ const FilterButton = styled.button`
 
 	display: flex;
 	gap: 1em;
-	justify-content: space-between;
+	justify-content: end;
 	align-items: center;
+
+	& > div:nth-child(1) {
+		margin-right: auto;
+	}
+
+	& .checkedFilterCount {
+		background-color: #067f97;
+		width: 1em;
+		height: 1em;
+		border-radius: 1em;
+		padding: 0.8em;
+		font-size: 0.8em;
+		display: grid;
+		justify-content: center;
+		align-content: center;
+	}
 
 	text-align: justify;
 	font-weight: 600;
@@ -97,6 +113,10 @@ const FilterButton = styled.button`
 	@media (max-width: ${breakPoint}px) {
 		font-size: 0.7em;
 		padding: 0.5em;
+
+		& .checkedFilterCount {
+			font-size: 0.3em;
+		}
 	}
 
 	@media (max-width: 430px) {
