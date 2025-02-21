@@ -9,16 +9,32 @@ const Container = styled.div`
 	gap: 1.5em;
 	justify-items: center;
 	overflow: auto;
-	padding: 0 1.5em;
+	padding: 1.5em 1.5em 2.5em 1.5em;
 
 	@media (max-width: ${1000}px) {
-		padding: 1.5em 1.5em 5em 1.5em;
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		font-size: 0.6em;
+		padding: 1.5em 1.5em 9em 1.5em;
 	}
 
 	@media (max-width: ${600}px) {
 		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	}
+
+	& > button,
+	.loading,
+	.error {
+		align-self: center;
+		justify-self: start;
+		color: white;
+	}
+
+	& > button {
+		font-size: 1em;
+		padding: 0.5em;
+		border-radius: 0.5em;
+		border: 0px;
+		background-color: #0ba9c2;
 	}
 `;
 
