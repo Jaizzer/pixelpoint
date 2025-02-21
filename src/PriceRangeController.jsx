@@ -7,80 +7,109 @@ const breakPoint = 1700;
 
 const DropdownFilterContainer = styled.div`
 	display: grid;
-	grid-template-rows: auto 1fr;
-	/* box-sizing: border-box;
-	margin: 0px;
+	grid-template-rows: 1fr;
 
-	min-width: 245px;
-	padding: 10px 18px;
-	border-radius: 10px;
-	background-color: #1b1e22; */
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	border-radius: 0.5em;
+
+	overflow: hidden;
+
+	background-color: #1b1e22;
+	border: 1px solid #1b1e22;
+
+	@media (max-width: ${breakPoint}px) {
+		padding: 0;
+	}
+
+	@media (max-width: ${breakPoint}px) {
+		border: ${(props) => (props.isexpanded ? '1px' : '0px')} solid red;
+	}
 `;
 
 const PopOver = styled.div`
+	overflow: hidden;
+
+	display: grid;
+	grid-template-rows: 1fr auto;
+	gap: 0.75em;
+
+	padding-bottom: 2em;
+
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+
+	align-content: space-around;
+	background-color: transparent;
+
 	@media (max-width: ${breakPoint}px) {
-		padding: 1em;
 		position: absolute;
 		left: 0px;
 		right: 0px;
 		top: 100%;
+		max-height: 300px;
+		z-index: 1;
+		background-color: #1b1e22;
+		padding: 2em;
+		border-bottom-left-radius: 0.5em;
+		border-bottom-right-radius: 0.5em;
 	}
-	/* box-sizing: border-box;
-	margin: 0px;
 
-	display: grid;
-	gap: 10px;
-	align-content: space-around;
-	padding: 15px;
-	background-color: transparent;
-	font-family: 'Poppins'; */
+	@media (max-width: 430px) {
+		gap: 2em;
+		padding-bottom: 1.5em;
+		font-size: 0.55em;
+	}
 `;
 
 const DropdownButton = styled.button`
 	width: 100%;
 	height: 100%;
+
+	border: 0px;
+	padding-top: 1em;
+	padding-bottom: 1em;
+
 	display: flex;
 	gap: 1em;
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	width: 100%;
-	padding: 5px 15px;
-	border-radius: 10px;
-	border: 0px;
-
-	display: flex;
 	justify-content: space-between;
 	align-items: center;
 
-	background-color: transparent;
-	font-size: 16px;
-	font-weight: 600;
 	text-align: justify;
-	color: white; */
+	font-weight: 600;
+	color: white;
+	font-size: 1.1em;
+
+	background-color: transparent;
+
+	@media (max-width: ${breakPoint}px) {
+		font-size: 0.7em;
+		padding: 0.5em;
+	}
+
+	@media (max-width: 430px) {
+		font-size: 0.6em;
+	}
 `;
 
 const PopOverItem = styled.div`
-	/* box-sizing: border-box;
-	margin: 0px;
-
 	display: flex;
-	justify-content: space-between;
+	justify-content: start;
 	align-items: center;
-	gap: 10px;
-	font-size: 14px;
-	color: white; */
+	gap: 1em;
+
+	color: white;
+
+	label {
+		width: 30px;
+	}
 `;
 
 const Input = styled.input`
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	width: 120px;
-	padding: 5px 7px;
+	padding: 0.1em 0.2em;
 	overflow: scroll;
-	border: 3px solid white;
-	border-radius: 5px;
+	border: 0.1em solid white;
+	border-radius: 0.3em;
 	outline: none;
 	font: inherit;
 
@@ -92,13 +121,13 @@ const Input = styled.input`
 
 	&:focus {
 		border-color: #099ea6;
-	} */
+	}
 `;
 
 function PriceRangeController({ onPriceRangeSet, isExpanded, onDropdownButtonClick }) {
 	const [priceRange, setPriceRange] = useState({ min: '', max: '' });
 	return (
-		<DropdownFilterContainer>
+		<DropdownFilterContainer isexpanded={isExpanded}>
 			<DropdownButton
 				className="priceRangeControllerTitle"
 				onClick={() => {

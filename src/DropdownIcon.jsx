@@ -2,16 +2,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Icon = styled.svg`
-	/* margin: 0px;
-	box-sizing: border-box;
-
 	font: inherit;
 	width: 1.2em;
 	height: 1.2em;
 	fill: white;
 
 	// Flip the icon vertically
-	transform: scaleY(${(props) => (props.isDropdownCollapsed ? 1 : -1)}); */
+	transform: scaleY(${(props) => (props.isDropdownCollapsed ? 1 : -1)});
 `;
 
 export default function DropdownIcon({ isDropdownCollapsed }) {

@@ -7,101 +7,116 @@ const breakPoint = 1700;
 
 const DropdownFilterContainer = styled.div`
 	display: grid;
-	grid-template-rows: auto 1fr;
-	/* box-sizing: border-box;
-	margin: 0px;
+	grid-template-rows: 1fr;
 
-	min-width: 245px;
-	padding: 10px 18px;
-	border-radius: 10px;
-	background-color: #1b1e22; */
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	border-radius: 0.5em;
+
+	overflow: hidden;
+
+	background-color: #1b1e22;
+	border: 1px solid #1b1e22;
+
+	@media (max-width: ${breakPoint}px) {
+		padding: 0;
+	}
+
+	@media (max-width: ${breakPoint}px) {
+		border: ${(props) => (props.isexpanded ? '1px' : '0px')} solid red;
+	}
 `;
 
 const PopOver = styled.div`
-	@media (max-width: ${breakPoint}px) {
-		padding: 1em;
-		position: absolute;
-		left: 0px;
-		right: 0px;
-		top: 100%;
-		background-color: white;
-		max-height: 250px;
-		z-index: 1;
-	}
+	overflow: hidden;
+
 	display: grid;
 	grid-template-rows: 1fr auto;
 	gap: 0.75em;
 
-	/* box-sizing: border-box;
-	margin: 0px;
+	padding-bottom: 2em;
 
-	display: grid;
-	gap: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+
 	align-content: space-around;
-	padding: 15px;
 	background-color: transparent;
-	font-family: 'Poppins'; */
+
+	@media (max-width: ${breakPoint}px) {
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		top: 100%;
+		max-height: 300px;
+		z-index: 1;
+		background-color: #1b1e22;
+		padding: 2em;
+		border-bottom-left-radius: 0.5em;
+		border-bottom-right-radius: 0.5em;
+	}
+
+	@media (max-width: 430px) {
+		gap: 2em;
+		padding-bottom: 1.5em;
+		font-size: 0.55em;
+	}
 `;
 
 const FilterItemsContainer = styled.div`
+	display: grid;
+	gap: 0.5em;
+
 	overflow: auto;
 	@media (max-width: ${breakPoint}px) {
-		display: grid;
-		grid-template-columns: repeat(3, clamp(80px, 30%, 200px));
+		grid-template-columns: repeat(auto-fit, clamp(80px, 30%, 200px));
 		gap: 0.5em;
 		overflow: auto;
-		/* display: flex;
-		flex-direction: row;
-		align-content: start;
-		flex-wrap: wrap;
-		gap: 0.75em; */
 	}
 `;
 
 const FilterButton = styled.button`
 	width: 100%;
 	height: 100%;
+
+	border: 0px;
+	padding-top: 1em;
+	padding-bottom: 1em;
+
 	display: flex;
 	gap: 1em;
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	width: 100%;
-	padding: 5px 15px;
-	border-radius: 10px;
-	border: 0px;
-
-	display: flex;
 	justify-content: space-between;
 	align-items: center;
 
-	background-color: transparent;
-	font-size: 16px;
-	font-weight: 600;
 	text-align: justify;
-	color: white; */
+	font-weight: 600;
+	color: white;
+	font-size: 1.1em;
+
+	background-color: transparent;
+
+	@media (max-width: ${breakPoint}px) {
+		font-size: 0.7em;
+		padding: 0.5em;
+	}
+
+	@media (max-width: 430px) {
+		font-size: 0.6em;
+	}
 `;
 
 const CheckboxContainer = styled.div`
-	border: 1px solid red;
 	flex-grow: 1;
-	/* box-sizing: border-box;
-	margin: 0px;
 
 	display: grid;
 	grid-template-columns: auto 1fr;
 	align-items: center;
-	gap: 10px;
-	font-size: 15px;
+	gap: 0.6em;
 
 	// Ensure the checkbox border and the label always has the same color
-	--color: #858585; */
+	--color: #858585;
 `;
 
 const Checkbox = styled.input`
-	/* box-sizing: border-box;
-	margin: 0px;
-
 	-webkit-appearance: none;
 	appearance: none;
 	// Align the checkbox with the label
@@ -139,29 +154,19 @@ const Checkbox = styled.input`
 	&:checked::before {
 		// Show the created checkmark
 		transform: scale(1);
-	} */
+	}
 `;
 
 const Label = styled.label`
-	/* box-sizing: border-box;
-	margin: 0px;
-
 	font: inherit;
-	color: var(--color); */
+	color: var(--color);
 `;
 
 const FilterActions = styled.div`
 	display: flex;
 	justify-content: space-between;
 
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	display: flex;
-	justify-content: space-between;
-	padding-top: 15px;
-	font-size: 13px;
-	color: white; */
+	color: white;
 `;
 
 function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessItems, onClearClick, onDropdownButtonClick, isExpanded = false }) {
@@ -199,7 +204,7 @@ function DropdownFilter({ items, title, onDropdownItemClick, numberOfShowLessIte
 	}
 
 	return (
-		<DropdownFilterContainer>
+		<DropdownFilterContainer isexpanded={isExpanded}>
 			<FilterButton
 				className="filterButton"
 				onClick={() => {

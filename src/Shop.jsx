@@ -17,7 +17,7 @@ const Container = styled.div`
 	grid-template-columns: 1fr 300px;
 
 	@media (max-width: ${breakPoint}px) {
-        grid-template-rows: auto 1fr;
+		grid-template-rows: auto 1fr;
 		padding-top: 0em;
 		position: relative;
 		grid-template-columns: 1fr;
@@ -25,29 +25,44 @@ const Container = styled.div`
 `;
 
 const DropdownFiltersContainer = styled.div`
+	position: relative;
 	grid-row: 1 / 2;
 	grid-column: 2 / 3;
-	overflow: scroll;
-	position: relative;
-	display: flex;
-	flex-direction: column;
 
-	gap: 0.75em;
-	padding: 0 1.5em;
+	height: 100%;
+	overflow: auto;
+
+	padding: 1.5em;
+
+	background-color: #373737;
+
+	& > div {
+		margin-top: 0.5em;
+	}
+
+	& > div:nth-child(1) {
+		margin-top: 0em;
+	}
 
 	@media (max-width: ${breakPoint}px) {
 		grid-row: 1 / 2;
 		grid-column: 1 / 2;
+
+		padding: 0.75em;
+		overflow: visible;
+
 		display: flex;
 		flex-direction: row;
 		justify-content: start;
-		overflow: visible;
-		padding-bottom: 0;
+        gap: 0.3em;
+
+		& > div {
+			margin-top: 0;
+		}
 	}
 
 	@media (max-width: 460px) {
-		justify-content: start;
-        flex-wrap: wrap;
+		flex-wrap: wrap;
 	}
 `;
 
@@ -176,7 +191,7 @@ function Shop({
 									// Clear genres request via API
 									getSpecificGenres([]);
 								}}
-								numberOfShowLessItems={7}
+								numberOfShowLessItems={isScreenNarrow ? 12 : 7}
 								isExpanded={activeDropdowns.includes('genre')}
 								onDropdownButtonClick={() => {
 									toggleActiveDropdowns('genre');
@@ -204,7 +219,7 @@ function Shop({
 									// Clear platforms request via API
 									getSpecificPlatforms([]);
 								}}
-								numberOfShowLessItems={7}
+								numberOfShowLessItems={isScreenNarrow ? 20 : 7}
 								isExpanded={activeDropdowns.includes('platform')}
 								onDropdownButtonClick={() => {
 									toggleActiveDropdowns('platform');
