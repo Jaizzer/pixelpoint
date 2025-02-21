@@ -8,7 +8,7 @@ const Icon = styled.svg`
 	height: 1.5em;
 	fill: none;
 
-	stroke: inherit;
+	stroke: white;
 	stroke-width: 1.5;
 	stroke-linecap: round;
 	stroke-linejoin: round;

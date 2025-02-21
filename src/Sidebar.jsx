@@ -6,10 +6,17 @@ const breakPoint = 932;
 const Nav = styled.nav`
 	grid-column: 1 / 2;
 	grid-row: 1 / 3;
-	padding: 0.5em;
-	background-color: #c80c0c; // Temporary color
+	padding: 0.75em;
+	background-color: #393b42; // Temporary color
+
+	padding-left: 2em;
+	padding-right: 6em;
 
 	@media (max-width: ${breakPoint}px) {
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+
+		font-size: 0.7em;
 		bottom: 0px;
 		width: 100%;
 		position: fixed;
@@ -29,6 +36,12 @@ const List = styled.ul`
 	gap: 40px;
 	list-style-type: none;
 
+	& a {
+		display: flex;
+		flex-direction: row;
+		gap: 1em;
+	}
+
 	@media (max-width: ${breakPoint}px) {
 		flex-direction: row;
 		justify-content: space-around;
@@ -39,6 +52,12 @@ const List = styled.ul`
 		}
 		li:nth-child(2) {
 			display: none;
+		}
+
+		& a {
+			flex-direction: column;
+			align-items: center;
+			gap: 0.3em;
 		}
 	}
 `;
