@@ -16,6 +16,8 @@ const Container = styled.div`
 	grid-template-rows: 1fr;
 	grid-template-columns: 1fr 300px;
 
+    background-color: #34343d;
+
 	@media (max-width: ${breakPoint}px) {
 		grid-template-rows: auto 1fr;
 		padding-top: 0em;
