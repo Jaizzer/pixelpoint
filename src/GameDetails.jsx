@@ -14,6 +14,7 @@ const Container = styled.div`
 	overflow: scroll;
 
 	display: grid;
+	padding: 1.75em;
 
 	& .descriptionContent {
 		display: grid;
