@@ -86,6 +86,10 @@ const DropdownButton = styled.button`
 
 	background-color: transparent;
 
+	& > div:nth-child(1) {
+		margin-right: auto;
+	}
+
 	@media (max-width: ${breakPoint}px) {
 		font-size: 0.7em;
 		padding: 0.5em;
