@@ -2,30 +2,34 @@ import PropTypes from 'prop-types';
 import { CartIcon as Icon } from './Icons.jsx';
 import styled from 'styled-components';
 
-const Container = styled.div`
-	box-sizing: border-box;
-	margin: 0px;
+const breakPoint = 932;
 
+const Container = styled.div`
 	position: relative;
+	height: 1.25em;
+
 	background-color: transparent;
-	font-family: 'Poppins';
-	font-size: 20px;
+	font-size: 1.25em;
 	stroke: white;
+
+	@media (max-width: ${breakPoint}px) {
+		font-size: 1em;
+	}
 `;
 
 const CountIndicator = styled.div`
-	box-sizing: border-box;
-	margin: 0px;
-
 	position: absolute;
-	top: -8px;
-	right: -12px;
+	top: -0.4em;
+	right: -0.6em;
 	width: 1.5em;
+
 	scale: 0.5;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 100px;
+
+	border-radius: 1em;
 	background-color: #099ea6;
 `;
 

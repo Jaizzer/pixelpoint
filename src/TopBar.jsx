@@ -10,40 +10,32 @@ const Container = styled.div`
 	grid-column: 2 / 3;
 	grid-row: 1 / 2;
 
-	display: flex;
+	display: grid;
+	grid-template-columns: auto auto;
 	justify-content: space-between;
+	align-items: center;
+
+	padding: 0.9em 1.5em;
+	background-color: #1f1e26;
+
 	@media (max-width: ${breakPoint}px) {
 		grid-row: 1/ 2;
 		grid-template-columns: -1 / 1;
+        padding: 0.7em 1.5em;
 	}
 `;
 
-const Actions = styled.div`
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	display: grid;
-	grid-template-columns: repeat(3, auto);
-	align-items: center;
-	gap: 50px; */
-`;
-
 const StyledLink = styled(Link)`
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	text-decoration: none; */
+	text-decoration: none;
 `;
 
 function TopBar({ cartContentCount }) {
 	return (
 		<Container>
 			<Search />
-			<Actions>
-				<StyledLink to="/cart" role="topbar-actions">
-					<CartIconWithCount cartContentCount={cartContentCount} />
-				</StyledLink>
-			</Actions>
+			<StyledLink to="/cart" role="topbar-actions">
+				<CartIconWithCount cartContentCount={cartContentCount} />
+			</StyledLink>
 		</Container>
 	);
 }
