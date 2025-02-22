@@ -55,6 +55,10 @@ const PopOver = styled.div`
 		border-bottom-right-radius: 0.5em;
 	}
 
+	@media (max-width: 580px) {
+		font-size: 0.7em;
+	}
+
 	@media (max-width: 430px) {
 		gap: 2em;
 		padding-bottom: 1.5em;
