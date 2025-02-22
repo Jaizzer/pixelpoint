@@ -33,21 +33,22 @@ const GameCardsContainer = styled.div`
 
 const UtilitiesContainer = styled.div`
 	justify-self: center;
+	color: white;
 
 	& > button,
 	.loading,
 	.error {
 		align-self: center;
 		justify-self: start;
-		color: white;
 	}
 
-	& > button {
+	& button {
 		font-size: 1em;
 		padding: 0.5em;
 		border-radius: 0.5em;
 		border: 0px;
 		background-color: #0ba9c2;
+		color: white;
 	}
 `;
 
