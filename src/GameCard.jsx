@@ -117,7 +117,7 @@ function GameCard({ image, title, price, rating, quantitySold, parentPlatforms, 
 						<Statistics>
 							<div className="rating">
 								<StarIcon />
-								<div className="rating-content">{rating}</div>
+								<div className="rating-content">{rating.toFixed(1)}</div>
 							</div>
 							<div className="quantitySold">
 								<DownloadIcon />
