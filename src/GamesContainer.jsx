@@ -81,6 +81,8 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 			setTimeout(() => {
 				setShowMoreButton(true);
 			}, 1000);
+		} else if (games.length === 0 && !gamesError && !games.isGamesLoading) {
+			setShowMoreButton(false);
 		}
 	}, [games, gamesError]);
 
@@ -121,29 +123,32 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 						Show More
 					</button>
 				)}
-				{isGamesLoading && (
+				{!isGamesLoading && !gamesError && games.length === 0 ? (
+					<div className="div">No games found</div>
+				) : isGamesLoading ? (
 					<div className="loading" title="loading">
 						Loading...
 					</div>
-				)}
-				{isErrorNoticeVisible && (
-					<div className="error" title="error">
-						<div>PixelPoint run into a problem</div>
-						<button
-							onClick={() => {
-								if (games.length === 0) {
-									// Refetch the first game batch
-									refetchGames();
-								} else {
-									// Refetch the new games batch if the error is encountered when the "Show More" button is clicked
-									getNewGames();
-								}
-								setIsErrorNoticeVisible(false);
-							}}
-						>
-							Try Again
-						</button>
-					</div>
+				) : (
+					isErrorNoticeVisible && (
+						<div className="error" title="error">
+							<div>PixelPoint run into a problem</div>
+							<button
+								onClick={() => {
+									if (games.length === 0) {
+										// Refetch the first game batch
+										refetchGames();
+									} else {
+										// Refetch the new games batch if the error is encountered when the "Show More" button is clicked
+										getNewGames();
+									}
+									setIsErrorNoticeVisible(false);
+								}}
+							>
+								Try Again
+							</button>
+						</div>
+					)
 				)}
 			</UtilitiesContainer>
 		</Container>
