@@ -56,8 +56,8 @@ const Icon = styled.svg`
 	fill: none;
 	stroke: var(--color);
 	stroke-width: 3;
-	stroke-linecap: 'round';
-	stroke-linejoin: 'round';
+	stroke-linecap: round;
+	stroke-linejoin: round;
 `;
 
 function Search() {
