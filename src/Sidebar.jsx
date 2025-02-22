@@ -50,9 +50,6 @@ const List = styled.ul`
 		li:nth-child(1) {
 			display: none;
 		}
-		li:nth-child(2) {
-			display: none;
-		}
 
 		& a {
 			flex-direction: column;
@@ -68,12 +65,6 @@ export default function Sidebar() {
 			<List>
 				<li>
 					<StyledLink to="/">PixelPoint</StyledLink>
-				</li>
-				<li>
-					<div className="user">
-						<img className="userProfilePicture" />
-						<div className="userName">Jaizzer</div>
-					</div>
 				</li>
 				<li>
 					<StyledLink to="/">
