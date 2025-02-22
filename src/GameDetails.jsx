@@ -5,6 +5,7 @@ import AddToCartButton from './AddToCartButton.jsx';
 import Image from './Image.jsx';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import ReadMoreArea from '@foxeian/react-read-more';
 
 const Teaser = styled.div``;
 
@@ -106,7 +107,9 @@ function GameDetails({ game, isLoading, error, onAddItemToCart, refetchGame }) {
 					<Teaser>{game.images.length > 1 ? <ImageSlider imageLinks={game.images}></ImageSlider> : <Image src={null} />}</Teaser>
 					<div className="descriptionContainer">
 						<h2 className="descriptionHeading">Description</h2>
-						<div className="descriptionContent">{game.description ? game.description : 'No available description.'}</div>
+						<ReadMoreArea className="descriptionContent" lettersLimit={400}>
+							{game.description ? game.description : 'No available description.'}
+						</ReadMoreArea>
 					</div>
 					<div className="price">{game.price ? `$${game.price.toFixed(2)}` : 'Price Unavailable'}</div>
 					<Actions>

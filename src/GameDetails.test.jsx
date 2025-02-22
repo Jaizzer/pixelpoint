@@ -57,7 +57,7 @@ describe('Game description', () => {
 			images: ['fakeLink1', 'fakeLink2'],
 		};
 		render(<GameDetails game={game} isLoading={false} error={false} />);
-		const gameDescription = screen.queryByText('This is the game description');
+		const gameDescription = screen.queryByText(/This is the game description/);
 		expect(gameDescription).not.toBeNull();
 	});
 
