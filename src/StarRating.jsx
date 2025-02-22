@@ -2,17 +2,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Star = styled.span`
-    /* height: fit-content;
+    height: fit-content;
 	font-size: calc(${(props) => (props.pixelSize ? props.pixelSize : 20)} * 1px);
 	color: transparent;
 	background-clip: text;
 	background-color: grey;
-	background-image: linear-gradient(to right, orange ${(props) => props.amount}%, rgba(0, 0, 0, 0) ${(props) => props.amount}%); */
+	background-image: linear-gradient(to right, orange ${(props) => props.amount}%, rgba(0, 0, 0, 0) ${(props) => props.amount}%);
 `;
 
 const StarsContainer = styled.div`
-	/* display: flex;
-	gap: 10px; */
+	display: flex;
+	gap: 0.3em;
 `;
 
 function StarRating({ rating, pixelSize }) {
