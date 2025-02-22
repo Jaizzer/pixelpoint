@@ -16,7 +16,7 @@ const Container = styled.div`
 	grid-template-rows: 1fr;
 	grid-template-columns: 1fr 300px;
 
-    background-color: #34343d;
+	background-color: #34343d;
 
 	@media (max-width: ${breakPoint}px) {
 		grid-template-rows: auto 1fr;
@@ -50,13 +50,13 @@ const DropdownFiltersContainer = styled.div`
 		grid-row: 1 / 2;
 		grid-column: 1 / 2;
 
-		padding: 0.75em;
+		padding: 0.75em 1.5em;
 		overflow: visible;
 
 		display: flex;
 		flex-direction: row;
 		justify-content: start;
-        gap: 0.3em;
+		gap: 0.3em;
 
 		& > div {
 			margin-top: 0;
