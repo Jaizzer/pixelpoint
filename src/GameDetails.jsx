@@ -11,6 +11,14 @@ const Teaser = styled.div``;
 const Container = styled.div`
 	height: 100%;
 	overflow: scroll;
+
+	display: grid;
+	@media (max-width: 600px) {
+		padding: 1.25em;
+	}
+
+	& .descriptionContent {
+	}
 `;
 
 const Actions = styled.div`
@@ -37,7 +45,9 @@ const Actions = styled.div`
 
 	@media (max-width: 600px) {
 		bottom: 54px;
+		left: 0px;
 		width: 100%;
+
 		position: fixed;
 		background-color: #453e3e;
 		display: grid;
