@@ -86,7 +86,6 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 			setShowMoreButton(false);
 		}
 		return () => {
-            console.log('jaizzer')
 			clearTimeout(showMoreTimer);
 		};
 	}, [games, gamesError]);
