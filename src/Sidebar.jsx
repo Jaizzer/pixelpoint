@@ -42,6 +42,11 @@ const List = styled.ul`
 		gap: 1em;
 	}
 
+	& .logo {
+		font-size: 1.75em;
+		font-weight: 600;
+	}
+
 	@media (max-width: ${breakPoint}px) {
 		flex-direction: row;
 		justify-content: space-around;
@@ -63,7 +68,7 @@ export default function Sidebar() {
 	return (
 		<Nav>
 			<List>
-				<li>
+				<li className="logo">
 					<StyledLink to="/">PixelPoint</StyledLink>
 				</li>
 				<li>
