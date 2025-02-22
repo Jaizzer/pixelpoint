@@ -14,11 +14,31 @@ const Container = styled.div`
 	overflow: scroll;
 
 	display: grid;
-	@media (max-width: 600px) {
-		padding: 1.25em;
-	}
 
 	& .descriptionContent {
+		display: grid;
+		gap: 0.75em;
+
+		p {
+			text-align: justify;
+		}
+		button {
+			padding: 0em !important;
+			text-decoration: none !important;
+			background-color: #0ba9c2 !important;
+			font-family: 'Poppins' !important;
+			padding: 0.4em !important;
+			color: white !important;
+			border-radius: 0.3em !important;
+		}
+	}
+
+	@media (max-width: 600px) {
+		padding: 1.25em;
+
+		.descriptionContent {
+			font-size: 0.85em;
+		}
 	}
 `;
 
