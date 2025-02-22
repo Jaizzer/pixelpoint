@@ -119,7 +119,7 @@ const FilterButton = styled.button`
 		padding: 0.5em;
 
 		& .checkedFilterCount {
-			font-size: 0.3em;
+			font-size: 0.8em;
 		}
 	}
 
