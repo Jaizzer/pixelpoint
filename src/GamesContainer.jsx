@@ -4,22 +4,35 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
+	overflow: auto;
+	padding: 1.5em 1.5em 2.5em 1.5em;
+
+	display: grid;
+	gap: 1.5em;
+
+	@media (max-width: ${1000}px) {
+		padding: 1.5em 1.5em 5em 1.5em;
+	}
+`;
+
+const GameCardsContainer = styled.div`
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	gap: 1.5em;
 	justify-items: center;
-	overflow: auto;
-	padding: 1.5em 1.5em 2.5em 1.5em;
 
 	@media (max-width: ${1000}px) {
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		font-size: 0.6em;
-		padding: 1.5em 1.5em 9em 1.5em;
 	}
 
 	@media (max-width: ${600}px) {
 		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 	}
+`;
+
+const UtilitiesContainer = styled.div`
+	justify-self: center;
 
 	& > button,
 	.loading,
@@ -87,50 +100,51 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 	));
 
 	return (
-		<Container className="gamesContainer" title="game-cards-container" ref={gamesContainerDOM}>
-			{gameCards.length > 0 ? gameCards : null}
-
-			{/* Ensure button only appears after new games are visible (after they finish loading) */}
-			{getNewGames && !isGamesLoading && showMoreButton && (
-				<button
-					onClick={() => {
-						if (!isGamesLoading && getNewGames) {
-							// Hide button while loading new games
-							setShowMoreButton(false);
-							getNewGames();
-							isShowMoreButtonClicked.current = true;
-						}
-					}}
-				>
-					Show More
-				</button>
-			)}
-
-			{isGamesLoading && (
-				<div className="loading" title="loading">
-					Loading...
-				</div>
-			)}
-
-			{isErrorNoticeVisible && (
-				<div className="error" title="error">
-					<div>PixelPoint run into a problem</div>
+		<Container ref={gamesContainerDOM}>
+			<GameCardsContainer className="gamesContainer" title="game-cards-container">
+				{gameCards.length > 0 ? gameCards : null}
+			</GameCardsContainer>
+			<UtilitiesContainer>
+				{/* Ensure button only appears after new games are visible (after they finish loading) */}
+				{getNewGames && !isGamesLoading && showMoreButton && (
 					<button
 						onClick={() => {
-							if (games.length === 0) {
-								// Refetch the first game batch
-								refetchGames();
-							} else {
-								// Refetch the new games batch if the error is encountered when the "Show More" button is clicked
+							if (!isGamesLoading && getNewGames) {
+								// Hide button while loading new games
+								setShowMoreButton(false);
 								getNewGames();
+								isShowMoreButtonClicked.current = true;
 							}
-							setIsErrorNoticeVisible(false);
 						}}
 					>
-						Try Again
+						Show More
 					</button>
-				</div>
-			)}
+				)}
+				{isGamesLoading && (
+					<div className="loading" title="loading">
+						Loading...
+					</div>
+				)}
+				{isErrorNoticeVisible && (
+					<div className="error" title="error">
+						<div>PixelPoint run into a problem</div>
+						<button
+							onClick={() => {
+								if (games.length === 0) {
+									// Refetch the first game batch
+									refetchGames();
+								} else {
+									// Refetch the new games batch if the error is encountered when the "Show More" button is clicked
+									getNewGames();
+								}
+								setIsErrorNoticeVisible(false);
+							}}
+						>
+							Try Again
+						</button>
+					</div>
+				)}
+			</UtilitiesContainer>
 		</Container>
 	);
 }
