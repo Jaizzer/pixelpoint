@@ -89,10 +89,26 @@ const DropdownButton = styled.button`
 	@media (max-width: ${breakPoint}px) {
 		font-size: 0.7em;
 		padding: 0.5em;
+
+		& .inputIndicator {
+			font-size: 0.8em;
+		}
 	}
 
 	@media (max-width: 430px) {
 		font-size: 0.6em;
+	}
+
+	& .inputIndicator {
+		background-color: #067f97;
+		width: 1em;
+		height: 1em;
+		border-radius: 1em;
+		padding: 0.8em;
+		font-size: 0.8em;
+		display: grid;
+		justify-content: center;
+		align-content: center;
 	}
 `;
 
@@ -130,6 +146,7 @@ const Input = styled.input`
 
 function PriceRangeController({ onPriceRangeSet, isExpanded, onDropdownButtonClick }) {
 	const [priceRange, setPriceRange] = useState({ min: '', max: '' });
+
 	return (
 		<DropdownFilterContainer isexpanded={isExpanded}>
 			<DropdownButton
@@ -138,7 +155,12 @@ function PriceRangeController({ onPriceRangeSet, isExpanded, onDropdownButtonCli
 					onDropdownButtonClick();
 				}}
 			>
-				Price
+				<div>Price</div>
+				{priceRange.min !== '' || priceRange.max !== '' ? (
+					<div className="inputIndicator" title="input-filter-indicator">
+						1
+					</div>
+				) : null}
 				<DropdownIcon isDropdownCollapsed={!isExpanded} />
 			</DropdownButton>
 			{isExpanded ? (
