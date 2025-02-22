@@ -61,6 +61,7 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 
 	// Detect when new games are loaded
 	useEffect(() => {
+		let showMoreTimer;
 		if (gamesError) {
 			setShowMoreButton(false);
 			setIsErrorNoticeVisible(true);
@@ -78,12 +79,16 @@ function GamesContainer({ games, gamesError, isGamesLoading, getNewGames, refetc
 			previousGamesCount.current = games.length;
 
 			// Ensure DOM has mounted all the game cards before showing the 'Show More' Button
-			setTimeout(() => {
+			showMoreTimer = setTimeout(() => {
 				setShowMoreButton(true);
 			}, 1000);
 		} else if (games.length === 0 && !gamesError && !games.isGamesLoading) {
 			setShowMoreButton(false);
 		}
+		return () => {
+            console.log('jaizzer')
+			clearTimeout(showMoreTimer);
+		};
 	}, [games, gamesError]);
 
 	// Create game cards
