@@ -4,41 +4,34 @@ import styled from 'styled-components';
 import Image from './Image.jsx';
 
 const Container = styled.div`
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	padding: 10px;
-	border-radius: 10px;
-	color: white;
-
 	display: grid;
 	grid-template-columns: auto 1fr;
-	gap: 20px;
 	align-items: center;
+	gap: 1.25em;
 
 	&:hover {
 		background-color: #373737;
-	} */
+	}
+
+	padding: 0.5em;
+	border-radius: 0.5em;
+
+	@media (max-width: ${932}px) {
+		padding: 0.3em;
+		border-radius: 0.3em;
+	}
 `;
 
 const GameInfo = styled.div`
-	/* box-sizing: border-box;
-	margin: 0px;
-
 	grid-column: 2 / 3;
 	display: grid;
 	grid-template-rows: auto auto;
-
-	font-size: 15px; */
 `;
 
 const StyledImage = styled(Image)`
-	/* box-sizing: border-box;
-	margin: 0px;
-
 	width: 50px;
 	object-fit: cover;
-	border-radius: 3px; */
+	border-radius: 3px;
 `;
 
 function SearchGameCard({ image, title, price, onClickCallback, id }) {

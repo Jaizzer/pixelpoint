@@ -3,23 +3,24 @@ import SearchGameCard from './SearchGameCard.jsx';
 import styled from 'styled-components';
 
 const PopOver = styled.div`
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	width: 100%;
 	max-height: 356px;
-	padding: 15px 25px;
-	border-radius: 0px 0px 10px 10px;
 	overflow: scroll;
-	color: var(--color);
+	width: 100%;
+	padding: 1em 1.5em;
+
+	border-radius: 0px 0px 0.75em 0.75em;
 
 	display: grid;
-	gap: 10px;
-	top: 47px;
-	position: absolute;
-	z-index: 1000;
+	gap: 1em;
 
-	background-color: #242629; */
+	background-color: #242629;
+	color: white;
+
+	@media (max-width: ${932}px) {
+		div {
+			font-size: 0.9em;
+		}
+	}
 `;
 
 function SearchDropdown({ loading, data, error, onSearchResultItemClick }) {

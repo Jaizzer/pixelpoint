@@ -4,61 +4,60 @@ import styled from 'styled-components';
 import getPrice from './getPrice.jsx';
 
 const SearchContainer = styled.div`
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	width: clamp(245px, 80%, 400px);
-	border-radius: 10px;
 	background-color: #242629;
 	--color: #858585;
+	padding: 0.75em 1em;
+	border-radius: 0.5em;
+	top: 0px;
+	width: clamp(150px, 95%, 400px);
+    min-height: 100%;
 
-	font-family: 'Poppins';
+	position: absolute;
+	z-index: 1000;
 
-	position: relative; */
+	display: grid;
+	gap: 1em;
+
+
+	@media (max-width: ${932}px) {
+        padding: 0.2em 0.5em;
+	}
 `;
 
 const SearchBar = styled.div`
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	width: 100%;
-	padding: 15px 25px;
-
 	display: grid;
 	grid-template-columns: auto 1fr;
-	gap: 10px; */
+	gap: 0.75em;
+	align-items: center;
 `;
 
 const Input = styled.input`
-	/* box-sizing: border-box;
-	margin: 0px;
-
-	border: 0px;
 	outline: none;
-	font: inherit;
+	font-size: 1em;
 	color: var(--color);
-	background-color: transparent; */
+	background-color: transparent;
+	border: 0px;
+
+	@media (max-width: ${932}px) {
+		font-size: 0.9em;
+	}
 `;
 
 const Label = styled.label`
-	/* display: grid;
+	display: grid;
 	justify-content: center;
-	align-items: center; */
+	align-items: center;
 `;
 
 const Icon = styled.svg`
-	/* margin: 0px;
-	box-sizing: border-box;
-
 	font: inherit;
 	width: 20px;
 	height: 20px;
-
 	fill: none;
 	stroke: var(--color);
 	stroke-width: 3;
 	stroke-linecap: 'round';
-	stroke-linejoin: 'round'; */
+	stroke-linejoin: 'round';
 `;
 
 function Search() {
