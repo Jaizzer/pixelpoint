@@ -102,7 +102,10 @@ const Container = styled.div`
 		font-size: 1.5em;
 		font-weight: 600;
 		justify-self: start;
-		color: #0ba9c2;
+		color: white;
+		background-color: #26ba61;
+		padding: 0 0.25em;
+		border-radius: 0.2em;
 	}
 
 	.ratingContent {
@@ -183,7 +186,7 @@ const Container = styled.div`
 		}
 
 		.price {
-			font-size: 1.5em;
+			font-size: 1.25em;
 		}
 	}
 
