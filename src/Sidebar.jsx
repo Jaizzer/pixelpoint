@@ -10,7 +10,7 @@ const Nav = styled.nav`
 	background-color: #393b42; // Temporary color
 
 	padding-left: 2em;
-	padding-right: 6em;
+	padding-right: 2em;
 
 	@media (max-width: ${breakPoint}px) {
 		padding-left: 0.5em;
