@@ -103,7 +103,7 @@ const Container = styled.div`
 		font-weight: 600;
 		justify-self: start;
 		color: white;
-		background-color: #26ba61;
+		background-color: #cd7115;
 		padding: 0 0.25em;
 		border-radius: 0.2em;
 	}
