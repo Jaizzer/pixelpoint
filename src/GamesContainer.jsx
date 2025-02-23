@@ -49,6 +49,10 @@ const UtilitiesContainer = styled.div`
 		border: 0px;
 		background-color: #0ba9c2;
 		color: white;
+
+		@media (max-width: ${600}px) {
+			font-size: 0.8em;
+		}
 	}
 `;
 
