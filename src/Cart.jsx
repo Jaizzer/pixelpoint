@@ -302,18 +302,18 @@ function Cart({ content, clearCart, removeItem }) {
 				<Link to="/shop">
 					<div>← Continue Shopping</div>
 				</Link>
-				{/* Hide clear cart if the individual item removal confirmation is visible, that is, if itemToRemove has a value */}
-				{content && content.length > 0 && !isClearCartConfirmationVisible && !itemToRemove && (
-					<button
-						title="clear-cart"
-						className="clearCartButton"
-						onClick={() => {
-							setIsClearCartConfirmationVisible(true);
-						}}
-					>
-						Clear Cart
-					</button>
-				)}
+				{/* disable clear cart if the individual item removal confirmation is visible, that is, if itemToRemove has a value */}
+
+				<button
+					title="clear-cart"
+					className="clearCartButton"
+					onClick={() => {
+						setIsClearCartConfirmationVisible(true);
+					}}
+					disabled={!(content && content.length > 0 && !isClearCartConfirmationVisible && !itemToRemove)}
+				>
+					Clear Cart
+				</button>
 			</div>
 			{content.length > 0 && (
 				<OrderSummary className="orderSummaryContainer">
