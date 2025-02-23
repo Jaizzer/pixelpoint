@@ -8,6 +8,10 @@ const Container = styled.div`
 	align-items: center;
 	gap: 0.5em;
 
+	@media (max-width: ${1000}px) {
+		gap: 0.01em;
+	}
+
 	svg {
 		display: grid;
 		justify-content: center;
@@ -15,12 +19,10 @@ const Container = styled.div`
 
 		@media (max-width: ${1000}px) {
 			transform: scale(0.8);
-			gap: 0.05em;
 		}
 
 		@media (max-width: ${600}px) {
 			transform: scale(0.7);
-			gap: 0.05em;
 		}
 	}
 `;
