@@ -38,7 +38,7 @@ const Container = styled.div`
 		grid-column: 1 / 2;
 		grid-row: 4 / 5;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: 1em;
 	}
 
