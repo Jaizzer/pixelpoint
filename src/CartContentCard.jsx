@@ -130,7 +130,7 @@ function CartContentCard({ title, price, image, id, rating, parentPlatforms, own
 								<div className="quantitySoldContent">{nFormatter(ownerCount)}</div>
 							</div>
 						</Statistics>
-						<GamingPlatforms platforms={parentPlatforms} maximumNumberOfIconsToRender={6} />
+						<GamingPlatforms platforms={parentPlatforms} maximumNumberOfIconsToRender={5} />
 					</div>
 				</CardContent>
 			</StyledLink>
