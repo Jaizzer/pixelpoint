@@ -147,7 +147,7 @@ const Icon = styled.svg`
 	height: 1.5em;
 
 	& > * {
-		fill: none;
+		fill: #ffffff;
 		stroke: white;
 		stroke-width: 1;
 	}
