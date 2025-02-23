@@ -78,6 +78,7 @@ export default function App() {
 				parentPlatforms: gameToAdd.parentPlatforms,
 				price: gameToAdd.price,
 				images: gameToAdd.images,
+				ownerCount: gameToAdd.ownerCount,
 			})
 		);
 	}

@@ -33,6 +33,7 @@ function useFetchGame(id) {
 						description: gameDetails.description_raw,
 						rating: gameDetails.rating,
 						price: getPrice(gameDetails.id),
+						ownerCount: gameDetails.added_by_status && gameDetails.added_by_status.owned ? gameDetails.added_by_status.owned : 0,
 						developers: gameDetails.developers.map((developer) => developer.name),
 						genres: gameDetails.genres.map((genre) => genre.name),
 						releaseDate: gameDetails.released,

@@ -241,6 +241,7 @@ function Cart({ content, clearCart, removeItem }) {
 					rating={item.rating}
 					image={item.images[0]}
 					parentPlatforms={item.parentPlatforms}
+					ownerCount={item.ownerCount}
 					removeItem={() => {
 						setItemToRemove(item);
 						// Replace clear cart confirmation message with individual item removal confirmation
