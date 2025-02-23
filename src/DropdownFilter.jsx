@@ -16,14 +16,13 @@ const DropdownFilterContainer = styled.div`
 	overflow: hidden;
 
 	background-color: #1b1e22;
-	border: 1px solid #1b1e22;
 
 	@media (max-width: ${breakPoint}px) {
 		padding: 0;
 	}
 
 	@media (max-width: ${breakPoint}px) {
-		border: ${(props) => (props.isexpanded ? '1px' : '0px')} solid #067f97;
+		border: 1px solid ${(props) => (props.isexpanded ? '#067f97' : '#1b1e22')};
 	}
 `;
 
