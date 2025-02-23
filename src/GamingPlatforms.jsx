@@ -2,23 +2,26 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.div`
+	width: 100%;
 	display: flex;
-	justify-self: end;
+	justify-content: flex-start;
 	align-items: center;
-	gap: 0.4em;
-
-	@media (max-width: ${1000}px) {
-		scale: 0.8;
-	}
-
-	@media (max-width: ${600}px) {
-		scale: 0.7;
-	}
+	gap: 0.5em;
 
 	svg {
 		display: grid;
 		justify-content: center;
 		align-items: end;
+
+		@media (max-width: ${1000}px) {
+			transform: scale(0.8);
+			gap: 0.05em;
+		}
+
+		@media (max-width: ${600}px) {
+			transform: scale(0.7);
+			gap: 0.05em;
+		}
 	}
 `;
 

@@ -55,10 +55,9 @@ const GameInfo = styled.div`
 
 	& > div:nth-child(2) {
 		grid-column: 1 / 3;
-
 		display: grid;
-		grid-template-columns: auto 1fr;
-		justify-content: space-around;
+		grid-template-columns: auto auto;
+		justify-content: space-between;
 		justify-items: end;
 		align-items: center;
 	}
