@@ -4,11 +4,14 @@ import styled from 'styled-components';
 
 const Container = styled.div`
 	position: relative;
-	width: min(100%, 600px);
-	height: 300px;
+	width: 100%;
+	height: 400px;
 	overflow: hidden;
-
 	border-radius: 0.5em;
+
+	@media (max-width: 500px) {
+		height: 300px;
+	}
 `;
 
 const DotsContainer = styled.div`
@@ -37,6 +40,7 @@ const Image = styled.img`
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	object-position: center;
 `;
 
 const Previous = styled.button`

@@ -15,6 +15,9 @@ const Container = styled.div`
 	font-size: 0.8em;
 	background-color: #0ba9c2;
 	color: white;
+	display: grid;
+	justify-content: center;
+	align-items: center;
 `;
 
 const StyledButton = styled.button`
