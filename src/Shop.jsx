@@ -36,7 +36,7 @@ const DropdownFiltersContainer = styled.div`
 
 	padding: 1.5em;
 
-	background-color: #373737;
+	background-color: #37373d;
 
 	& > div {
 		margin-top: 0.5em;
