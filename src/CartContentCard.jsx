@@ -53,7 +53,7 @@ const CardContent = styled.div`
 	display: grid;
 	grid-template-columns: 120px 1fr;
 	align-items: center;
-	grid-template-rows: 1fr;
+	grid-template-rows: 120px;
 	gap: 0.5em;
 `;
 
