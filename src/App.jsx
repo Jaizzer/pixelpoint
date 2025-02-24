@@ -35,7 +35,7 @@ export default function App() {
 	const [shopGames, shopGamesError, isShopGamesLoading, refetchShopGames, getNewShopGames, getSpecificGenres, getSpecificPlatforms] =
 		useFetchGames();
 	const [latestGames, latestGamesError, isLatestGamesLoading, refetchLatestGames] = useFetchGames('latest', 10);
-	const [upcomingGames, upcomingGamesError, isUpcomingGamesLoading, refetchUpcomingGames] = useFetchGames('upcoming', 5, true);
+	const [upcomingGames, upcomingGamesError, isUpcomingGamesLoading, refetchUpcomingGames] = useFetchGames('upcoming', 10, true);
 
 	const [cart, setCart] = useState([]);
 	const previousPage = useRef(pageToDisplay);

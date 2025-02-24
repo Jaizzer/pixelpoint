@@ -12,7 +12,7 @@ const Container = styled.div`
 	height: auto;
 	text-align: center;
 	padding: 0.6em;
-	font-size: 0.8em;
+	font-size: 1em;
 	background-color: #0ba9c2;
 	color: white;
 	display: grid;
