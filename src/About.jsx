@@ -12,6 +12,7 @@ const Container = styled.section`
 	background-color: #34343d;
 	color: white;
 	padding: 1.75em;
+    padding-bottom: 7em;
 
 	@media (max-width: 1000px) {
 		font-size: 0.8em;
