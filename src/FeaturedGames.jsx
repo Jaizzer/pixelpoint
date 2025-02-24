@@ -157,6 +157,7 @@ const ModifiedAddToCartButton = styled(AddToCartButton)`
 	border-radius: 0.5em;
 	font-size: 1em;
 	padding: 0.5em;
+	font-size: 14px;
 
 	button {
 		font-size: 14px;
