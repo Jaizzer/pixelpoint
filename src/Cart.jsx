@@ -20,6 +20,10 @@ const Container = styled.div`
 	background-color: #34343d;
 	color: white;
 
+    @media (max-width: ${500}px) {
+        font-size: 0.8em;
+    }
+
 	& > h1 {
 		grid-column: 1 /-1;
 		grid-row: 1 / 2;
