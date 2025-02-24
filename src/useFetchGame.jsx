@@ -20,11 +20,11 @@ function useFetchGame(id) {
 			(async function () {
 				try {
 					// Get the details about the game
-					let response = await fetch(`https://api.rawg.io/api/games/${id}?key=7316558e23f844788817eccdda2769a2`);
+					let response = await fetch(`https://api.rawg.io/api/games/${id}?key=c651b80b372d4bc595fa3ba01886bc17`);
 					const gameDetails = await response.json();
 
 					// Get the screenshots of the game
-					response = await fetch(`https://api.rawg.io/api/games/${id}/screenshots?key=7316558e23f844788817eccdda2769a2`);
+					response = await fetch(`https://api.rawg.io/api/games/${id}/screenshots?key=c651b80b372d4bc595fa3ba01886bc17`);
 					const gameScreenshots = await response.json();
 
 					const gameWithDistilledProperties = {

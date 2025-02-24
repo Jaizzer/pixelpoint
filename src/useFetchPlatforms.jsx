@@ -11,7 +11,7 @@ export default function useFetchPlatforms() {
 			isFetchingApproved.current = false;
 			(async function () {
 				try {
-					let url = `https://api.rawg.io/api/platforms?key=7316558e23f844788817eccdda2769a2`;
+					let url = `https://api.rawg.io/api/platforms?key=c651b80b372d4bc595fa3ba01886bc17`;
 					const response = await fetch(url);
 
 					// Throw error if response is 404

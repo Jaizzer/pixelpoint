@@ -76,7 +76,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 			isFetchingApproved.current = false;
 			(async function () {
 				try {
-					let url = `https://api.rawg.io/api/games?key=7316558e23f844788817eccdda2769a2&page=${pageToRequestFromAPI}&page_size=${gameCountPerRequest}`;
+					let url = `https://api.rawg.io/api/games?key=c651b80b372d4bc595fa3ba01886bc17&page=${pageToRequestFromAPI}&page_size=${gameCountPerRequest}`;
 
 					if (category === 'latest') {
 						// Get the games released between current day and last year
@@ -132,7 +132,7 @@ export default function useFetchGames(category, gameCountPerRequest = 40, isTher
 					if (isThereDescription) {
 						gamesWithDistilledProperties = await Promise.all(
 							gamesWithDistilledProperties.map(async (game) => {
-								let response = await fetch(`https://api.rawg.io/api/games/${game.id}?key=7316558e23f844788817eccdda2769a2`);
+								let response = await fetch(`https://api.rawg.io/api/games/${game.id}?key=c651b80b372d4bc595fa3ba01886bc17`);
 								let gameDescription = (await response.json()).description_raw;
 								return { ...game, description: gameDescription };
 							})
