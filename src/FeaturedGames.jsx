@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from './Image.jsx';
 import { Link } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton.jsx';
@@ -166,13 +166,6 @@ const ModifiedAddToCartButton = styled(AddToCartButton)`
 function FeaturedGames({ games, gamesError, isGamesLoading, addToCart }) {
 	const [selectedFeaturedGameIndex, setSelectedFeaturedGameIndex] = useState(0);
 	const isGamesLoaded = games.length > 0;
-
-	useEffect(() => {
-		if (isGamesLoaded) {
-			// Set the selected featured game as the first game in the games array by default
-			setSelectedFeaturedGameIndex(0);
-		}
-	}, [isGamesLoaded, gamesError, games]);
 
 	let selectedFeaturedGamesContainer;
 	let unselectedFeaturedGamesContainer = [];
